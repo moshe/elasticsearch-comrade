@@ -1,8 +1,8 @@
 <template>
-  <v-container>
+  <v-container fluid>
     <v-layout column>
       <v-flex xs12>
-        <v-img :src="require('../assets/logo.svg')" contain height="200" />
+        <v-img :src="require('../assets/logo.svg')" contain height="100" />
       </v-flex>
       <v-flex>
         <shards-grid />

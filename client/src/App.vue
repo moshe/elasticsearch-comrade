@@ -16,7 +16,7 @@
     </v-toolbar>
 
     <v-content>
-      <HelloWorld/>
+      <HelloWorld />
     </v-content>
   </v-app>
 </template>
