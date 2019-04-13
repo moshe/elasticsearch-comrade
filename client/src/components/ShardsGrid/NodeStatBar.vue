@@ -1,6 +1,7 @@
 <template>
-  <div>
-    <div>{{ name }} ({{ metric }}%)</div>
+  <div class="text-sm-center">
+    <div>{{ name }}</div>
+    <div>{{ metric }}%</div>
     <v-progress-linear
       height="2"
       v-model="metric"

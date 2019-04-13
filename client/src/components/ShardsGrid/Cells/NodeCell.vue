@@ -1,8 +1,11 @@
 <template>
   <div class="node-info ma-1">
-    <div class="node-name">
-      {{ name }}
+    <div class="node-name ml-1">
+      {{ nodeName }}
     </div>
+<!--    <v-icon v-if="isSuitableForRelocation" class="relocate-here">-->
+<!--      archive-->
+<!--    </v-icon>-->
     <v-layout style="font-size: 8px">
       <v-flex>
         <node-stat-bar :metric="metrics.heapPercent" name="HEAP" />
@@ -21,18 +24,33 @@
 </template>
 
 <script>
-import NodeStatBar from "./NodeStatBar";
+import NodeStatBar from "../NodeStatBar";
+import store from "../../../store";
+
 export default {
-  name: "MgrNodeInfo",
+  name: "NodeCell",
   components: { NodeStatBar },
   props: {
-    name: {
+    nodeName: {
       required: true,
       type: String
     },
     metrics: {
       required: true,
       type: Object
+    }
+  },
+  computed: {
+    isSuitableForRelocation() {
+      if (store.state.shardsMarkedForRelocation.length === 0) {
+        return false;
+      }
+      for (const mark of store.state.shardsMarkedForRelocation) {
+        if (mark.nodeName === this.nodeName) {
+          return false;
+        }
+      }
+      return true;
     }
   }
 };
@@ -45,5 +63,11 @@ export default {
 
 .node-name {
   font-size: 16px;
+  display: inline-block;
+}
+
+.relocate-here {
+  font-size: 16px;
+  cursor: pointer;
 }
 </style>

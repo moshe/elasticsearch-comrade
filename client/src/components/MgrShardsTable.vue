@@ -1,56 +1,48 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
-  <v-data-table :items="nodes" class="elevation-1" :headers="['a', '1', '2']">
-    <template slot="headers">
-      <th class="pl-1 pr-1"><div style="text-align: left">Node</div></th>
-      <th class="pl-1 pr-1" v-for="index of indices" :key="index">
-        <div style="text-align: left">{{ index }}</div>
-      </th>
-    </template>
-    <template v-slot:items="props">
-      <td class="pl-1 pr-1">
-        <mgr-node-info :name="props.item.name" :metrics="props.item.metrics" />
-      </td>
-      <td
-        v-for="index of indices"
-        :key="index"
-        style="border-left: 1px solid rgba(255,255,255,0.12)"
-        class="pl-1 pr-1"
-      >
-        <div v-if="props.item.indices[index]" style="max-width: 13vw">
-          <span v-if="props.item.indices[index].primaries">
-            <shard-square
-              :id="x"
-              :key="x"
-              v-for="x in props.item.indices[index].primaries"
-              :primary="true"
-            />
-          </span>
-          <span v-if="props.item.indices[index].replicas">
-            <shard-square
-              :id="x"
-              :key="x"
-              v-for="x in props.item.indices[index].replicas"
-              :primary="false"
-            />
-          </span>
-        </div>
-      </td>
-    </template>
-  </v-data-table>
+  <div>
+    <v-data-table :items="nodes" class="elevation-1">
+      <template slot="headers">
+        <th class="pl-1 pr-1"><div style="text-align: left">Node</div></th>
+        <th class="pl-1 pr-1" v-for="index of indices" :key="index">
+          <div style="text-align: left">{{ index }}</div>
+        </th>
+      </template>
+      <template v-slot:items="props">
+        <td class="pl-0 pr-0">
+          <node-cell
+            :node-name="props.item.name"
+            :metrics="props.item.metrics"
+          />
+        </td>
+        <td v-for="index of indices" :key="index" class="pa-1 shards-cell">
+          <shards-cell
+            :node-name="props.item.name"
+            :index="props.item.indices[index]"
+            :index-name="index"
+          />
+        </td>
+      </template>
+    </v-data-table>
+  </div>
 </template>
 
 <script>
-import MgrNodeInfo from "./MgrShardsTableComponents/MgrNodeInfo";
-import ShardSquare from "./MgrShardsTableComponents/ShardSquare";
+import NodeCell from "./ShardsGrid/Cells/NodeCell";
+import ShardSquare from "./ShardsGrid/ShardSquare";
+import store from "../store";
+import ShardsCell from "./ShardsGrid/Cells/ShardsCell";
 
 export default {
   name: "MgrShardsTable",
-  components: { ShardSquare, MgrNodeInfo },
+  components: { ShardsCell, ShardSquare, NodeCell },
   computed: {
     indices() {
       return [
         ...new Set([].concat(...this.nodes.map(x => Object.keys(x.indices))))
       ];
+    },
+    lol() {
+      return store.state.shardsMarkedForRelocation;
     }
   },
   data() {
@@ -129,22 +121,22 @@ export default {
           }
         }
         // {
-        //   name: "Gingerbread"
+        //   nodeName: "Gingerbread"
         // },
         // {
-        //   name: "Jelly bean"
+        //   nodeName: "Jelly bean"
         // },
         // {
-        //   name: "Lollipop"
+        //   nodeName: "Lollipop"
         // },
         // {
-        //   name: "Honeycomb"
+        //   nodeName: "Honeycomb"
         // },
         // {
-        //   name: "Donut"
+        //   nodeName: "Donut"
         // },
         // {
-        //   name: "KitKat"
+        //   nodeName: "KitKat"
         // }
       ]
     };
@@ -152,4 +144,9 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.shards-cell {
+  border-left: 1px solid rgba(255, 255, 255, 0.12);
+  vertical-align: top;
+}
+</style>
