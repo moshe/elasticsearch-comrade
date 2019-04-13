@@ -2,23 +2,19 @@
   <v-container>
     <v-layout column>
       <v-flex xs12>
-        <v-img
-          :src="require('../assets/logo.svg')"
-          contain
-          height="200"
-        />
+        <v-img :src="require('../assets/logo.svg')" contain height="200" />
       </v-flex>
       <v-flex>
-        <mgr-shards-table/>
+        <shards-grid />
       </v-flex>
     </v-layout>
   </v-container>
 </template>
 
 <script>
-import MgrShardsTable from "./MgrShardsTable";
+import ShardsGrid from "./ShardsGrid";
 export default {
-  components: {MgrShardsTable},
+  components: { ShardsGrid },
   data: () => ({})
 };
 </script>
