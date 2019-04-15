@@ -6,13 +6,17 @@
         <span class="font-weight-light">MATERIAL DESIGN2</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn
-        flat
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-      >
-        <span class="mr-2">Latest Release</span>
-      </v-btn>
+      <span>
+        <v-select
+          dense
+          v-model="refreshEvery"
+          @change="setRefreshEvery"
+          :items="times"
+          item-text="text"
+          item-value="value"
+          label="Refresh Every"
+        ></v-select>
+      </span>
     </v-toolbar>
 
     <v-content>
@@ -22,17 +26,28 @@
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld'
+import HelloWorld from "./components/HelloWorld";
+
+import { mapMutations } from "vuex";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
     HelloWorld
   },
-  data () {
+  data() {
     return {
-      //
-    }
+      times: [1, 5, 10, 30, 60].map(value => {
+        return {
+          value: value * 1000,
+          text: `${value} second${value > 1 ? "s" : ""}`
+        };
+      }),
+      refreshEvery: 5000
+    };
+  },
+  methods: {
+    ...mapMutations(["setRefreshEvery"])
   }
-}
+};
 </script>

@@ -4,7 +4,7 @@
       <div class="index-name">{{ index }}</div>
     </v-flex>
     <v-flex shrink>
-      <div class="index-info">shards 5 * 1 | docs: 123,133 | size: 112.32mb | nodes: 12</div>
+      <div class="index-info">shards {{primaries}} * {{replicas}} | docs: {{docsCount}} | size: 112.32mb | nodes: 12</div>
     </v-flex>
   </v-layout>
 </template>
@@ -16,6 +16,18 @@ export default {
     index: {
       required: true,
       type: String
+    },
+    primaries: {
+      required: true,
+      type: Number
+    },
+    replicas: {
+      required: true,
+      type: Number
+    },
+    docsCount: {
+      required: true,
+      type: Number
     }
   }
 };

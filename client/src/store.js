@@ -5,7 +5,9 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    shardsMarkedForRelocation: []
+    shardsMarkedForRelocation: [],
+    nodes: [],
+    settingsRefreshEvery: 5000
   },
   mutations: {
     toggleShardForRelocation(state, { index, id, nodeName }) {
@@ -21,6 +23,22 @@ export default new Vuex.Store({
         }
       }
       state.shardsMarkedForRelocation.push({ index, id, nodeName });
+    },
+    setNodes(state, data) {
+      Vue.set(state, "nodes", data);
+    },
+    setIndices(state, data) {
+      Vue.set(state, "indices", data);
+    },
+    setRefreshEvery(state, data) {
+      state.settingsRefreshEvery = data;
+    }
+  },
+  actions: {
+    async shardsGrid({ commit }) {
+      const a = await (await fetch("/api/v1/shards_grid")).json();
+      commit("setNodes", a.nodes);
+      commit("setIndices", a.indices);
     }
   }
 });

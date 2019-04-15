@@ -1,7 +1,8 @@
 <template>
   <div class="text-sm-center">
     <div>{{ name }}</div>
-    <div>{{ metric }}%</div>
+    <div>{{ metric.toFixed(1) }}%</div>
+    <v-sparkline :value="histogram" :line-width="6" :height="100"></v-sparkline>
     <v-progress-linear
       height="2"
       v-model="metric"
@@ -12,6 +13,8 @@
 </template>
 
 <script>
+import {mapState} from "vuex";
+
 export default {
   name: "NodeStatBar",
   props: {
@@ -24,7 +27,24 @@ export default {
       required: true
     }
   },
+  data() {
+    return {
+      histogram: [0, 0, 0]
+    };
+  },
+  methods: {
+    measure() {
+      this.histogram.push(this.metric);
+      if (this.histogram.length > 20) {
+        this.histogram.shift();
+      }
+    }
+  },
+  created() {
+    setInterval(this.measure, this.settingsRefreshEvery);
+  },
   computed: {
+    ...mapState(["settingsRefreshEvery"]),
     color() {
       if (this.metric < 60) {
         return "light-green darken-1";

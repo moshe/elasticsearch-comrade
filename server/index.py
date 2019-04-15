@@ -1,9 +1,10 @@
 import asyncio
 from collections import defaultdict
 
+from elasticsearch_async import AsyncElasticsearch
+
 from sanic import Sanic
 from sanic.response import json
-from elasticsearch_async import AsyncElasticsearch
 
 
 def get_client():
@@ -12,6 +13,18 @@ def get_client():
 
 
 app = Sanic()
+
+
+def format_index_data(data):
+    return {
+        "primaries": int(data["pri"]),
+        "replicas": int(data["rep"]),
+        "status": data["status"],
+        "docsCount": int(data["docs.count"]),
+        "docsDeleted": int(data["docs.deleted"]),
+        "storeSize": data["store.size"],
+        "data": data
+    }
 
 
 @app.route('/api/v1/shards_grid')
@@ -33,7 +46,7 @@ async def indices_stats(request):
     for node in nodes:
         nodes_result.append({
             "name": node["name"],
-            "indices": indices_per_node[node["name"]],
+            "indices": dict(sorted(indices_per_node[node["name"]].items())),
             "isMaster": node["master"] == "*",
             "ip": node["ip"],
             "role": node["node.role"],
@@ -44,13 +57,11 @@ async def indices_stats(request):
             }
         })
 
-    return json(nodes_result)
+    return json({
+        "nodes": sorted(nodes_result, key=lambda x: x["name"]),
+        "indices": dict([(x['index'], format_index_data(x)) for x in indices])
+    })
 
-# // metrics: {
-#             // heapPercent: 15,
-# // diskPercent: 45,
-# // CPUPercent: 65,
-# // load1Percent: 4
-#                  //}
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000, debug=True)
