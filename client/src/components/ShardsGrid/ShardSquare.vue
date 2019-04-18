@@ -63,6 +63,10 @@ export default {
       required: true,
       type: String
     },
+    state: {
+      required: true,
+      type: String
+    },
     primary: {
       required: true,
       type: Boolean

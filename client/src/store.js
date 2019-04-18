@@ -7,6 +7,7 @@ export default new Vuex.Store({
   state: {
     shardsMarkedForRelocation: [],
     nodes: [],
+    cluster: {},
     settingsRefreshEvery: 5000
   },
   mutations: {
@@ -30,6 +31,12 @@ export default new Vuex.Store({
     setIndices(state, data) {
       Vue.set(state, "indices", data);
     },
+    setCluster(state, data) {
+      Vue.set(state, "cluster", data);
+    },
+    clearRelocation(state) {
+      Vue.set(state, "shardsMarkedForRelocation", []);
+    },
     setRefreshEvery(state, data) {
       state.settingsRefreshEvery = data;
     }
@@ -39,6 +46,7 @@ export default new Vuex.Store({
       const a = await (await fetch("/api/v1/shards_grid")).json();
       commit("setNodes", a.nodes);
       commit("setIndices", a.indices);
+      commit("setCluster", a.cluster);
     }
   }
 });

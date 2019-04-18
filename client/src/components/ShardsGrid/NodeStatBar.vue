@@ -2,7 +2,13 @@
   <div class="text-sm-center">
     <div>{{ name }}</div>
     <div>{{ metric.toFixed(1) }}%</div>
-    <v-sparkline :value="histogram" :line-width="6" :height="100"></v-sparkline>
+    <v-sparkline
+      :value="histogram"
+      :line-width="6"
+      :height="100"
+      :gradient="outH"
+      color="light-green darken-1"
+    />
     <v-progress-linear
       height="2"
       v-model="metric"
@@ -13,7 +19,7 @@
 </template>
 
 <script>
-import {mapState} from "vuex";
+import { mapState } from "vuex";
 
 export default {
   name: "NodeStatBar",
@@ -29,14 +35,25 @@ export default {
   },
   data() {
     return {
-      histogram: [0, 0, 0]
+      histogram: [0, 0],
+      gradient: []
     };
   },
   methods: {
     measure() {
       this.histogram.push(this.metric);
+      this.gradient.push(this.color);
+      if (
+        this.histogram.length === 2 &&
+        this.histogram[0] === 0 &&
+        this.histogram.length === 0
+      ) {
+        this.histogram.shift();
+        this.histogram.shift();
+      }
       if (this.histogram.length > 20) {
         this.histogram.shift();
+        this.gradient.shift();
       }
     }
   },
@@ -45,17 +62,20 @@ export default {
   },
   computed: {
     ...mapState(["settingsRefreshEvery"]),
+    outH() {
+      return this.gradient.reduceRight((a, c) => (a.push(c), a), []);
+    },
     color() {
       if (this.metric < 60) {
-        return "light-green darken-1";
+        return "#7CB342";
       }
       if (this.metric < 80) {
-        return "light-green darken-3";
+        return "#558B2F";
       }
       if (this.metric < 90) {
-        return "red lighten-1 ";
+        return "#EF5350";
       }
-      return "red darken-4";
+      return "#B71C1C";
     }
   }
 };

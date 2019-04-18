@@ -2,7 +2,9 @@
   <div v-if="index" style="max-width: 13vw">
     <span v-if="index.primaries">
       <shard-square
-        :id="x"
+        :id="x.shard"
+        :state="x.state"
+        :progress="x.progress"
         :index="indexName"
         :node-name="nodeName"
         :key="x"
@@ -12,7 +14,9 @@
     </span>
     <span v-if="index.replicas">
       <shard-square
-        :id="x"
+        :id="x.shard"
+        :state="x.state"
+        :progress="x.progress"
         :index="indexName"
         :node-name="nodeName"
         :key="x"

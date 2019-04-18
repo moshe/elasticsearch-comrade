@@ -23,13 +23,26 @@
     </v-layout>
     <v-data-table :items="nodes" class="elevation-1" hide-actions>
       <template slot="headers">
-        <th class="pl-1 pr-1"><div style="text-align: left">Node</div></th>
-        <th class="pl-1 pr-1" v-for="index of indices" :key="index">
+        <th class="pa-2">
+          <div style="text-align: left">
+            <div v-if="cluster.relocatingShards !== 0">
+              <v-progress-circular
+                indeterminate
+                color="white"
+                size="8"
+                width="1"
+              ></v-progress-circular>
+              {{ cluster.relocatingShards }} relocating shards
+            </div>
+          </div>
+        </th>
+        <th class="pa-2" v-for="index of indices" :key="index">
           <index-cell
             :index="index"
             :primaries="indicesInfo[index]['primaries']"
             :replicas="indicesInfo[index]['replicas']"
             :docs-count="indicesInfo[index]['docsCount']"
+            :store-size="indicesInfo[index]['storeSize']"
           />
         </th>
         <th
@@ -72,7 +85,7 @@ export default {
   name: "MgrShardsTable",
   components: { IndexCell, ShardsCell, NodeCell },
   computed: {
-    ...mapState(["nodes", "settingsRefreshEvery"]),
+    ...mapState(["nodes", "settingsRefreshEvery", "cluster"]),
     ...mapState({ indicesInfo: "indices" }),
     uniqueIndices() {
       return [
@@ -93,7 +106,6 @@ export default {
     ...mapActions(["shardsGrid"]),
     async updateData() {
       await this.shardsGrid();
-      console.log(this.settingsRefreshEvery);
       setTimeout(this.updateData, this.settingsRefreshEvery);
     }
   },

@@ -10,9 +10,9 @@
       <v-flex>
         <node-stat-bar :metric="metrics.heapPercent" name="DISK" />
       </v-flex>
-<!--      <v-flex class="pl-1">-->
-<!--        <node-stat-bar :metric="metrics.diskPercent" name="DISK" />-->
-<!--      </v-flex>-->
+      <!--      <v-flex class="pl-1">-->
+      <!--        <node-stat-bar :metric="metrics.diskPercent" name="DISK" />-->
+      <!--      </v-flex>-->
       <v-flex class="pl-1">
         <node-stat-bar :metric="metrics.CPUPercent" name="CPU" />
       </v-flex>
@@ -20,17 +20,25 @@
         <node-stat-bar :metric="metrics.load1Percent" name="LOAD" />
       </v-flex>
     </v-layout>
-<!--    <v-layout class="ma-2">-->
-<!--      <v-flex>-->
-<!--        <v-btn :disabled="!isSuitableForRelocation" small color="primary" round>Relocate</v-btn>-->
-<!--      </v-flex>-->
-<!--    </v-layout>-->
+    <v-layout class="ma-2">
+      <v-flex>
+        <v-btn
+          @click="relocate"
+          :disabled="!isSuitableForRelocation"
+          small
+          color="primary"
+          round
+          >Relocate</v-btn
+        >
+      </v-flex>
+    </v-layout>
   </div>
 </template>
 
 <script>
 import NodeStatBar from "../NodeStatBar";
 import store from "../../../store";
+import { mapMutations } from "vuex";
 
 export default {
   name: "NodeCell",
@@ -43,6 +51,25 @@ export default {
     metrics: {
       required: true,
       type: Object
+    }
+  },
+  methods: {
+    ...mapMutations(["clearRelocation"]),
+    async relocate() {
+      const res = await fetch("/api/v1/cluster/reroute_shards", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          node: this.nodeName,
+          shards: store.state.shardsMarkedForRelocation
+        })
+      });
+      if ((await res.json()).status === "ok") {
+        this.clearRelocation();
+      }
     }
   },
   computed: {

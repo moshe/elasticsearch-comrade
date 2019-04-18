@@ -4,7 +4,7 @@
       <div class="index-name">{{ index }}</div>
     </v-flex>
     <v-flex shrink>
-      <div class="index-info">shards {{primaries}} * {{replicas}} | docs: {{docsCount}} | size: 112.32mb | nodes: 12</div>
+      <div class="index-info">shards {{primaries}} * {{replicas}} | docs: {{docsCount}} | size: {{storeSize}}</div>
     </v-flex>
   </v-layout>
 </template>
@@ -14,6 +14,10 @@ export default {
   name: "IndexCell",
   props: {
     index: {
+      required: true,
+      type: String
+    },
+    storeSize: {
       required: true,
       type: String
     },
