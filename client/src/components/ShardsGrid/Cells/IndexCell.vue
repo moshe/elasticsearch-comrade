@@ -4,7 +4,8 @@
       <div class="index-name">{{ index }}</div>
     </v-flex>
     <v-flex shrink>
-      <div class="index-info">shards {{primaries}} * {{replicas}} | docs: {{docsCount}} | size: {{storeSize}}</div>
+      <!--      eslint-disable-next-line -->
+      <div class="index-info">shards {{primaries}} * {{replicas}} | docs: {{docsCount.toLocaleString()}} | size: {{storeSize}}</div>
     </v-flex>
   </v-layout>
 </template>
@@ -31,7 +32,8 @@ export default {
     },
     docsCount: {
       required: true,
-      type: Number
+      type: Number,
+      default: 0
     }
   }
 };

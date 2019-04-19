@@ -1,0 +1,37 @@
+<template>
+  <v-layout align-center justify-center row>
+    <v-flex>
+      <info-box :text="`Cluster Status: ${cluster.clusterStatus}`" />
+    </v-flex>
+    <v-flex>
+      <info-box :text="`Indices: ${cluster.numOfIndices}`" />
+    </v-flex>
+    <v-flex>
+      <info-box :text="`Primary Shards: ${cluster.numOfPrimaryShards}`" />
+    </v-flex>
+    <v-flex>
+      <info-box :text="`Replica Shards: ${cluster.numOfReplicaShards}`" />
+    </v-flex>
+    <v-flex>
+      <info-box :text="`Docs: ${cluster.numberOfDocs.toLocaleString()}`" />
+    </v-flex>
+    <v-flex>
+      <info-box :text="`Nodes: ${cluster.numberOfNodes}`" />
+    </v-flex>
+  </v-layout>
+</template>
+
+<script>
+import InfoBox from "./InfoBox";
+import { mapState } from "vuex";
+
+export default {
+  name: "ClusterInfoBoxes",
+  components: { InfoBox },
+  computed: {
+    ...mapState(["cluster"])
+  }
+};
+</script>
+
+<style scoped></style>

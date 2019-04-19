@@ -1,5 +1,6 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
   <div>
+    <cluster-info-boxes />
     <v-layout align-end justify-end row>
       <v-flex shrink>
         <v-btn
@@ -24,17 +25,7 @@
     <v-data-table :items="nodes" class="elevation-1" hide-actions>
       <template slot="headers">
         <th class="pa-2">
-          <div style="text-align: left">
-            <div v-if="cluster.relocatingShards !== 0">
-              <v-progress-circular
-                indeterminate
-                color="white"
-                size="8"
-                width="1"
-              ></v-progress-circular>
-              {{ cluster.relocatingShards }} relocating shards
-            </div>
-          </div>
+          <cluster-cell />
         </th>
         <th class="pa-2" v-for="index of indices" :key="index">
           <index-cell
@@ -80,10 +71,18 @@ import NodeCell from "./ShardsGrid/Cells/NodeCell";
 import ShardsCell from "./ShardsGrid/Cells/ShardsCell";
 import IndexCell from "./ShardsGrid/Cells/IndexCell";
 import { mapActions, mapState } from "vuex";
+import ClusterInfoBoxes from "./ClusterInfoBoxes";
+import ClusterCell from "./ShardsGrid/Cells/ClusterCell";
 
 export default {
   name: "MgrShardsTable",
-  components: { IndexCell, ShardsCell, NodeCell },
+  components: {
+    ClusterCell,
+    ClusterInfoBoxes,
+    IndexCell,
+    ShardsCell,
+    NodeCell
+  },
   computed: {
     ...mapState(["nodes", "settingsRefreshEvery", "cluster"]),
     ...mapState({ indicesInfo: "indices" }),

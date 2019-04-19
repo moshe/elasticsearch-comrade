@@ -7,7 +7,7 @@
         :progress="x.progress"
         :index="indexName"
         :node-name="nodeName"
-        :key="x"
+        :key="x.shard"
         v-for="x in index.primaries"
         :primary="true"
       />
@@ -19,7 +19,7 @@
         :progress="x.progress"
         :index="indexName"
         :node-name="nodeName"
-        :key="x"
+        :key="x.shard"
         v-for="x in index.replicas"
         :primary="false"
       />
