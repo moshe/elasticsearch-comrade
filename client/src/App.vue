@@ -2,10 +2,11 @@
   <v-app dark>
     <v-toolbar app>
       <v-toolbar-title class="headline text-uppercase">
+        <status-dot/>
         <span class="font-weight-bold">Elasticsearch</span>
         <span class="font-weight-light">ops</span>
       </v-toolbar-title>
-      <v-spacer></v-spacer>
+      <v-spacer/>
       <span>
         <v-select
           dense
@@ -29,10 +30,12 @@
 import HelloWorld from "./components/HelloWorld";
 
 import { mapMutations } from "vuex";
+import StatusDot from "./components/StatusDot";
 
 export default {
   name: "App",
   components: {
+    StatusDot,
     HelloWorld
   },
   data() {
@@ -51,3 +54,6 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+</style>
