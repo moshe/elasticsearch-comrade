@@ -1,22 +1,14 @@
 from asyncio import gather
 from collections import defaultdict
 
-from elasticsearch_async import AsyncElasticsearch
-
 from sanic import Sanic
 from sanic.response import json
 
-cached_client = None
-
-
-def get_client():
-    global cached_client
-    if cached_client is None:
-        cached_client = AsyncElasticsearch(hosts=['http://222.85.141.99'])
-    return cached_client
-
+from blueprints.index import index_bp
+from connections import get_client
 
 app = Sanic()
+app.blueprint(index_bp, url_prefix='/api/v1/index')
 
 
 def format_index_data(data):
@@ -121,20 +113,6 @@ async def reroute_shard(request):
             for shard in shards
         ]}
     )
-    return json({"status": "ok"})
-
-
-@app.route('/api/v1/index/<index>/close')
-async def close_index(request, index):
-    client = get_client()
-    await client.indices.close(index=index, expand_wildcards='none')
-    return json({"status": "ok"})
-
-
-@app.route('/api/v1/index/<index>/open')
-async def open_index(request, index):
-    client = get_client()
-    await client.indices.open(index=index, expand_wildcards='none')
     return json({"status": "ok"})
 
 if __name__ == '__main__':
