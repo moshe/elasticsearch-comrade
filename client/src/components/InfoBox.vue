@@ -1,5 +1,5 @@
 <template>
-  <div class="info-square mr-4 pa-2">
+  <div class="info-square pa-2">
     {{ text }}
   </div>
 </template>
