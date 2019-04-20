@@ -11,7 +11,11 @@
             :disabled="index.status === 'close'"
           >
             <v-list-tile-action style="min-width: unset" class="pr-2">
-              <v-icon style="font-size: 16px">close</v-icon>
+              <v-icon
+                :disabled="index.status === 'open'"
+                style="font-size: 16px"
+                >close</v-icon
+              >
             </v-list-tile-action>
             <v-list-tile-title>Close index</v-list-tile-title>
           </v-list-tile>
@@ -21,7 +25,11 @@
             :disabled="index.status === 'open'"
           >
             <v-list-tile-action style="min-width: unset" class="pr-2">
-              <v-icon style="font-size: 16px">loop</v-icon>
+              <v-icon
+                :disabled="index.status === 'open'"
+                style="font-size: 16px"
+                >loop</v-icon
+              >
             </v-list-tile-action>
             <v-list-tile-title>Reopen index</v-list-tile-title>
           </v-list-tile>
@@ -29,8 +37,27 @@
       </v-menu>
     </v-flex>
     <v-flex shrink>
-      <!--      eslint-disable-next-line -->
-      <div v-if="index.status === 'open'" class="index-info">shards {{index.primaries}} * {{index.replicas}} | docs: {{index.docsCount.toLocaleString()}} | size: {{index.storeSize}}</div>
+      <v-layout
+        v-if="index.status === 'open'"
+        class="index-info"
+        justify-space-between
+        fill-height
+        wrap
+      >
+        <v-flex shrink>
+          <v-chip small label>
+            shards: {{ index.primaries }} * {{ index.replicas }}
+          </v-chip>
+        </v-flex>
+        <v-flex shrink>
+          <v-chip small label>
+            docs: {{ index.docsCount.toLocaleString() }}
+          </v-chip>
+        </v-flex>
+        <v-flex shrink>
+          <v-chip small label> size: {{ index.storeSize }} </v-chip>
+        </v-flex>
+      </v-layout>
     </v-flex>
   </v-layout>
 </template>
@@ -56,18 +83,26 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .index-cell {
-  text-align: left;
-  height: 80px;
+  max-width: 15vw;
+  user-select: text;
 }
 .index-name {
   font-size: 14px;
   cursor: pointer;
+  text-align: left;
 }
-.index-info {
-  max-width: 13vw;
-  white-space: pre-wrap;
-  font-size: 11px;
+
+.index-cell .v-chip--small {
+  font-size: 10px;
+  height: 16px !important;
+}
+
+.index-cell .v-chip .v-chip__content {
+  padding: 0 3px;
+}
+.index-cell .v-chip {
+  margin: 0;
 }
 </style>
