@@ -24,12 +24,15 @@
       </div>
     </template>
     <v-list dense>
-      <v-list-tile @click="toggleShardForRelocation({ index, id, nodeName })">
+      <v-list-tile
+        :disabled="isRelocating"
+        @click="toggleShardForRelocation({ index, id, nodeName })"
+      >
         <v-list-tile-action style="min-width: unset" class="pr-2">
-          <v-icon style="font-size: 16px">input</v-icon>
+          <v-icon :disabled="isRelocating" style="font-size: 16px">input</v-icon>
         </v-list-tile-action>
-        <v-list-tile-title v-if="isMarkedForRelocation"
-          >Deselect for relocation
+        <v-list-tile-title v-if="isMarkedForRelocation">
+          Deselect for relocation
         </v-list-tile-title>
         <v-list-tile-title v-else>Select for relocation</v-list-tile-title>
       </v-list-tile>
@@ -91,6 +94,9 @@ export default {
         }
       }
       return false;
+    },
+    isRelocating() {
+      return this.state === "RELOCATING";
     }
   }
 };
@@ -123,7 +129,7 @@ export default {
 .v-list--dense .v-list__tile:not(.v-list__tile--avatar) {
   height: unset;
 }
-  .v-progress-linear {
-    overflow: unset;
-  }
+.v-progress-linear {
+  overflow: unset;
+}
 </style>

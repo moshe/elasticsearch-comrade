@@ -6,6 +6,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    loading: true,
     shardsMarkedForRelocation: [],
     nodes: [],
     indices: {},
@@ -36,6 +37,12 @@ export default new Vuex.Store({
       }
       state.shardsMarkedForRelocation.push({ index, id, nodeName });
     },
+    stopLoading(state) {
+      state.loading = false;
+    },
+    startLoading(state) {
+      state.loading = true;
+    },
     setNodes(state, data) {
       Vue.set(state, "nodes", data);
     },
@@ -58,6 +65,7 @@ export default new Vuex.Store({
       commit("setNodes", a.nodes);
       commit("setIndices", a.indices);
       commit("setCluster", a.cluster);
+      commit("stopLoading");
     }
   }
 });

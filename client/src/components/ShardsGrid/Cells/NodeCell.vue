@@ -54,8 +54,9 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(["clearRelocation"]),
+    ...mapMutations(["clearRelocation", "startLoading", "stopLoading"]),
     async relocate() {
+      this.startLoading();
       const res = await fetch("/api/v1/cluster/reroute_shards", {
         method: "POST",
         headers: {
@@ -70,6 +71,7 @@ export default {
       if ((await res.json()).status === "ok") {
         this.clearRelocation();
       }
+      this.stopLoading();
     }
   },
   computed: {
