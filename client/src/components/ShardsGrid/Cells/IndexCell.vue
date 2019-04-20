@@ -1,39 +1,56 @@
-<template>
+<template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
   <v-layout column fill-height class="index-cell">
     <v-flex grow>
-      <div class="index-name">{{ index }}</div>
+      <v-menu offset-y style="display: inline-block">
+        <template v-slot:activator="{ on }">
+          <div class="index-name" v-on="on">{{ indexName }}</div>
+        </template>
+        <v-list dense>
+          <v-list-tile
+            @click="closeIndex(indexName)"
+            :disabled="index.status === 'close'"
+          >
+            <v-list-tile-action style="min-width: unset" class="pr-2">
+              <v-icon style="font-size: 16px">close</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-title>Close index</v-list-tile-title>
+          </v-list-tile>
+
+          <v-list-tile
+            @click="openIndex(indexName)"
+            :disabled="index.status === 'open'"
+          >
+            <v-list-tile-action style="min-width: unset" class="pr-2">
+              <v-icon style="font-size: 16px">loop</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-title>Reopen index</v-list-tile-title>
+          </v-list-tile>
+        </v-list>
+      </v-menu>
     </v-flex>
     <v-flex shrink>
       <!--      eslint-disable-next-line -->
-      <div class="index-info">shards {{primaries}} * {{replicas}} | docs: {{docsCount.toLocaleString()}} | size: {{storeSize}}</div>
+      <div v-if="index.status === 'open'" class="index-info">shards {{index.primaries}} * {{index.replicas}} | docs: {{index.docsCount.toLocaleString()}} | size: {{index.storeSize}}</div>
     </v-flex>
   </v-layout>
 </template>
 
 <script>
+import indexAPIs from "../../../mixins/indexApis";
+import { mapState } from "vuex";
 export default {
   name: "IndexCell",
+  mixins: [indexAPIs],
   props: {
-    index: {
+    indexName: {
       required: true,
       type: String
-    },
-    storeSize: {
-      required: true,
-      type: String
-    },
-    primaries: {
-      required: true,
-      type: Number
-    },
-    replicas: {
-      required: true,
-      type: Number
-    },
-    docsCount: {
-      required: true,
-      type: Number,
-      default: 0
+    }
+  },
+  computed: {
+    ...mapState(["indices"]),
+    index() {
+      return this.indices[this.indexName];
     }
   }
 };
@@ -46,6 +63,7 @@ export default {
 }
 .index-name {
   font-size: 14px;
+  cursor: pointer;
 }
 .index-info {
   max-width: 13vw;

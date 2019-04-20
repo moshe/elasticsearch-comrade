@@ -29,11 +29,7 @@
         </th>
         <th class="pa-2" v-for="index of indices" :key="index">
           <index-cell
-            :index="index"
-            :primaries="indicesInfo[index]['primaries']"
-            :replicas="indicesInfo[index]['replicas']"
-            :docs-count="indicesInfo[index]['docsCount']"
-            :store-size="indicesInfo[index]['storeSize']"
+            :indexName="index"
           />
         </th>
         <th
@@ -86,13 +82,8 @@ export default {
   computed: {
     ...mapState(["nodes", "settingsRefreshEvery", "cluster"]),
     ...mapState({ indicesInfo: "indices" }),
-    uniqueIndices() {
-      return [
-        ...new Set([].concat(...this.nodes.map(x => Object.keys(x.indices))))
-      ];
-    },
     indices() {
-      return this.uniqueIndices.slice(
+      return Object.keys(this.indicesInfo).slice(
         this.page * this.perPage,
         this.page * this.perPage + this.perPage
       );
