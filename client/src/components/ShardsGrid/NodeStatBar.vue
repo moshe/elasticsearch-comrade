@@ -44,11 +44,10 @@ export default {
       this.histogram.push(this.metric);
       this.gradient.push(this.color);
       if (
-        this.histogram.length === 2 &&
+        this.histogram.length === 3 &&
         this.histogram[0] === 0 &&
-        this.histogram.length === 0
+        this.histogram.length < 4
       ) {
-        this.histogram.shift();
         this.histogram.shift();
       }
       if (this.histogram.length > 20) {
