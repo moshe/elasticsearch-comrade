@@ -1,7 +1,7 @@
 <template>
   <div class="text-sm-center">
     <div>{{ name }}</div>
-    <div>{{ metric.toFixed(1) }}%</div>
+    <div>{{ metric }}%</div>
     <v-sparkline
       :value="histogram"
       :line-width="6"
@@ -55,10 +55,11 @@ export default {
         this.histogram.shift();
         this.gradient.shift();
       }
+      setTimeout(this.measure, this.settingsRefreshEvery);
     }
   },
   created() {
-    setInterval(this.measure, this.settingsRefreshEvery);
+    setTimeout(this.measure, this.settingsRefreshEvery);
   },
   computed: {
     ...mapState(["settingsRefreshEvery"]),

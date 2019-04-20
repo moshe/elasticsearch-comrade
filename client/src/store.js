@@ -7,6 +7,7 @@ export default new Vuex.Store({
   state: {
     shardsMarkedForRelocation: [],
     nodes: [],
+    indices: {},
     cluster: {
       numberOfDocs: 0,
       numOfIndices: 0,
@@ -14,7 +15,8 @@ export default new Vuex.Store({
       numOfReplicaShards: 0,
       numberOfNodes: 0,
       clusterStatus: "",
-      relocatingShards: 0
+      relocatingShards: 0,
+      initializingShards: 0
     },
     settingsRefreshEvery: 5000
   },

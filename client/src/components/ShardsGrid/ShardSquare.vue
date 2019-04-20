@@ -19,7 +19,7 @@
           class="ma-0"
           color="white"
           style="width: 20px;"
-          v-if="progress !== 0"
+          v-if="progress != null"
         />
       </div>
     </template>
@@ -73,8 +73,7 @@ export default {
     },
     progress: {
       required: false,
-      type: Number,
-      default: 0
+      type: Number
     }
   },
   methods: {
