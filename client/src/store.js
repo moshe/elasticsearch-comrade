@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import { clusterStatus } from "./enums";
 
 Vue.use(Vuex);
 
@@ -14,7 +15,7 @@ export default new Vuex.Store({
       numOfPrimaryShards: 0,
       numOfReplicaShards: 0,
       numberOfNodes: 0,
-      clusterStatus: "",
+      clusterStatus: clusterStatus.loading,
       relocatingShards: 0,
       initializingShards: 0
     },

@@ -4,19 +4,26 @@
 
 <script>
 import { mapState } from "vuex";
+import { clusterStatus } from "../enums";
 
 export default {
   name: "StatusDot",
   computed: {
     ...mapState(["cluster"]),
     color() {
-      if (this.cluster.clusterStatus === "Green") {
+      if (this.cluster.clusterStatus === clusterStatus.green) {
         return "green";
       }
-      if (this.cluster.clusterStatus === "Yellow") {
+      if (this.cluster.clusterStatus === clusterStatus.yellow) {
         return "yellow";
       }
-      return "red";
+      if (this.cluster.clusterStatus === clusterStatus.red) {
+        return "red";
+      }
+      if (this.cluster.clusterStatus === clusterStatus.loading) {
+        return "gray";
+      }
+      throw new Error(`Unknown cluster status ${this.cluster.clusterStatus}`);
     }
   }
 };
