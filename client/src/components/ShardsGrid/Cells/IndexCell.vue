@@ -17,7 +17,7 @@
                 >close</v-icon
               >
             </v-list-tile-action>
-            <v-list-tile-title>Close index</v-list-tile-title>
+            <v-list-tile-title>Close</v-list-tile-title>
           </v-list-tile>
 
           <v-list-tile
@@ -31,7 +31,28 @@
                 >loop</v-icon
               >
             </v-list-tile-action>
-            <v-list-tile-title>Reopen index</v-list-tile-title>
+            <v-list-tile-title>Open</v-list-tile-title>
+          </v-list-tile>
+
+          <v-list-tile @click="showMapping">
+            <v-list-tile-action style="min-width: unset" class="pr-2">
+              <v-icon style="font-size: 16px">view_compact</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-title>Mapping</v-list-tile-title>
+          </v-list-tile>
+
+          <v-list-tile @click="showSettings">
+            <v-list-tile-action style="min-width: unset" class="pr-2">
+              <v-icon style="font-size: 16px">settings</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-title>Settings</v-list-tile-title>
+          </v-list-tile>
+
+          <v-list-tile @click="showHead">
+            <v-list-tile-action style="min-width: unset" class="pr-2">
+              <v-icon style="font-size: 16px">visibility</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-title>Head</v-list-tile-title>
           </v-list-tile>
         </v-list>
       </v-menu>
@@ -64,10 +85,25 @@
 
 <script>
 import indexAPIs from "../../../mixins/indexApis";
-import { mapState } from "vuex";
+import { mapMutations, mapState } from "vuex";
 export default {
   name: "IndexCell",
   mixins: [indexAPIs],
+  methods: {
+    ...mapMutations(["startJsonModal"]),
+    async showMapping() {
+      const content = await this.getMapping(this.indexName);
+      this.startJsonModal(content);
+    },
+    async showSettings() {
+      const content = await this.getSettings(this.indexName);
+      this.startJsonModal(content);
+    },
+    async showHead() {
+      const content = await this.getHead(this.indexName);
+      this.startJsonModal(content);
+    }
+  },
   props: {
     indexName: {
       required: true,
@@ -95,7 +131,7 @@ export default {
 }
 
 .index-cell .v-chip--small {
-  font-size: 10px;
+  font-size: 9px;
   height: 16px !important;
 }
 

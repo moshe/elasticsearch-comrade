@@ -6,6 +6,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    jsonModalContent: false,
     loading: true,
     shardsMarkedForRelocation: [],
     nodes: [],
@@ -42,6 +43,12 @@ export default new Vuex.Store({
     },
     startLoading(state) {
       state.loading = true;
+    },
+    startJsonModal(state, content) {
+      state.jsonModalContent = content;
+    },
+    stopJsonModal(state) {
+      state.loading = false;
     },
     setNodes(state, data) {
       Vue.set(state, "nodes", data);

@@ -1,5 +1,6 @@
 <template>
   <v-app dark>
+    <json-modal/>
     <v-toolbar app>
       <v-toolbar-title class="headline text-uppercase">
         <status-dot />
@@ -38,10 +39,12 @@ import HelloWorld from "./components/HelloWorld";
 
 import { mapMutations, mapState } from "vuex";
 import StatusDot from "./components/StatusDot";
+import JsonModal from "./components/Modals/JsonModal";
 
 export default {
   name: "App",
   components: {
+    JsonModal,
     StatusDot,
     HelloWorld
   },
