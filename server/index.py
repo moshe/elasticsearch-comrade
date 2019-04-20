@@ -1,4 +1,4 @@
-import asyncio
+from asyncio import gather
 from collections import defaultdict
 
 from elasticsearch_async import AsyncElasticsearch
@@ -6,16 +6,24 @@ from elasticsearch_async import AsyncElasticsearch
 from sanic import Sanic
 from sanic.response import json
 
+cached_client = None
+
 
 def get_client():
-    client = AsyncElasticsearch(hosts=['http://222.85.141.99'])
-    return client
+    global cached_client
+    if cached_client is None:
+        cached_client = AsyncElasticsearch(hosts=['http://222.85.141.99'])
+    return cached_client
 
 
 app = Sanic()
 
 
 def format_index_data(data):
+    if data['status'] == 'close':
+        return {
+            "status": data["status"],
+        }
     return {
         "primaries": int(data["pri"]),
         "replicas": int(data["rep"]),
@@ -23,16 +31,34 @@ def format_index_data(data):
         "docsCount": int(data["docs.count"]),
         "docsDeleted": int(data["docs.deleted"]),
         "storeSize": data["store.size"],
-        "data": data
+    }
+
+
+async def get_cluster_info():
+    client = get_client()
+    [info], [docs] = await gather(client.cat.health(format='json'),
+                                  client.cat.count(format='json'))
+    return {
+        "relocatingShards": int(info['relo']),
+        "initializingShards": int(info['init']),
+        "unassignedShards": int(info['unassign']),
+        "numOfPrimaryShards": int(info['pri']),
+        "numOfReplicaShards": int(info["shards"]) - int(info['pri']),
+        "numberOfNodes": int(info['node.total']),
+        "numberOfDocs": int(docs['count']),
+        "clusterName": info['cluster'],
+        "clusterStatus": info['status'].title(),
     }
 
 
 @app.route('/api/v1/shards_grid')
 async def indices_stats(request):
     client = get_client()
-    indices, shards, nodes = await asyncio.gather(client.cat.indices(format='json'),
-                                                  client.cat.shards(format='json'),
-                                                  client.cat.nodes(format='json'))
+    indices, shards, nodes, cluster_info = await gather(client.cat.indices(format='json'),
+                                                        client.cat.shards(format='json'),
+                                                        client.cat.nodes(format='json'),
+                                                        get_cluster_info())
+    cluster_info["numOfIndices"] = len(indices)
     indices_per_node = defaultdict(lambda: defaultdict(lambda: {'replicas': [], 'primaries': []}))
     relocating_indices = list({shard['index'] for shard in shards if shard['state'] == 'RELOCATING'})
     recovery = await client.cat.recovery(index=relocating_indices, format='json')
@@ -70,18 +96,17 @@ async def indices_stats(request):
             "ip": node["ip"],
             "role": node["node.role"],
             "metrics": {
-                "CPUPercent": float(node["cpu"]),
-                "heapPercent": float(node["heap.percent"]),
-                "load1Percent": float(node["load_1m"]) / 4  # TODO: Count CPUs
+                # Reduce precision in order to reduce render loops in UI
+                "CPUPercent": int(float(node["cpu"])),
+                "heapPercent": int(float(node["heap.percent"])),
+                "load1Percent": int(float(node["load_1m"]) / 4)  # TODO: Count CPUs
             }
         })
 
     return json({
         "nodes": sorted(nodes_result, key=lambda x: x["name"]),
         "indices": dict([(x['index'], format_index_data(x)) for x in indices]),
-        "cluster": {
-            "relocatingShards": relocating,
-        }
+        "cluster": cluster_info,
     })
 
 
@@ -96,6 +121,20 @@ async def reroute_shard(request):
             for shard in shards
         ]}
     )
+    return json({"status": "ok"})
+
+
+@app.route('/api/v1/index/<index>/close')
+async def close_index(request, index):
+    client = get_client()
+    await client.indices.close(index=index, expand_wildcards='none')
+    return json({"status": "ok"})
+
+
+@app.route('/api/v1/index/<index>/open')
+async def open_index(request, index):
+    client = get_client()
+    await client.indices.open(index=index, expand_wildcards='none')
     return json({"status": "ok"})
 
 if __name__ == '__main__':
