@@ -1,13 +1,19 @@
 <template>
-  <HelloWorld />
+  <v-container fluid>
+    <v-layout column>
+      <v-flex>
+        <shards-grid />
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
-  import HelloWorld from '../components/HelloWorld'
-
-  export default {
-    components: {
-      HelloWorld
-    }
-  }
+import ShardsGrid from "../components/ShardsGrid";
+export default {
+  components: { ShardsGrid },
+  data: () => ({})
+};
 </script>
+
+<style></style>

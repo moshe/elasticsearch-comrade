@@ -33,13 +33,13 @@
           </v-card-text>
         </v-card>
       </v-dialog>
-      <HelloWorld />
+      <router-view />
     </v-content>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld";
+import HelloWorld from "./views/Home";
 
 import { mapMutations, mapState } from "vuex";
 import StatusDot from "./components/StatusDot";
