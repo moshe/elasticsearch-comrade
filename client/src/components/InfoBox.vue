@@ -1,5 +1,5 @@
 <template>
-  <div class="info-square pa-2">
+  <div class="info-square pa-2 elevation-2">
     {{ text }}
   </div>
 </template>
@@ -18,7 +18,8 @@ export default {
 
 <style scoped>
 .info-square {
-  border: 6px solid #424242;
+  border: 8px solid #424242;
+  border-radius: 2px;
   text-align: center;
   font-size: 20px;
 }
