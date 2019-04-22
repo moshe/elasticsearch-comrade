@@ -1,7 +1,11 @@
 <template>
   <v-app dark>
-    <json-modal/>
+    <json-modal />
+    <v-navigation-drawer v-model="drawer" absolute temporary>
+      <drawer-content />
+    </v-navigation-drawer>
     <v-toolbar app>
+      <v-toolbar-side-icon @click="drawer = true" />
       <v-toolbar-title class="headline text-uppercase">
         <status-dot />
         <span class="font-weight-bold">Elasticsearch</span>
@@ -40,16 +44,19 @@ import HelloWorld from "./components/HelloWorld";
 import { mapMutations, mapState } from "vuex";
 import StatusDot from "./components/StatusDot";
 import JsonModal from "./components/Modals/JsonModal";
+import DrawerContent from "./components/Navigation/DrawerContent";
 
 export default {
   name: "App",
   components: {
+    DrawerContent,
     JsonModal,
     StatusDot,
     HelloWorld
   },
   data() {
     return {
+      drawer: null,
       times: [1, 5, 10, 30, 60].map(value => {
         return {
           value: value * 1000,
