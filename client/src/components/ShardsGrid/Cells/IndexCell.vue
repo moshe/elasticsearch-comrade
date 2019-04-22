@@ -6,54 +6,34 @@
           <div class="index-name" v-on="on">{{ indexName }}</div>
         </template>
         <v-list dense>
-          <v-list-tile
-            @click="closeIndex(indexName)"
+          <list-tile
+            :action="() => closeIndex(indexName)"
+            icon="close"
+            title="Close"
             :disabled="index.status === 'close'"
-          >
-            <v-list-tile-action style="min-width: unset" class="pr-2">
-              <v-icon
-                :disabled="index.status === 'open'"
-                style="font-size: 16px"
-                >close</v-icon
-              >
-            </v-list-tile-action>
-            <v-list-tile-title>Close</v-list-tile-title>
-          </v-list-tile>
+          />
 
-          <v-list-tile
-            @click="openIndex(indexName)"
+          <list-tile
+            :action="() => openIndex(indexName)"
+            icon="loop"
+            title="Open"
             :disabled="index.status === 'open'"
-          >
-            <v-list-tile-action style="min-width: unset" class="pr-2">
-              <v-icon
-                :disabled="index.status === 'open'"
-                style="font-size: 16px"
-                >loop</v-icon
-              >
-            </v-list-tile-action>
-            <v-list-tile-title>Open</v-list-tile-title>
-          </v-list-tile>
+          />
 
-          <v-list-tile @click="showMapping">
-            <v-list-tile-action style="min-width: unset" class="pr-2">
-              <v-icon style="font-size: 16px">view_compact</v-icon>
-            </v-list-tile-action>
-            <v-list-tile-title>Mapping</v-list-tile-title>
-          </v-list-tile>
+          <list-tile
+            :action="showMapping"
+            icon="view_compact"
+            title="Mapping"
+          />
 
-          <v-list-tile @click="showSettings">
-            <v-list-tile-action style="min-width: unset" class="pr-2">
-              <v-icon style="font-size: 16px">settings</v-icon>
-            </v-list-tile-action>
-            <v-list-tile-title>Settings</v-list-tile-title>
-          </v-list-tile>
+          <list-tile :action="showSettings" icon="settings" title="Settings" />
 
-          <v-list-tile @click="showHead">
-            <v-list-tile-action style="min-width: unset" class="pr-2">
-              <v-icon style="font-size: 16px">visibility</v-icon>
-            </v-list-tile-action>
-            <v-list-tile-title>Head</v-list-tile-title>
-          </v-list-tile>
+          <list-tile
+            :action="showHead"
+            icon="visibility"
+            title="Head"
+            :disabled="index.status !== 'open'"
+          />
         </v-list>
       </v-menu>
     </v-flex>
@@ -86,8 +66,10 @@
 <script>
 import indexAPIs from "../../../mixins/indexApis";
 import { mapMutations, mapState } from "vuex";
+import ListTile from "./ListTile";
 export default {
   name: "IndexCell",
+  components: { ListTile },
   mixins: [indexAPIs],
   methods: {
     ...mapMutations(["startJsonModal"]),
