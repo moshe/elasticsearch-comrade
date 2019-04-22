@@ -2,6 +2,14 @@
   <div>
     <cluster-info-boxes />
     <v-layout align-end justify-end row>
+      <v-flex>
+        <v-text-field
+          clearable
+          label="Filter indices"
+          style="width: 300px"
+          v-model="indexSearch"
+        />
+      </v-flex>
       <v-flex shrink>
         <v-btn
           flat
@@ -22,15 +30,13 @@
         </v-btn>
       </v-flex>
     </v-layout>
-    <v-data-table :items="nodes" class="elevation-1" hide-actions>
+    <v-data-table :items="nodes" class="elevation-3" hide-actions>
       <template slot="headers">
         <th class="pa-2">
           <cluster-cell />
         </th>
         <th class="pa-2" v-for="index of indices" :key="index">
-          <index-cell
-            :indexName="index"
-          />
+          <index-cell :indexName="index" />
         </th>
         <th
           class="pl-1 pr-1"
@@ -83,10 +89,12 @@ export default {
     ...mapState(["nodes", "settingsRefreshEvery", "cluster"]),
     ...mapState({ indicesInfo: "indices" }),
     indices() {
-      return Object.keys(this.indicesInfo).slice(
-        this.page * this.perPage,
-        this.page * this.perPage + this.perPage
-      );
+      return Object.keys(this.indicesInfo)
+        .filter(index => index.includes(this.indexSearch))
+        .slice(
+          this.page * this.perPage,
+          this.page * this.perPage + this.perPage
+        );
     }
   },
   async created() {
@@ -102,6 +110,7 @@ export default {
   data() {
     return {
       page: 0,
+      indexSearch: "",
       perPage: 5
     };
   }
@@ -116,5 +125,9 @@ export default {
 th,
 td {
   vertical-align: top;
+}
+
+div.v-text-field__details {
+  display: none;
 }
 </style>
