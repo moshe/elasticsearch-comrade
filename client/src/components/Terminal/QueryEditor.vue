@@ -1,5 +1,5 @@
 <template>
-  <div id="jsoneditor" style="height: 800px;"></div>
+  <div class="elevation-3" id="jsoneditor" style="height: 800px;"></div>
 </template>
 
 <script>
@@ -10,16 +10,6 @@ export default {
   mounted() {
     const container = document.getElementById("jsoneditor");
     this.editor = new JSONEditor(container, this.options);
-    // set json
-    const json = {
-      Array: [1, 2, 3],
-      Boolean: true,
-      Null: null,
-      Number: 123,
-      Object: { a: "b", c: "d" },
-      String: "Hello World"
-    };
-    this.editor.set(json);
   },
   methods: {
     getQuery() {
@@ -32,7 +22,8 @@ export default {
       options: {
         mode: "code",
         modes: ["code", "text"],
-        search: false
+        search: false,
+        mainMenuBar: true
       }
     };
   }
@@ -118,5 +109,27 @@ div.jsoneditor-value.jsoneditor-invalid {
 }
 div.ace_gutter {
   z-index: 1;
+  background: #4e6e44;
+}
+
+.ace-jsoneditor .ace_gutter {
+  background: #424242 !important;
+  color: white !important;
+}
+
+div.ace_folding-enabled > .ace_gutter-cell {
+  padding: 0 15px 0 5px;
+  text-align: left;
+}
+
+div.ace_content {
+  background-color: #f5f5f5;
+}
+
+.ace-jsoneditor .ace_marker-layer .ace_active-line {
+  background: #e3f2fd !important;
+}
+.ace-jsoneditor .ace_gutter-active-line {
+  background-color: #1f1f1f !important;
 }
 </style>

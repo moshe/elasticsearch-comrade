@@ -13,7 +13,7 @@
         <v-text-field clearable label="URL" v-model="url" />
       </v-flex>
       <v-flex style="flex: 1">
-        <v-btn color="info" @click="sendQuery">Send</v-btn>
+        <v-btn color="info" @click="onClick">Send</v-btn>
       </v-flex>
     </v-layout>
     <v-layout>
@@ -27,7 +27,7 @@
           rows="20"
           label="Response"
           readonly
-          value="The Woodman set to work at once, and so sharp was his axe that the tree was soon chopped nearly through."
+          v-model="response"
           hint="Hint text"
           outline
         ></v-textarea>
@@ -38,20 +38,30 @@
 
 <script>
 import QueryEditor from "../components/Terminal/QueryEditor";
+import terminalApis from "../mixins/terminalApis";
+
 export default {
   name: "QueryView",
   components: { QueryEditor },
+  mixins: [terminalApis],
   data() {
     return {
+      response: "{}",
       method: "GET",
       url: "/"
     };
   },
   methods: {
-    sendQuery() {
+    async onClick() {
       console.log(this.$refs.editor.getQuery());
+      const resp = await this.sendQuery(
+        this.method,
+        this.url,
+        this.$refs.editor.getQuery()
+      );
+      this.response = JSON.stringify(resp, null, 2);
     }
-  },
+  }
 };
 </script>
 

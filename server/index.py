@@ -4,11 +4,13 @@ from collections import defaultdict
 from sanic import Sanic
 from sanic.response import json
 
+from blueprints.terminal import terminal_bp
 from blueprints.index import index_bp
 from connections import get_client
 
 app = Sanic()
 app.blueprint(index_bp, url_prefix='/api/v1/index')
+app.blueprint(terminal_bp, url_prefix='/api/v1/terminal')
 
 
 def format_index_data(data):
