@@ -1,16 +1,23 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
   <v-list>
-    <v-list-tile>
+    <v-list-tile to="/">
       <v-list-tile-action>
         <v-icon>home</v-icon>
       </v-list-tile-action>
       <v-list-tile-title>Home</v-list-tile-title>
     </v-list-tile>
+    <v-divider />
+    <v-list-tile to="/terminal">
+      <v-list-tile-action>
+        <v-icon>search</v-icon>
+      </v-list-tile-action>
+      <v-list-tile-title>Terminal</v-list-tile-title>
+    </v-list-tile>
 
-    <v-list-group prepend-icon="account_circle">
+    <v-list-group prepend-icon="backup">
       <template v-slot:activator>
         <v-list-tile>
-          <v-list-tile-title>Users</v-list-tile-title>
+          <v-list-tile-title>Snapshots</v-list-tile-title>
         </v-list-tile>
       </template>
       <v-list no-action sub-group>

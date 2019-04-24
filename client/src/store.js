@@ -7,7 +7,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     jsonModalContent: false,
-    loading: true,
+    loading: false,
     shardsMarkedForRelocation: [],
     nodes: [],
     indices: {},

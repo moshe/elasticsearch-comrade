@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
+import TerminalView from "./views/TerminalView";
 
 Vue.use(Router);
 
@@ -12,6 +13,11 @@ export default new Router({
       path: "/",
       nodeName: "home",
       component: Home
+    },
+    {
+      path: "/terminal",
+      nodeName: "terminal",
+      component: TerminalView
     },
     {
       path: "/about",
