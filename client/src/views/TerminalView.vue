@@ -4,7 +4,7 @@
       <v-flex style="flex: 2">
         <v-autocomplete
           v-model="method"
-          :items="['GET', 'POST', 'DELETE']"
+          :items="['GET', 'POST', 'DELETE', 'HEAD']"
           label="Method"
           persistent-hint
         />
@@ -17,21 +17,19 @@
       </v-flex>
     </v-layout>
     <v-layout>
-      <v-flex style="flex:1;" class="mr-3">
-        <query-editor ref="editor" />
+      <v-slide-x-transition>
+        <v-flex class="mr-3" style="flex: 10" v-show="panes.includes('editor')">
+          <query-editor ref="editor" />
+        </v-flex>
+      </v-slide-x-transition>
+      <v-flex shrink>
+        <terminal-buttons style="margin-top: 20px" :panes.sync="panes" />
       </v-flex>
-      <v-flex style="flex:1">
-        <v-textarea
-          name="input-7-1"
-          color="#1e1e1e"
-          rows="20"
-          label="Response"
-          readonly
-          v-model="response"
-          hint="Hint text"
-          outline
-        ></v-textarea>
-      </v-flex>
+      <v-slide-x-reverse-transition>
+        <v-flex v-show="panes.includes('preview')" style="flex: 10">
+          <query-editor ref="preview" read-only />
+        </v-flex>
+      </v-slide-x-reverse-transition>
     </v-layout>
   </v-container>
 </template>
@@ -39,27 +37,28 @@
 <script>
 import QueryEditor from "../components/Terminal/QueryEditor";
 import terminalApis from "../mixins/terminalApis";
+import TerminalButtons from "../components/Terminal/TerminalButtons";
 
 export default {
   name: "QueryView",
-  components: { QueryEditor },
+  components: { TerminalButtons, QueryEditor },
   mixins: [terminalApis],
   data() {
     return {
-      response: "{}",
+      response: null,
       method: "GET",
-      url: "/"
+      url: "/",
+      panes: ["preview", "editor"]
     };
   },
   methods: {
     async onClick() {
-      console.log(this.$refs.editor.getQuery());
       const resp = await this.sendQuery(
         this.method,
         this.url,
         this.$refs.editor.getQuery()
       );
-      this.response = JSON.stringify(resp, null, 2);
+      this.$refs.preview.setContent(resp);
     }
   }
 };

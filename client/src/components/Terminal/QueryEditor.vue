@@ -1,5 +1,5 @@
 <template>
-  <div class="elevation-3" id="jsoneditor" style="height: 800px;"></div>
+  <div style="height: 800px;"></div>
 </template>
 
 <script>
@@ -7,13 +7,25 @@ import JSONEditor from "jsoneditor";
 import "jsoneditor/dist/jsoneditor.css";
 export default {
   name: "QueryEditor",
+  props: {
+    readOnly: {
+      type: Boolean,
+      default: false
+    }
+  },
   mounted() {
-    const container = document.getElementById("jsoneditor");
+    const container = this.$el;
     this.editor = new JSONEditor(container, this.options);
+    if (this.readOnly) {
+      this.editor.aceEditor.setReadOnly(true);
+    }
   },
   methods: {
     getQuery() {
       return this.editor.get();
+    },
+    setContent(content) {
+      return this.editor.set(content);
     }
   },
   data() {
@@ -23,6 +35,7 @@ export default {
         mode: "code",
         modes: ["code", "text"],
         search: false,
+        statusBar: false,
         mainMenuBar: true
       }
     };
@@ -34,10 +47,10 @@ export default {
 /* dark styling of the editor */
 div.jsoneditor,
 div.jsoneditor-menu {
-  border-color: #202020;
+  border-color: #303030;
 }
 div.jsoneditor-menu {
-  background-color: #202020;
+  background-color: #303030;
 }
 div.jsoneditor-tree,
 div.jsoneditor textarea.jsoneditor-text {
@@ -113,7 +126,7 @@ div.ace_gutter {
 }
 
 .ace-jsoneditor .ace_gutter {
-  background: #424242 !important;
+  background: #303030 !important;
   color: white !important;
 }
 
