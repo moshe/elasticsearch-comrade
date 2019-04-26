@@ -43,3 +43,17 @@ async def open_index(request, index):
     client = get_client()
     content = await client.search(index=index)
     return json(x['_source'] for x in content['hits']['hits'])
+
+
+@index_bp.route('/<index>/flush')
+async def open_index(request, index):
+    client = get_client()
+    await client.indices.flush(index=index)
+    return json({"status": "ok"})
+
+
+@index_bp.route('/<index>/forcemerge')
+async def open_index(request, index):
+    client = get_client()
+    await client.indices.forcemerge(index=index)
+    return json({"status": "ok"})

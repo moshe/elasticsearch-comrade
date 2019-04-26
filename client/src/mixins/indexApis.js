@@ -23,6 +23,12 @@ export default {
     },
     async getHead(index) {
       return await this.GET(`/api/v1/index/${index}/head`);
+    },
+    async flushIndex(index) {
+      return await this.GET(`/api/v1/index/${index}/flush`);
+    },
+    async forceMergeIndex(index) {
+      return await this.GET(`/api/v1/index/${index}/forcemerge`);
     }
   }
 };

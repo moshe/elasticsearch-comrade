@@ -34,6 +34,18 @@
             title="Head"
             :disabled="index.status !== 'open'"
           />
+
+          <list-tile
+            :action="() => flushIndex(indexName)"
+            icon="sync"
+            title="Flush"
+          />
+
+          <list-tile
+            :action="() => forceMergeIndex(indexName)"
+            icon="call_merge"
+            title="Force Merge"
+          />
         </v-list>
       </v-menu>
     </v-flex>
