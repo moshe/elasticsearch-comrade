@@ -8,8 +8,10 @@
       <v-toolbar-side-icon @click="drawer = true" />
       <v-toolbar-title class="headline text-uppercase">
         <status-dot />
-        <span class="font-weight-bold">Elasticsearch</span>
-        <span class="font-weight-light">ops</span>
+        <span @click="$router.push('/')" style="cursor: pointer">
+          <span class="font-weight-bold">Elasticsearch</span>
+          <span class="font-weight-light">ops</span>
+        </span>
       </v-toolbar-title>
       <v-spacer />
       <span>
