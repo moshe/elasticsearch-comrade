@@ -67,11 +67,14 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    async shardsGrid({ commit }) {
-      const a = await (await fetch("/api/v1/shards_grid")).json();
-      commit("setNodes", a.nodes);
-      commit("setIndices", a.indices);
-      commit("setCluster", a.cluster);
+    async shardsGrid({ state, commit }) {
+      if (state.cluster.clusterStatus === clusterStatus.loading) {
+        commit("startLoading");
+      }
+      const grid = await (await fetch("/api/v1/shards_grid")).json();
+      commit("setNodes", grid.nodes);
+      commit("setIndices", grid.indices);
+      commit("setCluster", grid.cluster);
       commit("stopLoading");
     }
   }
