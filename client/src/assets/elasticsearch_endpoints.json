@@ -1,1467 +1,1471 @@
 [
   {
-    "path": "/_cluster/voting_config_exclusions/{node_name}", 
-    "name": "AddVotingConfigExclusion", 
+    "path": "/_cluster/voting_config_exclusions/{node_name}",
+    "name": "AddVotingConfigExclusion",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/_cat/aliases", 
-    "name": "Alias", 
+    "path": "/_cat/aliases",
+    "name": "Alias",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_cat/aliases/{alias}", 
-    "name": "Alias", 
+    "path": "/_cat/aliases/{alias}",
+    "name": "Alias",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_cat/allocation", 
-    "name": "Allocation", 
+    "path": "/_cat/allocation",
+    "name": "Allocation",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_cat/allocation/{nodes}", 
-    "name": "Allocation", 
+    "path": "/_cat/allocation/{nodes}",
+    "name": "Allocation",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_analyze", 
-    "name": "Analyze", 
+    "path": "/_analyze",
+    "name": "Analyze",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/{index}/_analyze", 
-    "name": "Analyze", 
+    "path": "/{index}/_analyze",
+    "name": "Analyze",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_analyze", 
-    "name": "Analyze", 
+    "path": "/_analyze",
+    "name": "Analyze",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/{index}/_analyze", 
-    "name": "Analyze", 
+    "path": "/{index}/_analyze",
+    "name": "Analyze",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/_bulk", 
-    "name": "Bulk", 
+    "path": "/_bulk",
+    "name": "Bulk",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/{index}/_bulk", 
-    "name": "Bulk", 
+    "path": "/{index}/_bulk",
+    "name": "Bulk",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/{index}/{type}/_bulk", 
-    "name": "Bulk", 
+    "path": "/{index}/{type}/_bulk",
+    "name": "Bulk",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/_bulk", 
-    "name": "Bulk", 
+    "path": "/_bulk",
+    "name": "Bulk",
     "method": "PUT"
-  }, 
+  },
   {
-    "path": "/{index}/_bulk", 
-    "name": "Bulk", 
+    "path": "/{index}/_bulk",
+    "name": "Bulk",
     "method": "PUT"
-  }, 
+  },
   {
-    "path": "/{index}/{type}/_bulk", 
-    "name": "Bulk", 
+    "path": "/{index}/{type}/_bulk",
+    "name": "Bulk",
     "method": "PUT"
-  }, 
+  },
   {
-    "path": "/_tasks/_cancel", 
-    "name": "CancelTasks", 
+    "path": "/_tasks/_cancel",
+    "name": "CancelTasks",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/_tasks/{task_id}/_cancel", 
-    "name": "CancelTasks", 
+    "path": "/_tasks/{task_id}/_cancel",
+    "name": "CancelTasks",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/_cat", 
-    "name": "Cat", 
+    "path": "/_cat",
+    "name": "Cat",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_cache/clear", 
-    "name": "ClearIndicesCache", 
+    "path": "/_cache/clear",
+    "name": "ClearIndicesCache",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/{index}/_cache/clear", 
-    "name": "ClearIndicesCache", 
+    "path": "/{index}/_cache/clear",
+    "name": "ClearIndicesCache",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/_search/scroll", 
-    "name": "ClearScroll", 
+    "path": "/_search/scroll",
+    "name": "ClearScroll",
     "method": "DELETE"
-  }, 
+  },
   {
-    "path": "/_search/scroll/{scroll_id}", 
-    "name": "ClearScroll", 
+    "path": "/_search/scroll/{scroll_id}",
+    "name": "ClearScroll",
     "method": "DELETE"
-  }, 
+  },
   {
-    "path": "/_cluster/voting_config_exclusions", 
-    "name": "ClearVotingConfigExclusions", 
+    "path": "/_cluster/voting_config_exclusions",
+    "name": "ClearVotingConfigExclusions",
     "method": "DELETE"
-  }, 
+  },
   {
-    "path": "/_close", 
-    "name": "CloseIndex", 
+    "path": "/_close",
+    "name": "CloseIndex",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/{index}/_close", 
-    "name": "CloseIndex", 
+    "path": "/{index}/_close",
+    "name": "CloseIndex",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/_cluster/allocation/explain", 
-    "name": "ClusterAllocationExplain", 
+    "path": "/_cluster/allocation/explain",
+    "name": "ClusterAllocationExplain",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_cluster/allocation/explain", 
-    "name": "ClusterAllocationExplain", 
+    "path": "/_cluster/allocation/explain",
+    "name": "ClusterAllocationExplain",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/_cluster/settings", 
-    "name": "ClusterGetSettings", 
+    "path": "/_cluster/settings",
+    "name": "ClusterGetSettings",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_cluster/health", 
-    "name": "ClusterHealth", 
+    "path": "/_cluster/health",
+    "name": "ClusterHealth",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_cluster/health/{index}", 
-    "name": "ClusterHealth", 
+    "path": "/_cluster/health/{index}",
+    "name": "ClusterHealth",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_cluster/reroute", 
-    "name": "ClusterReroute", 
+    "path": "/_cluster/reroute",
+    "name": "ClusterReroute",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/_search_shards", 
-    "name": "ClusterSearchShards", 
+    "path": "/_search_shards",
+    "name": "ClusterSearchShards",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/{index}/_search_shards", 
-    "name": "ClusterSearchShards", 
+    "path": "/{index}/_search_shards",
+    "name": "ClusterSearchShards",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_search_shards", 
-    "name": "ClusterSearchShards", 
+    "path": "/_search_shards",
+    "name": "ClusterSearchShards",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/{index}/_search_shards", 
-    "name": "ClusterSearchShards", 
+    "path": "/{index}/_search_shards",
+    "name": "ClusterSearchShards",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/_cluster/state", 
-    "name": "ClusterState", 
+    "path": "/_cluster/state",
+    "name": "ClusterState",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_cluster/state/{metric}", 
-    "name": "ClusterState", 
+    "path": "/_cluster/state/{metric}",
+    "name": "ClusterState",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_cluster/state/{metric}/{indices}", 
-    "name": "ClusterState", 
+    "path": "/_cluster/state/{metric}/{indices}",
+    "name": "ClusterState",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_cluster/stats", 
-    "name": "ClusterStats", 
+    "path": "/_cluster/stats",
+    "name": "ClusterStats",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_cluster/stats/nodes/{nodeId}", 
-    "name": "ClusterStats", 
+    "path": "/_cluster/stats/nodes/{nodeId}",
+    "name": "ClusterStats",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_cluster/settings", 
-    "name": "ClusterUpdateSettings", 
+    "path": "/_cluster/settings",
+    "name": "ClusterUpdateSettings",
     "method": "PUT"
-  }, 
+  },
   {
-    "path": "/_count", 
-    "name": "Count", 
+    "path": "/_count",
+    "name": "Count",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/{index}/_count", 
-    "name": "Count", 
+    "path": "/{index}/_count",
+    "name": "Count",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/{index}/{type}/_count", 
-    "name": "Count", 
+    "path": "/{index}/{type}/_count",
+    "name": "Count",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_count", 
-    "name": "Count", 
+    "path": "/_count",
+    "name": "Count",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/{index}/_count", 
-    "name": "Count", 
+    "path": "/{index}/_count",
+    "name": "Count",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/{index}/{type}/_count", 
-    "name": "Count", 
+    "path": "/{index}/{type}/_count",
+    "name": "Count",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/{index}", 
-    "name": "CreateIndex", 
+    "path": "/{index}",
+    "name": "CreateIndex",
     "method": "PUT"
-  }, 
+  },
   {
-    "path": "/_snapshot/{repository}/{snapshot}", 
-    "name": "CreateSnapshot", 
+    "path": "/_snapshot/{repository}/{snapshot}",
+    "name": "CreateSnapshot",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/_snapshot/{repository}/{snapshot}", 
-    "name": "CreateSnapshot", 
+    "path": "/_snapshot/{repository}/{snapshot}",
+    "name": "CreateSnapshot",
     "method": "PUT"
-  }, 
+  },
   {
-    "path": "/{index}/_doc/{id}", 
-    "name": "Delete", 
+    "path": "/{index}/_doc/{id}",
+    "name": "Delete",
     "method": "DELETE"
-  }, 
+  },
   {
-    "path": "/{index}/{type}/{id}", 
-    "name": "Delete", 
+    "path": "/{index}/{type}/{id}",
+    "name": "Delete",
     "method": "DELETE"
-  }, 
+  },
   {
-    "path": "/", 
-    "name": "DeleteIndex", 
+    "path": "/",
+    "name": "DeleteIndex",
     "method": "DELETE"
-  }, 
+  },
   {
-    "path": "/{index}", 
-    "name": "DeleteIndex", 
+    "path": "/{index}",
+    "name": "DeleteIndex",
     "method": "DELETE"
-  }, 
+  },
   {
-    "path": "/_template/{name}", 
-    "name": "DeleteIndexTemplate", 
+    "path": "/_template/{name}",
+    "name": "DeleteIndexTemplate",
     "method": "DELETE"
-  }, 
+  },
   {
-    "path": "/_ingest/pipeline/{id}", 
-    "name": "DeletePipeline", 
+    "path": "/_ingest/pipeline/{id}",
+    "name": "DeletePipeline",
     "method": "DELETE"
-  }, 
+  },
   {
-    "path": "/_snapshot/{repository}", 
-    "name": "DeleteRepository", 
+    "path": "/_snapshot/{repository}",
+    "name": "DeleteRepository",
     "method": "DELETE"
-  }, 
+  },
   {
-    "path": "/_snapshot/{repository}/{snapshot}", 
-    "name": "DeleteSnapshot", 
+    "path": "/_snapshot/{repository}/{snapshot}",
+    "name": "DeleteSnapshot",
     "method": "DELETE"
-  }, 
+  },
   {
-    "path": "/_scripts/{id}", 
-    "name": "DeleteStoredScript", 
+    "path": "/_scripts/{id}",
+    "name": "DeleteStoredScript",
     "method": "DELETE"
-  }, 
+  },
   {
-    "path": "/{index}/_explain/{id}", 
-    "name": "Explain", 
+    "path": "/{index}/_explain/{id}",
+    "name": "Explain",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/{index}/{type}/{id}/_explain", 
-    "name": "Explain", 
+    "path": "/{index}/{type}/{id}/_explain",
+    "name": "Explain",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/{index}/_explain/{id}", 
-    "name": "Explain", 
+    "path": "/{index}/_explain/{id}",
+    "name": "Explain",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/{index}/{type}/{id}/_explain", 
-    "name": "Explain", 
+    "path": "/{index}/{type}/{id}/_explain",
+    "name": "Explain",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/_field_caps", 
-    "name": "FieldCapabilities", 
+    "path": "/_field_caps",
+    "name": "FieldCapabilities",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/{index}/_field_caps", 
-    "name": "FieldCapabilities", 
+    "path": "/{index}/_field_caps",
+    "name": "FieldCapabilities",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_field_caps", 
-    "name": "FieldCapabilities", 
+    "path": "/_field_caps",
+    "name": "FieldCapabilities",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/{index}/_field_caps", 
-    "name": "FieldCapabilities", 
+    "path": "/{index}/_field_caps",
+    "name": "FieldCapabilities",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/_cat/fielddata", 
-    "name": "Fielddata", 
+    "path": "/_cat/fielddata",
+    "name": "Fielddata",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_cat/fielddata/{fields}", 
-    "name": "Fielddata", 
+    "path": "/_cat/fielddata/{fields}",
+    "name": "Fielddata",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_flush", 
-    "name": "Flush", 
+    "path": "/_flush",
+    "name": "Flush",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/{index}/_flush", 
-    "name": "Flush", 
+    "path": "/{index}/_flush",
+    "name": "Flush",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_flush", 
-    "name": "Flush", 
+    "path": "/_flush",
+    "name": "Flush",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/{index}/_flush", 
-    "name": "Flush", 
+    "path": "/{index}/_flush",
+    "name": "Flush",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/_forcemerge", 
-    "name": "ForceMerge", 
+    "path": "/_forcemerge",
+    "name": "ForceMerge",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/{index}/_forcemerge", 
-    "name": "ForceMerge", 
+    "path": "/{index}/_forcemerge",
+    "name": "ForceMerge",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/{index}/_doc/{id}", 
-    "name": "Get", 
+    "path": "/{index}/_doc/{id}",
+    "name": "Get",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/{index}/{type}/{id}", 
-    "name": "Get", 
+    "path": "/{index}/{type}/{id}",
+    "name": "Get",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/{index}/_doc/{id}", 
-    "name": "Get", 
+    "path": "/{index}/_doc/{id}",
+    "name": "Get",
     "method": "HEAD"
-  }, 
+  },
   {
-    "path": "/{index}/{type}/{id}", 
-    "name": "Get", 
+    "path": "/{index}/{type}/{id}",
+    "name": "Get",
     "method": "HEAD"
-  }, 
+  },
   {
-    "path": "/_alias", 
-    "name": "GetAliases", 
+    "path": "/_alias",
+    "name": "GetAliases",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_alias/{name}", 
-    "name": "GetAliases", 
+    "path": "/_alias/{name}",
+    "name": "GetAliases",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_aliases", 
-    "name": "GetAliases", 
+    "path": "/_aliases",
+    "name": "GetAliases",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/{index}/_alias", 
-    "name": "GetAliases", 
+    "path": "/{index}/_alias",
+    "name": "GetAliases",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/{index}/_alias/{name}", 
-    "name": "GetAliases", 
+    "path": "/{index}/_alias/{name}",
+    "name": "GetAliases",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_alias/{name}", 
-    "name": "GetAliases", 
+    "path": "/_alias/{name}",
+    "name": "GetAliases",
     "method": "HEAD"
-  }, 
+  },
   {
-    "path": "/{index}/_alias", 
-    "name": "GetAliases", 
+    "path": "/{index}/_alias",
+    "name": "GetAliases",
     "method": "HEAD"
-  }, 
+  },
   {
-    "path": "/{index}/_alias/{name}", 
-    "name": "GetAliases", 
+    "path": "/{index}/_alias/{name}",
+    "name": "GetAliases",
     "method": "HEAD"
-  }, 
+  },
   {
-    "path": "/_mapping/field/{fields}", 
-    "name": "GetFieldMapping", 
+    "path": "/_mapping/field/{fields}",
+    "name": "GetFieldMapping",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_mapping/{type}/field/{fields}", 
-    "name": "GetFieldMapping", 
+    "path": "/_mapping/{type}/field/{fields}",
+    "name": "GetFieldMapping",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/{index}/_mapping/field/{fields}", 
-    "name": "GetFieldMapping", 
+    "path": "/{index}/_mapping/field/{fields}",
+    "name": "GetFieldMapping",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/{index}/_mapping/{type}/field/{fields}", 
-    "name": "GetFieldMapping", 
+    "path": "/{index}/_mapping/{type}/field/{fields}",
+    "name": "GetFieldMapping",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/{index}/{type}/_mapping/field/{fields}", 
-    "name": "GetFieldMapping", 
+    "path": "/{index}/{type}/_mapping/field/{fields}",
+    "name": "GetFieldMapping",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_template", 
-    "name": "GetIndexTemplate", 
+    "path": "/_template",
+    "name": "GetIndexTemplate",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_template/{name}", 
-    "name": "GetIndexTemplate", 
+    "path": "/_template/{name}",
+    "name": "GetIndexTemplate",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_template/{name}", 
-    "name": "GetIndexTemplate", 
+    "path": "/_template/{name}",
+    "name": "GetIndexTemplate",
     "method": "HEAD"
-  }, 
+  },
   {
-    "path": "/{index}", 
-    "name": "GetIndices", 
+    "path": "/{index}",
+    "name": "GetIndices",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/{index}", 
-    "name": "GetIndices", 
+    "path": "/{index}",
+    "name": "GetIndices",
     "method": "HEAD"
-  }, 
+  },
   {
-    "path": "/_mapping", 
-    "name": "GetMapping", 
+    "path": "/_mapping",
+    "name": "GetMapping",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_mapping/{type}", 
-    "name": "GetMapping", 
+    "path": "/_mapping/{type}",
+    "name": "GetMapping",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_mappings", 
-    "name": "GetMapping", 
+    "path": "/_mappings",
+    "name": "GetMapping",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/{index}/_mapping", 
-    "name": "GetMapping", 
+    "path": "/{index}/_mapping",
+    "name": "GetMapping",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/{index}/_mapping/{type}", 
-    "name": "GetMapping", 
+    "path": "/{index}/_mapping/{type}",
+    "name": "GetMapping",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/{index}/_mappings", 
-    "name": "GetMapping", 
+    "path": "/{index}/_mappings",
+    "name": "GetMapping",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/{index}/_mappings/{type}", 
-    "name": "GetMapping", 
+    "path": "/{index}/_mappings/{type}",
+    "name": "GetMapping",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/{index}/{type}/_mapping", 
-    "name": "GetMapping", 
+    "path": "/{index}/{type}/_mapping",
+    "name": "GetMapping",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/{index}/_mapping/{type}", 
-    "name": "GetMapping", 
+    "path": "/{index}/_mapping/{type}",
+    "name": "GetMapping",
     "method": "HEAD"
-  }, 
+  },
   {
-    "path": "/_ingest/pipeline", 
-    "name": "GetPipeline", 
+    "path": "/_ingest/pipeline",
+    "name": "GetPipeline",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_ingest/pipeline/{id}", 
-    "name": "GetPipeline", 
+    "path": "/_ingest/pipeline/{id}",
+    "name": "GetPipeline",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_snapshot", 
-    "name": "GetRepositories", 
+    "path": "/_snapshot",
+    "name": "GetRepositories",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_snapshot/{repository}", 
-    "name": "GetRepositories", 
+    "path": "/_snapshot/{repository}",
+    "name": "GetRepositories",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_settings", 
-    "name": "GetSettings", 
+    "path": "/_settings",
+    "name": "GetSettings",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_settings/{name}", 
-    "name": "GetSettings", 
+    "path": "/_settings/{name}",
+    "name": "GetSettings",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/{index}/_setting/{name}", 
-    "name": "GetSettings", 
+    "path": "/{index}/_setting/{name}",
+    "name": "GetSettings",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/{index}/_settings", 
-    "name": "GetSettings", 
+    "path": "/{index}/_settings",
+    "name": "GetSettings",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/{index}/_settings/{name}", 
-    "name": "GetSettings", 
+    "path": "/{index}/_settings/{name}",
+    "name": "GetSettings",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_snapshot/{repository}/{snapshot}", 
-    "name": "GetSnapshots", 
+    "path": "/_snapshot/{repository}/{snapshot}",
+    "name": "GetSnapshots",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/{index}/_source/{id}", 
-    "name": "GetSource", 
+    "path": "/{index}/_source/{id}",
+    "name": "GetSource",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/{index}/{type}/{id}/_source", 
-    "name": "GetSource", 
+    "path": "/{index}/{type}/{id}/_source",
+    "name": "GetSource",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/{index}/_source/{id}", 
-    "name": "GetSource", 
+    "path": "/{index}/_source/{id}",
+    "name": "GetSource",
     "method": "HEAD"
-  }, 
+  },
   {
-    "path": "/{index}/{type}/{id}/_source", 
-    "name": "GetSource", 
+    "path": "/{index}/{type}/{id}/_source",
+    "name": "GetSource",
     "method": "HEAD"
-  }, 
+  },
   {
-    "path": "/_scripts/{id}", 
-    "name": "GetStoredScript", 
+    "path": "/_scripts/{id}",
+    "name": "GetStoredScript",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_tasks/{task_id}", 
-    "name": "GetTask", 
+    "path": "/_tasks/{task_id}",
+    "name": "GetTask",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_cat/health", 
-    "name": "Health", 
+    "path": "/_cat/health",
+    "name": "Health",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/{index}/_create/{id}/", 
-    "name": "Index", 
+    "path": "/{index}/_create/{id}/",
+    "name": "Index",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/{index}/_doc", 
-    "name": "Index", 
+    "path": "/{index}/_doc",
+    "name": "Index",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/{index}/_doc/{id}", 
-    "name": "Index", 
+    "path": "/{index}/_doc/{id}",
+    "name": "Index",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/{index}/{type}", 
-    "name": "Index", 
+    "path": "/{index}/{type}",
+    "name": "Index",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/{index}/{type}/{id}", 
-    "name": "Index", 
+    "path": "/{index}/{type}/{id}",
+    "name": "Index",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/{index}/{type}/{id}/_create", 
-    "name": "Index", 
+    "path": "/{index}/{type}/{id}/_create",
+    "name": "Index",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/{index}/_create/{id}", 
-    "name": "Index", 
+    "path": "/{index}/_create/{id}",
+    "name": "Index",
     "method": "PUT"
-  }, 
+  },
   {
-    "path": "/{index}/_doc/{id}", 
-    "name": "Index", 
+    "path": "/{index}/_doc/{id}",
+    "name": "Index",
     "method": "PUT"
-  }, 
+  },
   {
-    "path": "/{index}/{type}/{id}", 
-    "name": "Index", 
+    "path": "/{index}/{type}/{id}",
+    "name": "Index",
     "method": "PUT"
-  }, 
+  },
   {
-    "path": "/{index}/{type}/{id}/_create", 
-    "name": "Index", 
+    "path": "/{index}/{type}/{id}/_create",
+    "name": "Index",
     "method": "PUT"
-  }, 
+  },
   {
-    "path": "/{index}/_alias/{name}", 
-    "name": "IndexDeleteAliases", 
+    "path": "/{index}/_alias/{name}",
+    "name": "IndexDeleteAliases",
     "method": "DELETE"
-  }, 
+  },
   {
-    "path": "/{index}/_aliases/{name}", 
-    "name": "IndexDeleteAliases", 
+    "path": "/{index}/_aliases/{name}",
+    "name": "IndexDeleteAliases",
     "method": "DELETE"
-  }, 
+  },
   {
-    "path": "/{index}/_stats/{metric}", 
-    "name": "IndexFilteredStatsU{Emetric}", 
+    "path": "/{index}/_stats/{metric}",
+    "name": "IndexFilteredStatsU{Emetric}",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_alias/{name}", 
-    "name": "IndexPutAlias", 
+    "path": "/_alias/{name}",
+    "name": "IndexPutAlias",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/_aliases/{name}", 
-    "name": "IndexPutAlias", 
+    "path": "/_aliases/{name}",
+    "name": "IndexPutAlias",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/{index}/_alias/{name}", 
-    "name": "IndexPutAlias", 
+    "path": "/{index}/_alias/{name}",
+    "name": "IndexPutAlias",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/{index}/_aliases/{name}", 
-    "name": "IndexPutAlias", 
+    "path": "/{index}/_aliases/{name}",
+    "name": "IndexPutAlias",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/_alias", 
-    "name": "IndexPutAlias", 
+    "path": "/_alias",
+    "name": "IndexPutAlias",
     "method": "PUT"
-  }, 
+  },
   {
-    "path": "/_aliases/{name}", 
-    "name": "IndexPutAlias", 
+    "path": "/_aliases/{name}",
+    "name": "IndexPutAlias",
     "method": "PUT"
-  }, 
+  },
   {
-    "path": "/{index}/_alias", 
-    "name": "IndexPutAlias", 
+    "path": "/{index}/_alias",
+    "name": "IndexPutAlias",
     "method": "PUT"
-  }, 
+  },
   {
-    "path": "/{index}/_alias/{name}", 
-    "name": "IndexPutAlias", 
+    "path": "/{index}/_alias/{name}",
+    "name": "IndexPutAlias",
     "method": "PUT"
-  }, 
+  },
   {
-    "path": "/{index}/_aliases", 
-    "name": "IndexPutAlias", 
+    "path": "/{index}/_aliases",
+    "name": "IndexPutAlias",
     "method": "PUT"
-  }, 
+  },
   {
-    "path": "/{index}/_aliases/{name}", 
-    "name": "IndexPutAlias", 
+    "path": "/{index}/_aliases/{name}",
+    "name": "IndexPutAlias",
     "method": "PUT"
-  }, 
+  },
   {
-    "path": "/_alias/{name}", 
-    "name": "IndexPutAliasByName", 
+    "path": "/_alias/{name}",
+    "name": "IndexPutAliasByName",
     "method": "PUT"
-  }, 
+  },
   {
-    "path": "/_cat/indices", 
-    "name": "Indices", 
+    "path": "/_cat/indices",
+    "name": "Indices",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_cat/indices/{index}", 
-    "name": "Indices", 
+    "path": "/_cat/indices/{index}",
+    "name": "Indices",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_aliases", 
-    "name": "IndicesAliases", 
+    "path": "/_aliases",
+    "name": "IndicesAliases",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/_segments", 
-    "name": "IndicesSegments", 
+    "path": "/_segments",
+    "name": "IndicesSegments",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/{index}/_segments", 
-    "name": "IndicesSegments", 
+    "path": "/{index}/_segments",
+    "name": "IndicesSegments",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_shard_stores", 
-    "name": "IndicesShardStores", 
+    "path": "/_shard_stores",
+    "name": "IndicesShardStores",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/{index}/_shard_stores", 
-    "name": "IndicesShardStores", 
+    "path": "/{index}/_shard_stores",
+    "name": "IndicesShardStores",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_stats/{metric}", 
-    "name": "IndicesStatU{Emetric}", 
+    "path": "/_stats/{metric}",
+    "name": "IndicesStatU{Emetric}",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_stats", 
-    "name": "IndicesStats", 
+    "path": "/_stats",
+    "name": "IndicesStats",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/{index}/_stats", 
-    "name": "IndicesStats", 
+    "path": "/{index}/_stats",
+    "name": "IndicesStats",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_tasks", 
-    "name": "ListTasks", 
+    "path": "/_tasks",
+    "name": "ListTasks",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/", 
-    "name": "Main", 
+    "path": "/",
+    "name": "Main",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/", 
-    "name": "Main", 
+    "path": "/",
+    "name": "Main",
     "method": "HEAD"
-  }, 
+  },
   {
-    "path": "/_cat/master", 
-    "name": "Master", 
+    "path": "/_cat/master",
+    "name": "Master",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_mget", 
-    "name": "MultiGet", 
+    "path": "/_mget",
+    "name": "MultiGet",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/{index}/_mget", 
-    "name": "MultiGet", 
+    "path": "/{index}/_mget",
+    "name": "MultiGet",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/{index}/{type}/_mget", 
-    "name": "MultiGet", 
+    "path": "/{index}/{type}/_mget",
+    "name": "MultiGet",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_mget", 
-    "name": "MultiGet", 
+    "path": "/_mget",
+    "name": "MultiGet",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/{index}/_mget", 
-    "name": "MultiGet", 
+    "path": "/{index}/_mget",
+    "name": "MultiGet",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/{index}/{type}/_mget", 
-    "name": "MultiGet", 
+    "path": "/{index}/{type}/_mget",
+    "name": "MultiGet",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/_msearch", 
-    "name": "MultiSearch", 
+    "path": "/_msearch",
+    "name": "MultiSearch",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/{index}/_msearch", 
-    "name": "MultiSearch", 
+    "path": "/{index}/_msearch",
+    "name": "MultiSearch",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/{index}/{type}/_msearch", 
-    "name": "MultiSearch", 
+    "path": "/{index}/{type}/_msearch",
+    "name": "MultiSearch",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_msearch", 
-    "name": "MultiSearch", 
+    "path": "/_msearch",
+    "name": "MultiSearch",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/{index}/_msearch", 
-    "name": "MultiSearch", 
+    "path": "/{index}/_msearch",
+    "name": "MultiSearch",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/{index}/{type}/_msearch", 
-    "name": "MultiSearch", 
+    "path": "/{index}/{type}/_msearch",
+    "name": "MultiSearch",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/_mtermvectors", 
-    "name": "MultiTermVectors", 
+    "path": "/_mtermvectors",
+    "name": "MultiTermVectors",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/{index}/_mtermvectors", 
-    "name": "MultiTermVectors", 
+    "path": "/{index}/_mtermvectors",
+    "name": "MultiTermVectors",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/{index}/{type}/_mtermvectors", 
-    "name": "MultiTermVectors", 
+    "path": "/{index}/{type}/_mtermvectors",
+    "name": "MultiTermVectors",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_mtermvectors", 
-    "name": "MultiTermVectors", 
+    "path": "/_mtermvectors",
+    "name": "MultiTermVectors",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/{index}/_mtermvectors", 
-    "name": "MultiTermVectors", 
+    "path": "/{index}/_mtermvectors",
+    "name": "MultiTermVectors",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/{index}/{type}/_mtermvectors", 
-    "name": "MultiTermVectors", 
+    "path": "/{index}/{type}/_mtermvectors",
+    "name": "MultiTermVectors",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/_cat/nodeattrs", 
-    "name": "NodeAttrs", 
+    "path": "/_cat/nodeattrs",
+    "name": "NodeAttrs",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_nodes/{nodeId}/info/{metrics}", 
-    "name": "NodeInfoUiEnfo", 
+    "path": "/_nodes/{nodeId}/info/{metrics}",
+    "name": "NodeInfoUiEnfo",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_nodes/{nodeId}/{metrics}", 
-    "name": "NodeInfoU{Emetrics}", 
+    "path": "/_nodes/{nodeId}/{metrics}",
+    "name": "NodeInfoU{Emetrics}",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_nodes/{nodeId}/stats/{metric}", 
-    "name": "NodeStatsU{Emetric}", 
+    "path": "/_nodes/{nodeId}/stats/{metric}",
+    "name": "NodeStatsU{Emetric}",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_nodes/{nodeId}/stats/{metric}/{index_metric}", 
-    "name": "NodeStatsU{Emetric}", 
+    "path": "/_nodes/{nodeId}/stats/{metric}/{index_metric}",
+    "name": "NodeStatsU{Emetric}",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_cat/nodes", 
-    "name": "Nodes", 
+    "path": "/_cat/nodes",
+    "name": "Nodes",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_nodes/hot_threads", 
-    "name": "NodesHotThreads", 
+    "path": "/_nodes/hot_threads",
+    "name": "NodesHotThreads",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_nodes/{nodeId}/hot_threads", 
-    "name": "NodesHotThreads", 
+    "path": "/_nodes/{nodeId}/hot_threads",
+    "name": "NodesHotThreads",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_nodes", 
-    "name": "NodesInfo", 
+    "path": "/_nodes",
+    "name": "NodesInfo",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_nodes/{nodeId}", 
-    "name": "NodesInfoU{EnodeId}", 
+    "path": "/_nodes/{nodeId}",
+    "name": "NodesInfoU{EnodeId}",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_nodes/stats/{metric}", 
-    "name": "NodesStatsU{Emetric}", 
+    "path": "/_nodes/stats/{metric}",
+    "name": "NodesStatsU{Emetric}",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_nodes/stats/{metric}/{index_metric}", 
-    "name": "NodesStatsU{Emetric}", 
+    "path": "/_nodes/stats/{metric}/{index_metric}",
+    "name": "NodesStatsU{Emetric}",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_nodes/usage", 
-    "name": "NodesUsage", 
+    "path": "/_nodes/usage",
+    "name": "NodesUsage",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_nodes/usage/{metric}", 
-    "name": "NodesUsage", 
+    "path": "/_nodes/usage/{metric}",
+    "name": "NodesUsage",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_nodes/{nodeId}/usage", 
-    "name": "NodesUsage", 
+    "path": "/_nodes/{nodeId}/usage",
+    "name": "NodesUsage",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_nodes/{nodeId}/usage/{metric}", 
-    "name": "NodesUsage", 
+    "path": "/_nodes/{nodeId}/usage/{metric}",
+    "name": "NodesUsage",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_open", 
-    "name": "OpenIndex", 
+    "path": "/_open",
+    "name": "OpenIndex",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/{index}/_open", 
-    "name": "OpenIndex", 
+    "path": "/{index}/_open",
+    "name": "OpenIndex",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/_cat/pending_tasks", 
-    "name": "PendingClusterTasks", 
+    "path": "/_cat/pending_tasks",
+    "name": "PendingClusterTasks",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_cluster/pending_tasks", 
-    "name": "PendingClusterTasks", 
+    "path": "/_cluster/pending_tasks",
+    "name": "PendingClusterTasks",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_cat/plugins", 
-    "name": "Plugins", 
+    "path": "/_cat/plugins",
+    "name": "Plugins",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_template/{name}", 
-    "name": "PutIndexTemplate", 
+    "path": "/_template/{name}",
+    "name": "PutIndexTemplate",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/_template/{name}", 
-    "name": "PutIndexTemplate", 
+    "path": "/_template/{name}",
+    "name": "PutIndexTemplate",
     "method": "PUT"
-  }, 
+  },
   {
-    "path": "/_mapping/{type}", 
-    "name": "PutMapping", 
+    "path": "/_mapping/{type}",
+    "name": "PutMapping",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/_mappings/{type}", 
-    "name": "PutMapping", 
+    "path": "/_mappings/{type}",
+    "name": "PutMapping",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/{index}/_mapping/", 
-    "name": "PutMapping", 
+    "path": "/{index}/_mapping/",
+    "name": "PutMapping",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/{index}/_mapping/{type}", 
-    "name": "PutMapping", 
+    "path": "/{index}/_mapping/{type}",
+    "name": "PutMapping",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/{index}/_mappings/", 
-    "name": "PutMapping", 
+    "path": "/{index}/_mappings/",
+    "name": "PutMapping",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/{index}/_mappings/{type}", 
-    "name": "PutMapping", 
+    "path": "/{index}/_mappings/{type}",
+    "name": "PutMapping",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/{index}/{type}/_mapping", 
-    "name": "PutMapping", 
+    "path": "/{index}/{type}/_mapping",
+    "name": "PutMapping",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/{index}/{type}/_mappings", 
-    "name": "PutMapping", 
+    "path": "/{index}/{type}/_mappings",
+    "name": "PutMapping",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/_mapping/{type}", 
-    "name": "PutMapping", 
+    "path": "/_mapping/{type}",
+    "name": "PutMapping",
     "method": "PUT"
-  }, 
+  },
   {
-    "path": "/_mappings/{type}", 
-    "name": "PutMapping", 
+    "path": "/_mappings/{type}",
+    "name": "PutMapping",
     "method": "PUT"
-  }, 
+  },
   {
-    "path": "/{index}/_mapping/", 
-    "name": "PutMapping", 
+    "path": "/{index}/_mapping/",
+    "name": "PutMapping",
     "method": "PUT"
-  }, 
+  },
   {
-    "path": "/{index}/_mapping/{type}", 
-    "name": "PutMapping", 
+    "path": "/{index}/_mapping/{type}",
+    "name": "PutMapping",
     "method": "PUT"
-  }, 
+  },
   {
-    "path": "/{index}/_mappings/", 
-    "name": "PutMapping", 
+    "path": "/{index}/_mappings/",
+    "name": "PutMapping",
     "method": "PUT"
-  }, 
+  },
   {
-    "path": "/{index}/_mappings/{type}", 
-    "name": "PutMapping", 
+    "path": "/{index}/_mappings/{type}",
+    "name": "PutMapping",
     "method": "PUT"
-  }, 
+  },
   {
-    "path": "/{index}/{type}/_mapping", 
-    "name": "PutMapping", 
+    "path": "/{index}/{type}/_mapping",
+    "name": "PutMapping",
     "method": "PUT"
-  }, 
+  },
   {
-    "path": "/{index}/{type}/_mappings", 
-    "name": "PutMapping", 
+    "path": "/{index}/{type}/_mappings",
+    "name": "PutMapping",
     "method": "PUT"
-  }, 
+  },
   {
-    "path": "/_ingest/pipeline/{id}", 
-    "name": "PutPipeline", 
+    "path": "/_ingest/pipeline/{id}",
+    "name": "PutPipeline",
     "method": "PUT"
-  }, 
+  },
   {
-    "path": "/_snapshot/{repository}", 
-    "name": "PutRepository", 
+    "path": "/_snapshot/{repository}",
+    "name": "PutRepository",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/_snapshot/{repository}", 
-    "name": "PutRepository", 
+    "path": "/_snapshot/{repository}",
+    "name": "PutRepository",
     "method": "PUT"
-  }, 
+  },
   {
-    "path": "/_scripts/{id}", 
-    "name": "PutStoredScript", 
+    "path": "/_scripts/{id}",
+    "name": "PutStoredScript",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/_scripts/{id}/{context}", 
-    "name": "PutStoredScript", 
+    "path": "/_scripts/{id}/{context}",
+    "name": "PutStoredScript",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/_scripts/{id}", 
-    "name": "PutStoredScript", 
+    "path": "/_scripts/{id}",
+    "name": "PutStoredScript",
     "method": "PUT"
-  }, 
+  },
   {
-    "path": "/_scripts/{id}/{context}", 
-    "name": "PutStoredScript", 
+    "path": "/_scripts/{id}/{context}",
+    "name": "PutStoredScript",
     "method": "PUT"
-  }, 
+  },
   {
-    "path": "/_recovery", 
-    "name": "Recovery", 
+    "path": "/_recovery",
+    "name": "Recovery",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/{index}/_recovery", 
-    "name": "Recovery", 
+    "path": "/{index}/_recovery",
+    "name": "Recovery",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_refresh", 
-    "name": "Refresh", 
+    "path": "/_refresh",
+    "name": "Refresh",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/{index}/_refresh", 
-    "name": "Refresh", 
+    "path": "/{index}/_refresh",
+    "name": "Refresh",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_refresh", 
-    "name": "Refresh", 
+    "path": "/_refresh",
+    "name": "Refresh",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/{index}/_refresh", 
-    "name": "Refresh", 
+    "path": "/{index}/_refresh",
+    "name": "Refresh",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/_nodes/reload_secure_settings", 
-    "name": "ReloadSecureSettings", 
+    "path": "/_nodes/reload_secure_settings",
+    "name": "ReloadSecureSettings",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/_nodes/{nodeId}/reload_secure_settings", 
-    "name": "ReloadSecureSettings", 
+    "path": "/_nodes/{nodeId}/reload_secure_settings",
+    "name": "ReloadSecureSettings",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "_remote/info", 
-    "name": "RemoteClusterInfo", 
+    "path": "_remote/info",
+    "name": "RemoteClusterInfo",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_cat/repositories", 
-    "name": "Repositories", 
+    "path": "/_cat/repositories",
+    "name": "Repositories",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_snapshot/{repository}/{snapshot}/_restore", 
-    "name": "RestoreSnapshot", 
+    "path": "/_snapshot/{repository}/{snapshot}/_restore",
+    "name": "RestoreSnapshot",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/{index}/_rollover", 
-    "name": "RolloverIndex", 
+    "path": "/{index}/_rollover",
+    "name": "RolloverIndex",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/{index}/_rollover/{new_index}", 
-    "name": "RolloverIndex", 
+    "path": "/{index}/_rollover/{new_index}",
+    "name": "RolloverIndex",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/_search", 
-    "name": "Search", 
+    "path": "/_search",
+    "name": "Search",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/{index}/_search", 
-    "name": "Search", 
+    "path": "/{index}/_search",
+    "name": "Search",
+    "method": "GET",
+    "template": {
+      "size": 20,
+      "_source": []
+    }
+  },
+  {
+    "path": "/{index}/{type}/_search",
+    "name": "Search",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/{index}/{type}/_search", 
-    "name": "Search", 
-    "method": "GET"
-  }, 
-  {
-    "path": "/_search", 
-    "name": "Search", 
+    "path": "/_search",
+    "name": "Search",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/{index}/_search", 
-    "name": "Search", 
+    "path": "/{index}/_search",
+    "name": "Search",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/{index}/{type}/_search", 
-    "name": "Search", 
+    "path": "/{index}/{type}/_search",
+    "name": "Search",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/_search/scroll", 
-    "name": "SearchScroll", 
+    "path": "/_search/scroll",
+    "name": "SearchScroll",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_search/scroll/{scroll_id}", 
-    "name": "SearchScroll", 
+    "path": "/_search/scroll/{scroll_id}",
+    "name": "SearchScroll",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_search/scroll", 
-    "name": "SearchScroll", 
+    "path": "/_search/scroll",
+    "name": "SearchScroll",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/_search/scroll/{scroll_id}", 
-    "name": "SearchScroll", 
+    "path": "/_search/scroll/{scroll_id}",
+    "name": "SearchScroll",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/_cat/segments", 
-    "name": "Segments", 
+    "path": "/_cat/segments",
+    "name": "Segments",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_cat/segments/{index}", 
-    "name": "Segments", 
+    "path": "/_cat/segments/{index}",
+    "name": "Segments",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_cat/shards", 
-    "name": "Shards", 
+    "path": "/_cat/shards",
+    "name": "Shards",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_cat/shards/{index}", 
-    "name": "Shards", 
+    "path": "/_cat/shards/{index}",
+    "name": "Shards",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_ingest/pipeline/_simulate", 
-    "name": "SimulatePipeline", 
+    "path": "/_ingest/pipeline/_simulate",
+    "name": "SimulatePipeline",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_ingest/pipeline/{id}/_simulate", 
-    "name": "SimulatePipeline", 
+    "path": "/_ingest/pipeline/{id}/_simulate",
+    "name": "SimulatePipeline",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_ingest/pipeline/_simulate", 
-    "name": "SimulatePipeline", 
+    "path": "/_ingest/pipeline/_simulate",
+    "name": "SimulatePipeline",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/_ingest/pipeline/{id}/_simulate", 
-    "name": "SimulatePipeline", 
+    "path": "/_ingest/pipeline/{id}/_simulate",
+    "name": "SimulatePipeline",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/_cat/snapshots", 
-    "name": "Snapshot", 
+    "path": "/_cat/snapshots",
+    "name": "Snapshot",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_cat/snapshots/{repository}", 
-    "name": "Snapshot", 
+    "path": "/_cat/snapshots/{repository}",
+    "name": "Snapshot",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_snapshot/_status", 
-    "name": "SnapshotsStatus", 
+    "path": "/_snapshot/_status",
+    "name": "SnapshotsStatus",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_snapshot/{repository}/_status", 
-    "name": "SnapshotsStatus", 
+    "path": "/_snapshot/{repository}/_status",
+    "name": "SnapshotsStatus",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_snapshot/{repository}/{snapshot}/_status", 
-    "name": "SnapshotsStatus", 
+    "path": "/_snapshot/{repository}/{snapshot}/_status",
+    "name": "SnapshotsStatus",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_flush/synced", 
-    "name": "SyncedFlush", 
+    "path": "/_flush/synced",
+    "name": "SyncedFlush",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/{index}/_flush/synced", 
-    "name": "SyncedFlush", 
+    "path": "/{index}/_flush/synced",
+    "name": "SyncedFlush",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_flush/synced", 
-    "name": "SyncedFlush", 
+    "path": "/_flush/synced",
+    "name": "SyncedFlush",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/{index}/_flush/synced", 
-    "name": "SyncedFlush", 
+    "path": "/{index}/_flush/synced",
+    "name": "SyncedFlush",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/_cat/tasks", 
-    "name": "Tasks", 
+    "path": "/_cat/tasks",
+    "name": "Tasks",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_cat/templates", 
-    "name": "Templates", 
+    "path": "/_cat/templates",
+    "name": "Templates",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_cat/templates/{name}", 
-    "name": "Templates", 
+    "path": "/_cat/templates/{name}",
+    "name": "Templates",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/{index}/_termvectors", 
-    "name": "TermVectors", 
+    "path": "/{index}/_termvectors",
+    "name": "TermVectors",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/{index}/_termvectors/{id}", 
-    "name": "TermVectors", 
+    "path": "/{index}/_termvectors/{id}",
+    "name": "TermVectors",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/{index}/{type}/_termvectors", 
-    "name": "TermVectors", 
+    "path": "/{index}/{type}/_termvectors",
+    "name": "TermVectors",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/{index}/{type}/{id}/_termvectors", 
-    "name": "TermVectors", 
+    "path": "/{index}/{type}/{id}/_termvectors",
+    "name": "TermVectors",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/{index}/_termvectors", 
-    "name": "TermVectors", 
+    "path": "/{index}/_termvectors",
+    "name": "TermVectors",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/{index}/_termvectors/{id}", 
-    "name": "TermVectors", 
+    "path": "/{index}/_termvectors/{id}",
+    "name": "TermVectors",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/{index}/{type}/_termvectors", 
-    "name": "TermVectors", 
+    "path": "/{index}/{type}/_termvectors",
+    "name": "TermVectors",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/{index}/{type}/{id}/_termvectors", 
-    "name": "TermVectors", 
+    "path": "/{index}/{type}/{id}/_termvectors",
+    "name": "TermVectors",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/_cat/thread_pool", 
-    "name": "ThreadPool", 
+    "path": "/_cat/thread_pool",
+    "name": "ThreadPool",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_cat/thread_pool/{thread_pool_patterns}", 
-    "name": "ThreadPool", 
+    "path": "/_cat/thread_pool/{thread_pool_patterns}",
+    "name": "ThreadPool",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/{index}/_update/{id}", 
-    "name": "Update", 
+    "path": "/{index}/_update/{id}",
+    "name": "Update",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/{index}/{type}/{id}/_update", 
-    "name": "Update", 
+    "path": "/{index}/{type}/{id}/_update",
+    "name": "Update",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/_settings", 
-    "name": "UpdateSettings", 
+    "path": "/_settings",
+    "name": "UpdateSettings",
     "method": "PUT"
-  }, 
+  },
   {
-    "path": "/{index}/_settings", 
-    "name": "UpdateSettings", 
+    "path": "/{index}/_settings",
+    "name": "UpdateSettings",
     "method": "PUT"
-  }, 
+  },
   {
-    "path": "/_upgrade", 
-    "name": "Upgrade", 
+    "path": "/_upgrade",
+    "name": "Upgrade",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/{index}/_upgrade", 
-    "name": "Upgrade", 
+    "path": "/{index}/_upgrade",
+    "name": "Upgrade",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/_upgrade", 
-    "name": "UpgradeStatus", 
+    "path": "/_upgrade",
+    "name": "UpgradeStatus",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/{index}/_upgrade", 
-    "name": "UpgradeStatus", 
+    "path": "/{index}/_upgrade",
+    "name": "UpgradeStatus",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_validate/query", 
-    "name": "ValidateQuery", 
+    "path": "/_validate/query",
+    "name": "ValidateQuery",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/{index}/_validate/query", 
-    "name": "ValidateQuery", 
+    "path": "/{index}/_validate/query",
+    "name": "ValidateQuery",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/{index}/{type}/_validate/query", 
-    "name": "ValidateQuery", 
+    "path": "/{index}/{type}/_validate/query",
+    "name": "ValidateQuery",
     "method": "GET"
-  }, 
+  },
   {
-    "path": "/_validate/query", 
-    "name": "ValidateQuery", 
+    "path": "/_validate/query",
+    "name": "ValidateQuery",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/{index}/_validate/query", 
-    "name": "ValidateQuery", 
+    "path": "/{index}/_validate/query",
+    "name": "ValidateQuery",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/{index}/{type}/_validate/query", 
-    "name": "ValidateQuery", 
+    "path": "/{index}/{type}/_validate/query",
+    "name": "ValidateQuery",
     "method": "POST"
-  }, 
+  },
   {
-    "path": "/_snapshot/{repository}/_verify", 
-    "name": "VerifyRepository", 
+    "path": "/_snapshot/{repository}/_verify",
+    "name": "VerifyRepository",
     "method": "POST"
   }
 ]
