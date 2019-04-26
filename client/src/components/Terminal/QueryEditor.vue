@@ -26,6 +26,9 @@ export default {
     },
     setContent(content) {
       return this.editor.set(content);
+    },
+    refresh() {
+      this.editor.set(this.editor.get());
     }
   },
   data() {

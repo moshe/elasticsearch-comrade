@@ -17,19 +17,19 @@
       </v-flex>
     </v-layout>
     <v-layout>
-      <v-slide-x-transition>
+      <transition name="slide-fade-reverse">
         <v-flex class="mr-3" style="flex: 10" v-show="panes.includes('editor')">
           <query-editor ref="editor" />
         </v-flex>
-      </v-slide-x-transition>
+      </transition>
       <v-flex shrink>
         <terminal-buttons style="margin-top: 20px" :panes.sync="panes" />
       </v-flex>
-      <v-slide-x-reverse-transition>
+      <transition name="slide-fade">
         <v-flex v-show="panes.includes('preview')" style="flex: 10">
           <query-editor ref="preview" read-only />
         </v-flex>
-      </v-slide-x-reverse-transition>
+      </transition>
     </v-layout>
   </v-container>
 </template>
@@ -60,8 +60,36 @@ export default {
       );
       this.$refs.preview.setContent(resp);
     }
+  },
+  watch: {
+    panes() {
+      setTimeout(() => {
+        this.$refs.editor.refresh();
+        this.$refs.preview.refresh();
+      }, 310);
+    }
   }
 };
 </script>
 
-<style></style>
+<style>
+.slide-fade-enter-active,
+.slide-fade-reverse-enter-active {
+  transition: all 0.3s ease;
+}
+.slide-fade-leave-active,
+.slide-fade-reverse-leave-active {
+  transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.slide-fade-enter,
+.slide-fade-leave-to {
+  transform: translateX(600px);
+  opacity: 0;
+}
+
+.slide-fade-reverse-enter,
+.slide-fade-reverse-leave-to {
+  transform: translateX(-600px);
+  opacity: 0;
+}
+</style>
