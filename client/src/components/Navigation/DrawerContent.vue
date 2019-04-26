@@ -9,7 +9,7 @@
     <v-divider />
     <v-list-tile to="/terminal">
       <v-list-tile-action>
-        <v-icon>search</v-icon>
+        <v-icon>build</v-icon>
       </v-list-tile-action>
       <v-list-tile-title>Terminal</v-list-tile-title>
     </v-list-tile>

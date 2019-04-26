@@ -86,7 +86,7 @@ export default {
     NodeCell
   },
   computed: {
-    ...mapState(["nodes", "settingsRefreshEvery", "cluster"]),
+    ...mapState(["nodes", "cluster"]),
     ...mapState({ indicesInfo: "indices" }),
     indices() {
       return Object.keys(this.indicesInfo)

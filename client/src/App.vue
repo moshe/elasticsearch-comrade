@@ -77,7 +77,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(["loading"])
+    ...mapState(["loading", "settingsRefreshEvery"])
   }
 };
 </script>
