@@ -6,11 +6,30 @@
           v-model="method"
           :items="['GET', 'POST', 'DELETE', 'HEAD']"
           label="Method"
-          persistent-hint
         />
       </v-flex>
       <v-flex style="flex: 10" class="ml-3">
-        <v-text-field clearable label="URL" v-model="url" />
+        <v-combobox
+          :items="endpoints"
+          clearable
+          autofocus
+          label="URL"
+          v-model="url"
+          item-text="path"
+        >
+          <template v-slot:item="{ index, item }">
+            <v-list-tile-content>
+              <v-chip :color="`gray lighten-3`" dark label small>
+                {{ item.method }} {{ item.path }}
+              </v-chip>
+            </v-list-tile-content>
+            <v-list-tile-action>
+              <v-chip :color="`gray lighten-3`" dark label small>
+                {{ item.name }}
+              </v-chip>
+            </v-list-tile-action>
+          </template>
+        </v-combobox>
       </v-flex>
       <v-flex style="flex: 1">
         <v-btn color="info" @click="onClick">Send</v-btn>
@@ -38,6 +57,8 @@
 import QueryEditor from "../components/Terminal/QueryEditor";
 import terminalApis from "../mixins/terminalApis";
 import TerminalButtons from "../components/Terminal/TerminalButtons";
+import endpoints from "../assets/elasticsearch_endpoints";
+import { mapState } from "vuex";
 
 export default {
   name: "QueryView",
@@ -51,7 +72,22 @@ export default {
       panes: ["preview", "editor"]
     };
   },
+  computed: {
+    ...mapState(["indices"]),
+    endpoints() {
+      return endpoints.flatMap(this.expandIndices);
+    }
+  },
   methods: {
+    expandIndices(route) {
+      const indices = Object.keys(this.indices);
+      if (route.path.includes("{index}")) {
+        return indices.map(x => {
+          return { ...route, path: route.path.replace("{index}", x) };
+        });
+      }
+      return route;
+    },
     async onClick() {
       const resp = await this.sendQuery(
         this.method,
