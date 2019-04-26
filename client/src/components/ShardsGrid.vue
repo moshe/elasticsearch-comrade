@@ -72,7 +72,7 @@
 import NodeCell from "./ShardsGrid/Cells/NodeCell";
 import ShardsCell from "./ShardsGrid/Cells/ShardsCell";
 import IndexCell from "./ShardsGrid/Cells/IndexCell";
-import { mapActions, mapState } from "vuex";
+import { mapState } from "vuex";
 import ClusterInfoBoxes from "./ClusterInfoBoxes";
 import ClusterCell from "./ShardsGrid/Cells/ClusterCell";
 
@@ -95,16 +95,6 @@ export default {
           this.page * this.perPage,
           this.page * this.perPage + this.perPage
         );
-    }
-  },
-  async created() {
-    await this.updateData();
-  },
-  methods: {
-    ...mapActions(["shardsGrid"]),
-    async updateData() {
-      await this.shardsGrid();
-      setTimeout(this.updateData, this.settingsRefreshEvery);
     }
   },
   data() {

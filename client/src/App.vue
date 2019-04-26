@@ -41,9 +41,7 @@
 </template>
 
 <script>
-import HelloWorld from "./views/Home";
-
-import { mapMutations, mapState } from "vuex";
+import { mapActions, mapMutations, mapState } from "vuex";
 import StatusDot from "./components/StatusDot";
 import JsonModal from "./components/Modals/JsonModal";
 import DrawerContent from "./components/Navigation/DrawerContent";
@@ -53,8 +51,10 @@ export default {
   components: {
     DrawerContent,
     JsonModal,
-    StatusDot,
-    HelloWorld
+    StatusDot
+  },
+  async created() {
+    await this.updateData();
   },
   data() {
     return {
@@ -69,7 +69,12 @@ export default {
     };
   },
   methods: {
-    ...mapMutations(["setRefreshEvery"])
+    ...mapMutations(["setRefreshEvery"]),
+    ...mapActions(["shardsGrid"]),
+    async updateData() {
+      await this.shardsGrid();
+      setTimeout(this.updateData, this.settingsRefreshEvery);
+    }
   },
   computed: {
     ...mapState(["loading"])
