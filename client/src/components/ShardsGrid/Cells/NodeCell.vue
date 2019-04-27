@@ -7,12 +7,9 @@
       <v-flex>
         <node-stat-bar :metric="metrics.heapPercent" name="HEAP" />
       </v-flex>
-      <v-flex>
-        <node-stat-bar :metric="metrics.heapPercent" name="DISK" />
+      <v-flex class="pl-1">
+        <node-stat-bar :metric="metrics.diskPercent" name="DISK" />
       </v-flex>
-      <!--      <v-flex class="pl-1">-->
-      <!--        <node-stat-bar :metric="metrics.diskPercent" name="DISK" />-->
-      <!--      </v-flex>-->
       <v-flex class="pl-1">
         <node-stat-bar :metric="metrics.CPUPercent" name="CPU" />
       </v-flex>

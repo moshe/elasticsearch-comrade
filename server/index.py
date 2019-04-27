@@ -45,12 +45,34 @@ async def get_cluster_info():
     }
 
 
+async def get_nodes_info():
+    client = get_client()
+    info = await client.nodes.stats(metric='jvm,os,fs')
+    result = []
+    for node in info['nodes'].values():
+        result.append({
+            "name": node["name"],
+            "isMaster": False,
+            "ip": node["ip"],
+            "roles": node["roles"],
+            "metrics": {
+                # Reduce precision in order to reduce render loops in UI
+                "CPUPercent": int(node['os']['cpu']['percent']),
+                "heapPercent": int(node['jvm']['mem']['heap_used_percent']),
+                "load1Percent": int(float(node['os']['cpu']['load_average']['1m']) / 4),  # TODO: Count CPUs
+                "diskPercent": int(
+                    node['fs']['total']['available_in_bytes'] * 100 / node['fs']['total']['total_in_bytes'])
+            }
+        })
+    return result
+
+
 @app.route('/api/v1/shards_grid')
 async def indices_stats(request):
     client = get_client()
     indices, shards, nodes, cluster_info = await gather(client.cat.indices(format='json'),
                                                         client.cat.shards(format='json'),
-                                                        client.cat.nodes(format='json'),
+                                                        get_nodes_info(),
                                                         get_cluster_info())
     cluster_info["numOfIndices"] = len(indices)
     indices_per_node = defaultdict(lambda: defaultdict(lambda: {'replicas': [], 'primaries': []}))
@@ -81,24 +103,11 @@ async def indices_stats(request):
         indices_per_node[node][shard['index']][shard_type].append(data)
         indices_per_node[node][shard['index']][shard_type].sort(key=lambda x: x['shard'])
 
-    nodes_result = []
     for node in nodes:
-        nodes_result.append({
-            "name": node["name"],
-            "indices": dict(sorted(indices_per_node[node["name"]].items())),
-            "isMaster": node["master"] == "*",
-            "ip": node["ip"],
-            "role": node["node.role"],
-            "metrics": {
-                # Reduce precision in order to reduce render loops in UI
-                "CPUPercent": int(float(node["cpu"])),
-                "heapPercent": int(float(node["heap.percent"])),
-                "load1Percent": int(float(node["load_1m"]) / 4)  # TODO: Count CPUs
-            }
-        })
+        node['indices'] = dict(sorted(indices_per_node[node["name"]].items()))
 
     return json({
-        "nodes": sorted(nodes_result, key=lambda x: x["name"]),
+        "nodes": sorted(nodes, key=lambda x: x["name"]),
         "indices": dict([(x['index'], format_index_data(x)) for x in indices]),
         "cluster": cluster_info,
     })
@@ -116,6 +125,7 @@ async def reroute_shard(request):
         ]}
     )
     return json({"status": "ok"})
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000, debug=True)
