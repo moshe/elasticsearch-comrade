@@ -1,5 +1,29 @@
 [
   {
+    "path": "/_cluster/settings",
+    "name": "ClusterGetSettings",
+    "method": "GET"
+  },
+  {
+    "path": "/_settings",
+    "name": "GetSettings",
+    "method": "GET"
+  },
+  {
+    "path": "/_search",
+    "name": "Search",
+    "method": "GET"
+  },
+  {
+    "path": "/{index}/_search",
+    "name": "Search",
+    "method": "GET",
+    "template": {
+      "size": 20,
+      "_source": []
+    }
+  },
+  {
     "path": "/_cluster/voting_config_exclusions/{node_name}",
     "name": "AddVotingConfigExclusion",
     "method": "POST"
@@ -55,22 +79,12 @@
     "method": "POST"
   },
   {
-    "path": "/{index}/{type}/_bulk",
-    "name": "Bulk",
-    "method": "POST"
-  },
-  {
     "path": "/_bulk",
     "name": "Bulk",
     "method": "PUT"
   },
   {
     "path": "/{index}/_bulk",
-    "name": "Bulk",
-    "method": "PUT"
-  },
-  {
-    "path": "/{index}/{type}/_bulk",
     "name": "Bulk",
     "method": "PUT"
   },
@@ -133,11 +147,6 @@
     "path": "/_cluster/allocation/explain",
     "name": "ClusterAllocationExplain",
     "method": "POST"
-  },
-  {
-    "path": "/_cluster/settings",
-    "name": "ClusterGetSettings",
-    "method": "GET"
   },
   {
     "path": "/_cluster/health",
@@ -215,22 +224,12 @@
     "method": "GET"
   },
   {
-    "path": "/{index}/{type}/_count",
-    "name": "Count",
-    "method": "GET"
-  },
-  {
     "path": "/_count",
     "name": "Count",
     "method": "POST"
   },
   {
     "path": "/{index}/_count",
-    "name": "Count",
-    "method": "POST"
-  },
-  {
-    "path": "/{index}/{type}/_count",
     "name": "Count",
     "method": "POST"
   },
@@ -251,11 +250,6 @@
   },
   {
     "path": "/{index}/_doc/{id}",
-    "name": "Delete",
-    "method": "DELETE"
-  },
-  {
-    "path": "/{index}/{type}/{id}",
     "name": "Delete",
     "method": "DELETE"
   },
@@ -300,17 +294,7 @@
     "method": "GET"
   },
   {
-    "path": "/{index}/{type}/{id}/_explain",
-    "name": "Explain",
-    "method": "GET"
-  },
-  {
     "path": "/{index}/_explain/{id}",
-    "name": "Explain",
-    "method": "POST"
-  },
-  {
-    "path": "/{index}/{type}/{id}/_explain",
     "name": "Explain",
     "method": "POST"
   },
@@ -380,17 +364,7 @@
     "method": "GET"
   },
   {
-    "path": "/{index}/{type}/{id}",
-    "name": "Get",
-    "method": "GET"
-  },
-  {
     "path": "/{index}/_doc/{id}",
-    "name": "Get",
-    "method": "HEAD"
-  },
-  {
-    "path": "/{index}/{type}/{id}",
     "name": "Get",
     "method": "HEAD"
   },
@@ -440,22 +414,7 @@
     "method": "GET"
   },
   {
-    "path": "/_mapping/{type}/field/{fields}",
-    "name": "GetFieldMapping",
-    "method": "GET"
-  },
-  {
     "path": "/{index}/_mapping/field/{fields}",
-    "name": "GetFieldMapping",
-    "method": "GET"
-  },
-  {
-    "path": "/{index}/_mapping/{type}/field/{fields}",
-    "name": "GetFieldMapping",
-    "method": "GET"
-  },
-  {
-    "path": "/{index}/{type}/_mapping/field/{fields}",
     "name": "GetFieldMapping",
     "method": "GET"
   },
@@ -490,11 +449,6 @@
     "method": "GET"
   },
   {
-    "path": "/_mapping/{type}",
-    "name": "GetMapping",
-    "method": "GET"
-  },
-  {
     "path": "/_mappings",
     "name": "GetMapping",
     "method": "GET"
@@ -505,29 +459,9 @@
     "method": "GET"
   },
   {
-    "path": "/{index}/_mapping/{type}",
-    "name": "GetMapping",
-    "method": "GET"
-  },
-  {
     "path": "/{index}/_mappings",
     "name": "GetMapping",
     "method": "GET"
-  },
-  {
-    "path": "/{index}/_mappings/{type}",
-    "name": "GetMapping",
-    "method": "GET"
-  },
-  {
-    "path": "/{index}/{type}/_mapping",
-    "name": "GetMapping",
-    "method": "GET"
-  },
-  {
-    "path": "/{index}/_mapping/{type}",
-    "name": "GetMapping",
-    "method": "HEAD"
   },
   {
     "path": "/_ingest/pipeline",
@@ -547,11 +481,6 @@
   {
     "path": "/_snapshot/{repository}",
     "name": "GetRepositories",
-    "method": "GET"
-  },
-  {
-    "path": "/_settings",
-    "name": "GetSettings",
     "method": "GET"
   },
   {
@@ -585,17 +514,7 @@
     "method": "GET"
   },
   {
-    "path": "/{index}/{type}/{id}/_source",
-    "name": "GetSource",
-    "method": "GET"
-  },
-  {
     "path": "/{index}/_source/{id}",
-    "name": "GetSource",
-    "method": "HEAD"
-  },
-  {
-    "path": "/{index}/{type}/{id}/_source",
     "name": "GetSource",
     "method": "HEAD"
   },
@@ -630,37 +549,12 @@
     "method": "POST"
   },
   {
-    "path": "/{index}/{type}",
-    "name": "Index",
-    "method": "POST"
-  },
-  {
-    "path": "/{index}/{type}/{id}",
-    "name": "Index",
-    "method": "POST"
-  },
-  {
-    "path": "/{index}/{type}/{id}/_create",
-    "name": "Index",
-    "method": "POST"
-  },
-  {
     "path": "/{index}/_create/{id}",
     "name": "Index",
     "method": "PUT"
   },
   {
     "path": "/{index}/_doc/{id}",
-    "name": "Index",
-    "method": "PUT"
-  },
-  {
-    "path": "/{index}/{type}/{id}",
-    "name": "Index",
-    "method": "PUT"
-  },
-  {
-    "path": "/{index}/{type}/{id}/_create",
     "name": "Index",
     "method": "PUT"
   },
@@ -815,11 +709,6 @@
     "method": "GET"
   },
   {
-    "path": "/{index}/{type}/_mget",
-    "name": "MultiGet",
-    "method": "GET"
-  },
-  {
     "path": "/_mget",
     "name": "MultiGet",
     "method": "POST"
@@ -830,22 +719,12 @@
     "method": "POST"
   },
   {
-    "path": "/{index}/{type}/_mget",
-    "name": "MultiGet",
-    "method": "POST"
-  },
-  {
     "path": "/_msearch",
     "name": "MultiSearch",
     "method": "GET"
   },
   {
     "path": "/{index}/_msearch",
-    "name": "MultiSearch",
-    "method": "GET"
-  },
-  {
-    "path": "/{index}/{type}/_msearch",
     "name": "MultiSearch",
     "method": "GET"
   },
@@ -860,11 +739,6 @@
     "method": "POST"
   },
   {
-    "path": "/{index}/{type}/_msearch",
-    "name": "MultiSearch",
-    "method": "POST"
-  },
-  {
     "path": "/_mtermvectors",
     "name": "MultiTermVectors",
     "method": "GET"
@@ -875,22 +749,12 @@
     "method": "GET"
   },
   {
-    "path": "/{index}/{type}/_mtermvectors",
-    "name": "MultiTermVectors",
-    "method": "GET"
-  },
-  {
     "path": "/_mtermvectors",
     "name": "MultiTermVectors",
     "method": "POST"
   },
   {
     "path": "/{index}/_mtermvectors",
-    "name": "MultiTermVectors",
-    "method": "POST"
-  },
-  {
-    "path": "/{index}/{type}/_mtermvectors",
     "name": "MultiTermVectors",
     "method": "POST"
   },
@@ -1010,22 +874,7 @@
     "method": "PUT"
   },
   {
-    "path": "/_mapping/{type}",
-    "name": "PutMapping",
-    "method": "POST"
-  },
-  {
-    "path": "/_mappings/{type}",
-    "name": "PutMapping",
-    "method": "POST"
-  },
-  {
     "path": "/{index}/_mapping/",
-    "name": "PutMapping",
-    "method": "POST"
-  },
-  {
-    "path": "/{index}/_mapping/{type}",
     "name": "PutMapping",
     "method": "POST"
   },
@@ -1035,57 +884,12 @@
     "method": "POST"
   },
   {
-    "path": "/{index}/_mappings/{type}",
-    "name": "PutMapping",
-    "method": "POST"
-  },
-  {
-    "path": "/{index}/{type}/_mapping",
-    "name": "PutMapping",
-    "method": "POST"
-  },
-  {
-    "path": "/{index}/{type}/_mappings",
-    "name": "PutMapping",
-    "method": "POST"
-  },
-  {
-    "path": "/_mapping/{type}",
-    "name": "PutMapping",
-    "method": "PUT"
-  },
-  {
-    "path": "/_mappings/{type}",
-    "name": "PutMapping",
-    "method": "PUT"
-  },
-  {
     "path": "/{index}/_mapping/",
     "name": "PutMapping",
     "method": "PUT"
   },
   {
-    "path": "/{index}/_mapping/{type}",
-    "name": "PutMapping",
-    "method": "PUT"
-  },
-  {
     "path": "/{index}/_mappings/",
-    "name": "PutMapping",
-    "method": "PUT"
-  },
-  {
-    "path": "/{index}/_mappings/{type}",
-    "name": "PutMapping",
-    "method": "PUT"
-  },
-  {
-    "path": "/{index}/{type}/_mapping",
-    "name": "PutMapping",
-    "method": "PUT"
-  },
-  {
-    "path": "/{index}/{type}/_mappings",
     "name": "PutMapping",
     "method": "PUT"
   },
@@ -1192,34 +996,10 @@
   {
     "path": "/_search",
     "name": "Search",
-    "method": "GET"
-  },
-  {
-    "path": "/{index}/_search",
-    "name": "Search",
-    "method": "GET",
-    "template": {
-      "size": 20,
-      "_source": []
-    }
-  },
-  {
-    "path": "/{index}/{type}/_search",
-    "name": "Search",
-    "method": "GET"
-  },
-  {
-    "path": "/_search",
-    "name": "Search",
     "method": "POST"
   },
   {
     "path": "/{index}/_search",
-    "name": "Search",
-    "method": "POST"
-  },
-  {
-    "path": "/{index}/{type}/_search",
     "name": "Search",
     "method": "POST"
   },
@@ -1354,32 +1134,12 @@
     "method": "GET"
   },
   {
-    "path": "/{index}/{type}/_termvectors",
-    "name": "TermVectors",
-    "method": "GET"
-  },
-  {
-    "path": "/{index}/{type}/{id}/_termvectors",
-    "name": "TermVectors",
-    "method": "GET"
-  },
-  {
     "path": "/{index}/_termvectors",
     "name": "TermVectors",
     "method": "POST"
   },
   {
     "path": "/{index}/_termvectors/{id}",
-    "name": "TermVectors",
-    "method": "POST"
-  },
-  {
-    "path": "/{index}/{type}/_termvectors",
-    "name": "TermVectors",
-    "method": "POST"
-  },
-  {
-    "path": "/{index}/{type}/{id}/_termvectors",
     "name": "TermVectors",
     "method": "POST"
   },
@@ -1395,11 +1155,6 @@
   },
   {
     "path": "/{index}/_update/{id}",
-    "name": "Update",
-    "method": "POST"
-  },
-  {
-    "path": "/{index}/{type}/{id}/_update",
     "name": "Update",
     "method": "POST"
   },
@@ -1444,22 +1199,12 @@
     "method": "GET"
   },
   {
-    "path": "/{index}/{type}/_validate/query",
-    "name": "ValidateQuery",
-    "method": "GET"
-  },
-  {
     "path": "/_validate/query",
     "name": "ValidateQuery",
     "method": "POST"
   },
   {
     "path": "/{index}/_validate/query",
-    "name": "ValidateQuery",
-    "method": "POST"
-  },
-  {
-    "path": "/{index}/{type}/_validate/query",
     "name": "ValidateQuery",
     "method": "POST"
   },
