@@ -36,13 +36,6 @@
         </v-list-tile-title>
         <v-list-tile-title v-else>Select for relocation</v-list-tile-title>
       </v-list-tile>
-
-      <v-list-tile>
-        <v-list-tile-action style="min-width: unset" class="pr-2">
-          <v-icon style="font-size: 16px">trending_up</v-icon>
-        </v-list-tile-action>
-        <v-list-tile-title>Show stats</v-list-tile-title>
-      </v-list-tile>
     </v-list>
   </v-menu>
 </template>
