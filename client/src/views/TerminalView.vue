@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container fluid>
     <v-layout>
       <v-flex style="flex: 2">
         <v-autocomplete
@@ -9,7 +9,7 @@
         />
       </v-flex>
       <v-flex style="flex: 10" class="ml-3">
-        <endpoint-auto-completer :url.sync="url" :method.sync="method" />
+        <endpoint-auto-completer @change="selectRoute" />
       </v-flex>
       <v-flex style="flex: 1">
         <v-btn color="info" @click="onClick">Send</v-btn>
@@ -52,6 +52,11 @@ export default {
     };
   },
   methods: {
+    selectRoute({ path, method, template }) {
+      this.url = path;
+      this.method = method;
+      this.$refs.editor.setContent(template || {});
+    },
     async onClick() {
       const resp = await this.sendQuery(
         this.method,

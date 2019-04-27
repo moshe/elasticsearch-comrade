@@ -14,6 +14,13 @@
       <v-list-tile-title>Terminal</v-list-tile-title>
     </v-list-tile>
 
+    <v-list-tile to="/tasks">
+      <v-list-tile-action>
+        <v-icon>perm_data_setting</v-icon>
+      </v-list-tile-action>
+      <v-list-tile-title>Tasks</v-list-tile-title>
+    </v-list-tile>
+
     <v-list-group prepend-icon="backup">
       <template v-slot:activator>
         <v-list-tile>

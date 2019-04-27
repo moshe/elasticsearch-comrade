@@ -40,8 +40,7 @@ export default {
   },
   methods: {
     onChange(selected) {
-      this.$emit("update:method", selected.method);
-      this.$emit("update:url", selected.path);
+      this.$emit("change", selected);
     },
     expandIndices(route) {
       const indices = Object.keys(this.indices);
