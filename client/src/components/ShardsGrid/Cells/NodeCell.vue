@@ -24,9 +24,9 @@
           :disabled="!isSuitableForRelocation"
           small
           color="primary"
-          round
-          >Relocate</v-btn
         >
+          Relocate
+        </v-btn>
       </v-flex>
     </v-layout>
   </div>
