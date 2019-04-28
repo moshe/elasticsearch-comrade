@@ -1,6 +1,6 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
   <div>
-    <cluster-info-boxes />
+    <cluster-info-boxes class="mt-3 mb-3" />
     <v-layout align-end justify-end row>
       <v-flex>
         <v-text-field

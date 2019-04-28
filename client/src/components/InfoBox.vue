@@ -1,5 +1,5 @@
 <template>
-  <div class="info-square pa-2 elevation-2">
+  <div class="info-square pa-2 elevation-6">
     {{ text }}
   </div>
 </template>

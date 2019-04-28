@@ -19,7 +19,10 @@ export default new Vuex.Store({
       numberOfNodes: 0,
       clusterStatus: clusterStatus.loading,
       relocatingShards: 0,
-      initializingShards: 0
+      initializingShards: 0,
+      settings: {
+        allocation: null
+      }
     },
     settingsRefreshEvery: 5000
   },

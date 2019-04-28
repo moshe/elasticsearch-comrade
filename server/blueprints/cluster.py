@@ -21,7 +21,7 @@ async def reroute_shard(request):
 
 
 @cluster_bp.route('/allocation/<operation>', methods=['POST'])
-async def reroute_shard(request, operation):
+async def set_allocation(request, operation):
     assert operation in {"all", "primaries", "new_primaries", "none"}
     client = get_client()
     response = await client.cluster.put_settings(body={"transient": {"cluster.routing.allocation.enable": operation}})

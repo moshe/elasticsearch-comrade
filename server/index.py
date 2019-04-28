@@ -32,8 +32,9 @@ def format_index_data(data):
 
 async def get_cluster_info():
     client = get_client()
-    [info], [docs] = await gather(client.cat.health(format='json'),
-                                  client.cat.count(format='json'))
+    [info], [docs], settings = await gather(client.cat.health(format='json'),
+                                            client.cat.count(format='json'),
+                                            client.cluster.get_settings(flat_settings=True))
     return {
         "relocatingShards": int(info['relo']),
         "initializingShards": int(info['init']),
@@ -44,6 +45,9 @@ async def get_cluster_info():
         "numberOfDocs": int(docs['count']),
         "clusterName": info['cluster'],
         "clusterStatus": info['status'].title(),
+        "settings": {
+            "allocation": settings['transient'].get('cluster.routing.allocation.enable', 'all')
+        },
     }
 
 

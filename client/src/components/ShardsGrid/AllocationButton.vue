@@ -1,21 +1,21 @@
-<template>
+<template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
   <v-menu offset-y>
     <template v-slot:activator="{ on }">
-      <v-btn small color="red" v-on="on">
+      <v-btn small color="red" v-on="on" :loading="loading">
         <v-icon size="12px" dark class="mr-1">lock</v-icon>
         Allocation
       </v-btn>
     </template>
     <v-list dense two-line>
-      <div v-for="(option, i) in options" :key="option.name">
+      <div v-for="({ name, text }, i) in options" :key="name">
         <v-list-tile
-          :disabled="option.name === current"
-          @click="request(option)"
+          :disabled="name === cluster.settings.allocation"
+          @click="click(name)"
         >
           <v-list-tile-content>
-            <v-list-tile-title>{{ option.name }}</v-list-tile-title>
+            <v-list-tile-title>{{ name }}</v-list-tile-title>
             <v-list-tile-sub-title>
-              {{ option.text }}
+              {{ text }}
             </v-list-tile-sub-title>
           </v-list-tile-content>
         </v-list-tile>
@@ -26,11 +26,27 @@
 </template>
 
 <script>
+import clusterApis from "../../mixins/clusterApis";
+import { mapActions, mapState } from "vuex";
+
 export default {
   name: "AllocationButton",
+  mixins: [clusterApis],
+  computed: {
+    ...mapState(["cluster"])
+  },
+  methods: {
+    ...mapActions(["shardsGrid"]),
+    async click(name) {
+      this.loading = true;
+      await this.setAllocation(name);
+      await this.shardsGrid();
+      this.loading = false;
+    }
+  },
   data() {
     return {
-      current: "all",
+      loading: false,
       options: [
         {
           name: "all",
@@ -51,11 +67,6 @@ export default {
         }
       ]
     };
-  },
-  methods: {
-    request(option) {
-      console.log(option);
-    }
   }
 };
 </script>

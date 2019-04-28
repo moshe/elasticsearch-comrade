@@ -1,8 +1,10 @@
+import { GET } from "../requests";
+
 export default {
   methods: {
     async GET(url, refreshGrid = true) {
       this.$store.commit("startLoading");
-      const resp = await (await fetch(url)).json();
+      const resp = GET(url);
       if (refreshGrid) {
         await this.$store.dispatch("shardsGrid");
       }
