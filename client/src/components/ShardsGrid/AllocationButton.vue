@@ -2,16 +2,13 @@
   <v-menu offset-y>
     <template v-slot:activator="{ on }">
       <v-btn small color="red" v-on="on" :loading="loading">
-        <v-icon size="12px" dark class="mr-1">lock</v-icon>
+        <v-icon size="12px" dark class="mr-1">{{ icon }}</v-icon>
         Allocation
       </v-btn>
     </template>
     <v-list dense two-line>
       <div v-for="({ name, text }, i) in options" :key="name">
-        <v-list-tile
-          :disabled="name === cluster.settings.allocation"
-          @click="click(name)"
-        >
+        <v-list-tile :disabled="name === current" @click="click(name)">
           <v-list-tile-content>
             <v-list-tile-title>{{ name }}</v-list-tile-title>
             <v-list-tile-sub-title>
@@ -33,20 +30,29 @@ export default {
   name: "AllocationButton",
   mixins: [clusterApis],
   computed: {
-    ...mapState(["cluster"])
+    ...mapState(["cluster"]),
+    current() {
+      return this.cluster.settings.allocation;
+    },
+    icon() {
+      return this.current === "all" ? "lock_open" : "lock";
+    },
+    loading() {
+      return this.duringRequest || !this.current;
+    }
   },
   methods: {
     ...mapActions(["shardsGrid"]),
     async click(name) {
-      this.loading = true;
+      this.duringRequest = true;
       await this.setAllocation(name);
       await this.shardsGrid();
-      this.loading = false;
+      this.duringRequest = false;
     }
   },
   data() {
     return {
-      loading: false,
+      duringRequest: false,
       options: [
         {
           name: "all",
