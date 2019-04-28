@@ -81,7 +81,6 @@ async def indices_stats(request):
                                                         get_nodes_info(),
                                                         get_cluster_info())
     cluster_info["numOfIndices"] = len(indices)
-    indices_per_node = defaultdict(lambda: defaultdict(lambda: {'replicas': [], 'primaries': []}))
     relocating_indices = list({shard['index'] for shard in shards if shard['state'] == 'RELOCATING'})
     recovery = await client.cat.recovery(index=relocating_indices, format='json')
     relocation_progress = {
@@ -89,7 +88,9 @@ async def indices_stats(request):
             int(float(recovery_data["bytes_recovered"]) * 100 / int(recovery_data["bytes_total"]))
         for recovery_data in recovery if recovery_data["stage"] != "done"
     }
-    relocating = 0
+
+    indices_per_node = defaultdict(lambda: defaultdict(lambda: {'replicas': [], 'primaries': []}))
+    unassigned_shards = defaultdict(lambda: {'replicas': [], 'primaries': []})
     for shard in shards:
         if shard['prirep'] == 'p':
             shard_type = 'primaries'
@@ -102,9 +103,12 @@ async def indices_stats(request):
             "state": shard['state'],
         }
         node = shard['node']
+        if shard['state'] == 'UNASSIGNED':
+            unassigned_shards[shard['index']][shard_type].append(data)
         if shard['state'] == 'RELOCATING':
-            relocating += 1
             node = node.split(' ->')[0]
+            data['progress'] = relocation_progress[(shard['index'], shard['shard'])]
+        if shard['state'] == 'INITIALIZING':
             data['progress'] = relocation_progress[(shard['index'], shard['shard'])]
         indices_per_node[node][shard['index']][shard_type].append(data)
         indices_per_node[node][shard['index']][shard_type].sort(key=lambda x: x['shard'])
@@ -112,9 +116,14 @@ async def indices_stats(request):
     for node in nodes:
         node['indices'] = dict(sorted(indices_per_node[node["name"]].items()))
 
+    indices = dict([(x['index'], format_index_data(x)) for x in indices])
+    for index in indices:
+        if index in unassigned_shards:
+            indices[index]['unassignedShards'] = unassigned_shards[index]
+
     return json({
         "nodes": sorted(nodes, key=lambda x: x["name"]),
-        "indices": dict([(x['index'], format_index_data(x)) for x in indices]),
+        "indices": indices,
         "cluster": cluster_info,
     })
 

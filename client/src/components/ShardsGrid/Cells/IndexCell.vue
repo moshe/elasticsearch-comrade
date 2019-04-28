@@ -72,6 +72,16 @@
         </v-flex>
       </v-layout>
     </v-flex>
+    <v-flex style="text-align: left" v-if="index.unassignedShards" class="mt-2">
+      <shard-square
+        v-for="shard in index.unassignedShards.replicas"
+        :key="shard.shard"
+        :index="indexName"
+        :state="shard.state"
+        :id="shard.shard"
+        :primary="false"
+      />
+    </v-flex>
   </v-layout>
 </template>
 
@@ -79,9 +89,10 @@
 import indexAPIs from "../../../mixins/indexApis";
 import { mapMutations, mapState } from "vuex";
 import ListTile from "./ListTile";
+import ShardSquare from "../ShardSquare";
 export default {
   name: "IndexCell",
-  components: { ListTile },
+  components: { ShardSquare, ListTile },
   mixins: [indexAPIs],
   methods: {
     ...mapMutations(["startJsonModal"]),

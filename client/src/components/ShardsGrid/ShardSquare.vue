@@ -1,5 +1,5 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
-  <v-menu offset-y style="display: inline-block">
+  <v-menu offset-y style="display: inline-block" :disabled="isUnassigned">
     <template v-slot:activator="{ on }">
       <div style="display: inline-block; margin-right: 3px; height: 25px">
         <div
@@ -7,6 +7,8 @@
           v-bind:class="{
             'primary-shard': primary,
             'replica-shard': !primary,
+            'initializing-shard': isInitializing,
+            'unassigned-shard': isUnassigned,
             marked: isMarkedForRelocation
           }"
           v-on="on"
@@ -29,7 +31,9 @@
         @click="toggleShardForRelocation({ index, id, nodeName })"
       >
         <v-list-tile-action style="min-width: unset" class="pr-2">
-          <v-icon :disabled="isRelocating" style="font-size: 16px">input</v-icon>
+          <v-icon :disabled="isRelocating" style="font-size: 16px"
+            >input</v-icon
+          >
         </v-list-tile-action>
         <v-list-tile-title v-if="isMarkedForRelocation">
           Deselect for relocation
@@ -56,7 +60,7 @@ export default {
       type: String
     },
     nodeName: {
-      required: true,
+      required: false,
       type: String
     },
     state: {
@@ -90,6 +94,12 @@ export default {
     },
     isRelocating() {
       return this.state === "RELOCATING";
+    },
+    isUnassigned() {
+      return this.state === "UNASSIGNED";
+    },
+    isInitializing() {
+      return this.state === "INITIALIZING";
     }
   }
 };
@@ -117,6 +127,15 @@ export default {
 .marked {
   border-style: dashed;
   border-color: white;
+}
+
+.initializing-shard {
+  background-color: #f57f17;
+}
+
+.unassigned-shard {
+  background-color: gray;
+  cursor: unset;
 }
 
 .v-list--dense .v-list__tile:not(.v-list__tile--avatar) {
