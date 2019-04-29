@@ -1,7 +1,6 @@
 <template>
   <div class="text-sm-center">
-    <div>{{ name }}</div>
-    <div>{{ metric }}%</div>
+    <div>{{ name }} ({{ metric }}%)</div>
     <v-sparkline
       :value="histogram"
       :line-width="6"
