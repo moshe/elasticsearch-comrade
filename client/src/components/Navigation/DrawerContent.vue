@@ -28,7 +28,7 @@
         </v-list-tile>
       </template>
       <v-list no-action sub-group>
-        <v-list-tile v-for="([text, icon], i) in admins" :key="i" @click="">
+        <v-list-tile v-for="([text, icon], i) in admins" :key="i">
           <v-list-tile-title v-text="text"></v-list-tile-title>
           <v-list-tile-action>
             <v-icon v-text="icon" />

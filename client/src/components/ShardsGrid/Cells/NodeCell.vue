@@ -105,6 +105,7 @@ export default {
 
 .ip {
   font-size: 10px;
+  color: #bdbdbd;
 }
 
 .relocate-here {
