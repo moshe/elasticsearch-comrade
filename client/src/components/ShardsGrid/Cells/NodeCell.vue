@@ -3,6 +3,9 @@
     <div class="node-name ml-1">
       {{ nodeName }}
     </div>
+    <div class="ip ml-1 mb-2">
+      {{ nodeIp }}
+    </div>
     <v-layout style="font-size: 8px">
       <v-flex>
         <node-stat-bar :metric="metrics.heapPercent" name="HEAP" />
@@ -34,14 +37,17 @@
 
 <script>
 import NodeStatBar from "../NodeStatBar";
-import store from "../../../store";
-import { mapMutations } from "vuex";
+import { mapMutations, mapState } from "vuex";
 
 export default {
   name: "NodeCell",
   components: { NodeStatBar },
   props: {
     nodeName: {
+      required: true,
+      type: String
+    },
+    nodeIp: {
       required: true,
       type: String
     },
@@ -62,7 +68,7 @@ export default {
         },
         body: JSON.stringify({
           node: this.nodeName,
-          shards: store.state.shardsMarkedForRelocation
+          shards: this.shardsMarkedForRelocation
         })
       });
       if ((await res.json()).status === "ok") {
@@ -72,11 +78,12 @@ export default {
     }
   },
   computed: {
+    ...mapState(["shardsMarkedForRelocation"]),
     isSuitableForRelocation() {
-      if (store.state.shardsMarkedForRelocation.length === 0) {
+      if (this.shardsMarkedForRelocation.length === 0) {
         return false;
       }
-      for (const mark of store.state.shardsMarkedForRelocation) {
+      for (const mark of this.shardsMarkedForRelocation) {
         if (mark.nodeName === this.nodeName) {
           return false;
         }
@@ -89,12 +96,15 @@ export default {
 
 <style scoped>
 .node-info {
-  /*max-width: 200px;*/
 }
 
 .node-name {
   font-size: 14px;
   display: inline-block;
+}
+
+.ip {
+  font-size: 10px;
 }
 
 .relocate-here {

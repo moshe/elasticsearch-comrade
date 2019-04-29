@@ -48,6 +48,7 @@
         <td class="pl-0 pr-0" style="max-width: 200px; min-width: 180px">
           <node-cell
             :node-name="props.item.name"
+            :node-ip="props.item.ip"
             :metrics="props.item.metrics"
           />
         </td>
