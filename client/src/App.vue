@@ -42,9 +42,9 @@
 
 <script>
 import { mapActions, mapMutations, mapState } from "vuex";
-import StatusDot from "./components/StatusDot";
-import JsonModal from "./components/Modals/JsonModal";
-import DrawerContent from "./components/Navigation/DrawerContent";
+import StatusDot from "./components/StatusDot.vue";
+import JsonModal from "./components/Modals/JsonModal.vue";
+import DrawerContent from "./components/Navigation/DrawerContent.vue";
 
 export default {
   name: "App",

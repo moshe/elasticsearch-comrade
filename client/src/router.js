@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
-import TerminalView from "./views/TerminalView";
+import TerminalView from "./views/TerminalView.vue";
 
 Vue.use(Router);
 

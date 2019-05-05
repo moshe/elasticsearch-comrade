@@ -70,12 +70,12 @@
 </template>
 
 <script>
-import NodeCell from "./ShardsGrid/Cells/NodeCell";
-import ShardsCell from "./ShardsGrid/Cells/ShardsCell";
-import IndexCell from "./ShardsGrid/Cells/IndexCell";
 import { mapState } from "vuex";
-import ClusterInfoBoxes from "./ClusterInfoBoxes";
-import ClusterCell from "./ShardsGrid/Cells/ClusterCell";
+import NodeCell from "./ShardsGrid/Cells/NodeCell.vue";
+import ShardsCell from "./ShardsGrid/Cells/ShardsCell.vue";
+import IndexCell from "./ShardsGrid/Cells/IndexCell.vue";
+import ClusterInfoBoxes from "./ClusterInfoBoxes.vue";
+import ClusterCell from "./ShardsGrid/Cells/ClusterCell.vue";
 
 export default {
   name: "MgrShardsTable",

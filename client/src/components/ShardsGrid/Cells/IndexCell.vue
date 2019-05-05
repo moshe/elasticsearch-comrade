@@ -88,8 +88,8 @@
 <script>
 import indexAPIs from "../../../mixins/indexApis";
 import { mapMutations, mapState } from "vuex";
-import ListTile from "./ListTile";
-import ShardSquare from "../ShardSquare";
+import ListTile from "./ListTile.vue";
+import ShardSquare from "../ShardSquare.vue";
 export default {
   name: "IndexCell",
   components: { ShardSquare, ListTile },
