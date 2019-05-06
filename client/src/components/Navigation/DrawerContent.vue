@@ -7,19 +7,6 @@
       <v-list-tile-title>Home</v-list-tile-title>
     </v-list-tile>
     <v-divider />
-    <v-list-tile to="/terminal">
-      <v-list-tile-action>
-        <v-icon>build</v-icon>
-      </v-list-tile-action>
-      <v-list-tile-title>Terminal</v-list-tile-title>
-    </v-list-tile>
-
-    <v-list-tile to="/tasks">
-      <v-list-tile-action>
-        <v-icon>perm_data_setting</v-icon>
-      </v-list-tile-action>
-      <v-list-tile-title>Tasks</v-list-tile-title>
-    </v-list-tile>
 
     <v-list-group prepend-icon="link">
       <template v-slot:activator>
@@ -42,6 +29,20 @@
         </v-list-tile>
       </v-list>
     </v-list-group>
+
+    <v-list-tile to="/terminal">
+      <v-list-tile-action>
+        <v-icon>build</v-icon>
+      </v-list-tile-action>
+      <v-list-tile-title>REST</v-list-tile-title>
+    </v-list-tile>
+
+    <v-list-tile to="/tasks">
+      <v-list-tile-action>
+        <v-icon>perm_data_setting</v-icon>
+      </v-list-tile-action>
+      <v-list-tile-title>Tasks</v-list-tile-title>
+    </v-list-tile>
   </v-list>
 </template>
 

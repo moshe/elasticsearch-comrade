@@ -50,8 +50,14 @@
       </v-menu>
     </v-flex>
     <v-flex>
-      <v-chip v-if="index.aliases" small label color="red lighten-1">
-        {{ index.aliases[0] }}
+      <v-chip
+        v-for="alias in index.aliases"
+        :key="alias"
+        small
+        label
+        color="red lighten-1"
+      >
+        {{ alias }}
       </v-chip>
     </v-flex>
     <v-flex>
