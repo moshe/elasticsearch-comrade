@@ -1,6 +1,6 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
-  <v-layout column fill-height class="index-cell">
-    <v-flex grow>
+  <v-layout wrap column class="index-cell">
+    <v-flex>
       <v-menu offset-y style="display: inline-block">
         <template v-slot:activator="{ on }">
           <div class="index-name" v-on="on">{{ indexName }}</div>
@@ -49,13 +49,18 @@
         </v-list>
       </v-menu>
     </v-flex>
-    <v-flex shrink>
+    <v-flex>
+      <v-chip v-if="index.aliases" small label color="red lighten-1">
+        {{ index.aliases[0] }}
+      </v-chip>
+    </v-flex>
+    <v-flex>
       <v-layout
         v-if="index.status === 'open'"
         class="index-info"
         justify-space-between
+        row
         fill-height
-        wrap
       >
         <v-flex shrink>
           <v-chip small label>
@@ -127,6 +132,7 @@ export default {
 <style>
 .index-cell {
   max-width: 15vw;
+  min-height: 90px;
   user-select: text;
 }
 .index-name {

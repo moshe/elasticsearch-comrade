@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import ShardSquare from "../ShardSquare";
+import ShardSquare from "../ShardSquare.vue";
 export default {
   name: "ShardsCell",
   props: {

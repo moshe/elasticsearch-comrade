@@ -22,7 +22,7 @@
 
 <script>
 import { mapState } from "vuex";
-import AllocationButton from "../AllocationButton";
+import AllocationButton from "../AllocationButton.vue";
 
 export default {
   name: "ClusterCell",

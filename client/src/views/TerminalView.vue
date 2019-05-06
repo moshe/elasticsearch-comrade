@@ -34,10 +34,10 @@
 </template>
 
 <script>
-import QueryEditor from "../components/Terminal/QueryEditor";
 import terminalApis from "../mixins/terminalApis";
-import TerminalButtons from "../components/Terminal/TerminalButtons";
-import EndpointAutoCompleter from "../components/Terminal/EndpointAutoCompleter";
+import QueryEditor from "../components/Terminal/QueryEditor.vue";
+import TerminalButtons from "../components/Terminal/TerminalButtons.vue";
+import EndpointAutoCompleter from "../components/Terminal/EndpointAutoCompleter.vue";
 
 export default {
   name: "QueryView",

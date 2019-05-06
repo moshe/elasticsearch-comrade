@@ -20,7 +20,7 @@
 
 <script>
 import { mapState } from "vuex";
-import endpoints from "../../assets/elasticsearch_endpoints";
+import endpoints from "../../assets/elasticsearch_endpoints.json";
 
 export default {
   name: "EndpointAutoCompleter",
@@ -40,7 +40,14 @@ export default {
   },
   methods: {
     onChange(selected) {
-      this.$emit("change", selected);
+      if (typeof selected === "string") {
+        this.$emit("change", {
+          path: selected,
+          method: this.method
+        });
+      } else {
+        this.$emit("change", selected);
+      }
     },
     expandIndices(route) {
       const indices = Object.keys(this.indices);

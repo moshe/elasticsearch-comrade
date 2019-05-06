@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import NodeStatBar from "../NodeStatBar";
+import NodeStatBar from "../NodeStatBar.vue";
 import { mapMutations, mapState } from "vuex";
 
 export default {

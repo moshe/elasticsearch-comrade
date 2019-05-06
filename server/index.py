@@ -15,19 +15,20 @@ app.blueprint(terminal_bp, url_prefix='/api/v1/terminal')
 app.blueprint(cluster_bp, url_prefix='/api/v1/cluster')
 
 
-def format_index_data(data):
+def format_index_data(data, aliases):
+    append = {}
+    if data['index'] in aliases:
+        append = {"aliases": aliases[data['index']]}
     if data['status'] == 'close':
-        return {
-            "status": data["status"],
-        }
-    return {
+        return dict(status=data["status"], **append)
+    return dict({
         "primaries": int(data["pri"]),
         "replicas": int(data["rep"]),
         "status": data["status"],
         "docsCount": int(data["docs.count"]),
         "docsDeleted": int(data["docs.deleted"]),
         "storeSize": data["store.size"],
-    }
+    }, **append)
 
 
 async def get_cluster_info():
@@ -66,6 +67,7 @@ async def get_nodes_info():
                 "CPUPercent": int(node['os']['cpu']['percent']),
                 "heapPercent": int(node['jvm']['mem']['heap_used_percent']),
                 "load1Percent": int(float(node['os']['cpu']['load_average']['1m']) / 4),  # TODO: Count CPUs
+
                 "diskPercent": int(
                     node['fs']['total']['available_in_bytes'] * 100 / node['fs']['total']['total_in_bytes'])
             }
@@ -76,10 +78,11 @@ async def get_nodes_info():
 @app.route('/api/v1/shards_grid')
 async def indices_stats(request):
     client = get_client()
-    indices, shards, nodes, cluster_info = await gather(client.cat.indices(format='json'),
-                                                        client.cat.shards(format='json'),
-                                                        get_nodes_info(),
-                                                        get_cluster_info())
+    indices, aliases, shards, nodes, cluster_info = await gather(client.cat.indices(format='json'),
+                                                                 client.cat.aliases(format='json'),
+                                                                 client.cat.shards(format='json'),
+                                                                 get_nodes_info(),
+                                                                 get_cluster_info())
     cluster_info["numOfIndices"] = len(indices)
     relocating_indices = list({shard['index'] for shard in shards if shard['state'] == 'RELOCATING'})
     recovery = await client.cat.recovery(index=relocating_indices, format='json')
@@ -116,7 +119,10 @@ async def indices_stats(request):
     for node in nodes:
         node['indices'] = dict(sorted(indices_per_node[node["name"]].items()))
 
-    indices = dict([(x['index'], format_index_data(x)) for x in indices])
+    aliases_by_index = defaultdict(list)
+    for alias in aliases:
+        aliases_by_index[alias['index']].append(alias['alias'])
+    indices = dict([(x['index'], format_index_data(x, aliases_by_index)) for x in indices])
     for index in indices:
         if index in unassigned_shards:
             indices[index]['unassignedShards'] = unassigned_shards[index]

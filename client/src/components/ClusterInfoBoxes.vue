@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import InfoBox from "./InfoBox";
+import InfoBox from "./InfoBox.vue";
 import { mapState } from "vuex";
 
 export default {

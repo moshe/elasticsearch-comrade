@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import ShardsGrid from "../components/ShardsGrid";
+import ShardsGrid from "../components/ShardsGrid.vue";
 export default {
   components: { ShardsGrid },
   data: () => ({})
