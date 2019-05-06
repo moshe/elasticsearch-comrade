@@ -1,11 +1,9 @@
 <template>
-  <v-container fluid>
-    <v-layout column>
-      <v-flex>
-        <shards-grid />
-      </v-flex>
-    </v-layout>
-  </v-container>
+  <v-layout column>
+    <v-flex>
+      <shards-grid />
+    </v-flex>
+  </v-layout>
 </template>
 
 <script>

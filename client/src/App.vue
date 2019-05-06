@@ -35,7 +35,9 @@
           </v-card-text>
         </v-card>
       </v-dialog>
-      <router-view />
+      <v-container fluid>
+        <router-view />
+      </v-container>
     </v-content>
   </v-app>
 </template>

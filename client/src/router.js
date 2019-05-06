@@ -2,6 +2,7 @@ import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
 import TerminalView from "./views/TerminalView.vue";
+import CreateAliasesView from "./views/CreateAliasesView.vue";
 
 Vue.use(Router);
 
@@ -18,6 +19,11 @@ export default new Router({
       path: "/terminal",
       nodeName: "terminal",
       component: TerminalView
+    },
+    {
+      path: "/aliases/create",
+      nodeName: "createAliases",
+      component: CreateAliasesView
     },
     {
       path: "/about",

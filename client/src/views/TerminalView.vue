@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid>
+  <div>
     <v-layout>
       <v-flex style="flex: 2">
         <v-autocomplete
@@ -18,7 +18,7 @@
     <v-layout>
       <transition name="slide-fade-reverse">
         <v-flex class="mr-3" style="flex: 10" v-show="panes.includes('editor')">
-          <query-editor ref="editor" />
+          <query-editor style="height: 800px;" ref="editor" />
         </v-flex>
       </transition>
       <v-flex shrink>
@@ -26,11 +26,11 @@
       </v-flex>
       <transition name="slide-fade">
         <v-flex v-show="panes.includes('preview')" style="flex: 10">
-          <query-editor ref="preview" read-only />
+          <query-editor style="height: 800px;" ref="preview" read-only />
         </v-flex>
       </transition>
     </v-layout>
-  </v-container>
+  </div>
 </template>
 
 <script>

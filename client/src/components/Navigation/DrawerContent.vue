@@ -21,17 +21,23 @@
       <v-list-tile-title>Tasks</v-list-tile-title>
     </v-list-tile>
 
-    <v-list-group prepend-icon="backup">
+    <v-list-group prepend-icon="link">
       <template v-slot:activator>
         <v-list-tile>
-          <v-list-tile-title>Snapshots</v-list-tile-title>
+          <v-list-tile-title>Aliases</v-list-tile-title>
         </v-list-tile>
       </template>
       <v-list no-action sub-group>
-        <v-list-tile v-for="([text, icon], i) in admins" :key="i">
-          <v-list-tile-title v-text="text"></v-list-tile-title>
+        <v-list-tile to="/aliases/create">
+          <v-list-tile-title>Create</v-list-tile-title>
           <v-list-tile-action>
-            <v-icon v-text="icon" />
+            <v-icon>add</v-icon>
+          </v-list-tile-action>
+        </v-list-tile>
+        <v-list-tile>
+          <v-list-tile-title>Manage</v-list-tile-title>
+          <v-list-tile-action>
+            <v-icon>people_outline</v-icon>
           </v-list-tile-action>
         </v-list-tile>
       </v-list>
