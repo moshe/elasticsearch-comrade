@@ -116,12 +116,13 @@ export default {
 
 .primary-shard {
   background-color: #689f38;
-  border: 1px solid #4e6e44;
+  border: 1px solid #689f38;
+  color: white;
 }
 
 .replica-shard {
-  background-color: #1b491d;
-  border: 1px solid rgba(54, 75, 49, 0.67);
+  background-color: #38524f;
+  border: 1px solid #38524f;
   color: #757575;
 }
 

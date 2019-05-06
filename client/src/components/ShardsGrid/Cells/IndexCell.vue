@@ -50,36 +50,31 @@
       </v-menu>
     </v-flex>
     <v-flex>
-      <v-chip
-        v-for="alias in index.aliases"
-        :key="alias"
-        small
-        label
-        color="red lighten-1"
-      >
-        {{ alias }}
-      </v-chip>
+      <v-layout justify-start align-start>
+        <v-flex v-for="alias in index.aliases" :key="alias" shrink>
+          <v-chip small label color="#757575" style="margin-right: 6px">
+            {{ alias }}
+          </v-chip>
+        </v-flex>
+      </v-layout>
     </v-flex>
+
     <v-flex>
-      <v-layout
-        v-if="index.status === 'open'"
-        class="index-info"
-        justify-space-between
-        row
-        fill-height
-      >
+      <v-layout v-if="index.status === 'open'" row>
         <v-flex shrink>
-          <v-chip small label>
+          <v-chip small label style="margin-right: 6px">
             shards: {{ index.primaries }} * {{ index.replicas }}
           </v-chip>
         </v-flex>
         <v-flex shrink>
-          <v-chip small label>
+          <v-chip small label style="margin-right: 6px">
             docs: {{ index.docsCount.toLocaleString() }}
           </v-chip>
         </v-flex>
         <v-flex shrink>
-          <v-chip small label> size: {{ index.storeSize }} </v-chip>
+          <v-chip small label style="margin-right: 6px">
+            size: {{ index.storeSize }}
+          </v-chip>
         </v-flex>
       </v-layout>
     </v-flex>
@@ -142,9 +137,10 @@ export default {
   user-select: text;
 }
 .index-name {
-  font-size: 14px;
+  font-size: 16px;
   cursor: pointer;
   text-align: left;
+  color: white;
 }
 
 .index-cell .v-chip--small {

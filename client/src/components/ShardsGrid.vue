@@ -91,7 +91,14 @@ export default {
     ...mapState({ indicesInfo: "indices" }),
     indices() {
       return Object.keys(this.indicesInfo)
-        .filter(index => index.includes(this.indexSearch))
+        .filter(
+          index =>
+            index.includes(this.indexSearch) ||
+            (this.indicesInfo[index].aliases &&
+              JSON.stringify(this.indicesInfo[index].aliases).includes(
+                this.indexSearch
+              ))
+        )
         .slice(
           this.page * this.perPage,
           this.page * this.perPage + this.perPage

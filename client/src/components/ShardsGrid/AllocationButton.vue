@@ -1,7 +1,7 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
   <v-menu offset-y>
     <template v-slot:activator="{ on }">
-      <v-btn small color="red" v-on="on" :disabled="loading">
+      <v-btn small color="#5AB1BB" v-on="on" :disabled="loading">
         <v-icon size="12px" dark class="mr-1">{{ icon }}</v-icon>
         Allocation
       </v-btn>
