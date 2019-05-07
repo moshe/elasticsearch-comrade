@@ -23,10 +23,14 @@
           <list-tile
             :action="showMapping"
             icon="view_compact"
-            title="Mapping"
+            title="Show Mapping"
           />
 
-          <list-tile :action="showSettings" icon="settings" title="Settings" />
+          <list-tile
+            :action="showSettings"
+            icon="settings"
+            title="Show Settings"
+          />
 
           <list-tile
             :action="showHead"

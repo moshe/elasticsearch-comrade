@@ -8,27 +8,12 @@
     </v-list-tile>
     <v-divider />
 
-    <v-list-group prepend-icon="link">
-      <template v-slot:activator>
-        <v-list-tile>
-          <v-list-tile-title>Aliases</v-list-tile-title>
-        </v-list-tile>
-      </template>
-      <v-list no-action sub-group>
-        <v-list-tile to="/aliases/create">
-          <v-list-tile-title>Create</v-list-tile-title>
-          <v-list-tile-action>
-            <v-icon>add</v-icon>
-          </v-list-tile-action>
-        </v-list-tile>
-        <v-list-tile to="/aliases/manage">
-          <v-list-tile-title>Manage</v-list-tile-title>
-          <v-list-tile-action>
-            <v-icon>people_outline</v-icon>
-          </v-list-tile-action>
-        </v-list-tile>
-      </v-list>
-    </v-list-group>
+    <v-list-tile to="/aliases">
+      <v-list-tile-action>
+        <v-icon>link</v-icon>
+      </v-list-tile-action>
+      <v-list-tile-title>Aliases</v-list-tile-title>
+    </v-list-tile>
 
     <v-list-tile to="/terminal">
       <v-list-tile-action>

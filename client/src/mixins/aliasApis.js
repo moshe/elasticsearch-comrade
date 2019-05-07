@@ -9,13 +9,17 @@ export default {
       indexRouting,
       searchRouting
     }) {
-      return POST("/api/v1/alias/create", {
+      this.$store.commit("startLoading");
+      const response = POST("/api/v1/alias/create", {
         alias: aliasName,
         indices: selectedIndices,
         filter,
         indexRouting,
         searchRouting
       });
+      await this.$store.dispatch("shardsGrid");
+      this.$store.commit("stopLoading");
+      return response;
     }
   }
 };

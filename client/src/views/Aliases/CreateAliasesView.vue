@@ -1,71 +1,100 @@
 <template>
-  <v-form>
-    <v-layout
-      column
-      style="background-color: #202020; padding: 20px; border-radius: 3px; margin-bottom:10px"
-    >
-      <v-flex>
-        <div style="font-size: 25px">
-          Basic options
-        </div>
-      </v-flex>
-      <v-layout>
-        <v-flex class="pr-3" style="flex:1">
-          <v-text-field
-            :error="!aliasName"
-            label="Alias Name"
-            v-model="aliasName"
-          />
+  <v-layout row wrap>
+    <v-flex style="margin-right: 20px" xs8>
+      <v-layout column>
+        <v-flex>
+          <div style="font-size: 25px" class="mb-2">
+            Create New Alias
+          </div>
         </v-flex>
-        <v-flex style="flex:1">
-          <v-autocomplete
-            :error="!selectedIndices.length"
-            multiple
-            v-model="selectedIndices"
-            :items="Object.keys(indices)"
-            label="Select Indices"
-          />
-        </v-flex>
+        <v-layout>
+          <v-flex class="pr-3" style="flex:1">
+            <v-text-field solo label="Alias Name *" v-model="aliasName" />
+          </v-flex>
+          <v-flex style="flex:1">
+            <v-autocomplete
+              multiple
+              solo
+              v-model="selectedIndices"
+              :items="Object.keys(indices)"
+              label="Select Indices *"
+            />
+          </v-flex>
+        </v-layout>
       </v-layout>
-    </v-layout>
 
-    <v-layout
-      style="background-color: #202020; padding: 20px; border-radius: 3px;margin-bottom:10px"
-      column
-    >
+      <v-layout column>
+        <v-flex>
+          <div style="font-size: 18px" class="mb-2">
+            Routing options
+          </div>
+        </v-flex>
+        <v-layout>
+          <v-flex class="pr-3" style="flex:1">
+            <v-text-field solo label="Index Routing" v-model="indexRouting" />
+          </v-flex>
+          <v-flex style="flex:1">
+            <v-text-field solo label="Search Routing" v-model="searchRouting" />
+          </v-flex>
+        </v-layout>
+      </v-layout>
+      <v-layout column>
+        <v-flex>
+          <div style="font-size: 18px">
+            Filter
+          </div>
+        </v-flex>
+        <v-layout>
+          <v-flex class="pr-3" style="flex:1">
+            <query-editor ref="editor" style="height: 400px;" />
+          </v-flex>
+        </v-layout>
+      </v-layout>
+      <v-btn
+        color="primary"
+        @click="submit"
+        :disabled="!(selectedIndices.length && aliasName)"
+        >Create</v-btn
+      >
+    </v-flex>
+    <v-flex>
       <v-flex>
-        <div style="font-size: 25px">
-          Routing options
+        <div style="font-size: 25px" class="mb-2">
+          Manage Aliases
         </div>
       </v-flex>
-      <v-layout>
-        <v-flex class="pr-3" style="flex:1">
-          <v-text-field label="Index Routing" v-model="indexRouting" />
-        </v-flex>
-        <v-flex style="flex:1">
-          <v-text-field label="Search Routing" v-model="searchRouting" />
-        </v-flex>
-      </v-layout>
-    </v-layout>
-    <v-layout column>
-      <v-flex>
-        <div style="font-size: 25px">
-          Filter
+      <div>
+        <v-text-field
+          solo
+          label="Filter Aliases / Indices"
+          v-model="value"
+        ></v-text-field>
+        <div v-for="index in Object.keys(indices)" :key="index">
+          <div v-if="indices[index].aliases">
+            <div style="font-size:15px">
+              {{ index }}
+            </div>
+            <v-chip
+              v-for="alias in indices[index].aliases"
+              :key="alias"
+              close
+              color="orange"
+              label
+              outline
+              small
+            >
+              {{ alias }}
+            </v-chip>
+            <v-btn flat icon color="orange">
+              <v-icon>add</v-icon>
+            </v-btn>
+            <v-divider class="mb-2 mt-2"></v-divider>
+          </div>
         </div>
-      </v-flex>
-      <v-layout>
-        <v-flex class="pr-3" style="flex:1">
-          <query-editor ref="editor" style="height: 400px;" />
-        </v-flex>
-      </v-layout>
-    </v-layout>
-    <v-btn
-      color="primary"
-      @click="submit"
-      :disabled="!(selectedIndices.length && aliasName)"
-      >Create</v-btn
-    >
-  </v-form>
+        <v-btn color="success">Save</v-btn>
+      </div>
+    </v-flex>
+  </v-layout>
 </template>
 
 <script>

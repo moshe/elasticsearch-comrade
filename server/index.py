@@ -7,7 +7,7 @@ from sanic.response import json
 from blueprints.cluster import cluster_bp
 from blueprints.terminal import terminal_bp
 from blueprints.index import index_bp
-from blueprints.alias import alias_bp
+from blueprints.alias import alias_bp, get_index_aliases
 from connections import get_client
 
 app = Sanic()
@@ -81,7 +81,7 @@ async def get_nodes_info():
 async def indices_stats(request):
     client = get_client()
     indices, aliases, shards, nodes, cluster_info = await gather(client.cat.indices(format='json'),
-                                                                 client.cat.aliases(format='json'),
+                                                                 get_index_aliases(),
                                                                  client.cat.shards(format='json'),
                                                                  get_nodes_info(),
                                                                  get_cluster_info())
@@ -121,10 +121,7 @@ async def indices_stats(request):
     for node in nodes:
         node['indices'] = dict(sorted(indices_per_node[node["name"]].items()))
 
-    aliases_by_index = defaultdict(list)
-    for alias in aliases:
-        aliases_by_index[alias['index']].append(alias['alias'])
-    indices = dict([(x['index'], format_index_data(x, aliases_by_index)) for x in indices])
+    indices = dict([(x['index'], format_index_data(x, aliases)) for x in indices])
     for index in indices:
         if index in unassigned_shards:
             indices[index]['unassignedShards'] = unassigned_shards[index]

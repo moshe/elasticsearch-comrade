@@ -1,3 +1,4 @@
+from collections import defaultdict
 from sanic.response import json
 from sanic import Blueprint
 
@@ -19,6 +20,15 @@ def format_alias_addition(index, alias):
         data["index_routing"] = alias["indexRouting"]
 
     return {"add": data}
+
+
+async def get_index_aliases():
+    client = get_client()
+    aliases = await client.cat.aliases(format='json')
+    aliases_by_index = defaultdict(list)
+    for alias in aliases:
+        aliases_by_index[alias['index']].append(alias['alias'])
+    return dict([(x, sorted(aliases_by_index[x])) for x in aliases_by_index])
 
 
 @alias_bp.route('/create', methods=['POST'])
