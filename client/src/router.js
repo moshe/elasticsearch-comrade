@@ -2,7 +2,7 @@ import Vue from "vue";
 import Router from "vue-router";
 import Home from "./Views/Home.vue";
 import TerminalView from "./Views/TerminalView.vue";
-import CreateAliasesView from "./Views/Aliases/CreateAliasesView.vue";
+import CreateAliasesView from "./Views/AliasesView.vue";
 
 Vue.use(Router);
 
