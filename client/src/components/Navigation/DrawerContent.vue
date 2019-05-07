@@ -21,7 +21,7 @@
             <v-icon>add</v-icon>
           </v-list-tile-action>
         </v-list-tile>
-        <v-list-tile>
+        <v-list-tile to="/aliases/manage">
           <v-list-tile-title>Manage</v-list-tile-title>
           <v-list-tile-action>
             <v-icon>people_outline</v-icon>

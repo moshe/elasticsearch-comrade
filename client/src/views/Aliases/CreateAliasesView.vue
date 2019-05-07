@@ -70,9 +70,9 @@
 
 <script>
 import { mapState } from "vuex";
-import aliasApis from "../mixins/aliasApis";
+import aliasApis from "../../mixins/aliasApis";
 
-import QueryEditor from "../components/Terminal/QueryEditor.vue";
+import QueryEditor from "../../components/Terminal/QueryEditor.vue";
 export default {
   mixins: [aliasApis],
   methods: {
