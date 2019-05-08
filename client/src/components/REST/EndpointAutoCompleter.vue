@@ -1,8 +1,7 @@
-<template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
+<template>
   <v-combobox
     :items="endpoints"
     clearable
-    autofocus
     label="URL"
     item-text="path"
     @change="onChange"
@@ -26,24 +25,23 @@ export default {
   name: "EndpointAutoCompleter",
   props: {
     method: {
-      type: String
-    },
-    url: {
-      type: String
+      type: String,
+      required: true
     }
   },
   computed: {
     ...mapState(["indices"]),
     endpoints() {
-      return endpoints.flatMap(this.expandIndices);
+      return endpoints
+        .flatMap(this.expandIndices)
+        .filter(x => x.method === this.method);
     }
   },
   methods: {
     onChange(selected) {
       if (typeof selected === "string") {
         this.$emit("change", {
-          path: selected,
-          method: this.method
+          path: selected
         });
       } else {
         this.$emit("change", selected);

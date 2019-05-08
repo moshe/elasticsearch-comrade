@@ -6,10 +6,11 @@
           v-model="method"
           :items="['GET', 'POST', 'DELETE', 'HEAD']"
           label="Method"
+          autofocus
         />
       </v-flex>
       <v-flex style="flex: 10" class="ml-3">
-        <endpoint-auto-completer @change="selectRoute" />
+        <endpoint-auto-completer @change="selectRoute" :method="method" />
       </v-flex>
       <v-flex style="flex: 1">
         <v-btn color="info" @click="onClick">Send</v-btn>
@@ -52,9 +53,8 @@ export default {
     };
   },
   methods: {
-    selectRoute({ path, method, template }) {
+    selectRoute({ path, template }) {
       this.url = path;
-      this.method = method;
       this.$refs.editor.setContent(template || {});
     },
     async onClick() {
