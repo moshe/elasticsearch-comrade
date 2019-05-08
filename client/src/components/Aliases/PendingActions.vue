@@ -8,7 +8,7 @@
         <span style="font-weight:600">{{ action.index }}</span>
       </div>
       <div v-else-if="action.action === 'add'">
-        add alias
+        Add alias
         <span style="font-weight:600">{{ action.alias }}</span> to
         <span style="font-weight:600">{{ action.index }}</span>
       </div>

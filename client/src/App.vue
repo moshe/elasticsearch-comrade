@@ -23,15 +23,15 @@
           item-text="text"
           item-value="value"
           label="Refresh Every"
-        ></v-select>
+        />
       </span>
     </v-toolbar>
 
     <v-content>
-      <v-dialog v-model="loading" hide-overlay persistent width="300">
+      <v-dialog v-model="loading" persistent width="500">
         <v-card>
           <v-card-text>
-            <v-progress-linear indeterminate color="white" class="mb-0" />
+            <v-progress-linear indeterminate color="green" class="mb-0" />
           </v-card-text>
         </v-card>
       </v-dialog>
