@@ -15,7 +15,7 @@
       <v-list-tile-title>Aliases</v-list-tile-title>
     </v-list-tile>
 
-    <v-list-tile to="/terminal">
+    <v-list-tile to="/rest">
       <v-list-tile-action>
         <v-icon>build</v-icon>
       </v-list-tile-action>

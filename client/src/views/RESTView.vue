@@ -22,7 +22,7 @@
         </v-flex>
       </transition>
       <v-flex shrink>
-        <terminal-buttons style="margin-top: 20px" :panes.sync="panes" />
+        <r-e-s-t-buttons style="margin-top: 20px" :panes.sync="panes" />
       </v-flex>
       <transition name="slide-fade">
         <v-flex v-show="panes.includes('preview')" style="flex: 10">
@@ -34,15 +34,15 @@
 </template>
 
 <script>
-import terminalApis from "../mixins/terminalApis";
-import QueryEditor from "../components/Terminal/QueryEditor.vue";
-import TerminalButtons from "../components/Terminal/TerminalButtons.vue";
-import EndpointAutoCompleter from "../components/Terminal/EndpointAutoCompleter.vue";
+import RESTApis from "../mixins/RESTApis";
+import QueryEditor from "../components/REST/QueryEditor.vue";
+import RESTButtons from "../components/REST/RESTButtons.vue";
+import EndpointAutoCompleter from "../components/REST/EndpointAutoCompleter.vue";
 
 export default {
   name: "QueryView",
-  components: { EndpointAutoCompleter, TerminalButtons, QueryEditor },
-  mixins: [terminalApis],
+  components: { EndpointAutoCompleter, RESTButtons, QueryEditor },
+  mixins: [RESTApis],
   data() {
     return {
       response: null,

@@ -5,14 +5,14 @@ from sanic import Sanic
 from sanic.response import json
 
 from blueprints.cluster import cluster_bp
-from blueprints.terminal import terminal_bp
+from blueprints.rest import rest_bp
 from blueprints.index import index_bp
 from blueprints.alias import alias_bp, get_index_aliases
 from connections import get_client
 
 app = Sanic()
 app.blueprint(index_bp, url_prefix='/api/v1/index')
-app.blueprint(terminal_bp, url_prefix='/api/v1/terminal')
+app.blueprint(rest_bp, url_prefix='/api/v1/rest')
 app.blueprint(cluster_bp, url_prefix='/api/v1/cluster')
 app.blueprint(alias_bp, url_prefix='/api/v1/alias')
 

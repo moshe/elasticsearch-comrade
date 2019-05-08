@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "./Views/Home.vue";
-import TerminalView from "./Views/TerminalView.vue";
+import RESTView from "./Views/RESTView.vue";
 import CreateAliasesView from "./Views/AliasesView.vue";
 
 Vue.use(Router);
@@ -16,9 +16,9 @@ export default new Router({
       component: Home
     },
     {
-      path: "/terminal",
-      nodeName: "terminal",
-      component: TerminalView
+      path: "/rest",
+      nodeName: "rest",
+      component: RESTView
     },
     {
       path: "/aliases",

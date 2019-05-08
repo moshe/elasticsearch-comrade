@@ -28,7 +28,6 @@
 
 <script>
 export default {
-  name: "TerminalButtons",
   props: {
     panes: {
       type: Array

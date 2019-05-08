@@ -4,7 +4,7 @@ from sanic import Blueprint
 
 from connections import get_client
 
-terminal_bp = Blueprint('terminal')
+rest_bp = Blueprint('rest')
 
 
 def format_es_exception(e: TransportError):
@@ -13,7 +13,7 @@ def format_es_exception(e: TransportError):
                  "info": e.info})
 
 
-@terminal_bp.route('/query', methods=['POST'])
+@rest_bp.route('/query', methods=['POST'])
 async def close_index(request):
     client = get_client()
     body = request.json['body']
