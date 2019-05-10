@@ -50,7 +50,7 @@
       </v-layout>
     </v-layout>
     <v-btn
-      color="primary"
+      color="success"
       @click="submit"
       :disabled="!(selectedIndices.length && aliasName)"
       >Add</v-btn

@@ -5,7 +5,6 @@
       <v-flex>
         <v-text-field
           clearable
-          solo
           label="Filter indices"
           style="width: 300px"
           v-model="indexSearch"

@@ -1,29 +1,43 @@
 <template>
   <div>
     <div style="font-size: 25px" class="mb-2">Pending Actions</div>
-    <div v-for="(action, index) in actions" :key="index">
-      <div v-if="action.action === 'remove'">
+    <div v-for="(action, index) in pendingActions" :key="index">
+      <v-btn
+        flat
+        icon
+        small
+        color="white"
+        @click="$emit('removeAction', action)"
+      >
+        <v-icon>clear</v-icon>
+      </v-btn>
+      <span v-if="action.action === 'remove'">
         Remove alias
         <span style="font-weight:600">{{ action.alias }}</span> from
         <span style="font-weight:600">{{ action.index }}</span>
-      </div>
-      <div v-else-if="action.action === 'add'">
+      </span>
+      <span v-else-if="action.action === 'add'">
         Add alias
         <span style="font-weight:600">{{ action.alias }}</span> to
         <span style="font-weight:600">{{ action.index }}</span>
-      </div>
+      </span>
     </div>
+    <v-btn color="primary">Commit</v-btn>
   </div>
 </template>
 
 <script>
 export default {
   props: {
-    actions: {
+    pendingActions: {
       type: Array
     }
   }
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.v-btn--icon.v-btn--small {
+  margin: 0;
+}
+</style>
