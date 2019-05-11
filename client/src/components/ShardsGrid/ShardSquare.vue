@@ -1,4 +1,4 @@
-<template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
+<template>
   <v-menu offset-y style="display: inline-block" :disabled="isUnassigned">
     <template v-slot:activator="{ on }">
       <div style="display: inline-block; margin-right: 3px; height: 25px">
@@ -26,6 +26,12 @@
       </div>
     </template>
     <v-list dense>
+      <v-list-tile disabled v-if="isRelocating">
+        <v-list-tile-action style="min-width: unset" class="pr-2">
+          <v-icon style="font-size: 16px" disabled>computer</v-icon>
+        </v-list-tile-action>
+        <v-list-tile-action> From {{ fromNode }} </v-list-tile-action>
+      </v-list-tile>
       <v-list-tile
         :disabled="isRelocating"
         @click="toggleShardForRelocation({ index, id, nodeName })"
@@ -65,6 +71,9 @@ export default {
     },
     state: {
       required: true,
+      type: String
+    },
+    fromNode: {
       type: String
     },
     primary: {

@@ -4,6 +4,7 @@
       <shard-square
         :id="x.shard"
         :state="x.state"
+        :fromNode="x.fromNode"
         :progress="x.progress"
         :index="indexName"
         :node-name="nodeName"
@@ -16,6 +17,7 @@
       <shard-square
         :id="x.shard"
         :state="x.state"
+        :fromNode="x.fromNode"
         :progress="x.progress"
         :index="indexName"
         :node-name="nodeName"

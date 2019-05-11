@@ -4,7 +4,7 @@ export default {
   methods: {
     async GET(url, refreshGrid = true) {
       this.$store.commit("startLoading");
-      const resp = GET(url);
+      const resp = await GET(url);
       if (refreshGrid) {
         await this.$store.dispatch("shardsGrid");
       }

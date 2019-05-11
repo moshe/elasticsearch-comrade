@@ -91,7 +91,7 @@ async def indices_stats(request):
     relocation_progress = {
         (recovery_data["index"], recovery_data["shard"]):
             int(float(recovery_data["bytes_recovered"]) * 100 / int(recovery_data["bytes_total"]))
-        for recovery_data in recovery if recovery_data["stage"] != "done"
+        for recovery_data in recovery if recovery_data["stage"] != "done" and recovery_data["bytes_total"]
     }
 
     indices_per_node = defaultdict(lambda: defaultdict(lambda: {'replicas': [], 'primaries': []}))
@@ -111,7 +111,9 @@ async def indices_stats(request):
         if shard['state'] == 'UNASSIGNED':
             unassigned_shards[shard['index']][shard_type].append(data)
         if shard['state'] == 'RELOCATING':
-            node = node.split(' ->')[0]
+            from_node, to_node = node.split(' -> ')
+            node = from_node
+            data['fromNode'] = to_node.split()[2]
             data['progress'] = relocation_progress[(shard['index'], shard['shard'])]
         if shard['state'] == 'INITIALIZING':
             data['progress'] = relocation_progress[(shard['index'], shard['shard'])]

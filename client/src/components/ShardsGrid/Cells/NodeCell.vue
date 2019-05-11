@@ -1,5 +1,5 @@
 <template>
-  <div class="node-info ma-1">
+  <div class="ma-1">
     <div class="node-name ml-1">
       {{ nodeName }}
     </div>
@@ -95,9 +95,6 @@ export default {
 </script>
 
 <style scoped>
-.node-info {
-}
-
 .node-name {
   font-size: 14px;
   display: inline-block;
