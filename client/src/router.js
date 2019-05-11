@@ -3,6 +3,7 @@ import Router from "vue-router";
 import Home from "./Views/Home.vue";
 import RESTView from "./Views/RESTView.vue";
 import CreateAliasesView from "./Views/AliasesView.vue";
+import TasksView from "./Views/TasksView.vue";
 
 Vue.use(Router);
 
@@ -24,6 +25,11 @@ export default new Router({
       path: "/aliases",
       nodeName: "createAliases",
       component: CreateAliasesView
+    },
+    {
+      path: "/tasks",
+      nodeName: "tasks",
+      component: TasksView
     },
     {
       path: "/about",

@@ -7,6 +7,7 @@ from sanic.response import json
 from blueprints.cluster import cluster_bp
 from blueprints.rest import rest_bp
 from blueprints.index import index_bp
+from blueprints.task import task_bp
 from blueprints.alias import alias_bp, get_index_aliases
 from connections import get_client
 
@@ -15,6 +16,7 @@ app.blueprint(index_bp, url_prefix='/api/v1/index')
 app.blueprint(rest_bp, url_prefix='/api/v1/rest')
 app.blueprint(cluster_bp, url_prefix='/api/v1/cluster')
 app.blueprint(alias_bp, url_prefix='/api/v1/alias')
+app.blueprint(task_bp, url_prefix='/api/v1/task')
 
 
 def format_index_data(data, aliases):
