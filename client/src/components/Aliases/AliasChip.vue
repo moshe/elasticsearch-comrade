@@ -1,6 +1,7 @@
 <template>
   <v-chip
-    :close="!removed"
+    close
+    :disabled="removed"
     :color="color"
     label
     outline
@@ -31,12 +32,12 @@ export default {
   computed: {
     color() {
       if (this.added) {
-        return "yellow";
+        return "primary";
       }
       if (this.removed) {
         return "gray";
       }
-      return "teal";
+      return "orange";
     }
   },
   methods: {

@@ -1,14 +1,21 @@
 <template>
   <v-layout row>
-    <v-flex style="margin-right: 20px" xs8>
+    <v-flex class="mr-5" xs7>
       <create-alias @action="onAction" :pending-actions="pendingActions" />
     </v-flex>
-    <v-flex xs4>
+    <v-flex xs5>
       <manage-aliases @action="onAction" :pending-actions="pendingActions" />
       <pending-actions
         :pending-actions="pendingActions"
         @removeAction="removeAction"
       />
+      <v-btn
+        color="primary"
+        :disabled="pendingActions.length == 0"
+        @click="commit"
+      >
+        Commit
+      </v-btn>
     </v-flex>
   </v-layout>
 </template>
@@ -17,9 +24,11 @@
 import CreateAlias from "../components/Aliases/CreateAlias.vue";
 import ManageAliases from "../components/Aliases/ManageAliases.vue";
 import PendingActions from "../components/Aliases/PendingActions.vue";
+import aliasApis from "../mixins/aliasApis";
 import { mapState } from "vuex";
 export default {
   components: { CreateAlias, ManageAliases, PendingActions },
+  mixins: [aliasApis],
   data() {
     return {
       pendingActions: []
@@ -29,6 +38,10 @@ export default {
     ...mapState(["indices"])
   },
   methods: {
+    async commit() {
+      await this.updateAliases(this.pendingActions);
+      this.pendingActions = [];
+    },
     onAction(action) {
       this.removeAction(action);
       if (

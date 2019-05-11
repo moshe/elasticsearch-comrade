@@ -60,14 +60,12 @@
 
 <script>
 import { mapState } from "vuex";
-import aliasApis from "../../mixins/aliasApis";
 import QueryEditor from "../REST/QueryEditor.vue";
 export default {
   components: { QueryEditor },
   computed: {
     ...mapState(["indices"])
   },
-  mixins: [aliasApis],
   methods: {
     async submit() {
       this.filter = this.$refs.editor.getQuery();

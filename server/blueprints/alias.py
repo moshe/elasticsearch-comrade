@@ -7,19 +7,19 @@ from connections import get_client
 alias_bp = Blueprint('alias')
 
 
-def format_alias_addition(index, alias):
+def format_alias_addition(action):
     data = {
-        "index": index,
-        "alias": alias["alias"]
+        "index": action['index'],
+        "alias": action['alias']
     }
-    if alias.get("filter") != {} and alias.get("filter") not in {"", None}:
-        data["filter"] = alias["filter"]
-    if alias.get("searchRouting") not in {"", None}:
-        data["search_routing"] = alias["searchRouting"]
-    if alias.get("indexRouting") not in {"", None}:
-        data["index_routing"] = alias["indexRouting"]
+    if action.get("filter") != {} and action.get("filter") not in {"", None}:
+        data["filter"] = action["filter"]
+    if action.get("searchRouting") not in {"", None}:
+        data["search_routing"] = action["searchRouting"]
+    if action.get("indexRouting") not in {"", None}:
+        data["index_routing"] = action["indexRouting"]
 
-    return {"add": data}
+    return {action['action']: data}
 
 
 async def get_index_aliases():
@@ -31,13 +31,12 @@ async def get_index_aliases():
     return dict([(x, sorted(aliases_by_index[x])) for x in aliases_by_index])
 
 
-@alias_bp.route('/create', methods=['POST'])
+@alias_bp.route('/batch', methods=['POST'])
 async def create_alias(request):
     client = get_client()
-    data = request.json
+    actions = request.json['actions']
+    print({"actions": [format_alias_addition(action) for action in actions]})
     await client.indices.update_aliases(
-        {"actions": list([
-            format_alias_addition(index, data) for index in data['indices']
-        ])}
+        {"actions": [format_alias_addition(action) for action in actions]}
     )
     return json({"status": "ok"})

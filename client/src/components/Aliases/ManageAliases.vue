@@ -13,6 +13,9 @@
         "
       >
         <div style="font-size:15px">
+          <v-btn flat icon small @click="handleRemoveIndex(index)">
+            <v-icon>clear</v-icon>
+          </v-btn>
           {{ index }}
         </div>
         <div style="display: inline-block">
@@ -34,7 +37,7 @@
         <div style="display: inline-block">
           <v-menu offset-y>
             <template v-slot:activator="{ on }">
-              <v-btn flat icon color="teal" v-on="on">
+              <v-btn flat icon color="orange" v-on="on">
                 <v-icon>add</v-icon>
               </v-btn>
             </template>
@@ -95,6 +98,9 @@ export default {
     },
     handleRemove(index, alias) {
       this.$emit("action", { index, alias, action: "remove" });
+    },
+    handleRemoveIndex(index) {
+      this.indices[index].aliases.forEach(x => this.handleRemove(index, x));
     },
     handleAddition(index, alias) {
       this.$emit("action", { index, alias, action: "add" });
