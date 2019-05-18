@@ -24,7 +24,7 @@
           flat
           icon
           @click="page++"
-          :disabled="page * perPage + perPage >= indices.length + perPage"
+          :disabled="page * perPage >= indices.length"
         >
           <v-icon>{{ $vuetify.icons.next }}</v-icon>
         </v-btn>
@@ -35,12 +35,14 @@
         <th class="pa-2">
           <cluster-cell />
         </th>
-        <th class="pa-2" v-for="index of indices" :key="index">
+        <th class="pa-2" v-for="index of currentIndices" :key="index">
           <index-cell :indexName="index" />
         </th>
         <th
           class="pl-1 pr-1"
-          v-for="index of Math.abs(Math.min(indices.length - perPage, 0))"
+          v-for="index of Math.abs(
+            Math.min(currentIndices.length - perPage, 0)
+          )"
           :key="index"
         ></th>
       </template>
@@ -52,7 +54,11 @@
             :metrics="props.item.metrics"
           />
         </td>
-        <td v-for="index of indices" :key="index" class="pa-1 shards-cell">
+        <td
+          v-for="index of currentIndices"
+          :key="index"
+          class="pa-1 shards-cell"
+        >
           <shards-cell
             :node-name="props.item.name"
             :index="props.item.indices[index]"
@@ -60,7 +66,9 @@
           />
         </td>
         <td
-          v-for="index in Math.abs(Math.min(indices.length - perPage, 0))"
+          v-for="index in Math.abs(
+            Math.min(currentIndices.length - perPage, 0)
+          )"
           :key="index"
           class="pa-1 shards-cell"
         ></td>
@@ -89,20 +97,21 @@ export default {
   computed: {
     ...mapState(["nodes", "cluster"]),
     ...mapState({ indicesInfo: "indices" }),
+    currentIndices() {
+      return this.indices.slice(
+        this.page * this.perPage,
+        this.page * this.perPage + this.perPage
+      );
+    },
     indices() {
-      return Object.keys(this.indicesInfo)
-        .filter(
-          index =>
-            index.includes(this.indexSearch) ||
-            (this.indicesInfo[index].aliases &&
-              JSON.stringify(this.indicesInfo[index].aliases).includes(
-                this.indexSearch
-              ))
-        )
-        .slice(
-          this.page * this.perPage,
-          this.page * this.perPage + this.perPage
-        );
+      return Object.keys(this.indicesInfo).filter(
+        index =>
+          index.includes(this.indexSearch) ||
+          (this.indicesInfo[index].aliases &&
+            JSON.stringify(this.indicesInfo[index].aliases).includes(
+              this.indexSearch
+            ))
+      );
     }
   },
   data() {
