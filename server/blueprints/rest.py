@@ -18,9 +18,9 @@ async def close_index(request):
     client = get_client()
     body = request.json['body']
     method = request.json['method']
-    url = request.json['url']
+    path = request.json['path']
     try:
-        resp = await client.transport.perform_request(method, url, body=body)
+        resp = await client.transport.perform_request(method, path, body=body)
     except TransportError as e:
         return format_es_exception(e)
     return json(resp)
