@@ -10,7 +10,11 @@
         />
       </v-flex>
       <v-flex style="flex: 10" class="ml-3">
-        <endpoint-auto-completer @change="selectRoute" :method="method" />
+        <endpoint-auto-completer
+          @change="selectRoute"
+          :method="method"
+          :path="path"
+        />
       </v-flex>
       <v-flex style="flex: 1">
         <v-btn color="info" @click="onClick">Send</v-btn>
@@ -18,7 +22,11 @@
     </v-layout>
     <v-layout>
       <transition name="slide-fade-reverse">
-        <v-flex class="mr-3" style="flex: 10" v-show="panes.includes('editor')">
+        <v-flex
+          class="mr-3"
+          style="flex: 10; margin-top:48px"
+          v-show="panes.includes('editor')"
+        >
           <query-editor style="height: 800px;" ref="editor" />
         </v-flex>
       </transition>
@@ -27,7 +35,20 @@
       </v-flex>
       <transition name="slide-fade">
         <v-flex v-show="panes.includes('preview')" style="flex: 10">
-          <query-editor style="height: 800px;" ref="preview" read-only />
+          <v-tabs color="#303030">
+            <v-tab>
+              Response
+            </v-tab>
+            <v-tab>
+              History
+            </v-tab>
+            <v-tab-item>
+              <query-editor style="height: 800px;" ref="preview" read-only />
+            </v-tab-item>
+            <v-tab-item>
+              <query-history @query="setQueryFromHistory" ref="history" />
+            </v-tab-item>
+          </v-tabs>
         </v-flex>
       </transition>
     </v-layout>
@@ -39,28 +60,38 @@ import RESTApis from "../mixins/RESTApis";
 import QueryEditor from "../components/REST/QueryEditor.vue";
 import RESTButtons from "../components/REST/RESTButtons.vue";
 import EndpointAutoCompleter from "../components/REST/EndpointAutoCompleter.vue";
+import QueryHistory from "../components/REST/QueryHistory.vue";
 
 export default {
   name: "QueryView",
-  components: { EndpointAutoCompleter, RESTButtons, QueryEditor },
+  components: { EndpointAutoCompleter, RESTButtons, QueryEditor, QueryHistory },
   mixins: [RESTApis],
   data() {
     return {
       response: null,
       method: "GET",
-      url: "/",
+      path: "/",
       panes: ["preview", "editor"]
     };
   },
   methods: {
+    setQueryFromHistory({ path, query, method }) {
+      this.method = method;
+      this.selectRoute({ path, template: query });
+    },
     selectRoute({ path, template }) {
-      this.url = path;
+      this.path = path;
       this.$refs.editor.setContent(template || {});
     },
     async onClick() {
+      this.$refs.history.addEntry(
+        this.method,
+        this.path,
+        this.$refs.editor.getQuery()
+      );
       const resp = await this.sendQuery(
         this.method,
-        this.url,
+        this.path,
         this.$refs.editor.getQuery()
       );
       this.$refs.preview.setContent(resp);

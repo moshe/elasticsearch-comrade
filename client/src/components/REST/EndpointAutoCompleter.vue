@@ -1,6 +1,7 @@
 <template>
   <v-combobox
     :items="endpoints"
+    :value="path"
     clearable
     label="URL"
     item-text="path"
@@ -25,6 +26,10 @@ export default {
   name: "EndpointAutoCompleter",
   props: {
     method: {
+      type: String,
+      required: true
+    },
+    path: {
       type: String,
       required: true
     }
