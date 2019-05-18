@@ -24,7 +24,8 @@ export default new Vuex.Store({
         allocation: null
       }
     },
-    settingsRefreshEvery: 5000
+    settingsRefreshEvery: 5000,
+    settingsRefreshEnabled: true
   },
   mutations: {
     toggleShardForRelocation(state, { index, id, nodeName }) {
@@ -67,6 +68,9 @@ export default new Vuex.Store({
     },
     setRefreshEvery(state, data) {
       state.settingsRefreshEvery = data;
+    },
+    setRefreshEnabled(state, data) {
+      state.settingsRefreshEnabled = data;
     }
   },
   actions: {
