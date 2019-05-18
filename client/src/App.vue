@@ -14,17 +14,7 @@
         </span>
       </v-toolbar-title>
       <v-spacer />
-      <span>
-        <v-select
-          dense
-          v-model="refreshEvery"
-          @change="setRefreshEvery"
-          :items="times"
-          item-text="text"
-          item-value="value"
-          label="Refresh Every"
-        />
-      </span>
+      <refresh-selector />
     </v-toolbar>
 
     <v-content>
@@ -43,43 +33,39 @@
 </template>
 
 <script>
-import { mapActions, mapMutations, mapState } from "vuex";
+import { mapActions, mapState } from "vuex";
 import StatusDot from "./components/StatusDot.vue";
 import JsonModal from "./components/Modals/JsonModal.vue";
 import DrawerContent from "./components/Navigation/DrawerContent.vue";
+import RefreshSelector from "./components/RefreshSelector.vue";
 
 export default {
   name: "App",
   components: {
     DrawerContent,
     JsonModal,
-    StatusDot
+    StatusDot,
+    RefreshSelector
   },
   async created() {
     await this.updateData();
   },
   data() {
     return {
-      drawer: null,
-      times: [1, 5, 10, 30, 60].map(value => {
-        return {
-          value: value * 1000,
-          text: `${value} second${value > 1 ? "s" : ""}`
-        };
-      }),
-      refreshEvery: 5000
+      drawer: null
     };
   },
   methods: {
-    ...mapMutations(["setRefreshEvery"]),
     ...mapActions(["shardsGrid"]),
     async updateData() {
-      await this.shardsGrid();
+      if (this.settingsRefreshEnabled) {
+        await this.shardsGrid();
+      }
       setTimeout(this.updateData, this.settingsRefreshEvery);
     }
   },
   computed: {
-    ...mapState(["loading", "settingsRefreshEvery"])
+    ...mapState(["loading", "settingsRefreshEvery", "settingsRefreshEnabled"])
   }
 };
 </script>
