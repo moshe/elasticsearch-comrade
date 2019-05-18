@@ -50,6 +50,12 @@
             icon="call_merge"
             title="Force Merge"
           />
+
+          <list-tile
+            :action="() => deleteIndex(indexName)"
+            icon="delete"
+            title="Delete Index"
+          />
         </v-list>
       </v-menu>
     </v-flex>

@@ -31,6 +31,9 @@ export default {
     },
     async forceMergeIndex(index) {
       return await this.GET(`/api/v1/index/${index}/forcemerge`);
+    },
+    async deleteIndex(index) {
+      return await this.GET(`/api/v1/index/${index}/delete`);
     }
   }
 };
