@@ -5,6 +5,7 @@
     clearable
     label="URL"
     item-text="path"
+    ref="filter"
     @change="onChange"
   >
     <template v-slot:item="{ index, item }">
@@ -44,6 +45,7 @@ export default {
   },
   methods: {
     onChange(selected) {
+      this.$refs.filter.blur();
       if (typeof selected === "string") {
         this.$emit("change", {
           path: selected

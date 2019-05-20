@@ -6,6 +6,7 @@
           <v-combobox
             :items="actions"
             autofocus
+            ref="filter"
             clearable
             label="Action (Regex Supported)"
             @change="filterAction"
@@ -94,6 +95,7 @@ export default {
   mixins: [taskApis],
   data() {
     return {
+      value: "",
       actions: actions.flatMap(x => [x, "!" + x]),
       filters: [],
       tasks: [],
@@ -132,17 +134,16 @@ export default {
   },
   methods: {
     async refreshTasks() {
-      this.tasks = await this.listTasks();
-      setTimeout(() => {
-        if (this.settingsRefreshEnabled) {
-          this.refreshTasks();
-        }
-      }, this.settingsRefreshEvery);
+      if (this.settingsRefreshEnabled) {
+        this.tasks = await this.listTasks();
+      }
+      setTimeout(this.refreshTasks, this.settingsRefreshEvery);
     },
     filterAction(selected) {
       if (!selected) {
         return;
       }
+      this.$refs.filter.blur();
       if (selected.startsWith("!")) {
         const filter = selected.substr(1);
         this.removeFilter(filter, "filters");
