@@ -1,12 +1,6 @@
 <template>
   <v-layout align-center justify-center row>
     <v-flex>
-      <info-box
-        class="mr-4"
-        :text="`Cluster Status: ${cluster.clusterStatus}`"
-      />
-    </v-flex>
-    <v-flex>
       <info-box class="mr-4" :text="`Indices: ${cluster.numOfIndices}`" />
     </v-flex>
     <v-flex>
