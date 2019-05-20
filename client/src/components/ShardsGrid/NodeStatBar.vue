@@ -40,8 +40,10 @@ export default {
   },
   methods: {
     measure() {
-      this.histogram.push(this.metric);
-      this.gradient.push(this.color);
+      if (this.settingsRefreshEnabled) {
+        this.histogram.push(this.metric);
+        this.gradient.push(this.color);
+      }
       if (
         this.histogram.length === 3 &&
         this.histogram[0] === 0 &&
@@ -60,7 +62,7 @@ export default {
     setTimeout(this.measure, this.settingsRefreshEvery);
   },
   computed: {
-    ...mapState(["settingsRefreshEvery"]),
+    ...mapState(["settingsRefreshEvery", "settingsRefreshEnabled"]),
     outH() {
       return this.gradient.reduceRight((a, c) => (a.push(c), a), []);
     },
