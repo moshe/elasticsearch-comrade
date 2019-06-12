@@ -38,6 +38,7 @@
 <script>
 import NodeStatBar from "../NodeStatBar.vue";
 import { mapMutations, mapState } from "vuex";
+import { POST } from "../../../requests";
 
 export default {
   name: "NodeCell",
@@ -60,18 +61,11 @@ export default {
     ...mapMutations(["clearRelocation", "startLoading", "stopLoading"]),
     async relocate() {
       this.startLoading();
-      const res = await fetch("/api/v1/cluster/reroute_shards", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          node: this.nodeName,
-          shards: this.shardsMarkedForRelocation
-        })
+      const res = await POST("/api/v1/cluster/reroute_shards", {
+        node: this.nodeName,
+        shards: this.shardsMarkedForRelocation
       });
-      if ((await res.json()).status === "ok") {
+      if (res.status === "ok") {
         this.clearRelocation();
       }
       this.stopLoading();
