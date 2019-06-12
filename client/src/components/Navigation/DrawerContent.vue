@@ -28,6 +28,13 @@
       </v-list-tile-action>
       <v-list-tile-title>Tasks</v-list-tile-title>
     </v-list-tile>
+
+    <v-list-tile to="/snapshots">
+      <v-list-tile-action>
+        <v-icon>backup</v-icon>
+      </v-list-tile-action>
+      <v-list-tile-title>Snapshots</v-list-tile-title>
+    </v-list-tile>
   </v-list>
 </template>
 
