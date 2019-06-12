@@ -8,7 +8,7 @@ cluster_bp = Blueprint('cluster')
 
 @cluster_bp.route('/reroute_shards', methods=['POST'])
 async def reroute_shard(request):
-    client = get_client()
+    client = get_client(request)
     node = request.json['node']
     shards = request.json['shards']
     await client.cluster.reroute(
@@ -23,7 +23,7 @@ async def reroute_shard(request):
 @cluster_bp.route('/allocation/<operation>', methods=['POST'])
 async def set_allocation(request, operation):
     assert operation in {"all", "primaries", "new_primaries", "none"}
-    client = get_client()
+    client = get_client(request)
     response = await client.cluster.put_settings(body={"transient": {"cluster.routing.allocation.enable": operation}})
     assert response.get('acknowledged') is True
     return json({"status": "ok"})

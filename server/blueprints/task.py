@@ -12,7 +12,7 @@ task_query_regex = re.compile('source\[(.*)\]')
 
 @task_bp.route('/cancle', methods=['POST'])
 async def cancle_task(request):
-    client = get_client()
+    client = get_client(request)
     task_id = request.json['taskId']
     await client.tasks.cancle(task_id=task_id)
     return json({"status": "ok"})
@@ -21,7 +21,7 @@ async def cancle_task(request):
 @task_bp.route('/list')
 async def list_tasks(request):
     result = []
-    client = get_client()
+    client = get_client(request)
     tasks = await client.tasks.list(detailed=True, group_by='parents')
     for task_id, task in tasks['tasks'].items():
         formatted = {

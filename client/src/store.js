@@ -1,11 +1,12 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import { clusterStatus } from "./enums";
-
+import { GET } from "./requests";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    connectedCluster: "main",
     jsonModalContent: false,
     loading: false,
     shardsMarkedForRelocation: [],
@@ -78,7 +79,7 @@ export default new Vuex.Store({
       if (state.cluster.clusterStatus === clusterStatus.loading) {
         commit("startLoading");
       }
-      const grid = await (await fetch("/api/v1/shards_grid")).json();
+      const grid = await GET("/api/v1/views/shards_grid");
       commit("setNodes", grid.nodes);
       commit("setIndices", grid.indices);
       commit("setCluster", grid.cluster);

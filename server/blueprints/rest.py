@@ -15,7 +15,7 @@ def format_es_exception(e: TransportError):
 
 @rest_bp.route('/query', methods=['POST'])
 async def close_index(request):
-    client = get_client()
+    client = get_client(request)
     body = request.json['body']
     method = request.json['method']
     path = request.json['path']
