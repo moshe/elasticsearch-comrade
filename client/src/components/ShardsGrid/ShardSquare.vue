@@ -20,7 +20,7 @@
           v-model="progress"
           class="ma-0"
           color="white"
-          style="width: 20px;"
+          style="width: 20px"
           v-if="progress != null"
         />
       </div>

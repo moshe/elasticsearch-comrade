@@ -7,7 +7,7 @@
     <v-toolbar app>
       <v-toolbar-side-icon @click="drawer = true" />
       <v-toolbar-title class="headline text-uppercase">
-        <status-dot />
+        <status-dot :status="this.cluster.clusterStatus" class="mr-3" />
         <span @click="$router.push('/')" style="cursor: pointer">
           <span class="font-weight-bold">Elasticsearch</span>
           <span class="font-weight-light">ops</span>
@@ -15,6 +15,10 @@
       </v-toolbar-title>
       <v-spacer />
       <refresh-selector />
+      <v-btn icon flat><v-icon>refresh</v-icon></v-btn>
+      <v-btn icon flat @click="selectCluster(null)">
+        <v-icon>logout</v-icon>
+      </v-btn>
     </v-toolbar>
 
     <v-content>
@@ -26,18 +30,20 @@
         </v-card>
       </v-dialog>
       <v-container fluid>
-        <router-view />
+        <router-view v-if="connectedCluster" />
+        <login v-else />
       </v-container>
     </v-content>
   </v-app>
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
+import { mapActions, mapState, mapMutations } from "vuex";
 import StatusDot from "./components/StatusDot.vue";
 import JsonModal from "./components/Modals/JsonModal.vue";
 import DrawerContent from "./components/Navigation/DrawerContent.vue";
 import RefreshSelector from "./components/RefreshSelector.vue";
+import Login from "./components/Login.vue";
 
 export default {
   name: "App",
@@ -45,27 +51,45 @@ export default {
     DrawerContent,
     JsonModal,
     StatusDot,
-    RefreshSelector
+    RefreshSelector,
+    Login
   },
   async created() {
     await this.updateData();
   },
   data() {
     return {
-      drawer: null
+      drawer: null,
+      timer: setTimeout(() => {}, 0)
     };
   },
   methods: {
     ...mapActions(["shardsGrid"]),
+    ...mapMutations(["selectCluster", "startLoading"]),
     async updateData() {
-      if (this.settingsRefreshEnabled) {
+      if (this.settingsRefreshEnabled && this.connectedCluster) {
         await this.shardsGrid();
       }
-      setTimeout(this.updateData, this.settingsRefreshEvery);
+      this.timer = setTimeout(this.updateData, this.settingsRefreshEvery);
+    }
+  },
+  watch: {
+    connectedCluster(newValue) {
+      clearTimeout(this.timer);
+      if (newValue) {
+        this.startLoading();
+        this.updateData();
+      }
     }
   },
   computed: {
-    ...mapState(["loading", "settingsRefreshEvery", "settingsRefreshEnabled"])
+    ...mapState([
+      "connectedCluster",
+      "cluster",
+      "loading",
+      "settingsRefreshEvery",
+      "settingsRefreshEnabled"
+    ])
   }
 };
 </script>

@@ -1,29 +1,32 @@
 <template>
-  <div class="dot mr-3" v-bind:style="{ backgroundColor: color }"></div>
+  <div class="dot" v-bind:style="{ backgroundColor: color }"></div>
 </template>
 
 <script>
-import { mapState } from "vuex";
 import { clusterStatus } from "../enums";
 
 export default {
-  name: "StatusDot",
+  props: {
+    status: {
+      type: String,
+      default: "loading"
+    }
+  },
   computed: {
-    ...mapState(["cluster"]),
     color() {
-      if (this.cluster.clusterStatus === clusterStatus.green) {
+      if (this.status === clusterStatus.green) {
         return "green";
       }
-      if (this.cluster.clusterStatus === clusterStatus.yellow) {
+      if (this.status === clusterStatus.yellow) {
         return "yellow";
       }
-      if (this.cluster.clusterStatus === clusterStatus.red) {
+      if (this.status === clusterStatus.red) {
         return "red";
       }
-      if (this.cluster.clusterStatus === clusterStatus.loading) {
+      if (this.status === clusterStatus.loading) {
         return "gray";
       }
-      throw new Error(`Unknown cluster status ${this.cluster.clusterStatus}`);
+      throw new Error(`Unknown cluster status ${this.status}`);
     }
   }
 };

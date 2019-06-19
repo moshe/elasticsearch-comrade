@@ -40,7 +40,7 @@ async def get_cluster_info(request):
         "numberOfNodes": int(info['node.total']),
         "numberOfDocs": int(docs['count']),
         "clusterName": info['cluster'],
-        "clusterStatus": info['status'].title(),
+        "clusterStatus": info['status'],
         "settings": {
             "allocation": settings['transient'].get('cluster.routing.allocation.enable', 'all')
         },

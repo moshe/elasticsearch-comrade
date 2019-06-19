@@ -18,12 +18,6 @@
       item-value="value"
       label="Refresh Every"
     />
-    <v-btn icon flat style="display:inline-block">
-      <v-icon>refresh</v-icon>
-    </v-btn>
-    <v-btn icon flat style="display:inline-block">
-      <v-icon>account_circle</v-icon>
-    </v-btn>
   </span>
 </template>
 

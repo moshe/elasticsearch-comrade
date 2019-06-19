@@ -1,6 +1,6 @@
 export const clusterStatus = {
-  red: "Red",
-  green: "Green",
-  yellow: "Yellow",
-  loading: "Loading"
+  red: "red",
+  green: "green",
+  yellow: "yellow",
+  loading: "loading"
 };
