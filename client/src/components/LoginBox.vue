@@ -3,7 +3,7 @@
     <v-flex>
       <div class="cluster-name">
         <status-dot :status="cluster.status" />
-        {{ cluster.name }}
+        {{ clusterName }}
       </div>
     </v-flex>
     <v-flex>
@@ -46,7 +46,7 @@ export default {
   components: { StatusDot },
   data() {
     return {
-      cluster: { versions: [], docCount: 0 }
+      cluster: { versions: [], docCount: 0, status: "loading" }
     };
   },
   async created() {

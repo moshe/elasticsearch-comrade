@@ -7,7 +7,11 @@
     <v-toolbar app>
       <v-toolbar-side-icon @click="drawer = true" />
       <v-toolbar-title class="headline text-uppercase">
-        <status-dot :status="this.cluster.clusterStatus" class="mr-3" />
+        <status-dot
+          v-if="connectedCluster"
+          :status="this.cluster.clusterStatus"
+          class="mr-3"
+        />
         <span @click="$router.push('/')" style="cursor: pointer">
           <span class="font-weight-bold">Elasticsearch</span>
           <span class="font-weight-light">ops</span>

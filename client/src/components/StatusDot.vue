@@ -1,5 +1,8 @@
 <template>
-  <div class="dot" v-bind:style="{ backgroundColor: color }"></div>
+  <span>
+    <v-progress-circular v-if="isLoading" :indeterminate="true" />
+    <div v-else class="dot" v-bind:style="{ backgroundColor: color }"></div>
+  </span>
 </template>
 
 <script>
@@ -13,6 +16,9 @@ export default {
     }
   },
   computed: {
+    isLoading() {
+      return this.status === clusterStatus.loading;
+    },
     color() {
       if (this.status === clusterStatus.green) {
         return "green";
@@ -22,9 +28,6 @@ export default {
       }
       if (this.status === clusterStatus.red) {
         return "red";
-      }
-      if (this.status === clusterStatus.loading) {
-        return "gray";
       }
       throw new Error(`Unknown cluster status ${this.status}`);
     }
