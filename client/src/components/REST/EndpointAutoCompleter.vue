@@ -45,7 +45,6 @@ export default {
   },
   methods: {
     onChange(selected) {
-      this.$refs.filter.blur();
       if (typeof selected === "string") {
         this.$emit("change", {
           path: selected
