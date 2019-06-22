@@ -19,7 +19,6 @@
       </v-toolbar-title>
       <v-spacer />
       <refresh-selector />
-      <v-btn icon flat><v-icon>refresh</v-icon></v-btn>
       <v-btn icon flat @click="selectCluster(null)">
         <v-icon>logout</v-icon>
       </v-btn>
