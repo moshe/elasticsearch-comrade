@@ -12,6 +12,7 @@ export default new Vuex.Store({
     shardsMarkedForRelocation: [],
     nodes: [],
     indices: {},
+    errorBarContent: {},
     cluster: {
       numberOfDocs: 0,
       numOfIndices: 0,
@@ -75,6 +76,12 @@ export default new Vuex.Store({
     },
     setRefreshEnabled(state, data) {
       state.settingsRefreshEnabled = data;
+    },
+    setErrorBarContent(state, data) {
+      state.errorBarContent = data;
+    },
+    clearErrorBarContent(state) {
+      state.errorBarContent = {};
     }
   },
   actions: {

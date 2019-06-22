@@ -1,6 +1,7 @@
 <template>
   <v-app dark>
     <json-modal />
+    <error-bar />
     <v-navigation-drawer v-model="drawer" absolute temporary>
       <drawer-content />
     </v-navigation-drawer>
@@ -44,6 +45,7 @@
 import { mapActions, mapState, mapMutations } from "vuex";
 import StatusDot from "./components/StatusDot.vue";
 import JsonModal from "./components/Modals/JsonModal.vue";
+import ErrorBar from "./components/Modals/ErrorBar.vue";
 import DrawerContent from "./components/Navigation/DrawerContent.vue";
 import RefreshSelector from "./components/RefreshSelector.vue";
 import Login from "./components/Login.vue";
@@ -55,7 +57,8 @@ export default {
     JsonModal,
     StatusDot,
     RefreshSelector,
-    Login
+    Login,
+    ErrorBar
   },
   async created() {
     await this.updateData();
