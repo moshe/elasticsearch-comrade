@@ -1,5 +1,5 @@
 <template>
-  <v-layout>
+  <v-layout id="snapshots-view">
     <v-flex xs6>
       <div style="font-size: 25px" class="mb-2">
         Snapshots
@@ -47,10 +47,66 @@
         </template>
       </v-data-table>
     </v-flex>
-    <v-flex style="margin-left: 10px">
+    <v-flex xs6 style="margin-left: 10px">
       <div style="font-size: 25px" class="mb-2">
         Restore
       </div>
+      <div style="font-size: 18px" class="mb-2">Restore Options</div>
+      <v-layout>
+        <v-flex class="pr-3" style="flex:1">
+          <v-text-field solo label="Rename Pattern" />
+        </v-flex>
+        <v-flex class="pr-3" style="flex:1">
+          <v-text-field solo label="Rename Replacement" />
+        </v-flex>
+      </v-layout>
+
+      <v-checkbox>
+        <template v-slot:label>
+          <v-tooltip bottom max-width="400px">
+            <template v-slot:activator="{ on }">
+              <div v-on="on">Ignore unavailable indices</div>
+            </template>
+            <span>{{ docs.ignoreUnavailable }} </span>
+          </v-tooltip>
+        </template>
+      </v-checkbox>
+
+      <v-checkbox>
+        <template v-slot:label>
+          <v-tooltip bottom max-width="400px">
+            <template v-slot:activator="{ on }">
+              <div v-on="on">Include global state</div>
+            </template>
+            <span>{{ docs.includeGlobalState }} </span>
+          </v-tooltip>
+        </template>
+      </v-checkbox>
+
+      <v-checkbox>
+        <template v-slot:label>
+          <v-tooltip bottom max-width="400px">
+            <template v-slot:activator="{ on }">
+              <div v-on="on">Include aliases</div>
+            </template>
+            <span>{{ docs.includeAliases }} </span>
+          </v-tooltip>
+        </template>
+      </v-checkbox>
+
+      <v-checkbox>
+        <template v-slot:label>
+          <v-tooltip bottom max-width="400px">
+            <template v-slot:activator="{ on }">
+              <div v-on="on">Partial</div>
+            </template>
+            <span>{{ docs.partial }} </span>
+          </v-tooltip>
+        </template>
+      </v-checkbox>
+      <div style="font-size: 18px" class="mt-3">Choose indices</div>
+      <index-selector />
+      <v-btn color="success">Restore</v-btn>
     </v-flex>
   </v-layout>
 </template>
@@ -58,8 +114,10 @@
 <script>
 import snapshotApis from "../mixins/snapshotApis";
 import { mapState } from "vuex";
+import IndexSelector from "../components/Snapshots/IndexSelector.vue";
 export default {
   mixins: [snapshotApis],
+  components: { IndexSelector },
   computed: {
     ...mapState(["settingsRefreshEvery", "settingsRefreshEnabled"])
   },
@@ -87,6 +145,18 @@ export default {
         { text: "Took", value: "duration_in_millis" },
         { text: "Actions", value: "duration_in_millis" }
       ],
+      docs: {
+        // https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-snapshots.html#_partial_restore
+        partial:
+          "By default, the entire restore operation will fail if one or more indices participating in the operation don’t have snapshots of all shards available. It can occur if some shards failed to snapshot for example. It is still possible to restore such indices by setting partial to true. Please note, that only successfully snapshotted shards will be restored in this case and all missing shards will be recreated empty.",
+        // https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-snapshots.html#_restore
+        includeAliases:
+          "Set include_aliases to false to prevent aliases from being restored together with associated indices",
+        ignoreUnavailable:
+          "The snapshot request also supports the ignore_unavailable option. Setting it to true will cause indices that do not exist to be ignored during snapshot creation. By default, when ignore_unavailable option is not set and an index is missing the snapshot request will fail. By setting include_global_state to false it’s possible to prevent the cluster global state to be stored as part of the snapshot. By default, the entire snapshot will fail if one or more indices participating in the snapshot don’t have all primary shards available. This behaviour can be changed by setting partial to true.",
+        includeGlobalState:
+          "By setting include_global_state to false it’s possible to prevent the cluster global state to be stored as part of the snapshot. By default, the entire snapshot will fail if one or more indices participating in the snapshot don’t have all primary shards available. This behaviour can be changed by setting partial to true."
+      },
       repos: [],
       snapshots: []
     };
@@ -95,28 +165,43 @@ export default {
 </script>
 
 <style>
-table.v-table tbody td {
+#snapshots-view table.v-table tbody td {
   padding: 0 !important;
   padding-left: 5px !important;
 }
-table.v-table thead th {
+#snapshots-view table.v-table thead th {
   padding: 0 !important;
   padding-left: 5px !important;
 }
-table.v-table tbody td {
+#snapshots-view table.v-table tbody td {
   height: 24px;
   line-height: 24px;
   text-align: left;
 }
 
-table.v-table thead th {
+#snapshots-view table.v-table thead th {
   height: 50px;
   line-height: 50px;
   font-size: 14px;
   text-align: center;
 }
 
-.v-btn--icon.v-btn--small {
+#snapshots-view .v-btn--icon.v-btn--small {
   margin: 0;
+}
+
+#snapshots-view .v-input--selection-controls {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+#snapshots-view
+  .v-input--selection-controls:not(.v-input--hide-details)
+  .v-input__slot {
+  margin-bottom: 0;
+}
+
+#snapshots-view .v-messages {
+  min-height: 0px;
 }
 </style>

@@ -4,7 +4,7 @@ import Home from "./Views/Home.vue";
 import RESTView from "./Views/RESTView.vue";
 import CreateAliasesView from "./Views/AliasesView.vue";
 import TasksView from "./Views/TasksView.vue";
-// import SnapshotsView from "./Views/SnapshotsView.vue";
+import SnapshotsView from "./Views/SnapshotsView.vue";
 Vue.use(Router);
 
 export default new Router({
@@ -31,11 +31,11 @@ export default new Router({
       nodeName: "tasks",
       component: TasksView
     },
-    // {
-    //   path: "/snapshots",
-    //   nodeName: "snapshots",
-    //   component: SnapshotsView
-    // },
+    {
+      path: "/snapshots",
+      nodeName: "snapshots",
+      component: SnapshotsView
+    },
     {
       path: "/about",
       nodeName: "about",
