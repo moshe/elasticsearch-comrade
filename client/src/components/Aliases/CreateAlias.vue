@@ -2,9 +2,7 @@
   <div>
     <v-layout column>
       <v-flex>
-        <div style="font-size: 25px" class="mb-2">
-          Create New Alias
-        </div>
+        <div style="font-size: 25px" class="mb-2">Create New Alias</div>
       </v-flex>
       <v-layout>
         <v-flex class="pr-3" style="flex:1">
@@ -24,9 +22,7 @@
 
     <v-layout column>
       <v-flex>
-        <div style="font-size: 18px" class="mb-2">
-          Routing options
-        </div>
+        <div style="font-size: 18px" class="mb-2">Routing options</div>
       </v-flex>
       <v-layout>
         <v-flex class="pr-3" style="flex:1">
@@ -39,9 +35,7 @@
     </v-layout>
     <v-layout column>
       <v-flex>
-        <div style="font-size: 18px">
-          Filter
-        </div>
+        <div style="font-size: 18px">Filter</div>
       </v-flex>
       <v-layout>
         <v-flex class="pr-3" style="flex:1">
@@ -53,8 +47,9 @@
       color="success"
       @click="submit"
       :disabled="!(selectedIndices.length && aliasName)"
-      >Add</v-btn
     >
+      Add
+    </v-btn>
   </div>
 </template>
 
