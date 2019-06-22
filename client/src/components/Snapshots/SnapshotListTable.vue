@@ -37,7 +37,7 @@ export default {
         { text: "State", value: "state" },
         { text: "Time", value: "start_time" },
         { text: "Took", value: "duration_in_millis" },
-        { text: "Actions", value: "duration_in_millis" }
+        { text: "", value: "duration_in_millis", sortable: false }
       ]
     };
   }
