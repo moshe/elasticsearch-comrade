@@ -1,15 +1,16 @@
 <template>
   <v-layout id="snapshots-view">
-    <v-flex xs6>
+    <v-flex xs6 class="pr-3">
       <div style="font-size: 25px" class="mb-2">
         Snapshots
       </div>
       <v-combobox
         :items="repos"
         clearable
-        label="Repository"
+        label="Select repository"
         item-text="id"
         @change="repo => loadRepo(repo.id)"
+        class="mb-2"
       >
         <template v-slot:item="{ index, item }">
           <v-list-tile-content>
@@ -22,32 +23,9 @@
           </v-list-tile-action>
         </template>
       </v-combobox>
-      <v-data-table
-        :headers="headers"
-        :items="snapshots"
-        class="elevation-1"
-        item-key="id"
-        :rows-per-page-items="[30, 100, 200]"
-      >
-        <template v-slot:items="props">
-          <tr>
-            <td>{{ props.item.snapshot }}</td>
-            <td>{{ props.item.state }}</td>
-            <td>{{ props.item.start_time.split(":")[0] }}</td>
-            <td>{{ parseInt(props.item.duration_in_millis / 1000) }}</td>
-            <td>
-              <v-btn flat icon small>
-                <v-icon small>restore</v-icon>
-              </v-btn>
-              <v-btn flat icon small>
-                <v-icon small>clear</v-icon>
-              </v-btn>
-            </td>
-          </tr>
-        </template>
-      </v-data-table>
+      <snapshot-list-table :snapshots="snapshots" @restore="selectSnapshot" />
     </v-flex>
-    <v-flex xs6 style="margin-left: 10px">
+    <v-flex xs6 class="pl-3">
       <div style="font-size: 25px" class="mb-2">
         Restore
       </div>
@@ -105,7 +83,11 @@
         </template>
       </v-checkbox>
       <div style="font-size: 18px" class="mt-3">Choose indices</div>
-      <index-selector />
+      <index-selector
+        :indices="selectedSnapshot.indices"
+        @select="selectIndices"
+      />
+
       <v-btn color="success">Restore</v-btn>
     </v-flex>
   </v-layout>
@@ -113,38 +95,27 @@
 
 <script>
 import snapshotApis from "../mixins/snapshotApis";
-import { mapState } from "vuex";
 import IndexSelector from "../components/Snapshots/IndexSelector.vue";
+import SnapshotListTable from "../components/Snapshots/SnapshotListTable.vue";
 export default {
   mixins: [snapshotApis],
-  components: { IndexSelector },
-  computed: {
-    ...mapState(["settingsRefreshEvery", "settingsRefreshEnabled"])
-  },
+  components: { IndexSelector, SnapshotListTable },
   async created() {
-    await this.updateData();
-    setTimeout(this.updateData, this.settingsRefreshEvery);
+    this.repos = await this.listRepos();
   },
   methods: {
     async loadRepo(repo) {
       this.snapshots = await this.listSnapshots(repo);
     },
-    async updateData() {
-      if (this.settingsRefreshEnabled) {
-        this.repos = await this.listRepos();
-      }
-      setTimeout(this.refreshTasks, this.settingsRefreshEvery);
+    selectSnapshot(snapshot) {
+      this.selectedSnapshot = snapshot;
+    },
+    selectIndices(indices) {
+      this.selectedIndices = indices;
     }
   },
   data() {
     return {
-      headers: [
-        { text: "Id", value: "snapshot" },
-        { text: "State", value: "state" },
-        { text: "Time", value: "start_time" },
-        { text: "Took", value: "duration_in_millis" },
-        { text: "Actions", value: "duration_in_millis" }
-      ],
       docs: {
         // https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-snapshots.html#_partial_restore
         partial:
@@ -158,34 +129,15 @@ export default {
           "By setting include_global_state to false it’s possible to prevent the cluster global state to be stored as part of the snapshot. By default, the entire snapshot will fail if one or more indices participating in the snapshot don’t have all primary shards available. This behaviour can be changed by setting partial to true."
       },
       repos: [],
-      snapshots: []
+      snapshots: [],
+      selectedIndices: [],
+      selectedSnapshot: { indices: [] }
     };
   }
 };
 </script>
 
 <style>
-#snapshots-view table.v-table tbody td {
-  padding: 0 !important;
-  padding-left: 5px !important;
-}
-#snapshots-view table.v-table thead th {
-  padding: 0 !important;
-  padding-left: 5px !important;
-}
-#snapshots-view table.v-table tbody td {
-  height: 24px;
-  line-height: 24px;
-  text-align: left;
-}
-
-#snapshots-view table.v-table thead th {
-  height: 50px;
-  line-height: 50px;
-  font-size: 14px;
-  text-align: center;
-}
-
 #snapshots-view .v-btn--icon.v-btn--small {
   margin: 0;
 }
