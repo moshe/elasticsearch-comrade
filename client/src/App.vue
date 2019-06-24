@@ -48,7 +48,7 @@ import JsonModal from "./components/Modals/JsonModal.vue";
 import ErrorBar from "./components/Modals/ErrorBar.vue";
 import DrawerContent from "./components/Navigation/DrawerContent.vue";
 import RefreshSelector from "./components/RefreshSelector.vue";
-import Login from "./components/Login.vue";
+import Login from "./components/Login/Login.vue";
 
 export default {
   name: "App",

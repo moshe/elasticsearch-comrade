@@ -33,8 +33,8 @@
 </template>
 
 <script>
-import { GET } from "../requests";
-import StatusDot from "./StatusDot.vue";
+import { GET } from "../../requests";
+import StatusDot from "../StatusDot.vue";
 
 export default {
   props: {

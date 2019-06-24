@@ -15,7 +15,7 @@
 
 <script>
 import { mapMutations } from "vuex";
-import { GET } from "../requests";
+import { GET } from "../../requests";
 import LoginBox from "./LoginBox.vue";
 
 export default {
@@ -27,9 +27,7 @@ export default {
     this.clusters = await GET("/api/v1/clients");
   },
   data() {
-    return {
-      clusters: []
-    };
+    return { clusters: [] };
   }
 };
 </script>
