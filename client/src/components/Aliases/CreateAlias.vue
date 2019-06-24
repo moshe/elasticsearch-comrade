@@ -58,9 +58,7 @@ import { mapState } from "vuex";
 import QueryEditor from "../REST/QueryEditor.vue";
 export default {
   components: { QueryEditor },
-  computed: {
-    ...mapState(["indices"])
-  },
+  computed: { ...mapState(["indices"]) },
   methods: {
     async submit() {
       this.filter = this.$refs.editor.getQuery();

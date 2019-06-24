@@ -65,4 +65,8 @@ export default {
   font-size: 14px;
   text-align: center;
 }
+
+.snapshots-list-table .v-btn--icon.v-btn--small {
+  margin: 0;
+}
 </style>

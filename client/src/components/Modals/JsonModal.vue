@@ -1,21 +1,14 @@
 <template>
-  <div>
-    <v-dialog v-model="jsonModalContent" width="50%">
-      <code style="width: 100%">
-        {{ jsonModalContent }}
-      </code>
-    </v-dialog>
-  </div>
+  <v-dialog v-model="jsonModalContent" width="50%">
+    <code style="width: 100%">{{ jsonModalContent }}</code>
+  </v-dialog>
 </template>
 
 <script>
 import { mapState } from "vuex";
 
 export default {
-  name: "JsonModal",
-  computed: {
-    ...mapState(["jsonModalContent"])
-  }
+  computed: { ...mapState(["jsonModalContent"]) }
 };
 </script>
 

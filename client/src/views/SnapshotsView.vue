@@ -1,10 +1,9 @@
 <template>
-  <v-layout id="snapshots-view">
+  <v-layout>
     <v-flex xs6 class="pr-3">
       <div style="font-size: 25px" class="mb-2">Snapshots</div>
       <v-combobox
         :items="repos"
-        clearable
         label="Select repository"
         item-text="id"
         @change="repo => loadRepo(repo.id)"
@@ -23,7 +22,7 @@
     </v-flex>
     <v-flex xs6 class="pl-3">
       <div style="font-size: 25px" class="mb-2">Restore</div>
-      <restore-form :snapshot="selectedSnapshot" />
+      <restore-form :snapshot="selectedSnapshot" :repo="selectedRepo" />
     </v-flex>
   </v-layout>
 </template>
@@ -41,6 +40,7 @@ export default {
   methods: {
     async loadRepo(repo) {
       this.snapshots = await this.listSnapshots(repo);
+      this.selectedRepo = repo;
     },
     selectSnapshot(snapshot) {
       this.selectedSnapshot = snapshot;
@@ -50,7 +50,8 @@ export default {
     return {
       repos: [],
       snapshots: [],
-      selectedSnapshot: { indices: [] }
+      selectedSnapshot: { indices: [] },
+      selectedRepo: null
     };
   }
 };
@@ -59,23 +60,5 @@ export default {
 <style>
 .checkbox-text {
   cursor: help;
-}
-#snapshots-view .v-btn--icon.v-btn--small {
-  margin: 0;
-}
-
-#snapshots-view .v-input--selection-controls {
-  margin-top: 0;
-  padding-top: 0;
-}
-
-#snapshots-view
-  .v-input--selection-controls:not(.v-input--hide-details)
-  .v-input__slot {
-  margin-bottom: 0;
-}
-
-#snapshots-view .v-messages {
-  min-height: 0px;
 }
 </style>

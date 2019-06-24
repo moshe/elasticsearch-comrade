@@ -32,11 +32,8 @@ import InfoBox from "./InfoBox.vue";
 import { mapState } from "vuex";
 
 export default {
-  name: "ClusterInfoBoxes",
   components: { InfoBox },
-  computed: {
-    ...mapState(["cluster"])
-  }
+  computed: { ...mapState(["cluster"]) }
 };
 </script>
 

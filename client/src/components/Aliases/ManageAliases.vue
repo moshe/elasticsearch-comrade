@@ -1,9 +1,7 @@
 <template>
   <div>
     <v-flex>
-      <div style="font-size: 25px" class="mb-2">
-        Manage Aliases
-      </div>
+      <div style="font-size: 25px" class="mb-2">Manage Aliases</div>
     </v-flex>
     <v-text-field solo label="Filter Aliases / Indices"></v-text-field>
     <div v-for="index in Object.keys(indices)" :key="index">
