@@ -11,11 +11,17 @@ export default {
     readOnly: {
       type: Boolean,
       default: false
+    },
+    init: {
+      type: Object
     }
   },
   mounted() {
     const container = this.$el;
     this.editor = new JSONEditor(container, this.options);
+    if (this.init) {
+      this.setContent(this.init);
+    }
     if (this.readOnly) {
       this.editor.aceEditor.setReadOnly(true);
     }

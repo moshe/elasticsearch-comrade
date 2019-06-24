@@ -1,4 +1,4 @@
-import { GET } from "../requests";
+import { GET, POST } from "../requests";
 
 export default {
   methods: {
@@ -13,6 +13,9 @@ export default {
       const response = await GET(`/api/v1/snapshot/${repo}/list`);
       this.$store.commit("stopLoading");
       return response;
+    },
+    async restore(repo, snapshot, body) {
+      await POST(`/api/v1/snapshot/${repo}/${snapshot}`, body);
     }
   }
 };
