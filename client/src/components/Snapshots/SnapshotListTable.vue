@@ -1,37 +1,56 @@
 <template>
-  <v-data-table
-    :headers="headers"
-    :items="snapshots"
-    class="elevation-1 snapshots-list-table"
-    item-key="id"
-    :rows-per-page-items="[30, 100, 200]"
-  >
-    <template v-slot:items="props">
-      <tr>
-        <td>{{ props.item.snapshot }}</td>
-        <td>{{ props.item.state }}</td>
-        <td>{{ props.item.start_time.split(":")[0] }}</td>
-        <td>{{ parseInt(props.item.duration_in_millis / 1000) }}</td>
-        <td>
-          <v-btn flat icon small @click="$emit('restore', props.item)">
-            <v-icon small>settings_backup_restore</v-icon>
-          </v-btn>
-        </td>
-      </tr>
-    </template>
-  </v-data-table>
+  <div>
+    <v-dialog v-model="showDialog" width="60%">
+      <restore-form :repo="repo" :snapshot="snapshot" />
+    </v-dialog>
+    <v-data-table
+      :headers="headers"
+      :items="snapshots"
+      class="elevation-1 snapshots-list-table"
+      item-key="id"
+      :rows-per-page-items="[30, 100, 200]"
+    >
+      <template v-slot:items="props">
+        <tr>
+          <td>{{ props.item.snapshot }}</td>
+          <td>{{ props.item.state }}</td>
+          <td>{{ props.item.start_time.split(":")[0] }}</td>
+          <td>{{ parseInt(props.item.duration_in_millis / 1000) }}</td>
+          <td>
+            <v-btn flat icon small @click="showRestoreDialog(props.item)">
+              <v-icon small>settings_backup_restore</v-icon>
+            </v-btn>
+          </td>
+        </tr>
+      </template>
+    </v-data-table>
+  </div>
 </template>
 
 <script>
+import RestoreForm from "./RestoreForm.vue";
 export default {
   props: {
     snapshots: {
       type: Array,
       required: true
+    },
+    repo: {
+      type: String,
+      required: true
+    }
+  },
+  components: { RestoreForm },
+  methods: {
+    showRestoreDialog(snapshot) {
+      this.snapshot = snapshot;
+      this.showDialog = true;
     }
   },
   data() {
     return {
+      showDialog: false,
+      snapshot: { indices: [] },
       headers: [
         { text: "Id", value: "snapshot" },
         { text: "State", value: "state" },

@@ -1,54 +1,66 @@
 <template>
-  <div class="restore-form">
-    <v-layout>
-      <v-flex class="pr-3" style="flex:1">
-        <v-text-field
-          :disabled="!snapshot.snapshot"
-          v-model="renamePattern"
-          label="Rename Pattern"
-          placeholder="index_(.+)"
-        />
-      </v-flex>
-      <v-flex class="pr-3" style="flex:1">
-        <v-text-field
-          :disabled="!snapshot.snapshot"
-          v-model="renameReplacement"
-          label="Rename Replacement"
-          placeholder="restored_index_$1"
-        />
-      </v-flex>
-    </v-layout>
-    <div style="font-size: 18px" class="mb-2 mt-3">Restore Options</div>
-    <v-checkbox
-      v-for="option in booleanOptions"
-      :key="option.title"
-      v-model="option.value"
-      :disabled="!snapshot.snapshot"
-    >
-      <template v-slot:label>
-        <v-tooltip bottom max-width="400px">
-          <template v-slot:activator="{ on }">
-            <div v-on="on" class="checkbox-text">{{ option.title }}</div>
-          </template>
-          <span>{{ option.docs }} </span>
-        </v-tooltip>
-      </template>
-    </v-checkbox>
-    <div style="font-size: 18px" class="mt-3">Choose indices</div>
-    <index-selector
-      :indices="snapshot.indices"
-      :selected.sync="selectedIndices"
-    />
-    <div style="font-size: 18px" class="mt-3">Override index Settings</div>
-    <query-editor ref="editor" :init="{ 'index.number_of_replicas': 0 }" />
-    <v-btn
-      color="success"
-      @click="onRestore"
-      :disabled="!snapshot.snapshot || selectedIndices.length === 0"
-    >
-      Restore
-    </v-btn>
-  </div>
+  <v-card>
+    <v-card-title class="headline green lighten-2" primary-title>
+      Restore from snapshot
+    </v-card-title>
+
+    <v-card-text class="restore-form" v-if="repo">
+      <v-layout>
+        <v-flex class="pr-3" style="flex:1">
+          <v-text-field
+            :disabled="!snapshot.snapshot"
+            v-model="renamePattern"
+            label="Rename Pattern"
+            placeholder="index_(.+)"
+          />
+        </v-flex>
+        <v-flex class="pr-3" style="flex:1">
+          <v-text-field
+            :disabled="!snapshot.snapshot"
+            v-model="renameReplacement"
+            label="Rename Replacement"
+            placeholder="restored_index_$1"
+          />
+        </v-flex>
+      </v-layout>
+      <div style="font-size: 18px" class="mb-2 mt-3">Restore Options</div>
+      <v-checkbox
+        v-for="option in booleanOptions"
+        :key="option.title"
+        v-model="option.value"
+        :disabled="!snapshot.snapshot"
+      >
+        <template v-slot:label>
+          <v-tooltip bottom max-width="400px">
+            <template v-slot:activator="{ on }">
+              <div v-on="on" class="checkbox-text">{{ option.title }}</div>
+            </template>
+            <span>{{ option.docs }} </span>
+          </v-tooltip>
+        </template>
+      </v-checkbox>
+      <div style="font-size: 18px" class="mt-3">Choose indices</div>
+      <index-selector
+        :indices="snapshot.indices"
+        :selected.sync="selectedIndices"
+      />
+      <div style="font-size: 18px" class="mt-3">Override index Settings</div>
+      <query-editor ref="editor" :init="{ 'index.number_of_replicas': 0 }" />
+    </v-card-text>
+
+    <v-divider></v-divider>
+
+    <v-card-actions>
+      <v-spacer></v-spacer>
+      <v-btn
+        color="success"
+        @click="onRestore"
+        :disabled="!snapshot.snapshot || selectedIndices.length === 0"
+      >
+        Restore
+      </v-btn>
+    </v-card-actions>
+  </v-card>
 </template>
 
 <script>
