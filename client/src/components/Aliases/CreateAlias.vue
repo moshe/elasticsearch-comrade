@@ -55,7 +55,7 @@
 
 <script>
 import { mapState } from "vuex";
-import QueryEditor from "../REST/QueryEditor.vue";
+import QueryEditor from "../Base/QueryEditor.vue";
 export default {
   components: { QueryEditor },
   computed: { ...mapState(["indices"]) },

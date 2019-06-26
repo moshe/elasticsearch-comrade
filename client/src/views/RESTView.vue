@@ -57,7 +57,7 @@
 
 <script>
 import RESTApis from "../mixins/RESTApis";
-import QueryEditor from "../components/REST/QueryEditor.vue";
+import QueryEditor from "../components/Base/QueryEditor.vue";
 import RESTButtons from "../components/REST/RESTButtons.vue";
 import EndpointAutoCompleter from "../components/REST/EndpointAutoCompleter.vue";
 import QueryHistory from "../components/REST/QueryHistory.vue";

@@ -54,7 +54,7 @@
 <script>
 import IndexSelector from "./IndexSelector.vue";
 import snapshotApis from "../../mixins/snapshotApis";
-import QueryEditor from "../REST/QueryEditor.vue";
+import QueryEditor from "../Base/QueryEditor.vue";
 export default {
   props: ["snapshot", "repo"],
   components: { IndexSelector, QueryEditor },
