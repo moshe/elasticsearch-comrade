@@ -14,7 +14,7 @@
         <td>{{ parseInt(props.item.duration_in_millis / 1000) }}</td>
         <td>
           <v-btn flat icon small @click="$emit('restore', props.item)">
-            <v-icon small>arrow_downward</v-icon>
+            <v-icon small>settings_backup_restore</v-icon>
           </v-btn>
         </td>
       </tr>
@@ -37,7 +37,7 @@ export default {
         { text: "State", value: "state" },
         { text: "Time", value: "start_time" },
         { text: "Took", value: "duration_in_millis" },
-        { text: "", value: "duration_in_millis", sortable: false }
+        { text: "Restore", value: "duration_in_millis", sortable: false }
       ]
     };
   }
