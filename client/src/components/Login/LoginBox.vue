@@ -2,7 +2,7 @@
   <v-layout class="elevation-10 cluster" column>
     <v-flex>
       <div class="cluster-name">
-        <status-dot :status="cluster.status" />
+        <status-dot :status="cluster.status" :size="20" />
         {{ clusterName }}
       </div>
     </v-flex>
@@ -50,7 +50,7 @@ export default {
     };
   },
   async created() {
-    this.cluster = await GET(`/api/v1/cluster/binfo/${this.clusterName}`);
+    this.cluster = await GET(`/api/v1/cluster/info/${this.clusterName}`);
   }
 };
 </script>

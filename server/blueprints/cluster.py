@@ -29,10 +29,20 @@ async def set_allocation(request, operation):
     return json({"status": "ok"})
 
 
-@cluster_bp.route('/binfo/<cluster_name>')
+@cluster_bp.route('/info/<cluster_name>')
 async def get_cluster_info(request, cluster_name):
     assert cluster_name in clients()
-    client = get_client(None, cluster_name)
+    try:
+        client = get_client(None, cluster_name)
+        await client.ping()
+    except Exception:
+        return json({
+            "name": cluster_name,
+            "status": "error",
+            "versions": [],
+            "docCount": 0
+        })
+
     response = await client.cluster.stats()
     try:
         jvm = 'mixed' if len(response['nodes']['jvm']['versions']) > 1 else response['nodes']['jvm']['versions'][0]['vm_name']
