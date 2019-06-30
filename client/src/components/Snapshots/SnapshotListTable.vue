@@ -1,5 +1,6 @@
 <template>
   <div>
+    <repo-selector :repos="repos" @select="loadRepo" />
     <v-dialog v-model="showDialog" width="60%">
       <restore-form :repo="repo" :snapshot="snapshot" />
     </v-dialog>
@@ -29,27 +30,36 @@
 
 <script>
 import RestoreForm from "./RestoreForm.vue";
+import RepoSelector from "./RepoSelector.vue";
+import snapshotApis from "../../mixins/snapshotApis";
+
 export default {
   props: {
-    snapshots: {
+    repos: {
       type: Array,
-      required: true
-    },
-    repo: {
-      type: String,
       required: true
     }
   },
-  components: { RestoreForm },
+  mixins: [snapshotApis],
+  components: { RestoreForm, RepoSelector },
   methods: {
     showRestoreDialog(snapshot) {
       this.snapshot = snapshot;
       this.showDialog = true;
+    },
+    async loadRepo(repo) {
+      if (!repo) {
+        return;
+      }
+      this.snapshots = await this.listSnapshots(repo);
+      this.repo = repo;
     }
   },
   data() {
     return {
       showDialog: false,
+      snapshots: [],
+      repo: "",
       snapshot: { indices: [] },
       headers: [
         { text: "Id", value: "snapshot" },
