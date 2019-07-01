@@ -19,12 +19,14 @@
         >
           <v-icon>{{ $vuetify.icons.prev }}</v-icon>
         </v-btn>
-        {{ page * perPage }} - {{ page * perPage + perPage }}
+        {{ page * perPage + 1 }} -
+        {{ Math.min(page * perPage + perPage, indices.length) }} /
+        {{ indices.length }}
         <v-btn
           flat
           icon
           @click="page++"
-          :disabled="page * perPage >= indices.length"
+          :disabled="(page + 1) * perPage >= indices.length"
         >
           <v-icon>{{ $vuetify.icons.next }}</v-icon>
         </v-btn>
@@ -120,6 +122,11 @@ export default {
       indexSearch: "",
       perPage: 5
     };
+  },
+  watch: {
+    indexSearch() {
+      this.page = 0;
+    }
   }
 };
 </script>
