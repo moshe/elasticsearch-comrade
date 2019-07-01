@@ -14,16 +14,16 @@
         </v-list-tile>
       </template>
       <template v-slot:selection="{ item, index }">
-        <v-chip v-if="selected.length === indices.length && index === 0">
+        <v-chip v-if="value.length === indices.length && index === 0">
           <span>ALL</span>
         </v-chip>
         <span
-          v-if="selected.length === indices.length && index === 0"
+          v-if="value.length === indices.length && index === 0"
           class="caption"
         >
-          ({{ selected.length }} indices)
+          ({{ value.length }} indices)
         </span>
-        <v-chip v-else-if="selected.length !== indices.length">
+        <v-chip v-else-if="value.length !== indices.length">
           <span>{{ item }}</span>
         </v-chip>
       </template>
@@ -38,7 +38,7 @@ export default {
       type: Array,
       required: true
     },
-    selected: {
+    value: {
       type: Array,
       required: true
     }
@@ -46,17 +46,17 @@ export default {
   computed: {
     inner: {
       get() {
-        return this.selected;
+        return this.value;
       },
       set(x) {
-        this.$emit("update:selected", x);
+        this.$emit("input", x);
       }
     },
     allSelected() {
-      return this.selected.length === this.indices.length;
+      return this.value.length === this.indices.length;
     },
     likesSomeFruit() {
-      return this.selected.length > 0 && !this.allSelected;
+      return this.value.length > 0 && !this.allSelected;
     },
     icon() {
       if (this.allSelected) return "check_box";

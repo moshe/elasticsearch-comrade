@@ -1,6 +1,6 @@
 <template>
   <v-layout>
-    <v-flex xs7 class="pr-3">
+    <v-flex xs8 class="pr-3">
       <div style="font-size: 25px" class="mb-2">Snapshots</div>
       <snapshot-list-table :repos="repos" />
     </v-flex>

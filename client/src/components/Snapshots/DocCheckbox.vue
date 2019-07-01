@@ -1,9 +1,10 @@
 <template>
   <v-checkbox class="doc-checkbox" v-model="internalValue">
     <template v-slot:label>
+      {{ label }}
       <v-tooltip bottom max-width="400px">
         <template v-slot:activator="{ on }">
-          <div v-on="on" class="checkbox-text">{{ label }}</div>
+          <v-icon size="14" class="ml-1" v-on="on">help_outline</v-icon>
         </template>
         <span>{{ doc }}</span>
       </v-tooltip>
@@ -43,22 +44,7 @@ export default {
 </script>
 
 <style>
-.doc-checkbox .checkbox-text {
-  cursor: help;
-}
-.doc-checkbox .restore-form .v-input--selection-controls {
-  margin-top: 0;
-  padding-top: 0;
-}
-
-.doc-checkbox
-  .restore-form
-  .v-input--selection-controls:not(.v-input--hide-details)
-  .v-input__slot {
-  margin-bottom: 0;
-}
-
-.doc-checkbox .restore-form .v-messages {
+.doc-checkbox .v-messages {
   min-height: 0px;
 }
 
@@ -69,9 +55,5 @@ export default {
 
 .v-input--selection-controls:not(.v-input--hide-details) .v-input__slot {
   margin-bottom: 0;
-}
-
-.doc-checkbox .v-messages {
-  min-height: 0px;
 }
 </style>

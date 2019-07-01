@@ -30,10 +30,7 @@
         :label="option.title"
       />
       <div style="font-size: 18px" class="mt-3">Choose indices</div>
-      <index-selector
-        :indices="snapshot.indices"
-        :selected.sync="selectedIndices"
-      />
+      <index-selector :indices="snapshot.indices" v-model="selectedIndices" />
       <div style="font-size: 18px" class="mt-3">Override index Settings</div>
       <query-editor ref="editor" :init="{ 'index.number_of_replicas': 0 }" />
     </div>
