@@ -36,17 +36,26 @@
       <transition name="slide-fade">
         <v-flex v-show="panes.includes('preview')" style="flex: 10">
           <v-tabs color="#303030">
-            <v-tab>
-              Response
-            </v-tab>
-            <v-tab>
-              History
-            </v-tab>
+            <v-tab>Response</v-tab>
+            <v-tab>History</v-tab>
+            <v-tab>Starred</v-tab>
             <v-tab-item>
               <query-editor style="height: 800px;" ref="preview" read-only />
             </v-tab-item>
             <v-tab-item>
-              <query-history @query="setQueryFromHistory" ref="history" />
+              <query-history
+                @query="setQueryFromHistory"
+                ref="history"
+                storeName="history"
+                @star="x => $refs.starred.addEntry(x)"
+              />
+            </v-tab-item>
+            <v-tab-item>
+              <query-history
+                @query="setQueryFromHistory"
+                ref="starred"
+                storeName="starred"
+              />
             </v-tab-item>
           </v-tabs>
         </v-flex>
@@ -84,11 +93,12 @@ export default {
       this.$refs.editor.setContent(template || {});
     },
     async onClick() {
-      this.$refs.history.addEntry(
-        this.method,
-        this.path,
-        this.$refs.editor.getQuery()
-      );
+      this.$refs.history.addEntry({
+        method: this.method,
+        path: this.path,
+        query: this.$refs.editor.getQuery(),
+        date: Date.now()
+      });
       const resp = await this.sendQuery(
         this.method,
         this.path,

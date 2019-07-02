@@ -1,7 +1,7 @@
 <template>
   <v-data-table
     :headers="headers"
-    :items="history"
+    :items="items"
     class="elevation-1 mt-3 query-history"
     :rows-per-page-items="[30, 100, 200]"
     :pagination.sync="pagination"
@@ -12,23 +12,38 @@
       <td>{{ fromNow(props.item.date) }}</td>
       <td>{{ props.item.query }}</td>
       <td>
-        <v-icon small class="mr-2" @click="removeQuery(props.item)">
+        <v-icon small @click="removeQuery(props.item)">
           clear
         </v-icon>
-        <v-icon small @click="setQuery(props.item)">edit</v-icon>
+        <v-icon small class="ml-2" @click="setQuery(props.item)">edit</v-icon>
+        <v-icon
+          small
+          color="yellow"
+          class="ml-2"
+          @click="$emit('star', props.item)"
+          v-if="storeName !== 'starred'"
+        >
+          {{ icon(props.item) }}
+        </v-icon>
       </td>
     </template>
   </v-data-table>
 </template>
 
 <script>
-const HISTORY_MAX_SIZE = 1000;
+const MAX_SIZE = 1000;
 import formatDistance from "date-fns/distance_in_words_to_now";
 
 export default {
+  props: {
+    storeName: {
+      type: String,
+      required: true
+    }
+  },
   mounted() {
-    if (localStorage.queryHistory) {
-      this.history = JSON.parse(localStorage.queryHistory);
+    if (localStorage[this.storeName]) {
+      this.items = JSON.parse(localStorage[this.storeName]);
     }
   },
   data() {
@@ -41,7 +56,7 @@ export default {
         { text: "Query", value: "query" },
         { text: "Actions", value: "path" }
       ],
-      history: []
+      items: []
     };
   },
   methods: {
@@ -51,25 +66,34 @@ export default {
     fromNow(t) {
       return formatDistance(t, { addSuffix: true });
     },
-    addEntry(method, path, query) {
-      const date = Date.now();
-      this.history.push({ method, query, path, date });
-      if (this.history.length > HISTORY_MAX_SIZE) {
-        this.history.splice(-(this.history.length - HISTORY_MAX_SIZE));
+    addEntry({ method, path, query, date }) {
+      this.items.push({ method, query, path, date });
+      if (this.items.length > MAX_SIZE) {
+        this.items.splice(-(this.items.length - MAX_SIZE));
       }
-      localStorage.queryHistory = JSON.stringify(this.history);
+      localStorage[this.storeName] = JSON.stringify(this.items);
     },
     removeQuery(item) {
-      this.history = this.history.filter(
+      this.items = this.items.filter(
         x =>
           !(
             item.method === x.method &&
             item.path === x.path &&
-            item.query === x.query &&
+            JSON.stringify(item.query) === JSON.stringify(x.query) &&
             item.date === x.date
           )
       );
-      localStorage.queryHistory = JSON.stringify(this.history);
+      localStorage[this.storeName] = JSON.stringify(this.items);
+    },
+    icon(item) {
+      const matches = JSON.parse(localStorage["starred"] || "[]").filter(
+        x =>
+          item.method === x.method &&
+          item.path === x.path &&
+          JSON.stringify(item.query) === JSON.stringify(x.query) &&
+          item.date === x.date
+      );
+      return matches.length === 0 ? "star_border" : "start";
     }
   }
 };
