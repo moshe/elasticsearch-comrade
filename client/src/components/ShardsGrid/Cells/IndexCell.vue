@@ -1,4 +1,4 @@
-<template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
+<template>
   <v-layout wrap column class="index-cell">
     <v-flex>
       <v-menu offset-y style="display: inline-block">

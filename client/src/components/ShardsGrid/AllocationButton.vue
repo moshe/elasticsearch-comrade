@@ -1,4 +1,4 @@
-<template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
+<template>
   <v-menu offset-y>
     <template v-slot:activator="{ on }">
       <v-btn small color="#5AB1BB" v-on="on" :disabled="loading">
