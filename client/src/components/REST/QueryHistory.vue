@@ -10,16 +10,16 @@
       <td>{{ props.item.method }}</td>
       <td>{{ props.item.path }}</td>
       <td>{{ fromNow(props.item.date) }}</td>
-      <td>{{ props.item.query }}</td>
+      <td>{{ truncate(JSON.stringify(props.item.query), 50) }}</td>
       <td>
         <v-icon small @click="removeQuery(props.item)">
           clear
         </v-icon>
-        <v-icon small class="ml-2" @click="setQuery(props.item)">edit</v-icon>
+        <v-icon small class="ml-1" @click="setQuery(props.item)">edit</v-icon>
         <v-icon
           small
           color="yellow"
-          class="ml-2"
+          class="ml-1"
           @click="$emit('star', props.item)"
           v-if="storeName !== 'starred'"
         >
@@ -62,6 +62,11 @@ export default {
   methods: {
     setQuery(item) {
       this.$emit("query", item);
+    },
+    truncate(input, size) {
+      return input.length > size
+        ? `${input.substring(0, size - 4)} ...`
+        : input;
     },
     fromNow(t) {
       return formatDistance(t, { addSuffix: true });
