@@ -1,31 +1,30 @@
 <template>
-  <div>
-    <v-data-table
-      :headers="headers"
-      :items="history"
-      class="elevation-1 mt-3"
-      :rows-per-page-items="[30, 100, 200]"
-    >
-      <template v-slot:items="props">
-        <td>
-          <v-icon small class="mr-2" @click="removeQuery(props.item)">
-            clear
-          </v-icon>
-          <v-icon small @click="setQuery(props.item)">
-            edit
-          </v-icon>
-        </td>
-        <td>{{ props.item.method }}</td>
-        <td>{{ props.item.path }}</td>
-        <td>{{ props.item.date }}</td>
-        <td>{{ props.item.query }}</td>
-      </template>
-    </v-data-table>
-  </div>
+  <v-data-table
+    :headers="headers"
+    :items="history"
+    class="elevation-1 mt-3 query-history"
+    :rows-per-page-items="[30, 100, 200]"
+    :pagination.sync="pagination"
+  >
+    <template v-slot:items="props">
+      <td>{{ props.item.method }}</td>
+      <td>{{ props.item.path }}</td>
+      <td>{{ fromNow(props.item.date) }}</td>
+      <td>{{ props.item.query }}</td>
+      <td>
+        <v-icon small class="mr-2" @click="removeQuery(props.item)">
+          clear
+        </v-icon>
+        <v-icon small @click="setQuery(props.item)">edit</v-icon>
+      </td>
+    </template>
+  </v-data-table>
 </template>
 
 <script>
 const HISTORY_MAX_SIZE = 1000;
+import formatDistance from "date-fns/distance_in_words_to_now";
+
 export default {
   mounted() {
     if (localStorage.queryHistory) {
@@ -34,12 +33,13 @@ export default {
   },
   data() {
     return {
+      pagination: { descending: true, sortBy: "date" },
       headers: [
-        { text: "Actions", value: "path" },
         { text: "Method", value: "method" },
         { text: "Path", value: "path" },
         { text: "Date", value: "date" },
-        { text: "Query", value: "query" }
+        { text: "Query", value: "query" },
+        { text: "Actions", value: "path" }
       ],
       history: []
     };
@@ -47,6 +47,9 @@ export default {
   methods: {
     setQuery(item) {
       this.$emit("query", item);
+    },
+    fromNow(t) {
+      return formatDistance(t, { addSuffix: true });
     },
     addEntry(method, path, query) {
       const date = Date.now();
@@ -72,9 +75,25 @@ export default {
 };
 </script>
 
-<style scoped>
-table.v-table tbody td {
-  height: unset;
-  line-height: 36px;
+<style>
+.query-history table.v-table tbody td {
+  padding: 0 !important;
+  padding-left: 5px !important;
+}
+.query-history table.v-table thead th {
+  padding: 0 !important;
+  padding-left: 5px !important;
+}
+.query-history table.v-table tbody td {
+  height: 24px;
+  line-height: 24px;
+  text-align: left;
+}
+
+.query-history table.v-table thead th {
+  height: 50px;
+  line-height: 50px;
+  font-size: 14px;
+  text-align: center;
 }
 </style>
