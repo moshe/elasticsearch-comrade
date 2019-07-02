@@ -10,7 +10,7 @@
         @removeAction="removeAction"
       />
       <v-btn
-        color="primary"
+        color="success"
         :disabled="pendingActions.length == 0"
         @click="commit"
       >
