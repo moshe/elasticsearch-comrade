@@ -15,7 +15,10 @@ export default {
       return response;
     },
     async restore(repo, snapshot, body) {
-      await POST(`/api/v1/snapshot/${repo}/${snapshot}`, body);
+      await POST(`/api/v1/snapshot/restore/${repo}/${snapshot}`, body);
+    },
+    async createSnapshot(repo, snapshot, body) {
+      await POST(`/api/v1/snapshot/create/${repo}/${snapshot}`, body);
     }
   }
 };

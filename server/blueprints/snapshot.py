@@ -21,3 +21,17 @@ async def list_snaphosts(request, repo):
     client = get_client(request)
     resp = await client.snapshot.get(repo, '_all')
     return json(resp['snapshots'])
+
+
+@snapshot_bp.route('/create/<repo>/<snapshot>', methods=['POST'])
+async def create_snaphost(request, repo, snapshot):
+    client = get_client(request)
+    response = await client.snapshot.create(repo, snapshot, request.json)
+    return json(response)
+
+
+@snapshot_bp.route('/restore/<repo>/<snapshot>', methods=['POST'])
+async def restore(request, repo, snapshot):
+    client = get_client(request)
+    response = await client.snapshot.restore(repo, snapshot, request.json)
+    return json(response)
