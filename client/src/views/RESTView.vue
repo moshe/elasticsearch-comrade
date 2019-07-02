@@ -27,7 +27,11 @@
           style="flex: 10; margin-top:48px"
           v-show="panes.includes('editor')"
         >
-          <query-editor style="height: 800px;" ref="editor" />
+          <query-editor
+            style="height: 800px;"
+            ref="editor"
+            @execute="onClick"
+          />
         </v-flex>
       </transition>
       <v-flex shrink>

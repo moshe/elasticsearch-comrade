@@ -1,5 +1,5 @@
 <template>
-  <div />
+  <div v-on:keydown.enter="handleCmdEnter($event)" />
 </template>
 
 <script>
@@ -27,6 +27,11 @@ export default {
     }
   },
   methods: {
+    handleCmdEnter(e) {
+      if (e.ctrlKey || e.metaKey || e.altKey) {
+        this.$emit("execute");
+      }
+    },
     getQuery() {
       return this.editor.get();
     },
