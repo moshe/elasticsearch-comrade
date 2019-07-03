@@ -7,7 +7,7 @@
     <v-data-table
       :headers="headers"
       :items="snapshots"
-      class="elevation-1 snapshots-list-table"
+      class="elevation-1 small-table"
       item-key="id"
       :rows-per-page-items="[30, 100, 200]"
     >
@@ -73,29 +73,4 @@ export default {
 };
 </script>
 
-<style>
-.snapshots-list-table table.v-table tbody td {
-  padding: 0 !important;
-  padding-left: 5px !important;
-}
-.snapshots-list-table table.v-table thead th {
-  padding: 0 !important;
-  padding-left: 5px !important;
-}
-.snapshots-list-table table.v-table tbody td {
-  height: 24px;
-  line-height: 24px;
-  text-align: left;
-}
-
-.snapshots-list-table table.v-table thead th {
-  height: 50px;
-  line-height: 50px;
-  font-size: 14px;
-  text-align: center;
-}
-
-.snapshots-list-table .v-btn--icon.v-btn--small {
-  margin: 0;
-}
-</style>
+<style></style>

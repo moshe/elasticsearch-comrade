@@ -2,7 +2,7 @@
   <v-data-table
     :headers="headers"
     :items="items"
-    class="elevation-1 mt-3 query-history"
+    class="elevation-1 mt-3 small-table"
     :rows-per-page-items="[30, 100, 200]"
     :pagination.sync="pagination"
   >
@@ -104,25 +104,4 @@ export default {
 };
 </script>
 
-<style>
-.query-history table.v-table tbody td {
-  padding: 0 !important;
-  padding-left: 5px !important;
-}
-.query-history table.v-table thead th {
-  padding: 0 !important;
-  padding-left: 5px !important;
-}
-.query-history table.v-table tbody td {
-  height: 24px;
-  line-height: 24px;
-  text-align: left;
-}
-
-.query-history table.v-table thead th {
-  height: 50px;
-  line-height: 50px;
-  font-size: 14px;
-  text-align: center;
-}
-</style>
+<style></style>

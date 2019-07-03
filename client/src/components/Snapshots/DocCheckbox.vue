@@ -4,7 +4,9 @@
       {{ label }}
       <v-tooltip bottom max-width="400px">
         <template v-slot:activator="{ on }">
-          <v-icon size="14" class="ml-1" v-on="on">help_outline</v-icon>
+          <v-icon size="14" class="ml-1" v-on="on" color="secondary lighten-2">
+            help_outline
+          </v-icon>
         </template>
         <span>{{ doc }}</span>
       </v-tooltip>
