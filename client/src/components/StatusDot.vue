@@ -16,6 +16,7 @@
 
 <script>
 import { clusterStatus } from "../enums";
+import colors from "vuetify/es5/util/colors";
 
 export default {
   props: {
@@ -36,14 +37,12 @@ export default {
       return this.status === clusterStatus.error;
     },
     color() {
-      if (this.status === clusterStatus.green) {
-        return "green";
-      }
-      if (this.status === clusterStatus.yellow) {
-        return "yellow";
-      }
-      if (this.status === clusterStatus.red) {
-        return "red";
+      if (
+        [clusterStatus.red, clusterStatus.yellow, clusterStatus.green].indexOf(
+          this.status
+        ) !== -1
+      ) {
+        return colors[this.status].accent4;
       }
       throw new Error(`Unknown cluster status ${this.status}`);
     }
