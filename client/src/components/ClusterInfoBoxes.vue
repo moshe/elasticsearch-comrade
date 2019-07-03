@@ -1,27 +1,18 @@
 <template>
   <v-layout align-center justify-center row>
-    <v-flex>
-      <info-box class="mr-4" :text="`Indices: ${cluster.numOfIndices}`" />
+    <v-flex style="flex: 1" class="ma-2">
+      <info-box :text="`Indices: ${cluster.numOfIndices}`" />
     </v-flex>
-    <v-flex>
-      <info-box
-        class="mr-4"
-        :text="`Primary Shards: ${cluster.numOfPrimaryShards}`"
-      />
+    <v-flex style="flex: 1" class="ma-2">
+      <info-box :text="`Primary Shards: ${cluster.numOfPrimaryShards}`" />
     </v-flex>
-    <v-flex>
-      <info-box
-        class="mr-4"
-        :text="`Replica Shards: ${cluster.numOfReplicaShards}`"
-      />
+    <v-flex style="flex: 1" class="ma-2">
+      <info-box :text="`Replica Shards: ${cluster.numOfReplicaShards}`" />
     </v-flex>
-    <v-flex>
-      <info-box
-        class="mr-4"
-        :text="`Docs: ${cluster.numberOfDocs.toLocaleString()}`"
-      />
+    <v-flex style="flex: 1" class="ma-2">
+      <info-box :text="`Docs: ${cluster.numberOfDocs.toLocaleString()}`" />
     </v-flex>
-    <v-flex>
+    <v-flex style="flex: 1" class="ma-2">
       <info-box :text="`Nodes: ${cluster.numberOfNodes}`" />
     </v-flex>
   </v-layout>
