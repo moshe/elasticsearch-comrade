@@ -1,48 +1,25 @@
 <template>
   <v-list>
-    <v-list-tile to="/">
+    <v-list-tile v-for="page in pages" :key="page.to" :to="page.to">
       <v-list-tile-action>
-        <v-icon>home</v-icon>
+        <v-icon>{{ page.icon }}</v-icon>
       </v-list-tile-action>
-      <v-list-tile-title>Home</v-list-tile-title>
-    </v-list-tile>
-    <v-divider />
-
-    <v-list-tile to="/aliases">
-      <v-list-tile-action>
-        <v-icon>link</v-icon>
-      </v-list-tile-action>
-      <v-list-tile-title>Aliases</v-list-tile-title>
-    </v-list-tile>
-
-    <v-list-tile to="/rest">
-      <v-list-tile-action>
-        <v-icon>build</v-icon>
-      </v-list-tile-action>
-      <v-list-tile-title>REST</v-list-tile-title>
-    </v-list-tile>
-
-    <v-list-tile to="/tasks">
-      <v-list-tile-action>
-        <v-icon>perm_data_setting</v-icon>
-      </v-list-tile-action>
-      <v-list-tile-title>Tasks</v-list-tile-title>
-    </v-list-tile>
-
-    <v-list-tile to="/snapshots">
-      <v-list-tile-action>
-        <v-icon>backup</v-icon>
-      </v-list-tile-action>
-      <v-list-tile-title>Snapshots</v-list-tile-title>
+      <v-list-tile-title>{{ page.name }}</v-list-tile-title>
     </v-list-tile>
   </v-list>
 </template>
 
 <script>
 export default {
-  name: "DrawerContent",
   data: () => ({
-    admins: [["Management", "people_outline"], ["Settings", "settings"]]
+    pages: [
+      { to: "/", icon: "home", name: "Home" },
+      { to: "/aliases", icon: "link", name: "Aliases" },
+      { to: "/rest", icon: "build", name: "REST" },
+      { to: "/tasks", icon: "perm_data_setting", name: "Tasks" },
+      { to: "/snapshots", icon: "backup", name: "Snapshots" },
+      { to: "/repositories", icon: "storage", name: "Repositories" }
+    ]
   })
 };
 </script>
