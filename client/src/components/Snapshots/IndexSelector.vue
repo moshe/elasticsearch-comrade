@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-select v-model="inner" :items="indices" label="Select indices" multiple>
+    <v-select v-model="inner" :items="indices" label="Select indices*" multiple>
       <template v-slot:prepend-item>
         <v-list-tile ripple @click="toggle">
           <v-list-tile-action>

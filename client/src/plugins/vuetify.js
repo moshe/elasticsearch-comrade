@@ -6,6 +6,6 @@ import colors from "vuetify/es5/util/colors";
 Vue.use(Vuetify, {
   iconfont: "md",
   theme: {
-    primary: colors.green.accent1
+    primary2: colors.green.accent1
   }
 });

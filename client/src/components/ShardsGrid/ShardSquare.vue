@@ -16,7 +16,7 @@
           {{ id }}
         </div>
         <v-progress-linear
-          height="2px"
+          height="3px"
           v-model="progress"
           class="ma-0"
           color="white"
@@ -124,15 +124,15 @@ export default {
 }
 
 .primary-shard {
-  background-color: #689f38;
-  border: 1px solid #689f38;
+  background-color: #43a047;
+  border: 1px solid #43a047;
   color: white;
 }
 
 .replica-shard {
   background-color: #38524f;
   border: 1px solid #38524f;
-  color: #757575;
+  color: lightgray;
 }
 
 .marked {
@@ -146,6 +146,7 @@ export default {
 
 .unassigned-shard {
   background-color: gray;
+  border-color: gray;
   cursor: unset;
 }
 

@@ -11,8 +11,8 @@
         "
       >
         <div style="font-size:15px">
-          <v-btn flat icon small @click="handleRemoveIndex(index)">
-            <v-icon>clear</v-icon>
+          <v-btn flat icon small class="ma-0" @click="handleRemoveIndex(index)">
+            <v-icon size="18">clear</v-icon>
           </v-btn>
           {{ index }}
         </div>
@@ -35,7 +35,7 @@
         <div style="display: inline-block">
           <v-menu offset-y>
             <template v-slot:activator="{ on }">
-              <v-btn flat icon color="orange" v-on="on">
+              <v-btn flat icon color="orange" class="ma-0" v-on="on">
                 <v-icon>add</v-icon>
               </v-btn>
             </template>

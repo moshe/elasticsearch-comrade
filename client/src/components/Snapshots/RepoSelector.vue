@@ -11,7 +11,7 @@
         <v-chip dark label small>{{ item.id }} {{ item.location }} </v-chip>
       </v-list-tile-content>
       <v-list-tile-action>
-        <v-chip dark label small>{{ item.type }}</v-chip>
+        <v-chip dark label small color="success">{{ item.type.type }}</v-chip>
       </v-list-tile-action>
     </template>
   </v-combobox>

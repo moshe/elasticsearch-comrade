@@ -151,6 +151,11 @@ export default {
   cursor: pointer;
   text-align: left;
   color: white;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  white-space: -o-pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
 }
 
 .index-cell .v-chip--small {

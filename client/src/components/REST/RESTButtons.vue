@@ -6,9 +6,9 @@
       @click="toggle('editor')"
       v-if="!(show.length === 1 && show[0] === 'editor')"
     >
-      <v-icon v-if="show.length === 1 && show[0] === 'preview'"
-        >arrow_forward_ios</v-icon
-      >
+      <v-icon v-if="show.length === 1 && show[0] === 'preview'">
+        arrow_forward_ios
+      </v-icon>
       <v-icon v-else>arrow_back_ios</v-icon>
     </v-btn>
     <div />
@@ -18,9 +18,9 @@
       @click="toggle('preview')"
       v-if="!(show.length === 1 && show[0] === 'preview')"
     >
-      <v-icon v-if="show.length === 1 && show[0] === 'editor'"
-        >arrow_back_ios</v-icon
-      >
+      <v-icon v-if="show.length === 1 && show[0] === 'editor'">
+        arrow_back_ios
+      </v-icon>
       <v-icon v-else>arrow_forward_ios</v-icon>
     </v-btn>
   </div>
@@ -28,15 +28,9 @@
 
 <script>
 export default {
-  props: {
-    panes: {
-      type: Array
-    }
-  },
+  props: { panes: { type: Array } },
   data() {
-    return {
-      show: ["preview", "editor"]
-    };
+    return { show: ["preview", "editor"] };
   },
   methods: {
     toggle(pan) {
@@ -46,9 +40,6 @@ export default {
         this.show.push(pan);
       }
       this.$emit("update:panes", this.show);
-    },
-    includes(pan) {
-      return this.show.includes(pan);
     }
   }
 };

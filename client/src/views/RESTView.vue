@@ -16,7 +16,7 @@
           :path="path"
         />
       </v-flex>
-      <v-flex style="flex: 1">
+      <v-flex style="flex: 1" class="ml-3">
         <v-btn color="info" @click="onClick">Send</v-btn>
       </v-flex>
     </v-layout>
@@ -28,14 +28,14 @@
           v-show="panes.includes('editor')"
         >
           <query-editor
-            style="height: 800px;"
+            style="height: 700px;"
             ref="editor"
             @execute="onClick"
           />
         </v-flex>
       </transition>
       <v-flex shrink>
-        <r-e-s-t-buttons style="margin-top: 20px" :panes.sync="panes" />
+        <r-e-s-t-buttons style="margin-top: 70px" :panes.sync="panes" />
       </v-flex>
       <transition name="slide-fade">
         <v-flex v-show="panes.includes('preview')" style="flex: 10">
@@ -44,7 +44,7 @@
             <v-tab>History</v-tab>
             <v-tab>Starred</v-tab>
             <v-tab-item>
-              <query-editor style="height: 800px;" ref="preview" read-only />
+              <query-editor style="height: 700px;" ref="preview" read-only />
             </v-tab-item>
             <v-tab-item>
               <query-history

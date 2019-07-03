@@ -15,8 +15,9 @@
       class="mt-4"
       color="success"
       :disabled="selectedIndices.length === 0"
-      >Create Snapshot</v-btn
     >
+      Create Snapshot
+    </v-btn>
   </div>
 </template>
 
