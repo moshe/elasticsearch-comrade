@@ -11,7 +11,7 @@
     </v-flex>
     <v-flex grow>
       <div v-if="cluster.unassignedShards && cluster.unassignedShards !== 0">
-        <v-progress-circular indeterminate color="white" size="8" width="1" />
+        <v-icon size="14">error_outline</v-icon>
         {{ cluster.unassignedShards }} unassigned shards
       </div>
     </v-flex>
