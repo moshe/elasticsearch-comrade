@@ -4,6 +4,7 @@ import RESTView from "./Views/RESTView.vue";
 import CreateAliasesView from "./Views/AliasesView.vue";
 import TasksView from "./Views/TasksView.vue";
 import SnapshotsView from "./Views/SnapshotsView.vue";
+import RepositoriesView from "./Views/RepositoriesView.vue";
 
 export default new Router({
   mode: "history",
@@ -33,6 +34,11 @@ export default new Router({
       path: "/snapshots",
       nodeName: "snapshots",
       component: SnapshotsView
+    },
+    {
+      path: "/repositories",
+      nodeName: "repositories",
+      component: RepositoriesView
     }
     // ,{
     //   path: "/about",
