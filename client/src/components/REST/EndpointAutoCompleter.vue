@@ -13,7 +13,7 @@
         <v-chip dark label small> {{ item.method }} {{ item.path }} </v-chip>
       </v-list-tile-content>
       <v-list-tile-action>
-        <v-chip dark label small>{{ item.name }}</v-chip>
+        <v-chip dark label small color="success">{{ item.name }}</v-chip>
       </v-list-tile-action>
     </template>
   </v-combobox>

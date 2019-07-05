@@ -142,6 +142,7 @@ export default {
 
 .initializing-shard {
   background-color: #f57f17;
+  border-color: #f57f17;
 }
 
 .unassigned-shard {

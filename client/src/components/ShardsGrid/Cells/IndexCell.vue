@@ -62,7 +62,8 @@
     <v-flex>
       <v-layout justify-start align-start>
         <v-flex v-for="alias in index.aliases" :key="alias" shrink>
-          <v-chip small label color="#757575" style="margin-right: 6px">
+          <v-chip outline small label style="margin-right: 6px">
+            <v-icon size="12" class="mr-1">bookmark</v-icon>
             {{ alias }}
           </v-chip>
         </v-flex>
@@ -82,9 +83,7 @@
           </v-chip>
         </v-flex>
         <v-flex shrink>
-          <v-chip small label style="margin-right: 6px">
-            size: {{ index.storeSize }}
-          </v-chip>
+          <v-chip small label> size:{{ index.storeSize }}</v-chip>
         </v-flex>
       </v-layout>
     </v-flex>
@@ -150,7 +149,6 @@ export default {
   font-size: 16px;
   cursor: pointer;
   text-align: left;
-  color: white;
   word-wrap: break-word;
   white-space: pre-wrap;
   white-space: -o-pre-wrap;

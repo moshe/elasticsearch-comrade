@@ -1,7 +1,7 @@
 <template>
   <div>
     <repo-selector :repos="repos" @select="x => (repo = x)" />
-    <v-text-field label="Snapshot name" />
+    <v-text-field label="Snapshot name*" v-model="name" />
     <index-selector :indices="Object.keys(indices)" v-model="selectedIndices" />
     <doc-checkbox
       v-for="option in booleanOptions"
@@ -14,7 +14,7 @@
       block
       class="mt-4"
       color="success"
-      :disabled="selectedIndices.length === 0"
+      :disabled="selectedIndices.length === 0 || !name || !repo"
     >
       Create Snapshot
     </v-btn>
@@ -42,6 +42,7 @@ export default {
     return {
       selectedIndices: [],
       repo: null,
+      name: null,
       booleanOptions: {
         partial: {
           title: "Partial",
