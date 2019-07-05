@@ -3,8 +3,7 @@ import Home from "./Views/Home.vue";
 import RESTView from "./Views/RESTView.vue";
 import CreateAliasesView from "./Views/AliasesView.vue";
 import TasksView from "./Views/TasksView.vue";
-import SnapshotsView from "./Views/SnapshotsView.vue";
-import RepositoriesView from "./Views/RepositoriesView.vue";
+import TemplatesView from "./Views/TemplatesView.vue";
 
 export default new Router({
   mode: "history",
@@ -33,21 +32,13 @@ export default new Router({
     {
       path: "/snapshots",
       nodeName: "snapshots",
-      component: SnapshotsView
+      component: () =>
+        import(/* webpackChunkName: "snapshots" */ "./Views/SnapshotsView.vue")
     },
     {
-      path: "/repositories",
-      nodeName: "repositories",
-      component: RepositoriesView
+      path: "/templates",
+      nodeName: "templates",
+      component: TemplatesView
     }
-    // ,{
-    //   path: "/about",
-    //   nodeName: "about",
-    //   // route level code-splitting
-    //   // this generates a separate chunk (about.[hash].js) for this route
-    //   // which is lazy-loaded when the route is visited.
-    //   component: () =>
-    //     import(/* webpackChunkName: "about" */ "./Views/About.vue")
-    // }
   ]
 });

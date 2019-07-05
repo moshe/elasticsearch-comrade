@@ -17,8 +17,8 @@ export default {
       { to: "/aliases", icon: "link", name: "Aliases" },
       { to: "/rest", icon: "build", name: "REST" },
       { to: "/tasks", icon: "perm_data_setting", name: "Tasks" },
-      { to: "/snapshots", icon: "backup", name: "Snapshots" },
-      { to: "/repositories", icon: "storage", name: "Repositories" }
+      { to: "/templates", icon: "add_to_photos", name: "Index Templates" },
+      { to: "/snapshots", icon: "backup", name: "Snapshots" }
     ]
   })
 };
