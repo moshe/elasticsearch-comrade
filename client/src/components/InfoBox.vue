@@ -1,12 +1,9 @@
 <template>
-  <div class="info-square pa-2 elevation-6">
-    {{ text }}
-  </div>
+  <div class="info-square pa-2 elevation-6">{{ text }}</div>
 </template>
 
 <script>
 export default {
-  name: "InfoBox",
   props: {
     text: {
       type: String,
@@ -19,7 +16,7 @@ export default {
 <style scoped>
 .info-square {
   border: 8px solid #424242;
-  border-radius: 2px;
+  border-radius: 4px;
   text-align: center;
   font-size: 20px;
 }
