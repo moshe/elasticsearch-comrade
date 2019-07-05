@@ -2,7 +2,7 @@
   <div>
     <v-layout column>
       <v-flex>
-        <div style="font-size: 25px" class="mb-2">Create New Alias</div>
+        <v-header sub>Create New Alias</v-header>
       </v-flex>
       <v-layout>
         <v-flex class="pr-3" style="flex:1">
@@ -56,8 +56,10 @@
 <script>
 import { mapState } from "vuex";
 import QueryEditor from "../Base/QueryEditor.vue";
+import VHeader from "../Base/Header.vue";
+
 export default {
-  components: { QueryEditor },
+  components: { QueryEditor, VHeader },
   computed: { ...mapState(["indices"]) },
   methods: {
     async submit() {

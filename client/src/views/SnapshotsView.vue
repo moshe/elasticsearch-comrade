@@ -1,11 +1,11 @@
 <template>
   <v-layout>
     <v-flex xs8 class="pr-3">
-      <div style="font-size: 25px" class="mb-2">Snapshots</div>
+      <v-header sub>Snapshots</v-header>
       <snapshot-list-table :repos="repos" />
     </v-flex>
     <v-flex xs5 class="pl-3">
-      <div style="font-size: 25px" class="mb-2">Create a snapshot</div>
+      <v-header sub>Create a snapshot</v-header>
       <create-snapshot :repos="repos" />
     </v-flex>
   </v-layout>
@@ -15,10 +15,11 @@
 import snapshotApis from "../mixins/snapshotApis";
 import SnapshotListTable from "../components/Snapshots/SnapshotListTable.vue";
 import CreateSnapshot from "../components/Snapshots/CreateSnapshot.vue";
+import VHeader from "../components/Base/Header.vue";
 
 export default {
   mixins: [snapshotApis],
-  components: { SnapshotListTable, CreateSnapshot },
+  components: { SnapshotListTable, CreateSnapshot, VHeader },
   async created() {
     this.repos = await this.listRepos();
   },

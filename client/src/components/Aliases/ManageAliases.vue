@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-flex>
-      <div style="font-size: 25px" class="mb-2">Manage Aliases</div>
+      <v-header sub>Manage Aliases</v-header>
     </v-flex>
     <v-text-field solo label="Filter Aliases / Indices"></v-text-field>
     <div v-for="index in Object.keys(indices)" :key="index">
@@ -59,9 +59,10 @@
 <script>
 import { mapState } from "vuex";
 import AliasChip from "./AliasChip.vue";
+import VHeader from "../Base/Header.vue";
 
 export default {
-  components: { AliasChip },
+  components: { AliasChip, VHeader },
   props: {
     pendingActions: {
       type: Array

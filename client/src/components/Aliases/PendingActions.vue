@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div style="font-size: 25px" class="mb-2">Pending Actions</div>
+    <v-header sub>Pending Actions</v-header>
     <div v-for="(action, index) in pendingActions" :key="index">
       <v-btn flat icon small @click="$emit('removeAction', action)">
         <v-icon>clear</v-icon>
@@ -20,7 +20,10 @@
 </template>
 
 <script>
+import VHeader from "../Base/Header.vue";
+
 export default {
+  components: { VHeader },
   props: {
     pendingActions: {
       type: Array
