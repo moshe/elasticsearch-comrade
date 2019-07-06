@@ -17,9 +17,9 @@ export default {
 
 <style scoped>
 .header {
-  font-size: 40px;
+  font-size: 30px;
 }
 .sub-header {
-  font-size: 25px;
+  font-size: 24px;
 }
 </style>
