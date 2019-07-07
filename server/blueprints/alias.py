@@ -1,13 +1,15 @@
 from collections import defaultdict
-from sanic.response import json
+
 from sanic import Blueprint
+from sanic.request import Request
+from sanic.response import HTTPResponse, json
 
 from connections import get_client
 
 alias_bp = Blueprint('alias')
 
 
-def format_alias_addition(action):
+def format_alias_addition(action: dict) -> dict:
     data = {
         "index": action['index'],
         "alias": action['alias']
@@ -22,7 +24,7 @@ def format_alias_addition(action):
     return {action['action']: data}
 
 
-async def get_index_aliases(request):
+async def get_index_aliases(request: Request) -> dict:
     client = get_client(request)
     aliases = await client.cat.aliases(format='json')
     aliases_by_index = defaultdict(list)
@@ -32,7 +34,7 @@ async def get_index_aliases(request):
 
 
 @alias_bp.route('/batch', methods=['POST'])
-async def create_alias(request):
+async def create_alias(request: Request) -> HTTPResponse:
     client = get_client(request)
     actions = request.json['actions']
     print({"actions": [format_alias_addition(action) for action in actions]})

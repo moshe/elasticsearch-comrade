@@ -1,10 +1,10 @@
 import traceback
-from sanic import Sanic
-from sanic.response import json
-from sanic.request import Request
-from elasticsearch import ElasticsearchException
 
-from blueprints.views import views_bp
+from elasticsearch import ElasticsearchException
+from sanic import Sanic
+from sanic.request import Request
+from sanic.response import json
+
 from blueprints.alias import alias_bp
 from blueprints.cluster import cluster_bp
 from blueprints.index import index_bp
@@ -12,6 +12,7 @@ from blueprints.rest import rest_bp
 from blueprints.snapshot import snapshot_bp
 from blueprints.task import task_bp
 from blueprints.template import template_bp
+from blueprints.views import views_bp
 from connections import clients
 
 app = Sanic()

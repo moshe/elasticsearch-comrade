@@ -1,11 +1,11 @@
-from collections import defaultdict
-from sanic.response import json
-from sanic import Blueprint
-
 from asyncio import gather
+from collections import defaultdict
 
-from connections import get_client
+from sanic import Blueprint
+from sanic.response import json
+
 from blueprints.alias import get_index_aliases
+from connections import get_client
 
 views_bp = Blueprint('views')
 
