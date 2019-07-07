@@ -17,7 +17,7 @@
         />
       </v-flex>
       <v-flex style="flex: 1" class="ml-3">
-        <v-btn color="info" @click="onClick">Send</v-btn>
+        <v-btn color="success" @click="onClick">Send</v-btn>
       </v-flex>
     </v-layout>
     <v-layout>
