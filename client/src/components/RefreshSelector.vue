@@ -9,8 +9,7 @@
       <v-icon>{{ settingsRefreshEnabled ? "stop" : "play_arrow" }}</v-icon>
     </v-btn>
     <v-select
-      style="display:inline-block"
-      dense
+      style="display:inline-block; width: 200px"
       :value="{ value: settingsRefreshEvery }"
       @change="setRefreshEvery"
       :items="times"
