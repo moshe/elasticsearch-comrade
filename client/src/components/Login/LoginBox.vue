@@ -7,8 +7,8 @@
       </div>
     </v-flex>
     <v-flex>
-      <v-layout justify-end align-end>
-        <v-flex class="info-box" v-if="!cluster.error">
+      <v-layout class="info-box" justify-end align-end>
+        <v-flex v-if="!cluster.error">
           <span class="key">Version:</span>
           {{ cluster.versions.join(" , ") }}<br />
           <span class="key">Nodes:</span>
@@ -93,7 +93,6 @@ export default {
 }
 
 .info-box {
-  padding: 10px;
   padding-left: 20px;
 }
 </style>

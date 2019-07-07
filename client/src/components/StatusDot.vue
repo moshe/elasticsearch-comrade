@@ -1,7 +1,14 @@
 <template>
   <span>
-    <v-progress-circular :size="20" v-if="isLoading" :indeterminate="true" />
-    <v-icon v-else-if="isError" :size="size" color="red">error</v-icon>
+    <v-progress-circular :size="size" v-if="isLoading" :indeterminate="true" />
+    <v-icon
+      v-else-if="isError"
+      :size="size * 1.2"
+      color="red"
+      v-bind:style="{ lineHeight: `${size * 1.5}px` }"
+    >
+      error
+    </v-icon>
     <div
       v-else
       class="dot"
@@ -26,7 +33,7 @@ export default {
     },
     size: {
       type: Number,
-      default: 18
+      default: 20
     }
   },
   computed: {
