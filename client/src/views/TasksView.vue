@@ -38,7 +38,7 @@
       <v-data-table
         :headers="headers"
         :items="filteredTasks"
-        class="elevation-1"
+        class="elevation-1 small-table"
         :expand="true"
         item-key="taskId"
         :rows-per-page-items="[30, 100, 200]"
@@ -56,10 +56,9 @@
                 <v-icon>keyboard_arrow_right</v-icon>
               </v-btn>
             </td>
-            <td>
-              {{ props.item.taskId }}
-            </td>
+            <td>{{ props.item.taskId }}</td>
             <td>{{ props.item.action }}</td>
+            <td>{{ props.item.nodeName }}</td>
             <td>
               <v-btn
                 flat
@@ -71,7 +70,6 @@
                 <v-icon>clear</v-icon>
               </v-btn>
             </td>
-            <td>{{ props.item.nodeName }}</td>
           </tr>
         </template>
         <template v-slot:expand="props">
@@ -104,13 +102,13 @@ export default {
         { text: "Expand", value: "expend" },
         { text: "taskId", value: "taskId" },
         { text: "Action", value: "action" },
-        { text: "Cancle", value: "cancellable" },
-        { text: "Node", value: "nodeName" }
+        { text: "Node", value: "nodeName" },
+        { text: "Cancle", value: "cancellable" }
       ]
     };
   },
   async created() {
-    this.refreshTasks();
+    this.refreshTasks(true);
   },
   computed: {
     ...mapState(["settingsRefreshEvery", "settingsRefreshEnabled"]),
@@ -133,8 +131,8 @@ export default {
     }
   },
   methods: {
-    async refreshTasks() {
-      if (this.settingsRefreshEnabled) {
+    async refreshTasks(force) {
+      if (this.settingsRefreshEnabled || force) {
         this.tasks = await this.listTasks();
       }
       setTimeout(this.refreshTasks, this.settingsRefreshEvery);
@@ -161,16 +159,6 @@ export default {
 </script>
 
 <style scoped>
-table.v-table tbody td,
-table.v-table tbody th {
-  height: unset;
-  line-height: 36px;
-}
-
-.v-btn--icon.v-btn--small {
-  margin: 0;
-}
-
 .expand {
   overflow: hidden;
   transition-duration: 0.4s;
