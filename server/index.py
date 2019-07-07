@@ -3,7 +3,7 @@ import traceback
 from elasticsearch import ElasticsearchException
 from sanic import Sanic
 from sanic.request import Request
-from sanic.response import json
+from sanic.response import HTTPResponse, json
 
 from blueprints.alias import alias_bp
 from blueprints.cluster import cluster_bp
@@ -28,7 +28,7 @@ app.blueprint(template_bp, url_prefix='/api/v1/template')
 
 
 @app.route('/api/v1/clients')
-async def get_clients(request):
+async def get_clients(request: Request) -> HTTPResponse:
     result = []
     for cluster_name in clients():
         result.append({"name": cluster_name})
@@ -36,7 +36,7 @@ async def get_clients(request):
 
 
 @app.exception(Exception)
-async def halt_response(request: Request, exception: Exception):
+async def halt_response(request: Request, exception: Exception) -> HTTPResponse:
     if isinstance(exception, ElasticsearchException):
         return json({"error": exception.info, "type": "ElasticSearch error"})
     return json({"error": traceback.format_exc(), "type": "unexpected"})

@@ -62,7 +62,13 @@
     <v-flex>
       <v-layout justify-start align-start>
         <v-flex v-for="alias in index.aliases" :key="alias" shrink>
-          <v-chip outline small label style="margin-right: 6px">
+          <v-chip
+            small
+            label
+            style="margin-right: 6px"
+            color="blue-grey lighten-4"
+            text-color="grey darken-3"
+          >
             <v-icon size="12" class="mr-1">bookmark</v-icon>
             {{ alias }}
           </v-chip>

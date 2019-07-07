@@ -2,7 +2,8 @@ from asyncio import gather
 from collections import defaultdict
 
 from sanic import Blueprint
-from sanic.response import json
+from sanic.request import Request
+from sanic.response import HTTPResponse, json
 
 from blueprints.alias import get_index_aliases
 from connections import get_client
@@ -10,7 +11,7 @@ from connections import get_client
 views_bp = Blueprint('views')
 
 
-def format_index_data(data, aliases):
+def format_index_data(data: dict, aliases: dict) -> dict:
     append = {}
     if data['index'] in aliases:
         append = {"aliases": aliases[data['index']]}
@@ -26,7 +27,7 @@ def format_index_data(data, aliases):
     }, **append)
 
 
-async def get_cluster_info(request):
+async def get_cluster_info(request: Request) -> dict:
     client = get_client(request)
     [info], [docs], settings = await gather(client.cat.health(format='json'),
                                             client.cat.count(format='json'),
@@ -47,7 +48,7 @@ async def get_cluster_info(request):
     }
 
 
-async def get_nodes_info(request):
+async def get_nodes_info(request: Request) -> list:
     client = get_client(request)
     info = await client.nodes.stats(metric='jvm,os,fs')
     result = []
@@ -70,7 +71,7 @@ async def get_nodes_info(request):
     return result
 
 
-async def get_shards_info(request):
+async def get_shards_info(request: Request) -> tuple:
     client = get_client(request)
     shards = await client.cat.shards(format='json')
     relocating_indices = list({shard['index'] for shard in shards if shard['state'] == 'RELOCATING'})
@@ -84,7 +85,7 @@ async def get_shards_info(request):
 
 
 @views_bp.route('/shards_grid')
-async def indices_stats(request):
+async def indices_stats(request: Request) -> HTTPResponse:
     client = get_client(request)
     indices, aliases, shards, nodes, cluster_info = await gather(client.cat.indices(format='json'),
                                                                  get_index_aliases(request),

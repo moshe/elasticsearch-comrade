@@ -2,7 +2,8 @@ import re
 
 import ujson
 from sanic import Blueprint
-from sanic.response import json
+from sanic.request import Request
+from sanic.response import HTTPResponse, json
 
 from connections import get_client
 
@@ -12,7 +13,7 @@ task_query_regex = re.compile('source\[(.*)\]')
 
 
 @task_bp.route('/cancle', methods=['POST'])
-async def cancle_task(request):
+async def cancle_task(request: Request) -> HTTPResponse:
     client = get_client(request)
     task_id = request.json['taskId']
     await client.tasks.cancle(task_id=task_id)
@@ -20,7 +21,7 @@ async def cancle_task(request):
 
 
 @task_bp.route('/list')
-async def list_tasks(request):
+async def list_tasks(request: Request) -> HTTPResponse:
     result = []
     client = get_client(request)
     tasks = await client.tasks.list(detailed=True, group_by='parents')

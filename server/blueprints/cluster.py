@@ -1,5 +1,6 @@
 from sanic import Blueprint
-from sanic.response import json
+from sanic.request import Request
+from sanic.response import HTTPResponse, json
 
 from connections import clients, get_client
 
@@ -7,7 +8,7 @@ cluster_bp = Blueprint('cluster')
 
 
 @cluster_bp.route('/reroute_shards', methods=['POST'])
-async def reroute_shard(request):
+async def reroute_shard(request: Request) -> HTTPResponse:
     client = get_client(request)
     node = request.json['node']
     shards = request.json['shards']
@@ -21,7 +22,7 @@ async def reroute_shard(request):
 
 
 @cluster_bp.route('/allocation/<operation>', methods=['POST'])
-async def set_allocation(request, operation):
+async def set_allocation(request: Request, operation: str) -> HTTPResponse:
     assert operation in {"all", "primaries", "new_primaries", "none"}
     client = get_client(request)
     response = await client.cluster.put_settings(body={"transient": {"cluster.routing.allocation.enable": operation}})
@@ -30,7 +31,7 @@ async def set_allocation(request, operation):
 
 
 @cluster_bp.route('/info/<cluster_name>')
-async def get_cluster_info(request, cluster_name):
+async def get_cluster_info(request: Request, cluster_name: str) -> HTTPResponse:
     assert cluster_name in clients()
     try:
         client = get_client(None, cluster_name)

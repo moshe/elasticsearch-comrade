@@ -1,6 +1,7 @@
 from elasticsearch import TransportError
 from sanic import Blueprint
-from sanic.response import json
+from sanic.request import Request
+from sanic.response import HTTPResponse, json
 
 from connections import get_client
 
@@ -14,7 +15,7 @@ def format_es_exception(e: TransportError):
 
 
 @rest_bp.route('/query', methods=['POST'])
-async def close_index(request):
+async def close_index(request: Request) -> HTTPResponse:
     client = get_client(request)
     body = request.json['body']
     method = request.json['method']
