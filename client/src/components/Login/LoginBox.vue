@@ -8,7 +8,7 @@
     </v-flex>
     <v-flex>
       <v-layout justify-end align-end>
-        <v-flex class="info-box">
+        <v-flex class="info-box" v-if="!cluster.error">
           <span class="key">Version:</span>
           {{ cluster.versions.join(" , ") }}<br />
           <span class="key">Nodes:</span>
@@ -22,8 +22,16 @@
           <span class="key">JVM Name:</span>
           {{ cluster.jvmName }}<br />
         </v-flex>
+        <v-flex v-else>
+          {{ cluster.error.args.body }}
+        </v-flex>
         <v-flex shrink>
-          <v-btn icon flat @click="selectCluster(null)">
+          <v-btn
+            icon
+            flat
+            @click="selectCluster(null)"
+            :disabled="!!cluster.error"
+          >
             <v-icon>arrow_forward</v-icon>
           </v-btn>
         </v-flex>
@@ -35,6 +43,7 @@
 <script>
 import { GET } from "../../requests";
 import StatusDot from "../StatusDot.vue";
+import { clusterStatus } from "../../enums";
 
 export default {
   props: {
@@ -46,11 +55,19 @@ export default {
   components: { StatusDot },
   data() {
     return {
-      cluster: { versions: [], docCount: 0, status: "loading" }
+      cluster: { versions: [], docCount: 0, status: clusterStatus.loading }
     };
   },
   async created() {
-    this.cluster = await GET(`/api/v1/cluster/info/${this.clusterName}`);
+    try {
+      this.cluster = await GET(
+        `/api/v1/cluster/info/${this.clusterName}`,
+        false
+      );
+    } catch (error) {
+      this.cluster.status = clusterStatus.error;
+      this.cluster.error = error;
+    }
   }
 };
 </script>
@@ -72,6 +89,7 @@ export default {
   cursor: pointer;
   border-radius: 10px;
   background-color: #666;
+  height: 180px;
 }
 
 .info-box {

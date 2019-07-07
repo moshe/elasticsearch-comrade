@@ -33,16 +33,8 @@ async def set_allocation(request: Request, operation: str) -> HTTPResponse:
 @cluster_bp.route('/info/<cluster_name>')
 async def get_cluster_info(request: Request, cluster_name: str) -> HTTPResponse:
     assert cluster_name in clients()
-    try:
-        client = get_client(None, cluster_name)
-        await client.ping()
-    except Exception:
-        return json({
-            "name": cluster_name,
-            "status": "error",
-            "versions": [],
-            "docCount": 0
-        })
+    client = get_client(None, cluster_name)
+    await client.ping()
 
     response = await client.cluster.stats()
     try:
