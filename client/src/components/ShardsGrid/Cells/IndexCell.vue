@@ -3,7 +3,8 @@
     <v-flex>
       <v-menu offset-y style="display: inline-block">
         <template v-slot:activator="{ on }">
-          <div class="index-name" v-on="on">{{ indexName }}</div>
+          <!-- eslint-disable-next-line prettier/prettier -->
+          <div class="index-name" v-on="on">{{ indexName }}{{ index.status === "close" ? " (closed)" : "" }}</div>
         </template>
         <v-list dense>
           <list-tile
