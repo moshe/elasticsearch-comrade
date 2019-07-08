@@ -1,9 +1,9 @@
 <template>
   <v-layout row>
-    <v-flex class="mr-5" xs7>
+    <v-flex class="pr-3" xs7>
       <create-alias @action="onAction" :pending-actions="pendingActions" />
     </v-flex>
-    <v-flex xs5>
+    <v-flex xs5 class="pl-3">
       <manage-aliases @action="onAction" :pending-actions="pendingActions" />
       <pending-actions
         :pending-actions="pendingActions"
