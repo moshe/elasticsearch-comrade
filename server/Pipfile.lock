@@ -196,11 +196,11 @@
         },
         "sanic": {
             "hashes": [
-                "sha256:cc64978266025afb0e7c0f8be928e2b81670c5d58ddac290d04c9d0da6ec2112",
-                "sha256:ebd806298782400db811ea9d63e8096e835e67f0b5dc5e66e507532984a82bb3"
+                "sha256:22a46963af3bbab2a5e5e44625d01e253b319c9296e913c8292e8310dc8724ee",
+                "sha256:7737773957447925a10ae4e66bfea40cb05319c2d916545c44e13b83f655f98e"
             ],
             "index": "pypi",
-            "version": "==19.6.0"
+            "version": "==19.6.2"
         },
         "ujson": {
             "hashes": [
