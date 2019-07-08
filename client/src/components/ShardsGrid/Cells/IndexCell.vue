@@ -11,14 +11,14 @@
             :action="() => closeIndex(indexName)"
             icon="close"
             title="Close"
-            :disabled="index.status === 'close'"
+            :disabled="isClosed"
           />
 
           <list-tile
             :action="() => openIndex(indexName)"
             icon="loop"
             title="Open"
-            :disabled="index.status === 'open'"
+            :disabled="isOpen"
           />
 
           <list-tile
@@ -37,25 +37,28 @@
             :action="showHead"
             icon="visibility"
             title="Head"
-            :disabled="index.status !== 'open'"
+            :disabled="isClosed"
           />
 
           <list-tile
             :action="() => flushIndex(indexName)"
             icon="storage"
             title="Flush"
+            :disabled="isClosed"
           />
 
           <list-tile
             :action="() => forceMergeIndex(indexName)"
             icon="call_merge"
             title="Force Merge"
+            :disabled="isClosed"
           />
 
           <list-tile
             :action="() => clearCacheIndex(indexName)"
             icon="sync_disabled"
             title="Clear Cache"
+            :disabled="isClosed"
           />
 
           <list-tile
@@ -85,7 +88,7 @@
     </v-flex>
 
     <v-flex>
-      <v-layout v-if="index.status === 'open'" row>
+      <v-layout v-if="isOpen" row>
         <v-flex shrink>
           <v-chip small label style="margin-right: 6px">
             shards: {{ index.primaries }} * {{ index.replicas }}
@@ -148,6 +151,12 @@ export default {
     ...mapState(["indices"]),
     index() {
       return this.indices[this.indexName];
+    },
+    isOpen() {
+      return this.index.status === "open";
+    },
+    isClosed() {
+      return this.index.status === "close";
     }
   }
 };
