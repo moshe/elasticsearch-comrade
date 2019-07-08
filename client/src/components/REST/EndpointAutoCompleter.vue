@@ -46,9 +46,7 @@ export default {
   methods: {
     onChange(selected) {
       if (typeof selected === "string") {
-        this.$emit("change", {
-          path: selected
-        });
+        this.$emit("change", { path: selected });
       } else {
         this.$emit("change", selected);
       }
