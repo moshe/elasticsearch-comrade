@@ -50,6 +50,8 @@ export default {
         modes: ["code", "text"],
         search: false,
         statusBar: false,
+        enableSort: false,
+        enableTransform: false,
         mainMenuBar: true
       }
     };
