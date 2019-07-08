@@ -1,6 +1,6 @@
 <template>
   <v-layout>
-    <v-flex xs8 class="pr-3">
+    <v-flex xs7 class="pr-3">
       <v-header sub>Index Templates</v-header>
       <v-data-table
         :headers="headers"
