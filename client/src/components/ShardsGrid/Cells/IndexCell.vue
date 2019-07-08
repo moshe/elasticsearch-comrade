@@ -41,7 +41,7 @@
 
           <list-tile
             :action="() => flushIndex(indexName)"
-            icon="sync"
+            icon="storage"
             title="Flush"
           />
 
@@ -52,9 +52,16 @@
           />
 
           <list-tile
+            :action="() => clearCacheIndex(indexName)"
+            icon="sync_disabled"
+            title="Clear Cache"
+          />
+
+          <list-tile
             :action="() => deleteIndex(indexName)"
             icon="delete"
             title="Delete Index"
+            color="red lighten-2"
           />
         </v-list>
       </v-menu>

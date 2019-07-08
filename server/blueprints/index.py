@@ -65,3 +65,10 @@ async def delete_index(request: Request, index: str) -> HTTPResponse:
     client = get_client(request)
     await client.indices.delete(index=index)
     return json({"status": "ok"})
+
+
+@index_bp.route('/<index>/clearCache')
+async def delete_index(request: Request, index: str) -> HTTPResponse:
+    client = get_client(request)
+    await client.indices.clear_cache(index=index, allow_no_indices=False)
+    return json({"status": "ok"})

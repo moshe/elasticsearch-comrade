@@ -34,6 +34,9 @@ export default {
     },
     async deleteIndex(index) {
       return await this.GET(`/api/v1/index/${index}/delete`);
+    },
+    async clearCacheIndex(index) {
+      return await this.GET(`/api/v1/index/${index}/clearCache`);
     }
   }
 };
