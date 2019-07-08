@@ -15,9 +15,9 @@
       <template v-slot:items="props">
         <tr>
           <td>{{ props.item.snapshot }}</td>
-          <td>{{ props.item.state }}</td>
           <td>{{ fromNow(props.item.start_time) }}</td>
-          <td>{{ parseInt(props.item.duration_in_millis / 1000) }}</td>
+          <td>{{ props.item.state }}</td>
+          <td>{{ parseInt(props.item.duration_in_millis / 1000) }}s</td>
           <td>
             <v-btn flat icon small @click="showRestoreDialog(props.item)">
               <v-icon small>settings_backup_restore</v-icon>
@@ -69,8 +69,8 @@ export default {
       snapshot: { indices: [] },
       headers: [
         { text: "Id", value: "snapshot" },
-        { text: "State", value: "state" },
         { text: "Time", value: "start_time" },
+        { text: "State", value: "state" },
         { text: "Took", value: "duration_in_millis" },
         { text: "Restore", value: "duration_in_millis", sortable: false }
       ]
