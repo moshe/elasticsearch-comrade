@@ -11,7 +11,7 @@
   "dependencies": {
     "core-js": "^2.6.5",
     "date-fns": "^1.30.1",
-    "jsoneditor": "^5.32.4",
+    "jsoneditor": "^6.1.0",
     "register-service-worker": "^1.6.2",
     "vue": "^2.6.10",
     "vue-router": "^3.0.7",
