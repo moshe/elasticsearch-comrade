@@ -88,7 +88,6 @@
 import { mapState } from "vuex";
 import actions from "../assets/elasticsearch_actions.json";
 import taskApis from "../mixins/taskApis";
-
 export default {
   mixins: [taskApis],
   data() {
@@ -98,6 +97,7 @@ export default {
       filters: [],
       tasks: [],
       notFilters: [],
+      timeout: null,
       headers: [
         { text: "Expand", value: "expend" },
         { text: "taskId", value: "taskId" },
@@ -109,6 +109,9 @@ export default {
   },
   async created() {
     this.refreshTasks(true);
+  },
+  destroyed() {
+    clearTimeout(this.timeout);
   },
   computed: {
     ...mapState(["settingsRefreshEvery", "settingsRefreshEnabled"]),
@@ -135,7 +138,7 @@ export default {
       if (this.settingsRefreshEnabled || force) {
         this.tasks = await this.listTasks();
       }
-      setTimeout(this.refreshTasks, this.settingsRefreshEvery);
+      this.timeout = setTimeout(this.refreshTasks, this.settingsRefreshEvery);
     },
     filterAction(selected) {
       if (!selected) {
