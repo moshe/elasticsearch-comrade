@@ -22,9 +22,7 @@
           <span class="key">JVM Name:</span>
           {{ cluster.jvmName }}<br />
         </v-flex>
-        <v-flex v-else>
-          {{ cluster.error.args.body }}
-        </v-flex>
+        <v-flex v-else>{{ cluster.error.args.body }}</v-flex>
         <v-flex shrink>
           <v-btn
             icon

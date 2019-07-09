@@ -1,8 +1,6 @@
 <template>
   <v-layout align-start justify-space-between column>
-    <v-flex shrink>
-      <allocation-button />
-    </v-flex>
+    <v-flex shrink><allocation-button /></v-flex>
     <v-flex grow>
       <div v-if="cluster.relocatingShards && cluster.relocatingShards !== 0">
         <v-progress-circular indeterminate color="white" size="8" width="1" />
@@ -32,11 +30,8 @@ import { mapState } from "vuex";
 import AllocationButton from "../AllocationButton.vue";
 
 export default {
-  name: "ClusterCell",
   components: { AllocationButton },
-  computed: {
-    ...mapState(["cluster"])
-  }
+  computed: { ...mapState(["cluster"]) }
 };
 </script>
 

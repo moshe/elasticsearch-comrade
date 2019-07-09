@@ -1,9 +1,7 @@
 <template>
   <div>
     <v-layout column>
-      <v-flex>
-        <v-header sub>Create New Alias</v-header>
-      </v-flex>
+      <v-flex><v-header sub>Create New Alias</v-header></v-flex>
       <v-layout>
         <v-flex class="pr-3" style="flex:1">
           <v-text-field solo label="Alias Name *" v-model="aliasName" />
@@ -34,9 +32,7 @@
       </v-layout>
     </v-layout>
     <v-layout column>
-      <v-flex>
-        <div style="font-size: 18px">Filter</div>
-      </v-flex>
+      <v-flex><div style="font-size: 18px">Filter</div></v-flex>
       <v-layout>
         <v-flex class="pr-3" style="flex:1">
           <query-editor ref="editor" style="height: 400px;" />

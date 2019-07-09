@@ -123,7 +123,12 @@ import { mapMutations, mapState } from "vuex";
 import ListTile from "./ListTile.vue";
 import ShardSquare from "../ShardSquare.vue";
 export default {
-  name: "IndexCell",
+  props: {
+    indexName: {
+      required: true,
+      type: String
+    }
+  },
   components: { ShardSquare, ListTile },
   mixins: [indexAPIs],
   methods: {
@@ -139,12 +144,6 @@ export default {
     async showHead() {
       const content = await this.getHead(this.indexName);
       this.startJsonModal(content);
-    }
-  },
-  props: {
-    indexName: {
-      required: true,
-      type: String
     }
   },
   computed: {

@@ -12,9 +12,7 @@
       <td>{{ fromNow(props.item.date) }}</td>
       <td>{{ truncate(JSON.stringify(props.item.query), 50) }}</td>
       <td>
-        <v-icon small @click="removeQuery(props.item)">
-          clear
-        </v-icon>
+        <v-icon small @click="removeQuery(props.item)">clear</v-icon>
         <v-icon small class="ml-1" @click="setQuery(props.item)">edit</v-icon>
         <v-icon
           small

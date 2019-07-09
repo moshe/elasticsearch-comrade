@@ -1,8 +1,6 @@
 <template>
   <div>
-    <v-flex>
-      <v-header sub>Manage Aliases</v-header>
-    </v-flex>
+    <v-flex><v-header sub>Manage Aliases</v-header></v-flex>
     <v-text-field solo label="Filter Aliases / Indices"></v-text-field>
     <div v-for="index in Object.keys(indices)" :key="index">
       <div
@@ -50,7 +48,7 @@
             </v-list>
           </v-menu>
         </div>
-        <v-divider class="mb-1 mt-1"></v-divider>
+        <v-divider class="mb-1 mt-1" />
       </div>
     </div>
   </div>

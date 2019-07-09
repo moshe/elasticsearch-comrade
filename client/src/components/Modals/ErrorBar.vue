@@ -4,7 +4,7 @@
     right
     auto-height
     v-model="visible"
-    :color="color"
+    color="error"
     vertical
     :timeout="30000"
   >
@@ -42,10 +42,7 @@ export default {
     ...mapMutations(["clearErrorBarContent"])
   },
   data() {
-    return {
-      show: true,
-      color: "error"
-    };
+    return { show: true };
   }
 };
 </script>

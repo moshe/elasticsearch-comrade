@@ -37,9 +37,9 @@
         @click="toggleShardForRelocation({ index, id, nodeName })"
       >
         <v-list-tile-action style="min-width: unset" class="pr-2">
-          <v-icon :disabled="isRelocating" style="font-size: 16px"
-            >input</v-icon
-          >
+          <v-icon :disabled="isRelocating" style="font-size: 16px">
+            input
+          </v-icon>
         </v-list-tile-action>
         <v-list-tile-title v-if="isMarkedForRelocation">
           Deselect for relocation

@@ -1,11 +1,7 @@
 <template>
   <div class="ma-1">
-    <div class="node-name ml-1">
-      {{ nodeName }}
-    </div>
-    <div class="ip ml-1 mb-2">
-      {{ nodeIp }}
-    </div>
+    <div class="node-name ml-1">{{ nodeName }}</div>
+    <div class="ip ml-1 mb-2">{{ nodeIp }}</div>
     <v-layout style="font-size: 8px">
       <v-flex>
         <node-stat-bar :metric="metrics.heapPercent" name="HEAP" />
