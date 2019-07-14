@@ -1,8 +1,12 @@
+from collections import ChainMap
+from copy import deepcopy
+
 from sanic import Blueprint
 from sanic.request import Request
 from sanic.response import HTTPResponse, json
 
 from connections import get_client
+from elasticsearch_assets import get_index_settings_docs
 
 index_bp = Blueprint('index')
 
@@ -25,6 +29,19 @@ async def open_index(request: Request, index: str) -> HTTPResponse:
 async def index_stats(request: Request, index: str) -> HTTPResponse:
     client = get_client(request)
     return json(await client.indices.stats(index=index))
+
+
+@index_bp.route('/<index>/dynamicSettings')
+async def dynamic_settings(request: Request, index: str) -> HTTPResponse:
+    client = get_client(request)
+    all_settings = await client.indices.get_settings(index=index, flat_settings=True, include_defaults=True)
+    chained = ChainMap(*all_settings[index].values())
+    sections = deepcopy(get_index_settings_docs())
+    for section in sections:
+        for setting in section['settings']:
+            if setting['name'] in chained:
+                setting['value'] = chained[setting['name']]
+    return json(sections)
 
 
 @index_bp.route('/<index>/settings')

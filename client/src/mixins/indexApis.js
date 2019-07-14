@@ -37,6 +37,9 @@ export default {
     },
     async clearCacheIndex(index) {
       return await this.GET(`/api/v1/index/${index}/clearCache`);
+    },
+    async getIndexDynamicModules(index) {
+      return await this.GET(`/api/v1/index/${index}/dynamicSettings`);
     }
   }
 };
