@@ -1,0 +1,34 @@
+{
+  "description": "The data in the translog is only persisted to disk when the translog is\n++fsync++ed and committed.  In the event of hardware failure, any data written\nsince the previous translog commit will be lost.\n\nBy default, `index.translog.durability` is set to `request` meaning that Elasticsearch will only report success of an index, delete,\nupdate, or bulk request to the client after the translog has been successfully\n++fsync++ed and committed on the primary and on every allocated replica. If\n`index.translog.durability` is set to `async` then Elasticsearch ++fsync++s\nand commits the translog every `index.translog.sync_interval` (defaults to 5 seconds).\n\nThe following <<indices-update-settings,dynamically updatable>> per-index\nsettings control the behaviour of the translog:",
+  "settings": [
+    {
+      "description": "How often the translog is ++fsync++ed to disk and committed, regardless of\nwrite operations. Defaults to `5s`. Values less than `100ms` are not allowed.",
+      "name": "index.translog.sync_interval"
+    },
+    {
+      "description": "+\n--\n\nWhether or not to `fsync` and commit the translog after every index, delete,\nupdate, or bulk request.  This setting accepts the following parameters:",
+      "name": "index.translog.durability"
+    },
+    {
+      "description": "(default) `fsync` and commit after every request. In the event\n    of hardware failure, all acknowledged writes will already have been\n    committed to disk.",
+      "name": "request"
+    },
+    {
+      "description": "`fsync` and commit in the background every `sync_interval`. In\n    the event of hardware failure, all acknowledged writes since the last\n    automatic commit will be discarded.\n--",
+      "name": "async"
+    },
+    {
+      "description": "The translog stores all operations that are not yet safely persisted in Lucene\n(i.e., are not part of a Lucene commit point). Although these operations are\navailable for reads, they will need to be reindexed if the shard was to\nshutdown and has to be recovered. This settings controls the maximum total size\nof these operations, to prevent recoveries from taking too long. Once the\nmaximum size has been reached a flush will happen, generating a new Lucene\ncommit point. Defaults to `512mb`.",
+      "name": "index.translog.flush_threshold_size"
+    },
+    {
+      "description": "The total size of translog files to keep. Keeping more translog files increases\nthe chance of performing an operation based sync when recovering replicas. If\nthe translog files are not sufficient, replica recovery will fall back to a\nfile based sync. Defaults to `512mb`",
+      "name": "index.translog.retention.size"
+    },
+    {
+      "description": "The maximum duration for which translog files will be kept. Defaults to `12h`.",
+      "name": "index.translog.retention.age"
+    }
+  ],
+  "name": "Translog settings"
+}
