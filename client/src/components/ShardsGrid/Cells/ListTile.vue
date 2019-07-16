@@ -1,10 +1,5 @@
 <template>
-  <v-list-tile @click="action" :disabled="disabled">
-    <v-list-tile-action style="min-width: unset" class="pr-2">
-      <v-icon style="font-size: 16px" :disabled="disabled" :color="color">
-        {{ icon }}
-      </v-icon>
-    </v-list-tile-action>
+  <v-list-tile @click="action" :disabled="disabled" style="margin-left:24px">
     <v-list-tile-title>{{ title }}</v-list-tile-title>
   </v-list-tile>
 </template>
@@ -17,10 +12,6 @@ export default {
       type: Function,
       required: true
     },
-    icon: {
-      type: String,
-      required: true
-    },
     title: {
       type: String,
       required: true
@@ -28,9 +19,6 @@ export default {
     disabled: {
       type: Boolean,
       default: false
-    },
-    color: {
-      type: String
     }
   }
 };

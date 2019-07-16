@@ -7,73 +7,70 @@
           <div class="index-name" v-on="on">{{ indexName }}{{ index.status === "close" ? " (closed)" : "" }}</div>
         </template>
         <v-list dense>
-          <v-subheader class="green--text text--lighten-1">
-            Actions
-          </v-subheader>
+          <v-list-tile class="success--text pt-1">
+            <v-list-tile-action style="min-width: 24px" class="pr-2">
+              <v-icon size="14">build</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-title>Actions</v-list-tile-title>
+          </v-list-tile>
           <v-divider />
+
           <list-tile
             :action="() => closeIndex(indexName)"
-            icon="close"
             title="Close"
             :disabled="isClosed"
           />
           <list-tile
             :action="() => openIndex(indexName)"
-            icon="loop"
             title="Open"
             :disabled="isOpen"
           />
           <list-tile
             :action="() => flushIndex(indexName)"
-            icon="storage"
             title="Flush"
             :disabled="isClosed"
           />
           <list-tile
             :action="() => clearCacheIndex(indexName)"
-            icon="sync_disabled"
             title="Clear Cache"
             :disabled="isClosed"
           />
           <list-tile
             :action="() => forceMergeIndex(indexName)"
-            icon="call_merge"
             title="Force Merge"
             :disabled="isClosed"
           />
-          <v-subheader class="green--text text--lighten-1">Inspect</v-subheader>
+          <v-list-tile class="success--text pt-1">
+            <v-list-tile-action style="min-width: 24px" class="pr-2">
+              <v-icon size="14">visibility</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-title>Inspect</v-list-tile-title>
+          </v-list-tile>
           <v-divider />
-          <list-tile
-            :action="showMapping"
-            icon="view_compact"
-            title="Show Mapping"
-          />
-          <list-tile
-            :action="showSettings"
-            icon="settings"
-            title="Show Settings"
-          />
-          <list-tile
-            :action="showHead"
-            icon="visibility"
-            title="Head"
-            :disabled="isClosed"
-          />
-          <v-subheader class="green--text text--lighten-1">
-            Configure
-          </v-subheader>
+          <list-tile :action="showMapping" title="Show Mapping" />
+          <list-tile :action="showSettings" title="Show Settings" />
+          <list-tile :action="showHead" title="Head" :disabled="isClosed" />
+          <v-list-tile class="success--text pt-1">
+            <v-list-tile-action style="min-width: 24px" class="pr-2">
+              <v-icon size="14">settings</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-title>Configure</v-list-tile-title>
+          </v-list-tile>
           <v-divider />
           <list-tile
             :action="() => $router.push(`/indexSettings/${indexName}`)"
-            icon="build"
             title="Edit Settings"
             :disabled="isClosed"
           />
-          <v-subheader class="red--text text--lighten-1">Danger</v-subheader>
+          <v-list-tile class="success--text pt-1">
+            <v-list-tile-action style="min-width: 24px" class="pr-2">
+              <v-icon size="14">error_outline</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-title>Danger</v-list-tile-title>
+          </v-list-tile>
           <v-divider />
           <list-tile
             :action="() => deleteIndex(indexName)"
-            icon="delete"
             title="Delete Index"
           />
         </v-list>
