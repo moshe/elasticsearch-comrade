@@ -3,12 +3,19 @@
     <cluster-info-boxes class="mt-3 mb-3" />
     <v-layout align-end justify-end row>
       <v-flex>
-        <v-text-field
-          clearable
-          label="Filter indices"
-          style="width: 300px"
-          v-model="indexSearch"
-        />
+        <v-layout>
+          <v-flex xs4>
+            <v-text-field
+              clearable
+              label="Filter indices"
+              v-model="indexSearch"
+              class="pr-4"
+            />
+          </v-flex>
+          <v-flex>
+            <v-checkbox label="Include Hidden" v-model="includeHidden" />
+          </v-flex>
+        </v-layout>
       </v-flex>
       <v-flex shrink>
         <v-btn
@@ -73,7 +80,7 @@
           )"
           :key="index"
           class="pa-1 shards-cell"
-        ></td>
+        />
       </template>
     </v-data-table>
   </div>
@@ -106,21 +113,23 @@ export default {
       );
     },
     indices() {
-      return Object.keys(this.indicesInfo).filter(
-        index =>
-          index.includes(this.indexSearch) ||
-          (this.indicesInfo[index].aliases &&
-            JSON.stringify(this.indicesInfo[index].aliases).includes(
-              this.indexSearch
-            ))
-      );
+      return Object.keys(this.indicesInfo)
+        .filter(
+          index =>
+            RegExp(this.indexSearch || "").test(index) ||
+            (this.indicesInfo[index].aliases || []).filter(alias =>
+              RegExp(this.indexSearch || "").test(alias)
+            ).length > 0
+        )
+        .filter(index => (this.includeHidden ? true : !index.startsWith(".")));
     }
   },
   data() {
     return {
       page: 0,
       indexSearch: "",
-      perPage: 5
+      perPage: 5,
+      includeHidden: true
     };
   },
   watch: {
