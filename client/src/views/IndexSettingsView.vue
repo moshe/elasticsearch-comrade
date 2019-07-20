@@ -4,7 +4,7 @@
       {{ module.name }}
     </v-tab>
     <v-tab-item v-for="module in modules" :key="module.name">
-      <index-settings-form :module="module" />
+      <index-settings-form :module="module" @save="save" />
     </v-tab-item>
   </v-tabs>
 </template>
@@ -27,6 +27,12 @@ export default {
   },
   data() {
     return { modules: [] };
+  },
+  methods: {
+    async save(settings) {
+      await this.setIndexSettings(this.indexName, settings);
+      this.modules = await this.getIndexDynamicModules(this.indexName);
+    }
   }
 };
 </script>

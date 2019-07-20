@@ -1,4 +1,4 @@
-import { GET } from "../requests";
+import { GET, POST } from "../requests";
 
 export default {
   methods: {
@@ -40,6 +40,9 @@ export default {
     },
     async getIndexDynamicModules(index) {
       return await this.GET(`/api/v1/index/${index}/dynamicSettings`);
+    },
+    async setIndexSettings(index, settings) {
+      return await POST(`/api/v1/index/${index}/settings`, settings);
     }
   }
 };

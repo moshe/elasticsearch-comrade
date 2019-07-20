@@ -50,6 +50,12 @@ async def index_settings(request: Request, index: str) -> HTTPResponse:
     return json(await client.indices.get_settings(index=index, flat_settings=True))
 
 
+@index_bp.route('/<index>/settings', methods=['POST'])
+async def set_index_settings(request: Request, index: str) -> HTTPResponse:
+    client = get_client(request)
+    return json(await client.indices.put_settings(dict(request.json), index))
+
+
 @index_bp.route('/<index>/mapping')
 async def get_mapping(request: Request, index: str) -> HTTPResponse:
     client = get_client(request)
