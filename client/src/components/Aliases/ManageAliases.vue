@@ -75,9 +75,7 @@ export default {
       return this.pendingActions.filter(x => x.action === "add");
     },
     aliases() {
-      return [
-        ...new Set(Object.values(this.indices).flatMap(x => x.aliases || []))
-      ];
+      return [...new Set(Object.values(this.indices).flatMap(x => x.aliases))];
     }
   },
   methods: {

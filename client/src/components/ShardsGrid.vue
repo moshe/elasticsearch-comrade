@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="shards-grid">
     <cluster-info-boxes class="mt-3 mb-3" />
     <v-layout align-end justify-end row>
       <v-flex>
@@ -13,7 +13,8 @@
             />
           </v-flex>
           <v-flex>
-            <v-checkbox label="Include Hidden" v-model="includeHidden" />
+            <v-checkbox label="Show Hidden" v-model="showHidden" />
+            <v-checkbox label="Show Green Indices" v-model="showGreen" />
           </v-flex>
         </v-layout>
       </v-flex>
@@ -95,7 +96,6 @@ import ClusterInfoBoxes from "./ClusterInfoBoxes.vue";
 import ClusterCell from "./ShardsGrid/Cells/ClusterCell.vue";
 
 export default {
-  name: "MgrShardsTable",
   components: {
     ClusterCell,
     ClusterInfoBoxes,
@@ -117,11 +117,14 @@ export default {
         .filter(
           index =>
             RegExp(this.indexSearch || "").test(index) ||
-            (this.indicesInfo[index].aliases || []).filter(alias =>
+            this.indicesInfo[index].aliases.filter(alias =>
               RegExp(this.indexSearch || "").test(alias)
             ).length > 0
         )
-        .filter(index => (this.includeHidden ? true : !index.startsWith(".")));
+        .filter(index => (this.showHidden ? true : !index.startsWith(".")))
+        .filter(index =>
+          this.showGreen ? true : this.indicesInfo[index].unassignedShards
+        );
     }
   },
   data() {
@@ -129,11 +132,12 @@ export default {
       page: 0,
       indexSearch: "",
       perPage: 5,
-      includeHidden: true
+      showHidden: true,
+      showGreen: true
     };
   },
   watch: {
-    indexSearch() {
+    indices() {
       this.page = 0;
     }
   }
@@ -152,5 +156,19 @@ td {
 
 div.v-text-field__details {
   display: none;
+}
+
+.shards-grid .v-input--selection-controls {
+  margin: 0;
+  padding: 0;
+}
+.shards-grid .v-messages {
+  min-height: 0px;
+}
+
+.shards-grid
+  .v-input--selection-controls:not(.v-input--hide-details)
+  .v-input__slot {
+  margin-bottom: 0;
 }
 </style>

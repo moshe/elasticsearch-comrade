@@ -46,17 +46,15 @@ export default {
       this.removeAction(action);
       if (
         action.action === "add" &&
-        (this.indices[action.index].aliases || []).filter(
-          x => x === action.alias
-        ).length === 1
+        this.indices[action.index].aliases.filter(x => x === action.alias)
+          .length === 1
       ) {
         return;
       }
       if (
         action.action === "remove" &&
-        (this.indices[action.index].aliases || []).filter(
-          x => x === action.alias
-        ).length === 0
+        this.indices[action.index].aliases.filter(x => x === action.alias)
+          .length === 0
       ) {
         return;
       }

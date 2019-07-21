@@ -12,9 +12,9 @@ views_bp = Blueprint('views')
 
 
 def format_index_data(data: dict, aliases: dict) -> dict:
-    append = {}
+    append = {"aliases": []}
     if data['index'] in aliases:
-        append = {"aliases": aliases[data['index']]}
+        append["aliases"] = aliases[data['index']]
     if data['status'] == 'close':
         return dict(status=data["status"], **append)
     return dict({
