@@ -1,11 +1,13 @@
 <template>
   <div>
     <v-flex><v-header sub>Manage Aliases</v-header></v-flex>
-    <v-text-field solo label="Filter Aliases / Indices"></v-text-field>
+    <v-text-field solo label="Filter Aliases / Indices" v-model="filter" />
     <div v-for="index in Object.keys(indices)" :key="index">
       <div
         v-if="
-          indices[index].aliases || added.filter(x => x.index === index).length
+          index.includes(filter || '') &&
+            (indices[index].aliases.length > 0 ||
+              added.filter(x => x.index === index).length)
         "
       >
         <div style="font-size:15px">
@@ -61,6 +63,9 @@ import VHeader from "../Base/Header.vue";
 
 export default {
   components: { AliasChip, VHeader },
+  data() {
+    return { filter: "" };
+  },
   props: {
     pendingActions: {
       type: Array
