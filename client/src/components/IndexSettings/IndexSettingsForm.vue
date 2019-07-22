@@ -1,7 +1,9 @@
 <template>
   <div>
     <v-header sub class="mt-4">{{ module.name }}</v-header>
-    <div>{{ module.description }}</div>
+    <div v-for="line in module.description.split('\n')" :key="line">
+      {{ line }}
+    </div>
     <v-layout wrap>
       <v-flex
         xs6
@@ -16,7 +18,7 @@
           :value="setting.value"
           @change="v => handleChange(setting, v)"
         >
-          <template v-slot:prepend-inner>
+          <template v-if="setting.description" v-slot:prepend-inner>
             <v-tooltip bottom>
               <template v-slot:activator="{ on }">
                 <v-icon v-on="on" size="18">help_outline</v-icon>

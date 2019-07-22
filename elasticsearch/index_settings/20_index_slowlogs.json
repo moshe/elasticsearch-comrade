@@ -1,0 +1,19 @@
+{
+    "name": "Index Slow Logs",
+    "description": "The indexing slow log, similar in functionality to the search slow log.\nThe log file name ends with _index_indexing_slowlog.log. Log and the thresholds are configured in the same way as the search slowlog",
+    "settings": [
+        {"name": "index.indexing.slowlog.level"},
+        {
+            "name": "index.indexing.slowlog.source",
+            "description": "By default Elasticsearch will log the first 1000 characters of the _source in the slowlog.\nYou can change that with index.indexing.slowlog.source.\nSetting it to false or 0 will skip logging the source entirely an setting it to true will log the entire source regardless of size"
+        },
+        {
+            "name": "index.indexing.slowlog.reformat",
+            "description": "The original _source is reformatted by default to make sure that it fits on a single log line.\nIf preserving the original document format is important, you can turn off reformatting by setting index.indexing.slowlog.reformat to false,\nwhich will cause the source to be logged \"as is\" and can potentially span multiple log lines."
+        },
+        {"name": "index.indexing.slowlog.threshold.index.trace"},
+        {"name": "index.indexing.slowlog.threshold.index.debug"},
+        {"name": "index.indexing.slowlog.threshold.index.info"},
+        {"name": "index.indexing.slowlog.threshold.index.warn"}
+    ]
+}

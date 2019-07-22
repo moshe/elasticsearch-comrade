@@ -1,0 +1,15 @@
+{
+    "name": "Search Slow Logs",
+    "description": "Shard level slow search log allows to log slow search (query and fetch phases) into a dedicated log file.\nThresholds can be set for both the query phase of the execution, and fetch phase.\nBy default, none are enabled (set to -1). Levels (warn, info, debug, trace) allow to control under which logging level the log will be logged.\nNot all are required to be configured (for example, only warn threshold can be set). The benefit of several levels is the ability to quickly \"grep\" for specific thresholds breached.\nThe logging is done on the shard level scope, meaning the execution of a search request within a specific shard. It does not encompass the whole search request, which can be broadcast to several shards in order to execute. Some of the benefits of shard level logging is the association of the actual execution on the specific machine, compared with request level.",
+    "settings": [
+        {"name": "index.search.slowlog.level"},
+        {"name": "index.search.slowlog.threshold.fetch.trace"},
+        {"name": "index.search.slowlog.threshold.fetch.debug"},
+        {"name": "index.search.slowlog.threshold.fetch.info"},
+        {"name": "index.search.slowlog.threshold.fetch.warn"},
+        {"name": "index.search.slowlog.threshold.query.trace"},
+        {"name": "index.search.slowlog.threshold.query.debug"},
+        {"name": "index.search.slowlog.threshold.query.info"},
+        {"name": "index.search.slowlog.threshold.query.warn"}
+    ]
+}
