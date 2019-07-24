@@ -1,6 +1,19 @@
 <template>
-  <div class="ma-1">
-    <div class="node-name ml-1">{{ nodeName }}</div>
+  <div class="ma-2">
+    <v-menu offset-y style="display: inline-block">
+      <template v-slot:activator="{ on }">
+        <div class="node-name ml-1" v-on="on">{{ nodeName }}</div>
+      </template>
+      <v-list dense>
+        <v-list-tile @click="$router.push(`/node/${nodeName}`)">
+          <v-list-tile-title>Show Info</v-list-tile-title>
+        </v-list-tile>
+
+        <v-list-tile :disabled="!isSuitableForRelocation" @click="relocate">
+          <v-list-tile-title>Relocate</v-list-tile-title>
+        </v-list-tile>
+      </v-list>
+    </v-menu>
     <div class="ip ml-1 mb-2">{{ nodeIp }}</div>
     <v-layout style="font-size: 8px">
       <v-flex>
@@ -16,18 +29,6 @@
         <node-stat-bar :metric="metrics.load1Percent" name="LOAD" />
       </v-flex>
     </v-layout>
-    <v-layout class="ma-2">
-      <v-flex>
-        <v-btn
-          @click="relocate"
-          :disabled="!isSuitableForRelocation"
-          small
-          color="primary"
-        >
-          Relocate
-        </v-btn>
-      </v-flex>
-    </v-layout>
   </div>
 </template>
 
@@ -37,7 +38,6 @@ import { mapMutations, mapState } from "vuex";
 import { POST } from "../../../requests";
 
 export default {
-  name: "NodeCell",
   components: { NodeStatBar },
   props: {
     nodeName: {
@@ -88,6 +88,7 @@ export default {
 .node-name {
   font-size: 14px;
   display: inline-block;
+  cursor: pointer;
 }
 
 .ip {

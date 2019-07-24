@@ -2,6 +2,7 @@ import Router from "vue-router";
 import CreateAliasesView from "./Views/AliasesView.vue";
 import Home from "./Views/Home.vue";
 import IndexSettingsView from "./Views/IndexSettingsView.vue";
+import NodeInfoView from "./Views/NodeInfoView.vue";
 import RESTView from "./Views/RESTView.vue";
 import TasksView from "./Views/TasksView.vue";
 import TemplatesView from "./Views/TemplatesView.vue";
@@ -45,6 +46,12 @@ export default new Router({
       path: "/indexSettings/:indexName",
       nodeName: "indexSettings",
       component: IndexSettingsView,
+      props: true
+    },
+    {
+      path: "/node/:nodeName",
+      nodeName: "NodeInfo",
+      component: NodeInfoView,
       props: true
     }
   ]
