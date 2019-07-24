@@ -8,7 +8,7 @@
             autofocus
             ref="filter"
             clearable
-            label="Action (Regex Supported)"
+            label="Filter (Regex Supported)"
             @change="filterAction"
           />
         </v-flex>

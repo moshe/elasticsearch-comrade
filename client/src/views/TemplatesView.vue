@@ -27,7 +27,7 @@
     </v-flex>
     <v-flex xs5 class="pl-3">
       <v-header sub>{{ isNew ? "Create" : "Edit" }} Template</v-header>
-      <v-text-field label="Snapshot name*" v-model="templateName" />
+      <v-text-field label="Template name*" v-model="templateName" />
       <query-editor style="height: 70vh;" :init="base" ref="editor" />
       <v-btn
         block
