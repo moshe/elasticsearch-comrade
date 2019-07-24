@@ -9,12 +9,12 @@
     @change="onChange"
   >
     <template v-slot:item="{ index, item }">
-      <v-list-tile-content>
+      <v-list-item-content>
         <v-chip dark label small> {{ item.method }} {{ item.path }} </v-chip>
-      </v-list-tile-content>
-      <v-list-tile-action>
+      </v-list-item-content>
+      <v-list-item-action>
         <v-chip dark label small color="success">{{ item.name }}</v-chip>
-      </v-list-tile-action>
+      </v-list-item-action>
     </template>
   </v-combobox>
 </template>

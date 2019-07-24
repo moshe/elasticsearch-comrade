@@ -1,11 +1,15 @@
 import Vue from "vue";
-import "./plugins/vuetify";
+import Router from "vue-router";
+import Vuetify from "vuetify";
+import "vuetify/dist/vuetify.min.css";
+// import "./plugins/vuetify";
 import App from "./App.vue";
+import "./registerServiceWorker";
 import router from "./router";
 import store from "./store";
-import "./registerServiceWorker";
 import "./style/smallTable.css";
-import Router from "vue-router";
+
+Vue.use(Vuetify);
 
 Vue.use(Router);
 Vue.config.productionTip = false;
@@ -13,5 +17,6 @@ Vue.config.productionTip = false;
 new Vue({
   router,
   store,
+  vuetify: new Vuetify({ theme: { dark: true } }),
   render: h => h(App)
 }).$mount("#app");

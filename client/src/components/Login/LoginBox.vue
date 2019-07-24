@@ -26,7 +26,7 @@
         <v-flex shrink>
           <v-btn
             icon
-            flat
+            text
             @click="selectCluster(null)"
             :disabled="!!cluster.error"
           >

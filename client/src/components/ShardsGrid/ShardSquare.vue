@@ -26,26 +26,26 @@
       </div>
     </template>
     <v-list dense>
-      <v-list-tile disabled v-if="isRelocating">
-        <v-list-tile-action style="min-width: unset" class="pr-2">
+      <v-list-item disabled v-if="isRelocating">
+        <v-list-item-action style="min-width: unset" class="pr-2">
           <v-icon style="font-size: 16px" disabled>computer</v-icon>
-        </v-list-tile-action>
-        <v-list-tile-action> From {{ fromNode }} </v-list-tile-action>
-      </v-list-tile>
-      <v-list-tile
+        </v-list-item-action>
+        <v-list-item-action> From {{ fromNode }} </v-list-item-action>
+      </v-list-item>
+      <v-list-item
         :disabled="isRelocating"
         @click="toggleShardForRelocation({ index, id, nodeName })"
       >
-        <v-list-tile-action style="min-width: unset" class="pr-2">
+        <v-list-item-action style="min-width: unset" class="pr-2">
           <v-icon :disabled="isRelocating" style="font-size: 16px">
             input
           </v-icon>
-        </v-list-tile-action>
-        <v-list-tile-title v-if="isMarkedForRelocation">
+        </v-list-item-action>
+        <v-list-item-title v-if="isMarkedForRelocation">
           Deselect for relocation
-        </v-list-tile-title>
-        <v-list-tile-title v-else>Select for relocation</v-list-tile-title>
-      </v-list-tile>
+        </v-list-item-title>
+        <v-list-item-title v-else>Select for relocation</v-list-item-title>
+      </v-list-item>
     </v-list>
   </v-menu>
 </template>

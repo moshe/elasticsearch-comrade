@@ -8,14 +8,14 @@
     </template>
     <v-list dense two-line>
       <div v-for="({ name, text }, i) in options" :key="name">
-        <v-list-tile :disabled="name === current" @click="click(name)">
-          <v-list-tile-content>
-            <v-list-tile-title>{{ name }}</v-list-tile-title>
-            <v-list-tile-sub-title>
+        <v-list-item :disabled="name === current" @click="click(name)">
+          <v-list-item-content>
+            <v-list-item-title>{{ name }}</v-list-item-title>
+            <v-list-item-subtitle>
               {{ text }}
-            </v-list-tile-sub-title>
-          </v-list-tile-content>
-        </v-list-tile>
+            </v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
         <v-divider v-if="i !== options.length - 1" />
       </div>
     </v-list>

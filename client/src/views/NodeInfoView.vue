@@ -4,17 +4,17 @@
       <v-layout wrap>
         <v-flex xs4 v-for="(items, name) in cards" :key="name">
           <v-card class="ma-2" color="light-blue ">
-            <v-card-title class="subheading font-weight-bold">
+            <v-card-title class="subtitle-1 font-weight-bold">
               {{ name }}
             </v-card-title>
             <v-divider />
             <v-list dense>
-              <v-list-tile v-for="{ key, value } in items" :key="key">
-                <v-list-tile-content>{{ key }}:</v-list-tile-content>
-                <v-list-tile-content class="align-end">
+              <v-list-item v-for="{ key, value } in items" :key="key">
+                <v-list-item-content>{{ key }}:</v-list-item-content>
+                <v-list-item-content class="align-end">
                   {{ value }}
-                </v-list-tile-content>
-              </v-list-tile>
+                </v-list-item-content>
+              </v-list-item>
             </v-list>
           </v-card>
         </v-flex>

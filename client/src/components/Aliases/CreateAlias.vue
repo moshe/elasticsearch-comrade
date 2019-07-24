@@ -3,7 +3,7 @@
     <v-layout column>
       <v-flex><v-header sub>Create New Alias</v-header></v-flex>
       <v-layout>
-        <v-flex class="pr-3" style="flex:1">
+        <v-flex class="pr-4" style="flex:1">
           <v-text-field solo label="Alias Name *" v-model="aliasName" />
         </v-flex>
         <v-flex style="flex:1">
@@ -23,7 +23,7 @@
         <div style="font-size: 18px" class="mb-2">Routing options</div>
       </v-flex>
       <v-layout>
-        <v-flex class="pr-3" style="flex:1">
+        <v-flex class="pr-4" style="flex:1">
           <v-text-field solo label="Index Routing" v-model="indexRouting" />
         </v-flex>
         <v-flex style="flex:1">
@@ -34,7 +34,7 @@
     <v-layout column>
       <v-flex><div style="font-size: 18px">Filter</div></v-flex>
       <v-layout>
-        <v-flex class="pr-3" style="flex:1">
+        <v-flex class="pr-4" style="flex:1">
           <query-editor ref="editor" style="height: 400px;" />
         </v-flex>
       </v-layout>

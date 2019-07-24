@@ -2,7 +2,7 @@
   <div>
     <v-header sub>Pending Actions</v-header>
     <div v-for="(action, index) in pendingActions" :key="index">
-      <v-btn flat icon small @click="$emit('removeAction', action)">
+      <v-btn text icon small @click="$emit('removeAction', action)">
         <v-icon>clear</v-icon>
       </v-btn>
       <span v-if="action.action === 'remove'">

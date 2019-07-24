@@ -4,7 +4,7 @@
     :disabled="removed"
     :color="color"
     label
-    outline
+    outlined
     small
     @input="handleRemove"
   >

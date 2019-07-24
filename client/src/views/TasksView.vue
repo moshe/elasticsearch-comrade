@@ -39,9 +39,8 @@
         :headers="headers"
         :items="filteredTasks"
         class="elevation-1 small-table"
-        :expand="true"
         item-key="taskId"
-        :rows-per-page-items="[30, 100, 200]"
+        :footer-props="{ 'items-per-page-options': [30, 100, 200] }"
       >
         <template v-slot:items="props">
           <tr>

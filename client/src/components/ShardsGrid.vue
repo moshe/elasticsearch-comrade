@@ -1,6 +1,6 @@
 <template>
   <div class="shards-grid">
-    <cluster-info-boxes class="mt-3 mb-3" />
+    <cluster-info-boxes class="mt-4 mb-4" />
     <v-layout align-end justify-end row>
       <v-flex>
         <v-layout>
@@ -9,7 +9,7 @@
               clearable
               label="Filter indices"
               v-model="indexSearch"
-              class="pr-4"
+              class="pr-6"
             />
           </v-flex>
           <v-flex>
@@ -20,7 +20,7 @@
       </v-flex>
       <v-flex shrink>
         <v-btn
-          flat
+          text
           icon
           @click="page--"
           :disabled="page * perPage - perPage < 0"
@@ -31,7 +31,7 @@
         {{ Math.min(page * perPage + perPage, indices.length) }} /
         {{ indices.length }}
         <v-btn
-          flat
+          text
           icon
           @click="page++"
           :disabled="(page + 1) * perPage >= indices.length"
@@ -40,8 +40,8 @@
         </v-btn>
       </v-flex>
     </v-layout>
-    <v-data-table :items="nodes" class="elevation-3" hide-actions>
-      <template slot="headers">
+    <v-data-table :items="nodes" class="elevation-3" hide-default-footer>
+      <template slot="header">
         <th class="pa-2">
           <cluster-cell />
         </th>
@@ -56,7 +56,7 @@
           :key="index"
         ></th>
       </template>
-      <template v-slot:items="props">
+      <template v-slot:item="props">
         <td class="pl-0 pr-0" style="max-width: 200px; min-width: 180px">
           <node-cell
             :node-name="props.item.name"

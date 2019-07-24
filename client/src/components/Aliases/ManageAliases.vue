@@ -11,7 +11,7 @@
         "
       >
         <div style="font-size:15px">
-          <v-btn flat icon small class="ma-0" @click="handleRemoveIndex(index)">
+          <v-btn text icon small class="ma-0" @click="handleRemoveIndex(index)">
             <v-icon size="18">clear</v-icon>
           </v-btn>
           {{ index }}
@@ -23,6 +23,7 @@
             :alias="alias"
             :removed="isRemoved(index, alias)"
             @remove="handleRemove(index, alias)"
+            class="ma-1"
           />
           <alias-chip
             v-for="(action, i) in added.filter(x => x.index === index)"
@@ -30,23 +31,24 @@
             :alias="action.alias"
             added
             @remove="handleRemove(action.index, action.alias)"
+            class="ma-1"
           />
         </div>
         <div style="display: inline-block">
           <v-menu offset-y>
             <template v-slot:activator="{ on }">
-              <v-btn flat icon color="orange" class="ma-0" v-on="on">
+              <v-btn text icon color="orange" class="ma-0" v-on="on">
                 <v-icon>add</v-icon>
               </v-btn>
             </template>
             <v-list>
-              <v-list-tile
+              <v-list-item
                 v-for="alias in aliases"
                 :key="alias"
                 @click="handleAddition(index, alias)"
               >
-                <v-list-tile-title>{{ alias }}</v-list-tile-title>
-              </v-list-tile>
+                <v-list-item-title>{{ alias }}</v-list-item-title>
+              </v-list-item>
             </v-list>
           </v-menu>
         </div>

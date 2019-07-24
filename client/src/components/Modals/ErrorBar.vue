@@ -2,7 +2,6 @@
   <v-snackbar
     top
     right
-    auto-height
     v-model="visible"
     color="error"
     vertical
@@ -16,7 +15,7 @@
         {{ errorBarContent.body }}
       </code>
     </div>
-    <v-btn dark flat @click="clearErrorBarContent">
+    <v-btn dark text @click="clearErrorBarContent">
       Close
     </v-btn>
   </v-snackbar>

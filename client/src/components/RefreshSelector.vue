@@ -2,7 +2,7 @@
   <span>
     <v-btn
       icon
-      flat
+      text
       style="display:inline-block"
       @click="setRefreshEnabled(!settingsRefreshEnabled)"
     >

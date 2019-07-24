@@ -1,13 +1,13 @@
 <template>
   <v-layout>
-    <v-flex xs7 class="pr-3">
+    <v-flex xs7 class="pr-4">
       <v-header sub>Index Templates</v-header>
       <v-data-table
         :headers="headers"
         :items="templates"
         class="elevation-1 small-table"
         item-key="name"
-        :rows-per-page-items="[30, 100, 200]"
+        :footer-props="{ 'items-per-page-options': [30, 100, 200] }"
       >
         <template v-slot:items="props">
           <tr>
@@ -25,13 +25,13 @@
         </template>
       </v-data-table>
     </v-flex>
-    <v-flex xs5 class="pl-3">
+    <v-flex xs5 class="pl-4">
       <v-header sub>{{ isNew ? "Create" : "Edit" }} Template</v-header>
       <v-text-field label="Template name*" v-model="templateName" />
       <query-editor style="height: 70vh;" :init="base" ref="editor" />
       <v-btn
         block
-        class="mt-4"
+        class="mt-6"
         color="success"
         :disabled="!templateName"
         @click="submit"

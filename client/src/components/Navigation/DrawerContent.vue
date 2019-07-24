@@ -1,11 +1,11 @@
 <template>
   <v-list>
-    <v-list-tile v-for="page in pages" :key="page.to" :to="page.to">
-      <v-list-tile-action>
+    <v-list-item v-for="page in pages" :key="page.to" :to="page.to">
+      <v-list-item-action>
         <v-icon>{{ page.icon }}</v-icon>
-      </v-list-tile-action>
-      <v-list-tile-title>{{ page.name }}</v-list-tile-title>
-    </v-list-tile>
+      </v-list-item-action>
+      <v-list-item-title>{{ page.name }}</v-list-item-title>
+    </v-list-item>
   </v-list>
 </template>
 

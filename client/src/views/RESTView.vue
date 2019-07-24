@@ -9,21 +9,21 @@
           autofocus
         />
       </v-flex>
-      <v-flex style="flex: 10" class="ml-3">
+      <v-flex style="flex: 10" class="ml-4">
         <endpoint-auto-completer
           @change="selectRoute"
           :method="method"
           :path="path"
         />
       </v-flex>
-      <v-flex style="flex: 1" class="ml-3">
+      <v-flex style="flex: 1" class="ml-4">
         <v-btn color="success" @click="onClick">Send</v-btn>
       </v-flex>
     </v-layout>
     <v-layout>
       <transition name="slide-fade-reverse">
         <v-flex
-          class="mr-3"
+          class="mr-4"
           style="flex: 10; margin-top:48px"
           v-show="panes.includes('editor')"
         >

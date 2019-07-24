@@ -5,13 +5,13 @@
         <div class="node-name ml-1" v-on="on">{{ nodeName }}</div>
       </template>
       <v-list dense>
-        <v-list-tile @click="$router.push(`/node/${nodeName}`)">
-          <v-list-tile-title>Show Info</v-list-tile-title>
-        </v-list-tile>
+        <v-list-item @click="$router.push(`/node/${nodeName}`)">
+          <v-list-item-title>Show Info</v-list-item-title>
+        </v-list-item>
 
-        <v-list-tile :disabled="!isSuitableForRelocation" @click="relocate">
-          <v-list-tile-title>Relocate</v-list-tile-title>
-        </v-list-tile>
+        <v-list-item :disabled="!isSuitableForRelocation" @click="relocate">
+          <v-list-item-title>Relocate</v-list-item-title>
+        </v-list-item>
       </v-list>
     </v-menu>
     <div class="ip ml-1 mb-2">{{ nodeIp }}</div>

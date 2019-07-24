@@ -12,7 +12,7 @@
     />
     <v-btn
       block
-      class="mt-4"
+      class="mt-6"
       color="success"
       :disabled="selectedIndices.length === 0 || !name || !repo"
     >

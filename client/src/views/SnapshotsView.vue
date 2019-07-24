@@ -1,10 +1,10 @@
 <template>
   <v-layout>
-    <v-flex xs7 class="pr-3">
+    <v-flex xs7 class="pr-4">
       <v-header sub>Snapshots</v-header>
       <snapshot-list-table :repos="repos" />
     </v-flex>
-    <v-flex xs5 class="pl-3">
+    <v-flex xs5 class="pl-4">
       <v-header sub>Create a snapshot</v-header>
       <create-snapshot :repos="repos" />
     </v-flex>

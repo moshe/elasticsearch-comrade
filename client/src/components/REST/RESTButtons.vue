@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-btn
-      flat
+      text
       icon
       @click="toggle('editor')"
       v-if="!(show.length === 1 && show[0] === 'editor')"
@@ -13,7 +13,7 @@
     </v-btn>
     <div />
     <v-btn
-      flat
+      text
       icon
       @click="toggle('preview')"
       v-if="!(show.length === 1 && show[0] === 'preview')"

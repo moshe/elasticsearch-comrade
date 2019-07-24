@@ -2,9 +2,10 @@
   <v-data-table
     :headers="headers"
     :items="items"
-    class="elevation-1 mt-3 small-table"
-    :rows-per-page-items="[30, 100, 200]"
-    :pagination.sync="pagination"
+    class="elevation-1 mt-4 small-table"
+    :footer-props="{ 'items-per-page-options': [30, 100, 200] }"
+    sort-by="date"
+    :sort-desc="true"
   >
     <template v-slot:items="props">
       <td>{{ props.item.method }}</td>
@@ -46,7 +47,6 @@ export default {
   },
   data() {
     return {
-      pagination: { descending: true, sortBy: "date" },
       headers: [
         { text: "Method", value: "method" },
         { text: "Path", value: "path" },

@@ -1,6 +1,19 @@
-import Vue from "vue";
-import colors from "vuetify/es5/util/colors";
-import Vuetify from "vuetify/lib";
-import "vuetify/src/stylus/app.styl";
+// // import Vue from "vue";
+// // import Vuetify from "vuetify";
+// // import "vuetify/dist/vuetify.min.css";
+// // const opts = {
+// //   theme: {
+// //     dark: true
+// //   }
+// // };
+// // Vue.use(Vuetify, opts);
+// import Vue from "vue";
+// import Vuetify from "vuetify";
 
-Vue.use(Vuetify, { theme: { primary: colors.lightBlue.darken1 } });
+// Vue.use(Vuetify, {
+//   theme: { dark: true }
+// });
+
+// export default new Vuetify({
+//   theme: { dark: true }
+// });

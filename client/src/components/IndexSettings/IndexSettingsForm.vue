@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-header sub class="mt-4">{{ module.name }}</v-header>
+    <v-header sub class="mt-6">{{ module.name }}</v-header>
     <div v-for="line in module.description.split('\n')" :key="line">
       {{ line }}
     </div>
@@ -32,7 +32,7 @@
       </v-flex>
     </v-layout>
     <div v-for="(value, key) in changes" :key="key">
-      <v-btn flat icon small color="white" @click="handleChange({ name: key })">
+      <v-btn text text small color="white" @click="handleChange({ name: key })">
         <v-icon>clear</v-icon>
       </v-btn>
       {{ key }} changed from {{ value.from }} to {{ value.value }}

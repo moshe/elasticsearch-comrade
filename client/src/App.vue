@@ -1,14 +1,14 @@
 <template>
-  <v-app dark>
+  <v-app>
     <json-modal />
     <error-bar />
     <v-navigation-drawer v-model="drawer" absolute temporary>
       <drawer-content />
     </v-navigation-drawer>
-    <v-toolbar app v-if="connectedCluster">
-      <v-toolbar-side-icon @click="drawer = true" />
+    <v-app-bar app v-if="connectedCluster">
+      <v-app-bar-nav-icon @click="drawer = true" />
       <v-toolbar-title class="headline text-uppercase">
-        <status-dot :status="this.cluster.clusterStatus" class="mr-3" />
+        <status-dot :status="this.cluster.clusterStatus" class="mr-4" />
         <span @click="$router.push('/')" style="cursor: pointer">
           <span class="font-weight-light">Elasticsearch</span>
           <span class="font-weight-bold">Comrade</span>
@@ -16,10 +16,10 @@
       </v-toolbar-title>
       <v-spacer />
       <refresh-selector />
-      <v-btn icon flat @click="selectCluster(null)">
+      <v-btn icon text @click="selectCluster(null)">
         <v-icon>logout</v-icon>
       </v-btn>
-    </v-toolbar>
+    </v-app-bar>
 
     <v-content>
       <v-dialog v-model="loading" persistent width="500">
@@ -29,7 +29,7 @@
           </v-card-text>
         </v-card>
       </v-dialog>
-      <v-container fluid>
+      <v-container fluid class="pl-10 pr-10">
         <router-view v-if="connectedCluster" />
         <login v-else />
       </v-container>

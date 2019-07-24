@@ -2,16 +2,16 @@
   <div>
     <v-select v-model="inner" :items="indices" label="Select indices*" multiple>
       <template v-slot:prepend-item>
-        <v-list-tile ripple @click="toggle">
-          <v-list-tile-action>
+        <v-list-item ripple @click="toggle">
+          <v-list-item-action>
             <v-icon>{{ icon }}</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>
               {{ allSelected ? "Unselect all" : "Select All" }}
-            </v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
+            </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
       </template>
       <template v-slot:selection="{ item, index }">
         <v-chip v-if="value.length === indices.length && index === 0">

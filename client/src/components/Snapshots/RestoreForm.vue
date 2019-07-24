@@ -6,14 +6,14 @@
 
     <div class="restore-form" v-if="repo">
       <v-layout>
-        <v-flex class="pr-3" style="flex:1">
+        <v-flex class="pr-4" style="flex:1">
           <v-text-field
             v-model="renamePattern"
             label="Rename Pattern"
             placeholder="index_(.+)"
           />
         </v-flex>
-        <v-flex class="pr-3" style="flex:1">
+        <v-flex class="pr-4" style="flex:1">
           <v-text-field
             v-model="renameReplacement"
             label="Rename Replacement"
@@ -21,7 +21,7 @@
           />
         </v-flex>
       </v-layout>
-      <div style="font-size: 18px" class="mb-2 mt-3">Restore Options</div>
+      <div style="font-size: 18px" class="mb-2 mt-4">Restore Options</div>
       <doc-checkbox
         v-for="option in booleanOptions"
         :key="option.title"
@@ -29,9 +29,9 @@
         :doc="option.doc"
         :label="option.title"
       />
-      <div style="font-size: 18px" class="mt-3">Choose indices</div>
+      <div style="font-size: 18px" class="mt-4">Choose indices</div>
       <index-selector :indices="snapshot.indices" v-model="selectedIndices" />
-      <div style="font-size: 18px" class="mt-3">Override index Settings</div>
+      <div style="font-size: 18px" class="mt-4">Override index Settings</div>
       <query-editor ref="editor" :init="{ 'index.number_of_replicas': 0 }" />
     </div>
     <v-divider />

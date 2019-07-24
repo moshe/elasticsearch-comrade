@@ -1,7 +1,7 @@
 <template>
-  <v-list-tile @click="action" :disabled="disabled" style="margin-left:24px">
-    <v-list-tile-title>{{ title }}</v-list-tile-title>
-  </v-list-tile>
+  <v-list-item @click="action" :disabled="disabled" style="margin-left:24px">
+    <v-list-item-title>{{ title }}</v-list-item-title>
+  </v-list-item>
 </template>
 
 <script>

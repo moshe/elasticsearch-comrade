@@ -9,8 +9,9 @@
       :items="snapshots"
       class="elevation-1 small-table"
       item-key="id"
-      :rows-per-page-items="[30, 100, 200]"
-      :pagination.sync="pagination"
+      :footer-props="{ 'items-per-page-options': [30, 100, 200] }"
+      sort-by="start_time"
+      :sort-desc="true"
     >
       <template v-slot:items="props">
         <tr>
@@ -19,7 +20,7 @@
           <td>{{ props.item.state }}</td>
           <td>{{ parseInt(props.item.duration_in_millis / 1000) }}s</td>
           <td>
-            <v-btn flat icon small @click="showRestoreDialog(props.item)">
+            <v-btn text icon small @click="showRestoreDialog(props.item)">
               <v-icon small>settings_backup_restore</v-icon>
             </v-btn>
           </td>
@@ -62,7 +63,6 @@ export default {
   },
   data() {
     return {
-      pagination: { descending: true, sortBy: "start_time" },
       showDialog: false,
       snapshots: [],
       repo: "",
