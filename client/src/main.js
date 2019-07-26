@@ -26,11 +26,13 @@ new Vue({
       themes: {
         light: {
           blue1: colors.lightBlue.darken1,
-          blue2: colors.lightBlue.lighten1
+          blue2: colors.lightBlue.lighten1,
+          "bg-color": "#e9e9e9"
         },
         dark: {
           blue1: colors.lightBlue.darken1,
-          blue2: colors.lightBlue.darken2
+          blue2: colors.lightBlue.darken2,
+          "bg-color": "#595959"
         }
       }
     }

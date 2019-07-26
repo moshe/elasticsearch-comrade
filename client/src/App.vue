@@ -16,7 +16,7 @@
       </v-toolbar-title>
       <v-spacer />
       <refresh-selector />
-      <v-btn icon text @click="selectCluster(null)">
+      <v-btn icon @click="selectCluster(null)">
         <v-icon>logout</v-icon>
       </v-btn>
     </v-app-bar>
@@ -98,9 +98,9 @@ export default {
 
 <style>
 .theme--light.v-application {
-  background: #e9e9e9;
+  background-color: var(--v-bg-color-base);
 }
 .theme--dark.v-application {
-  background: var(--v-secondary-lighten1);
+  background-color: var(--v-bg-color-base);
 }
 </style>
