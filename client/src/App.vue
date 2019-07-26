@@ -96,4 +96,11 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style>
+.theme--light.v-application {
+  background: #e9e9e9;
+}
+.theme--dark.v-application {
+  background: var(--v-secondary-lighten1);
+}
+</style>
