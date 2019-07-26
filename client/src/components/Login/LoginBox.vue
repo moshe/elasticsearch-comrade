@@ -1,5 +1,5 @@
 <template>
-  <v-layout class="elevation-10 cluster" column>
+  <v-layout class="elevation-20 cluster" column>
     <v-flex>
       <div class="cluster-name">
         <status-dot :status="cluster.status" :size="20" />
@@ -30,7 +30,7 @@
             @click="selectCluster(null)"
             :disabled="!!cluster.error"
           >
-            <v-icon>arrow_forward</v-icon>
+            <v-icon color="white">arrow_forward</v-icon>
           </v-btn>
         </v-flex>
       </v-layout>
@@ -72,7 +72,7 @@ export default {
 
 <style scoped>
 .cluster-name {
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: var(--v-blue1-base);
   text-align: center;
   font-size: 30px;
   border-top-left-radius: 10px;
@@ -86,8 +86,9 @@ export default {
   margin: 20px;
   cursor: pointer;
   border-radius: 10px;
-  background-color: #666;
+  background-color: var(--v-blue2-base);
   height: 180px;
+  color: white;
 }
 
 .info-box {

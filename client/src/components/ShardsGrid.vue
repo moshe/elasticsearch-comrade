@@ -1,5 +1,5 @@
 <template>
-  <div class="shards-grid">
+  <div class="shards-grid" :style="cssProps">
     <cluster-info-boxes class="mt-4 mb-4" />
     <v-layout align-end justify-end row>
       <v-flex>
@@ -13,8 +13,16 @@
             />
           </v-flex>
           <v-flex>
-            <v-checkbox label="Show Hidden" v-model="showHidden" />
-            <v-checkbox label="Show Green Indices" v-model="showGreen" />
+            <v-checkbox
+              color="blue-grey lighten-4"
+              label="Show Hidden"
+              v-model="showHidden"
+            />
+            <v-checkbox
+              color="blue-grey lighten-4"
+              label="Show Green Indices"
+              v-model="showGreen"
+            />
           </v-flex>
         </v-layout>
       </v-flex>
@@ -25,7 +33,7 @@
           @click="page--"
           :disabled="page * perPage - perPage < 0"
         >
-          <v-icon>{{ $vuetify.icons.prev }}</v-icon>
+          <v-icon>mdi-chevron-left</v-icon>
         </v-btn>
         {{ page * perPage + 1 }} -
         {{ Math.min(page * perPage + perPage, indices.length) }} /
@@ -36,54 +44,50 @@
           @click="page++"
           :disabled="(page + 1) * perPage >= indices.length"
         >
-          <v-icon>{{ $vuetify.icons.next }}</v-icon>
+          <v-icon>mdi-chevron-right</v-icon>
         </v-btn>
       </v-flex>
     </v-layout>
-    <v-data-table :items="nodes" class="elevation-3" hide-default-footer>
-      <template slot="header">
-        <th class="pa-2">
+    <div class="elevation-3 shards-table">
+      <v-layout>
+        <v-flex class="pa-1 cell" style="flex:1.1">
           <cluster-cell />
-        </th>
-        <th class="pa-2" v-for="index of currentIndices" :key="index">
+        </v-flex>
+        <v-flex class="pa-1 cell" v-for="index of currentIndices" :key="index">
           <index-cell :indexName="index" />
-        </th>
-        <th
-          class="pl-1 pr-1"
+        </v-flex>
+        <v-flex
+          class="pa-1 cell"
           v-for="index of Math.abs(
             Math.min(currentIndices.length - perPage, 0)
           )"
           :key="index"
-        ></th>
-      </template>
-      <template v-slot:item="props">
-        <td class="pl-0 pr-0" style="max-width: 200px; min-width: 180px">
+        />
+      </v-layout>
+      <v-layout v-for="node in nodes" :key="node.name">
+        <v-flex class="cell pa-1" style="flex:1.1">
           <node-cell
-            :node-name="props.item.name"
-            :node-ip="props.item.ip"
-            :metrics="props.item.metrics"
+            :node-name="node.name"
+            :node-ip="node.ip"
+            :metrics="node.metrics"
           />
-        </td>
-        <td
-          v-for="index of currentIndices"
-          :key="index"
-          class="pa-1 shards-cell"
-        >
+        </v-flex>
+        <v-flex v-for="index of currentIndices" :key="index" class="pa-1 cell">
           <shards-cell
-            :node-name="props.item.name"
-            :index="props.item.indices[index]"
+            :node-name="node.name"
+            :index="node.indices[index]"
             :index-name="index"
           />
-        </td>
-        <td
+        </v-flex>
+        <v-flex
           v-for="index in Math.abs(
             Math.min(currentIndices.length - perPage, 0)
           )"
           :key="index"
-          class="pa-1 shards-cell"
+          class="pa-1 cell"
         />
-      </template>
-    </v-data-table>
+      </v-layout>
+    </div>
   </div>
 </template>
 
@@ -125,19 +129,26 @@ export default {
         .filter(index =>
           this.showGreen ? true : this.indicesInfo[index].unassignedShards
         );
+    },
+    cssProps() {
+      return {
+        "--border-color": this.$vuetify.theme.dark
+          ? "rgba(255, 255, 255, 0.14)"
+          : "rgba(0, 0, 0, 0.14)"
+      };
     }
   },
   data() {
     return {
       page: 0,
       indexSearch: "",
-      perPage: 5,
+      perPage: 6,
       showHidden: true,
       showGreen: true
     };
   },
   watch: {
-    indices() {
+    indexSearch() {
       this.page = 0;
     }
   }
@@ -145,17 +156,19 @@ export default {
 </script>
 
 <style>
-.shards-cell {
-  border-left: 1px solid rgba(255, 255, 255, 0.12);
-  min-width: 200px;
-}
-th,
-td {
-  vertical-align: top;
+.cell {
+  border-left: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  flex: 1;
 }
 
 div.v-text-field__details {
   display: none;
+}
+
+.shards-table {
+  border-top: 1px solid var(--border-color);
+  border-right: 1px solid var(--border-color);
 }
 
 .shards-grid .v-input--selection-controls {

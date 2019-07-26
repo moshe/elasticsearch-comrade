@@ -1,5 +1,24 @@
 <template>
   <v-layout wrap>
+    <v-flex xs12>
+      <v-btn
+        :color="color"
+        v-for="color in [
+          'primary',
+          'secondary',
+          'accent',
+          'info',
+          'warning',
+          'error',
+          'success',
+          'blue1',
+          'blue2'
+        ]"
+        :key="color"
+      >
+        {{ color }}
+      </v-btn>
+    </v-flex>
     <v-flex
       v-for="cluster in clusters"
       :key="cluster.name"
