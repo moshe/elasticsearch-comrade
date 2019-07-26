@@ -10,10 +10,10 @@
   >
     <template v-slot:item="{ index, item }">
       <v-list-item-content>
-        <v-chip dark label small> {{ item.method }} {{ item.path }} </v-chip>
+        <div>{{ item.method }} {{ item.path }}</div>
       </v-list-item-content>
       <v-list-item-action>
-        <v-chip dark label small color="success">{{ item.name }}</v-chip>
+        <v-chip label small color="success">{{ item.name }}</v-chip>
       </v-list-item-action>
     </template>
   </v-combobox>

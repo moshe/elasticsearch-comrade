@@ -25,7 +25,7 @@
         />
       </div>
     </template>
-    <v-list dense>
+    <v-list dense class="shard-list">
       <v-list-item disabled v-if="isRelocating">
         <v-list-item-action style="min-width: unset" class="pr-2">
           <v-icon style="font-size: 16px" disabled>computer</v-icon>
@@ -118,9 +118,11 @@ export default {
 .shard-square {
   display: inline-block;
   height: 20px;
+  line-height: 20px;
   width: 20px;
   text-align: center;
   cursor: pointer;
+  font-size: 14px;
 }
 
 .primary-shard {
@@ -151,10 +153,8 @@ export default {
   cursor: unset;
 }
 
-.v-list--dense .v-list__tile:not(.v-list__tile--avatar) {
-  height: unset;
-}
-.v-progress-linear {
-  overflow: unset;
+.shard-list .v-list-item {
+  min-height: 0;
+  height: 24px;
 }
 </style>

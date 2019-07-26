@@ -77,8 +77,8 @@ export default {
 };
 </script>
 
-<style scoped>
-.v-btn--small {
+<style>
+button.v-size--small {
   height: 18px;
   padding: 3px 7px;
   font-size: 9px !important;

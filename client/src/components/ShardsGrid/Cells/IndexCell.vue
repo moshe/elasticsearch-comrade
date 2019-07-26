@@ -3,15 +3,19 @@
     <v-flex>
       <v-menu offset-y style="display: inline-block">
         <template v-slot:activator="{ on }">
-          <!-- eslint-disable-next-line prettier/prettier -->
-          <div class="index-name" v-on="on">{{ indexName }}{{ index.status === "close" ? " (closed)" : "" }}</div>
+          <div class="index-name" v-on="on">
+            <v-icon size="14">menu</v-icon> {{ indexName
+            }}{{ index.status === "close" ? " (closed)" : "" }}
+          </div>
         </template>
         <v-list dense>
-          <v-list-item class="success--text pt-1">
-            <v-list-item-action style="min-width: 24px" class="pr-2">
-              <v-icon size="14">build</v-icon>
+          <v-list-item>
+            <v-list-item-action>
+              <v-icon size="14" color="success lighten-2">build</v-icon>
             </v-list-item-action>
-            <v-list-item-title>Actions</v-list-item-title>
+            <v-list-item-title class="success--text text--lighten-2">
+              Actions
+            </v-list-item-title>
           </v-list-item>
           <v-divider />
 
@@ -41,20 +45,24 @@
             :disabled="isClosed"
           />
           <v-list-item class="success--text pt-1">
-            <v-list-item-action style="min-width: 24px" class="pr-2">
-              <v-icon size="14">visibility</v-icon>
+            <v-list-item-action class="pr-2">
+              <v-icon size="14" color="success lighten-2">visibility</v-icon>
             </v-list-item-action>
-            <v-list-item-title>Inspect</v-list-item-title>
+            <v-list-item-title class="success--text text--lighten-2">
+              Inspect
+            </v-list-item-title>
           </v-list-item>
           <v-divider />
           <list-tile :action="showMapping" title="Show Mapping" />
           <list-tile :action="showSettings" title="Show Settings" />
           <list-tile :action="showHead" title="Head" :disabled="isClosed" />
           <v-list-item class="success--text pt-1">
-            <v-list-item-action style="min-width: 24px" class="pr-2">
-              <v-icon size="14">settings</v-icon>
+            <v-list-item-action class="pr-2">
+              <v-icon size="14" color="success lighten-2">settings</v-icon>
             </v-list-item-action>
-            <v-list-item-title>Configure</v-list-item-title>
+            <v-list-item-title class="success--text text--lighten-2">
+              Configure
+            </v-list-item-title>
           </v-list-item>
           <v-divider />
           <list-tile
@@ -63,10 +71,12 @@
             :disabled="isClosed"
           />
           <v-list-item class="success--text pt-1">
-            <v-list-item-action style="min-width: 24px" class="pr-2">
-              <v-icon size="14">error_outline</v-icon>
+            <v-list-item-action class="pr-2">
+              <v-icon size="14" color="error lighten-2">error_outline</v-icon>
             </v-list-item-action>
-            <v-list-item-title>Danger</v-list-item-title>
+            <v-list-item-title class="error--text text--lighten-2">
+              Danger
+            </v-list-item-title>
           </v-list-item>
           <v-divider />
           <list-tile
@@ -77,10 +87,10 @@
       </v-menu>
     </v-flex>
     <v-flex>
-      <v-layout justify-start align-start>
-        <v-flex v-for="alias in index.aliases" :key="alias" shrink>
+      <v-layout justify-start align-start wrap>
+        <v-flex shrink v-for="alias in index.aliases" :key="alias">
           <v-chip
-            small
+            x-small
             label
             style="margin-right: 6px"
             color="blue-grey lighten-4"
@@ -94,21 +104,29 @@
     </v-flex>
 
     <v-flex>
-      <v-layout v-if="isOpen" row>
-        <v-flex shrink>
-          <v-chip small label style="margin-right: 6px">
-            shards: {{ index.primaries }} * {{ index.replicas }}
-          </v-chip>
-        </v-flex>
-        <v-flex shrink>
-          <v-chip small label style="margin-right: 6px">
-            docs: {{ index.docsCount.toLocaleString() }}
-          </v-chip>
-        </v-flex>
-        <v-flex shrink>
-          <v-chip small label> size:{{ index.storeSize }}</v-chip>
-        </v-flex>
-      </v-layout>
+      <div v-if="isOpen">
+        <v-chip
+          color="grey darken-3"
+          text-color="white"
+          x-small
+          label
+          style="margin-right: 6px"
+        >
+          shards: {{ index.primaries }} * {{ index.replicas + 1 }}
+        </v-chip>
+        <v-chip
+          color="grey darken-3"
+          text-color="white"
+          x-small
+          label
+          style="margin-right: 6px"
+        >
+          docs: {{ index.docsCount.toLocaleString() }}
+        </v-chip>
+        <v-chip color="grey darken-3" text-color="white" x-small label>
+          size:{{ index.storeSize }}</v-chip
+        >
+      </div>
     </v-flex>
     <v-flex style="text-align: left" v-if="index.unassignedShards" class="mt-2">
       <shard-square
@@ -173,30 +191,29 @@ export default {
   min-height: 90px;
   user-select: text;
 }
+.index-cell .v-chip {
+  padding: 0 4px;
+}
 .index-name {
   font-size: 16px;
   cursor: pointer;
   text-align: left;
-  word-wrap: break-word;
-  white-space: pre-wrap;
-  white-space: -o-pre-wrap;
-  white-space: -moz-pre-wrap;
-  white-space: -pre-wrap;
+  white-space: -moz-pre-wrap; /* Mozilla */
+  white-space: -hp-pre-wrap; /* HP printers */
+  white-space: -o-pre-wrap; /* Opera 7 */
+  white-space: -pre-wrap; /* Opera 4-6 */
+  white-space: pre-wrap; /* CSS 2.1 */
+  white-space: pre-line; /* CSS 3 (and 2.1 as well, actually) */
+  word-wrap: break-word; /* IE */
+  word-break: break-all;
 }
 
-.index-cell .v-chip--small {
-  font-size: 9px;
-  height: 16px !important;
+.v-list-item--dense,
+.v-list--dense .v-list-item {
+  min-height: 28px;
 }
-
-.index-cell .v-chip .v-chip__content {
-  padding: 0 3px;
-}
-.index-cell .v-chip {
-  margin: 0;
-}
-
-.v-list--dense .v-subheader {
-  height: 28px !important;
+.v-list-item__action:first-child,
+.v-list-item__icon:first-child {
+  margin-right: 0;
 }
 </style>
