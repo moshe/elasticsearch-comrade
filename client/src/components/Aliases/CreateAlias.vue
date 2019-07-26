@@ -35,13 +35,14 @@
       <v-flex><div style="font-size: 18px">Filter</div></v-flex>
       <v-layout>
         <v-flex class="pr-4" style="flex:1">
-          <query-editor ref="editor" style="height: 400px;" />
+          <query-editor ref="editor" style="height: 300px;" />
         </v-flex>
       </v-layout>
     </v-layout>
     <v-btn
       color="success"
       @click="submit"
+      class="mt-3"
       :disabled="!(selectedIndices.length && aliasName)"
     >
       Add

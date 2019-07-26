@@ -6,7 +6,7 @@
     label
     outlined
     small
-    @input="handleRemove"
+    @click:close="handleRemove"
   >
     <span :class="removed ? 'removed' : added ? 'added' : null">
       {{ alias }}

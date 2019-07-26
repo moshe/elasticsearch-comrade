@@ -2,7 +2,7 @@
   <div>
     <v-header sub>Pending Actions</v-header>
     <div v-for="(action, index) in pendingActions" :key="index">
-      <v-btn text icon small @click="$emit('removeAction', action)">
+      <v-btn icon x-small @click="$emit('removeAction', action)">
         <v-icon>clear</v-icon>
       </v-btn>
       <span v-if="action.action === 'remove'">
@@ -32,8 +32,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.v-btn--icon.v-btn--small {
-  margin: 0;
-}
-</style>
+<style scoped></style>
