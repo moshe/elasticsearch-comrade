@@ -10,6 +10,7 @@
               label="Filter indices"
               v-model="indexSearch"
               class="pr-6"
+              hide-details
             />
           </v-flex>
           <v-flex>
@@ -17,11 +18,13 @@
               color="blue-grey lighten-4"
               label="Show Hidden"
               v-model="showHidden"
+              hide-details
             />
             <v-checkbox
               color="blue-grey lighten-4"
               label="Show Green Indices"
               v-model="showGreen"
+              hide-details
             />
           </v-flex>
         </v-layout>
@@ -162,26 +165,8 @@ export default {
   flex: 1;
 }
 
-div.v-text-field__details {
-  display: none;
-}
-
 .shards-table {
   border-top: 1px solid var(--border-color);
   border-right: 1px solid var(--border-color);
-}
-
-.shards-grid .v-input--selection-controls {
-  margin: 0;
-  padding: 0;
-}
-.shards-grid .v-messages {
-  min-height: 0px;
-}
-
-.shards-grid
-  .v-input--selection-controls:not(.v-input--hide-details)
-  .v-input__slot {
-  margin-bottom: 0;
 }
 </style>

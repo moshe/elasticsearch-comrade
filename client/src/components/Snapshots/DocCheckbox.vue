@@ -45,17 +45,4 @@ export default {
 };
 </script>
 
-<style>
-.doc-checkbox .v-messages {
-  min-height: 0px;
-}
-
-.v-input--selection-controls {
-  margin-top: 0;
-  padding-top: 0;
-}
-
-.v-input--selection-controls:not(.v-input--hide-details) .v-input__slot {
-  margin-bottom: 0;
-}
-</style>
+<style scoped></style>

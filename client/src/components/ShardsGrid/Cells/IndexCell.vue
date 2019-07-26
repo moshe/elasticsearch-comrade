@@ -186,18 +186,12 @@ export default {
 </script>
 
 <style>
-.index-cell {
-  max-width: 15vw;
-  min-height: 90px;
-  user-select: text;
-}
 .index-cell .v-chip {
   padding: 0 4px;
 }
 .index-name {
   font-size: 16px;
   cursor: pointer;
-  text-align: left;
   white-space: -moz-pre-wrap; /* Mozilla */
   white-space: -hp-pre-wrap; /* HP printers */
   white-space: -o-pre-wrap; /* Opera 7 */
@@ -206,14 +200,5 @@ export default {
   white-space: pre-line; /* CSS 3 (and 2.1 as well, actually) */
   word-wrap: break-word; /* IE */
   word-break: break-all;
-}
-
-.v-list-item--dense,
-.v-list--dense .v-list-item {
-  min-height: 28px;
-}
-.v-list-item__action:first-child,
-.v-list-item__icon:first-child {
-  margin-right: 0;
 }
 </style>

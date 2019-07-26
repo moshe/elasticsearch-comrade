@@ -1,7 +1,13 @@
 <template>
   <v-menu offset-y>
     <template v-slot:activator="{ on }">
-      <v-btn small color="accent" v-on="on" :disabled="loading">
+      <v-btn
+        class="allocation-button"
+        small
+        color="accent"
+        v-on="on"
+        :disabled="loading"
+      >
         <v-icon size="12px" dark class="mr-1">{{ icon }}</v-icon>
         Allocation
       </v-btn>
@@ -78,13 +84,10 @@ export default {
 </script>
 
 <style>
-button.v-size--small {
-  height: 18px;
-  padding: 3px 7px;
+.allocation-button.v-size--small {
+  height: 18px !important;
+  padding: 3px 7px !important;
   font-size: 9px !important;
-  margin: 0;
-}
-.v-btn {
-  min-width: 50px;
+  margin: 0 !important;
 }
 </style>

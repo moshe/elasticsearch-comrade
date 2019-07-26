@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-flex><v-header sub>Manage Aliases</v-header></v-flex>
+    <v-header sub>Manage Aliases</v-header>
     <v-text-field solo label="Filter Aliases / Indices" v-model="filter" />
     <div v-for="index in Object.keys(indices)" :key="index">
       <div
@@ -11,7 +11,7 @@
         "
       >
         <div style="font-size:15px">
-          <v-btn text icon small class="ma-0" @click="handleRemoveIndex(index)">
+          <v-btn icon small @click="handleRemoveIndex(index)">
             <v-icon size="18">clear</v-icon>
           </v-btn>
           {{ index }}
@@ -37,7 +37,7 @@
         <div style="display: inline-block">
           <v-menu offset-y>
             <template v-slot:activator="{ on }">
-              <v-btn text icon color="orange" class="ma-0" v-on="on">
+              <v-btn icon color="orange" v-on="on">
                 <v-icon>add</v-icon>
               </v-btn>
             </template>
