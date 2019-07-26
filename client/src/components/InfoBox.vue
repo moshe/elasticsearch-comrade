@@ -15,7 +15,7 @@ export default {
 
 <style scoped>
 .info-square {
-  border: 8px solid #424242;
+  border: 8px solid var(--border-color);
   border-radius: 4px;
   text-align: center;
   font-size: 20px;
