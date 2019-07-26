@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-layout>
+    <v-layout align-baseline>
       <v-flex style="flex: 2">
         <v-autocomplete
           v-model="method"
@@ -21,49 +21,42 @@
       </v-flex>
     </v-layout>
     <v-layout>
-      <transition name="slide-fade-reverse">
-        <v-flex
-          class="mr-4"
-          style="flex: 10; margin-top:48px"
-          v-show="panes.includes('editor')"
-        >
-          <query-editor
-            style="height: 700px;"
-            ref="editor"
-            @execute="onClick"
-          />
-        </v-flex>
-      </transition>
+      <v-flex
+        class="mr-4"
+        xs6
+        style="margin-top:48px"
+        v-show="panes.includes('editor')"
+      >
+        <query-editor style="height: 700px;" ref="editor" @execute="onClick" />
+      </v-flex>
       <v-flex shrink>
         <r-e-s-t-buttons style="margin-top: 70px" :panes.sync="panes" />
       </v-flex>
-      <transition name="slide-fade">
-        <v-flex v-show="panes.includes('preview')" style="flex: 10">
-          <v-tabs color="#303030">
-            <v-tab>Response</v-tab>
-            <v-tab>History</v-tab>
-            <v-tab>Starred</v-tab>
-            <v-tab-item>
-              <query-editor style="height: 700px;" ref="preview" read-only />
-            </v-tab-item>
-            <v-tab-item>
-              <query-history
-                @query="setQueryFromHistory"
-                ref="history"
-                storeName="history"
-                @star="x => $refs.starred.addEntry(x)"
-              />
-            </v-tab-item>
-            <v-tab-item>
-              <query-history
-                @query="setQueryFromHistory"
-                ref="starred"
-                storeName="starred"
-              />
-            </v-tab-item>
-          </v-tabs>
-        </v-flex>
-      </transition>
+      <v-flex xs6 v-show="panes.includes('preview')">
+        <v-tabs background-color="#303030">
+          <v-tab>Response</v-tab>
+          <v-tab>History</v-tab>
+          <v-tab>Starred</v-tab>
+          <v-tab-item>
+            <query-editor style="height: 700px;" ref="preview" read-only />
+          </v-tab-item>
+          <v-tab-item eager>
+            <query-history
+              @query="setQueryFromHistory"
+              ref="history"
+              storeName="history"
+              @star="x => $refs.starred.addEntry(x)"
+            />
+          </v-tab-item>
+          <v-tab-item>
+            <query-history
+              @query="setQueryFromHistory"
+              ref="starred"
+              storeName="starred"
+            />
+          </v-tab-item>
+        </v-tabs>
+      </v-flex>
     </v-layout>
   </div>
 </template>
@@ -122,24 +115,4 @@ export default {
 };
 </script>
 
-<style>
-.slide-fade-enter-active,
-.slide-fade-reverse-enter-active {
-  transition: all 0.3s ease;
-}
-.slide-fade-leave-active,
-.slide-fade-reverse-leave-active {
-  transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
-}
-.slide-fade-enter,
-.slide-fade-leave-to {
-  transform: translateX(600px);
-  opacity: 0;
-}
-
-.slide-fade-reverse-enter,
-.slide-fade-reverse-leave-to {
-  transform: translateX(-600px);
-  opacity: 0;
-}
-</style>
+<style></style>
