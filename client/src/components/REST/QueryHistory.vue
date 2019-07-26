@@ -2,7 +2,7 @@
   <v-data-table
     :headers="headers"
     :items="items"
-    class="elevation-1 mt-4 small-table"
+    class="elevation-1 small-table"
     :footer-props="{ 'items-per-page-options': [30, 100, 200] }"
     sort-by="date"
     :sort-desc="true"

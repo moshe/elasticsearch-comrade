@@ -23,8 +23,7 @@
     <v-layout>
       <v-flex
         class="mr-4"
-        xs6
-        style="margin-top:48px"
+        style="margin-top:48px; flex:1"
         v-show="panes.includes('editor')"
       >
         <query-editor style="height: 700px;" ref="editor" @execute="onClick" />
@@ -32,12 +31,12 @@
       <v-flex shrink>
         <r-e-s-t-buttons style="margin-top: 70px" :panes.sync="panes" />
       </v-flex>
-      <v-flex xs6 v-show="panes.includes('preview')">
-        <v-tabs background-color="#303030">
+      <v-flex style="flex: 1" v-show="panes.includes('preview')">
+        <v-tabs background-color="bg-color">
           <v-tab>Response</v-tab>
           <v-tab>History</v-tab>
           <v-tab>Starred</v-tab>
-          <v-tab-item>
+          <v-tab-item eager>
             <query-editor style="height: 700px;" ref="preview" read-only />
           </v-tab-item>
           <v-tab-item eager>
@@ -48,7 +47,7 @@
               @star="x => $refs.starred.addEntry(x)"
             />
           </v-tab-item>
-          <v-tab-item>
+          <v-tab-item eager>
             <query-history
               @query="setQueryFromHistory"
               ref="starred"
