@@ -17,6 +17,11 @@
       item-value="value"
       label="Refresh Every"
     />
+    <v-switch
+      label="Dark"
+      v-model="$vuetify.theme.dark"
+      style="display: inline-block"
+    />
   </span>
 </template>
 
