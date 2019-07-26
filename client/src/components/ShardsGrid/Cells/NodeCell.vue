@@ -1,8 +1,11 @@
 <template>
-  <div class="ma-2">
+  <div>
     <v-menu offset-y style="display: inline-block">
       <template v-slot:activator="{ on }">
-        <div class="node-name ml-1" v-on="on">{{ nodeName }}</div>
+        <div class="node-name ml-1" v-on="on">
+          <v-icon size="14">menu</v-icon>
+          {{ nodeName }}
+        </div>
       </template>
       <v-list dense>
         <v-list-item @click="$router.push(`/node/${nodeName}`)">
@@ -14,8 +17,7 @@
         </v-list-item>
       </v-list>
     </v-menu>
-    <div class="ip ml-1 mb-2">{{ nodeIp }}</div>
-    <v-layout style="font-size: 8px">
+    <v-layout style="font-size: 8px" class="pt-1">
       <v-flex>
         <node-stat-bar :metric="metrics.heapPercent" name="HEAP" />
       </v-flex>
