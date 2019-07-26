@@ -2,7 +2,7 @@
   <v-app>
     <json-modal />
     <error-bar />
-    <v-navigation-drawer v-model="drawer" absolute temporary>
+    <v-navigation-drawer v-model="drawer" app temporary>
       <drawer-content />
     </v-navigation-drawer>
     <v-app-bar app v-if="connectedCluster">

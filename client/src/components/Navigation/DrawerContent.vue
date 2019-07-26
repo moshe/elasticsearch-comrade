@@ -1,10 +1,12 @@
 <template>
-  <v-list>
-    <v-list-item v-for="page in pages" :key="page.to" :to="page.to">
-      <v-list-item-action>
+  <v-list dense nav>
+    <v-list-item link v-for="page in pages" :key="page.to" :to="page.to">
+      <v-list-item-icon class="mr-4">
         <v-icon>{{ page.icon }}</v-icon>
-      </v-list-item-action>
-      <v-list-item-title>{{ page.name }}</v-list-item-title>
+      </v-list-item-icon>
+      <v-list-item-content>
+        <v-list-item-title>{{ page.name }}</v-list-item-title>
+      </v-list-item-content>
     </v-list-item>
   </v-list>
 </template>
