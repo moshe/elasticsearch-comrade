@@ -17,6 +17,9 @@ def get_client(request: Request, cluster: str = None) -> AsyncElasticsearch:
 
 def clients() -> dict:
     return {
+        "localhost": {
+            "hosts": ['http://localhost']
+        },
         "my-cluster": {
             "hosts": ['http://222.85.141.99']
         },
