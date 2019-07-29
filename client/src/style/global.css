@@ -2,3 +2,18 @@
   margin: 0;
   padding: 0;
 }
+
+body {
+font-size: 14px;
+}
+
+.theme--light.v-application {
+  background-color: var(--v-bg-color-base);
+}
+.theme--dark.v-application {
+  background-color: var(--v-bg-color-base);
+}
+
+.v-list--dense .v-list-item {
+    min-height: 20px;
+}
