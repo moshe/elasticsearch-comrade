@@ -1,7 +1,7 @@
 <template>
   <div class="shards-grid" :style="cssProps">
     <cluster-info-boxes class="mt-4 mb-4" />
-    <v-layout align-end justify-end row>
+    <v-layout class="mb-2">
       <v-flex>
         <v-layout>
           <v-flex xs4>
@@ -9,7 +9,6 @@
               clearable
               label="Filter indices"
               v-model="indexSearch"
-              class="pr-6"
               hide-details
             />
           </v-flex>
@@ -51,7 +50,7 @@
         </v-btn>
       </v-flex>
     </v-layout>
-    <div class="elevation-3 shards-table">
+    <div class="elevation-6 shards-table">
       <v-layout>
         <v-flex class="pa-1 cell" style="flex:1.1">
           <cluster-cell />

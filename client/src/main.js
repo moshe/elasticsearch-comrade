@@ -3,7 +3,8 @@ import Vue from "vue";
 import Router from "vue-router";
 import Vuetify from "vuetify";
 import "vuetify/dist/vuetify.min.css";
-import colors from "vuetify/es5/util/colors";
+import colors from "vuetify/lib/util/colors";
+import "../public/materialdesignicons.css";
 // import "./plugins/vuetify";
 import App from "./App.vue";
 import "./registerServiceWorker";
@@ -25,14 +26,11 @@ new Vue({
       options: { customProperties: true },
       themes: {
         light: {
-          blue1: colors.lightBlue.darken1,
-          blue2: colors.lightBlue.lighten1,
           "bg-color": "#e9e9e9"
         },
         dark: {
-          blue1: colors.lightBlue.darken1,
-          blue2: colors.lightBlue.darken2,
-          "bg-color": "#595959"
+          "bg-color": "#595959",
+          accent: colors.blueGrey
         }
       }
     }

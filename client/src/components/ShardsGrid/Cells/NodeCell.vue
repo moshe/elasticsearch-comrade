@@ -3,8 +3,8 @@
     <v-menu offset-y style="display: inline-block">
       <template v-slot:activator="{ on }">
         <div class="node-name ml-1" v-on="on">
-          <v-icon size="14">menu</v-icon>
           {{ nodeName }}
+          <v-icon size="14">mdi-menu-down</v-icon>
         </div>
       </template>
       <v-list dense>

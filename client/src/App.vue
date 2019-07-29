@@ -16,9 +16,6 @@
       </v-toolbar-title>
       <v-spacer />
       <refresh-selector />
-      <v-btn icon @click="selectCluster(null)">
-        <v-icon>logout</v-icon>
-      </v-btn>
     </v-app-bar>
 
     <v-content>
@@ -30,6 +27,27 @@
         </v-card>
       </v-dialog>
       <v-container fluid class="pl-10 pr-10">
+        <v-switch
+          label="Dark"
+          v-model="$vuetify.theme.dark"
+          style="display: inline-block"
+          class="mr-4"
+        />
+        <!-- <v-btn
+          :color="color"
+          v-for="color in [
+            'primary',
+            'secondary',
+            'accent',
+            'info',
+            'warning',
+            'error',
+            'success'
+          ]"
+          :key="color"
+        >
+          {{ color }}
+        </v-btn> -->
         <router-view v-if="connectedCluster" />
         <login v-else />
       </v-container>
@@ -96,11 +114,4 @@ export default {
 };
 </script>
 
-<style>
-.theme--light.v-application {
-  background-color: var(--v-bg-color-base);
-}
-.theme--dark.v-application {
-  background-color: var(--v-bg-color-base);
-}
-</style>
+<style></style>

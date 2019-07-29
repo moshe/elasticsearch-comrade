@@ -1,5 +1,5 @@
 <template>
-  <v-layout class="elevation-20 cluster" column>
+  <v-layout class="elevation-20 cluster" column :style="cssProps">
     <v-flex>
       <div class="cluster-name">
         <status-dot :status="cluster.status" :size="20" />
@@ -42,6 +42,7 @@
 import { GET } from "../../requests";
 import StatusDot from "../StatusDot.vue";
 import { clusterStatus } from "../../enums";
+import colors from "vuetify/es5/util/colors";
 
 export default {
   props: {
@@ -66,13 +67,23 @@ export default {
       this.cluster.status = clusterStatus.error;
       this.cluster.error = error;
     }
+  },
+  computed: {
+    cssProps() {
+      const { dark } = this.$vuetify.theme;
+      const { blueGrey } = colors;
+      return {
+        "--header-color": dark ? blueGrey.darken1 : blueGrey.lighten1,
+        "--body-color": dark ? blueGrey.darken2 : blueGrey.lighten2
+      };
+    }
   }
 };
 </script>
 
 <style scoped>
 .cluster-name {
-  background-color: var(--v-blue1-base);
+  background-color: var(--header-color);
   text-align: center;
   font-size: 30px;
   border-top-left-radius: 10px;
@@ -86,7 +97,7 @@ export default {
   margin: 20px;
   cursor: pointer;
   border-radius: 10px;
-  background-color: var(--v-blue2-base);
+  background-color: var(--body-color);
   height: 180px;
   color: white;
 }
