@@ -7,24 +7,24 @@
     sort-by="date"
     :sort-desc="true"
   >
-    <template v-slot:items="props">
-      <td>{{ props.item.method }}</td>
-      <td>{{ props.item.path }}</td>
-      <td>{{ fromNow(props.item.date) }}</td>
-      <td>{{ truncate(JSON.stringify(props.item.query), 50) }}</td>
-      <td>
-        <v-icon small @click="removeQuery(props.item)">clear</v-icon>
-        <v-icon small class="ml-1" @click="setQuery(props.item)">edit</v-icon>
-        <v-icon
-          small
-          color="yellow"
-          class="ml-1"
-          @click="$emit('star', props.item)"
-          v-if="storeName !== 'starred'"
-        >
-          {{ icon(props.item) }}
-        </v-icon>
-      </td>
+    <template v-slot:item.date="{ item }">
+      {{ fromNow(item.date) }}
+    </template>
+    <template v-slot:item.query="props">
+      {{ truncate(JSON.stringify(props.item.query), 50) }}
+    </template>
+    <template v-slot:item.actions="props">
+      <v-icon x-small @click="removeQuery(props.item)">clear</v-icon>
+      <v-icon x-small class="ml-1" @click="setQuery(props.item)">edit</v-icon>
+      <v-icon
+        x-small
+        color="yellow"
+        class="ml-1"
+        @click="$emit('star', props.item)"
+        v-if="storeName !== 'starred'"
+      >
+        {{ icon(props.item) }}
+      </v-icon>
     </template>
   </v-data-table>
 </template>
@@ -52,7 +52,7 @@ export default {
         { text: "Path", value: "path" },
         { text: "Date", value: "date" },
         { text: "Query", value: "query" },
-        { text: "Actions", value: "path" }
+        { text: "Actions", value: "actions" }
       ],
       items: []
     };
