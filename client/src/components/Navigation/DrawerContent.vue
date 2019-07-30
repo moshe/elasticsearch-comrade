@@ -8,7 +8,7 @@
         <v-list-item-title>{{ page.name }}</v-list-item-title>
       </v-list-item-content>
     </v-list-item>
-    <v-divider />
+    <v-divider class="mt-6" />
     <v-list-item @click="selectCluster(null)">
       <v-list-item-icon class="mr-4">
         <v-icon>logout</v-icon>
