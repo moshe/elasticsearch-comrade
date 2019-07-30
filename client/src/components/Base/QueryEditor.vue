@@ -5,8 +5,7 @@
 <script>
 import JSONEditor from "jsoneditor";
 import "jsoneditor/dist/jsoneditor.css";
-import colors from "vuetify/es5/util/colors";
-
+import colors from "vuetify/lib/util/colors";
 export default {
   props: {
     readOnly: {
@@ -61,8 +60,8 @@ export default {
     cssProps() {
       const { dark } = this.$vuetify.theme;
       return {
-        "--query-frame": dark ? colors.grey.darken4 : colors.grey.darken1,
-        "--marker": dark ? colors.grey.darken3 : colors.grey.darken2
+        "--query-frame": dark ? colors.grey.darken3 : colors.grey.darken1,
+        "--marker": dark ? colors.grey.darken2 : colors.grey.darken2
       };
     }
   }

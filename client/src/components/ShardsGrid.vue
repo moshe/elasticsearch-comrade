@@ -13,14 +13,8 @@
             />
           </v-flex>
           <v-flex>
+            <v-checkbox label="Show Hidden" v-model="showHidden" hide-details />
             <v-checkbox
-              color="blue-grey lighten-4"
-              label="Show Hidden"
-              v-model="showHidden"
-              hide-details
-            />
-            <v-checkbox
-              color="blue-grey lighten-4"
               label="Show Green Indices"
               v-model="showGreen"
               hide-details
