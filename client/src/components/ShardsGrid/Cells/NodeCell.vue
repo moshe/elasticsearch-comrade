@@ -3,12 +3,11 @@
     <v-menu offset-y style="display: inline-block">
       <template v-slot:activator="{ on }">
         <div class="node-name ml-1" v-on="on">
-          {{ nodeName }}
-          <v-icon size="14">mdi-menu-down</v-icon>
+          {{ nodeName }}<v-icon size="16">arrow_drop_down</v-icon>
         </div>
       </template>
       <v-list dense>
-        <v-list-item @click="$router.push(`/node/${nodeName}`)">
+        <v-list-item @click="$router.push(`/node/${nodeId}`)">
           <v-list-item-title>Show Info</v-list-item-title>
         </v-list-item>
 
@@ -43,6 +42,10 @@ export default {
   components: { NodeStatBar },
   props: {
     nodeName: {
+      required: true,
+      type: String
+    },
+    nodeId: {
       required: true,
       type: String
     },

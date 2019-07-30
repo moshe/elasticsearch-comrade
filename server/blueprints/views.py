@@ -52,12 +52,13 @@ async def get_nodes_info(request: Request) -> list:
     client = get_client(request)
     info = await client.nodes.stats(metric='jvm,os,fs')
     result = []
-    for node in info['nodes'].values():
+    for node_id, node in info['nodes'].items():
         result.append({
             "name": node["name"],
             "isMaster": False,
             "ip": node.get("ip", "no-ip"),
             "roles": node["roles"],
+            "id": node_id,
             "metrics": {
                 # Reduce precision in order to reduce render loops in UI
                 "CPUPercent": int(node['os']['cpu']['percent']),

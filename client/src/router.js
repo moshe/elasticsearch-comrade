@@ -49,7 +49,7 @@ export default new Router({
       props: true
     },
     {
-      path: "/node/:nodeName",
+      path: "/node/:nodeId",
       nodeName: "NodeInfo",
       component: NodeInfoView,
       props: true

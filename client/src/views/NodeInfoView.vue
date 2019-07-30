@@ -9,11 +9,9 @@
             </v-card-title>
             <v-divider />
             <v-list dense>
-              <v-list-item v-for="{ key, value } in items" :key="key">
+              <v-list-item v-for="(value, key) in items" :key="key">
                 <v-list-item-content>{{ key }}:</v-list-item-content>
-                <v-list-item-content class="align-end">
-                  {{ value }}
-                </v-list-item-content>
+                <v-list-item-content>{{ value }}</v-list-item-content>
               </v-list-item>
             </v-list>
           </v-card>
@@ -22,25 +20,36 @@
     </v-flex>
     <v-flex>
       <v-layout wrap>
-        <v-flex
-          xs6
-          v-for="x in [
-            Array.from({ length: 30 }, () =>
-              Math.ceil(Math.random() * (120 - 80) + 80)
-            ),
-            Array.from({ length: 30 }, () =>
-              Math.ceil(Math.random() * (120 - 80) + 80)
-            ),
-            Array.from({ length: 30 }, () =>
-              Math.ceil(Math.random() * (120 - 80) + 80)
-            ),
-            Array.from({ length: 30 }, () =>
-              Math.ceil(Math.random() * (120 - 80) + 80)
-            )
-          ]"
-          :key="x"
-          class="pa-2"
-        >
+        <v-flex xs12>
+          <v-header>Thread Pools</v-header>
+        </v-flex>
+        <v-flex xs4 class="pa-1">
+          <v-layout wrap>
+            <v-flex
+              xs3
+              v-for="(v, k) in threadPools"
+              :key="k"
+              class="pa-3"
+              :class="{ 'elevation-6': k === 'analyze' }"
+            >
+              <div style="font-size: 10px">{{ k }}</div>
+              <v-sparkline
+                key="15"
+                smooth
+                color="rgba(255, 255, 255, .7)"
+                :value="v['active']"
+                auto-draw
+                height="90px"
+                stroke-linecap="round"
+              >
+                <template v-slot:label="item">
+                  {{ item.index % 2 === 0 ? item.value : "" }}
+                </template>
+              </v-sparkline>
+            </v-flex>
+          </v-layout>
+        </v-flex>
+        <v-flex xs8 class="pa-1">
           <v-card class="mx-auto text-xs-center" color="green">
             <v-card-text>
               <v-sheet color="rgba(0, 0, 0, .12)">
@@ -48,7 +57,7 @@
                   key="15"
                   smooth
                   color="rgba(255, 255, 255, .7)"
-                  :value="x"
+                  :value="[1, 2, 3, 4]"
                   auto-draw
                   height="100"
                   padding="14"
@@ -67,41 +76,225 @@
         </v-flex>
       </v-layout>
     </v-flex>
+    <!-- <div v-for="stat in threadPools.search.active" :key="stat">
+      {{ stat }}
+    </div> -->
   </v-layout>
 </template>
 
 <script>
+import nodeApis from "../mixins/nodeApis";
+import VHeader from "../components/Base/Header.vue";
 export default {
+  props: {
+    nodeId: {
+      type: String,
+      required: true
+    }
+  },
+  mixins: [nodeApis],
+  components: { VHeader },
+  async created() {
+    this.cards = await this.getNodeInfo(this.nodeId);
+    setInterval(this.collect, 1000);
+    // this.collect();
+  },
+  methods: {
+    async collect() {
+      const stats = await this.getNodeStats(this.nodeId);
+      for (const [k, v] of Object.entries(stats.threadPool)) {
+        if (!this.threadPools[k]) {
+          // this.threadPools[k] = { active: [v["active"]] };
+        } else {
+          this.threadPools[k]["active"].push(v["active"]);
+        }
+      }
+    }
+  },
   data() {
     return {
       heartbeats: Array.from({ length: 30 }, () =>
         Math.ceil(Math.random() * (120 - 80) + 80)
       ),
-      cards: {
-        Details: [
-          { key: "ip", value: "10.31.45.13" },
-          { key: "Roles", value: "Data,Master" },
-          { key: "Home Path", value: "/mnt/data" },
-          { key: "Data Path", value: "/mnt/" },
-          { key: "Conf Path", value: "/mnt/conf" },
-          { key: "Logs Path", value: "/mnt/logs" }
-        ],
-        "Thread Pools": [
-          { key: "index", value: "0/10" },
-          { key: "search", value: "5/10" },
-          { key: "bulk", value: "2/18" },
-          { key: "get", value: "1/14" },
-          { key: "snapshot", value: "5/12" },
-          { key: "management", value: "12/12" }
-        ],
-        JVM: [
-          { key: "pid", value: "24258" },
-          { key: "version", value: "1.8.0_91" },
-          { key: "vm_name", value: "Java HotSpot(TM) 64-Bit Server VM" },
-          { key: "vm_vendor", value: "Oracle Corporation" },
-          { key: "uptime", value: "1 day ago" },
-          { key: "heap_max", value: "10gb" }
-        ]
+      cards: {},
+      stats: { threadPools: [123] },
+      threadPools: {
+        analyze: {
+          threads: [],
+          queue: [],
+          active: [],
+          rejected: [],
+          largest: [],
+          completed: []
+        },
+        data_frame_indexing: {
+          threads: [],
+          queue: [],
+          active: [],
+          rejected: [],
+          largest: [],
+          completed: []
+        },
+        fetch_shard_started: {
+          threads: [],
+          queue: [],
+          active: [],
+          rejected: [],
+          largest: [],
+          completed: []
+        },
+        fetch_shard_store: {
+          threads: [],
+          queue: [],
+          active: [],
+          rejected: [],
+          largest: [],
+          completed: []
+        },
+        flush: {
+          threads: [],
+          queue: [],
+          active: [],
+          rejected: [],
+          largest: [],
+          completed: []
+        },
+        force_merge: {
+          threads: [],
+          queue: [],
+          active: [],
+          rejected: [],
+          largest: [],
+          completed: []
+        },
+        generic: {
+          threads: [],
+          queue: [],
+          active: [],
+          rejected: [],
+          largest: [],
+          completed: []
+        },
+        get: {
+          threads: [],
+          queue: [],
+          active: [],
+          rejected: [],
+          largest: [],
+          completed: []
+        },
+        listener: {
+          threads: [],
+          queue: [],
+          active: [],
+          rejected: [],
+          largest: [],
+          completed: []
+        },
+        management: {
+          threads: [],
+          queue: [],
+          active: [],
+          rejected: [],
+          largest: [],
+          completed: []
+        },
+        ml_datafeed: {
+          threads: [],
+          queue: [],
+          active: [],
+          rejected: [],
+          largest: [],
+          completed: []
+        },
+        ml_job_comms: {
+          threads: [],
+          queue: [],
+          active: [],
+          rejected: [],
+          largest: [],
+          completed: []
+        },
+        ml_utility: {
+          threads: [],
+          queue: [],
+          active: [],
+          rejected: [],
+          largest: [],
+          completed: []
+        },
+        refresh: {
+          threads: [],
+          queue: [],
+          active: [],
+          rejected: [],
+          largest: [],
+          completed: []
+        },
+        rollup_indexing: {
+          threads: [],
+          queue: [],
+          active: [],
+          rejected: [],
+          largest: [],
+          completed: []
+        },
+        search: {
+          threads: [],
+          queue: [],
+          active: [],
+          rejected: [],
+          largest: [],
+          completed: []
+        },
+        search_throttled: {
+          threads: [],
+          queue: [],
+          active: [],
+          rejected: [],
+          largest: [],
+          completed: []
+        },
+        "security-token-key": {
+          threads: [],
+          queue: [],
+          active: [],
+          rejected: [],
+          largest: [],
+          completed: []
+        },
+        snapshot: {
+          threads: [],
+          queue: [],
+          active: [],
+          rejected: [],
+          largest: [],
+          completed: []
+        },
+        warmer: {
+          threads: [],
+          queue: [],
+          active: [],
+          rejected: [],
+          largest: [],
+          completed: []
+        },
+        watcher: {
+          threads: [],
+          queue: [],
+          active: [],
+          rejected: [],
+          largest: [],
+          completed: []
+        },
+        write: {
+          threads: [],
+          queue: [],
+          active: [],
+          rejected: [],
+          largest: [],
+          completed: []
+        }
       }
     };
   }

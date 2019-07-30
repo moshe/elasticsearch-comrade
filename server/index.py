@@ -8,6 +8,7 @@ from sanic.response import HTTPResponse, json
 from blueprints.alias import alias_bp
 from blueprints.cluster import cluster_bp
 from blueprints.index import index_bp
+from blueprints.node import node_bp
 from blueprints.rest import rest_bp
 from blueprints.snapshot import snapshot_bp
 from blueprints.task import task_bp
@@ -25,6 +26,7 @@ app.blueprint(alias_bp, url_prefix='/api/v1/alias')
 app.blueprint(task_bp, url_prefix='/api/v1/task')
 app.blueprint(snapshot_bp, url_prefix='/api/v1/snapshot')
 app.blueprint(template_bp, url_prefix='/api/v1/template')
+app.blueprint(node_bp, url_prefix='/api/v1/node')
 
 
 @app.route('/api/v1/clients')

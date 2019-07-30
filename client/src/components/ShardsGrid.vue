@@ -35,7 +35,7 @@
           @click="page--"
           :disabled="page * perPage - perPage < 0"
         >
-          <v-icon>mdi-chevron-left</v-icon>
+          <v-icon>navigate_before</v-icon>
         </v-btn>
         {{ page * perPage + 1 }} -
         {{ Math.min(page * perPage + perPage, indices.length) }} /
@@ -46,7 +46,7 @@
           @click="page++"
           :disabled="(page + 1) * perPage >= indices.length"
         >
-          <v-icon>mdi-chevron-right</v-icon>
+          <v-icon>navigate_next</v-icon>
         </v-btn>
       </v-flex>
     </v-layout>
@@ -71,6 +71,7 @@
           <node-cell
             :node-name="node.name"
             :node-ip="node.ip"
+            :node-id="node.id"
             :metrics="node.metrics"
           />
         </v-flex>
