@@ -9,7 +9,7 @@
       <v-icon>{{ settingsRefreshEnabled ? "stop" : "play_arrow" }}</v-icon>
     </v-btn>
     <v-select
-      style="display:inline-block; width: 200px"
+      style="display:inline-block;height: 0px"
       :value="{ value: settingsRefreshEvery }"
       @change="setRefreshEvery"
       :items="times"
@@ -33,12 +33,8 @@ export default {
       })
     };
   },
-  methods: {
-    ...mapMutations(["setRefreshEvery", "setRefreshEnabled"])
-  },
-  computed: {
-    ...mapState(["settingsRefreshEvery", "settingsRefreshEnabled"])
-  }
+  methods: { ...mapMutations(["setRefreshEvery", "setRefreshEnabled"]) },
+  computed: { ...mapState(["settingsRefreshEvery", "settingsRefreshEnabled"]) }
 };
 </script>
 

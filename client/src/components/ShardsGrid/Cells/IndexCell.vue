@@ -5,15 +5,18 @@
         <template v-slot:activator="{ on }">
           <div class="index-name" v-on="on">
             {{ indexName }}{{ index.status === "close" ? " (closed)" : "" }}
-            <v-icon size="14">mdi-menu-down</v-icon>
+            <v-icon size="16">arrow_drop_down</v-icon>
           </div>
         </template>
         <v-list dense>
           <v-list-item>
-            <v-list-item-action>
-              <v-icon size="14" color="success lighten-2">build</v-icon>
-            </v-list-item-action>
             <v-list-item-title class="success--text text--lighten-2">
+              <v-icon
+                size="14"
+                color="success lighten-2"
+                class="pr-2"
+                v-text="'build'"
+              />
               Actions
             </v-list-item-title>
           </v-list-item>
@@ -45,10 +48,13 @@
             :disabled="isClosed"
           />
           <v-list-item class="success--text pt-1">
-            <v-list-item-action class="pr-2">
-              <v-icon size="14" color="success lighten-2">visibility</v-icon>
-            </v-list-item-action>
             <v-list-item-title class="success--text text--lighten-2">
+              <v-icon
+                size="14"
+                color="success lighten-2"
+                class="pr-2"
+                v-text="'visibility'"
+              />
               Inspect
             </v-list-item-title>
           </v-list-item>
@@ -57,10 +63,13 @@
           <list-tile :action="showSettings" title="Show Settings" />
           <list-tile :action="showHead" title="Head" :disabled="isClosed" />
           <v-list-item class="success--text pt-1">
-            <v-list-item-action class="pr-2">
-              <v-icon size="14" color="success lighten-2">settings</v-icon>
-            </v-list-item-action>
             <v-list-item-title class="success--text text--lighten-2">
+              <v-icon
+                size="14"
+                color="success lighten-2"
+                class="pr-2"
+                v-text="'settings'"
+              />
               Configure
             </v-list-item-title>
           </v-list-item>
@@ -71,10 +80,13 @@
             :disabled="isClosed"
           />
           <v-list-item class="success--text pt-1">
-            <v-list-item-action class="pr-2">
-              <v-icon size="14" color="error lighten-2">error_outline</v-icon>
-            </v-list-item-action>
             <v-list-item-title class="error--text text--lighten-2">
+              <v-icon
+                size="14"
+                color="error lighten-2"
+                class="pr-2"
+                v-text="'error_outline'"
+              />
               Danger
             </v-list-item-title>
           </v-list-item>
@@ -96,7 +108,7 @@
             color="blue-grey lighten-4"
             text-color="grey darken-3"
           >
-            <v-icon size="12" class="mr-1">bookmark</v-icon>
+            <v-icon size="12" class="mr-1" v-text="'bookmark'" />
             {{ alias }}
           </v-chip>
         </v-flex>
