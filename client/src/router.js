@@ -1,15 +1,14 @@
 import Router from "vue-router";
-import CreateAliasesView from "./Views/AliasesView.vue";
-import Home from "./Views/Home.vue";
-import IndexSettingsView from "./Views/IndexSettingsView.vue";
-import NodeInfoView from "./Views/NodeInfoView.vue";
-import RESTView from "./Views/RESTView.vue";
-import TasksView from "./Views/TasksView.vue";
-import TemplatesView from "./Views/TemplatesView.vue";
+import AliasesView from "./views/AliasesView.vue";
+import Home from "./views/Home.vue";
+import IndexSettingsView from "./views/IndexSettingsView.vue";
+import NodeInfoView from "./views/NodeInfoView.vue";
+import RESTView from "./views/RESTView.vue";
+import TasksView from "./views/TasksView.vue";
+import TemplatesView from "./views/TemplatesView.vue";
 
 export default new Router({
   mode: "history",
-  base: process.env.BASE_URL,
   routes: [
     {
       path: "/",
@@ -24,7 +23,7 @@ export default new Router({
     {
       path: "/aliases",
       nodeName: "createAliases",
-      component: CreateAliasesView
+      component: AliasesView
     },
     {
       path: "/tasks",
@@ -35,7 +34,7 @@ export default new Router({
       path: "/snapshots",
       nodeName: "snapshots",
       component: () =>
-        import(/* webpackChunkName: "snapshots" */ "./Views/SnapshotsView.vue")
+        import(/* webpackChunkName: "snapshots" */ "./views/SnapshotsView.vue")
     },
     {
       path: "/templates",
