@@ -2,8 +2,21 @@
   <v-app>
     <json-modal />
     <error-bar />
-    <v-navigation-drawer v-model="drawer" app temporary>
+    <v-navigation-drawer v-model="drawer" app class="accent" temporary>
       <drawer-content />
+      <template v-slot:append>
+        <div class="pa-2">
+          <v-btn
+            block
+            @click="
+              selectCluster(null);
+              drawer = false;
+            "
+          >
+            Logout
+          </v-btn>
+        </div>
+      </template>
     </v-navigation-drawer>
     <v-app-bar app v-if="connectedCluster">
       <v-app-bar-nav-icon @click="drawer = true" />

@@ -1,27 +1,19 @@
 <template>
-  <v-list dense nav>
+  <v-list dense>
     <v-list-item link v-for="page in pages" :key="page.to" :to="page.to">
       <v-list-item-icon class="mr-4">
-        <v-icon>{{ page.icon }}</v-icon>
+        <v-icon color="white" v-text="page.icon" />
       </v-list-item-icon>
       <v-list-item-content>
-        <v-list-item-title>{{ page.name }}</v-list-item-title>
-      </v-list-item-content>
-    </v-list-item>
-    <v-divider class="mt-6" />
-    <v-list-item @click="selectCluster(null)">
-      <v-list-item-icon class="mr-4">
-        <v-icon>logout</v-icon>
-      </v-list-item-icon>
-      <v-list-item-content>
-        <v-list-item-title>Logout</v-list-item-title>
+        <v-list-item-title style="color: white">{{
+          page.name
+        }}</v-list-item-title>
       </v-list-item-content>
     </v-list-item>
   </v-list>
 </template>
 
 <script>
-import { mapMutations } from "vuex";
 export default {
   data() {
     return {
@@ -34,8 +26,7 @@ export default {
         { to: "/snapshots", icon: "backup", name: "Snapshots" }
       ]
     };
-  },
-  methods: { ...mapMutations(["selectCluster"]) }
+  }
 };
 </script>
 
