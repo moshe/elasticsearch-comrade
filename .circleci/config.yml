@@ -5,25 +5,25 @@ jobs:
    steps:
      - checkout
      - restore_cache:
-        key: v1-{{ .Branch }}
+        key: cache-{{ checksum "Dockerfile" }}
      - run:
-       name: Load Docker image layer cache
-       command: |
-         set +o pipefail
-         if [ -f /caches/${CIRCLE_PROJECT_REPONAME}.tar.gz ]; then gunzip -c /caches/${CIRCLE_PROJECT_REPONAME}.tar.gz | docker load; docker images; fi
-     # build the application image
+        name: Load Docker image layer cache
+        command: |
+          set +o pipefail
+          if [ -f caches/${CIRCLE_PROJECT_REPONAME}.tar.gz ]; then gunzip -c caches/${CIRCLE_PROJECT_REPONAME}.tar.gz | docker load; docker images; fi
      - run:
-       name: Build application Docker image
-       command: |
-         docker build -t --tag ${CIRCLE_PROJECT_REPONAME} .
+        name: Build application Docker image
+        command: |
+          docker build --tag ${CIRCLE_PROJECT_REPONAME} .
      - run:
-       name: Save Docker image layer cache
-       command: |
-         docker build --tag ${CIRCLE_PROJECT_REPONAME} . | grep '\-\-\->' | grep -v 'Using cache' | sed -e 's/[ >-]//g' > /tmp/layers.txt
-         docker save $(cat /tmp/layers.txt) | gzip < /caches/${CIRCLE_PROJECT_REPONAME}.tar.gz
+        name: Save Docker image layer cache
+        command: |
+          mkdir -p caches/
+          docker build --tag ${CIRCLE_PROJECT_REPONAME} . | grep '\-\-\->' | grep -v 'Using cache' | sed -e 's/[ >-]//g' > /tmp/layers.txt
+          docker save $(cat /tmp/layers.txt) | gzip > caches/${CIRCLE_PROJECT_REPONAME}.tar.gz
      - save_cache:
-       key: v1-{{ .Branch }}
-       paths:
-         - /caches/
+        key: cache-{{ checksum "Dockerfile" }}
+        paths:
+          - caches/
 
 
