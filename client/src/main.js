@@ -1,17 +1,17 @@
 import "@mdi/font/css/materialdesignicons.css";
+import "material-design-icons-iconfont/dist/material-design-icons.css";
 import Vue from "vue";
 import Router from "vue-router";
 import Vuetify from "vuetify";
 import "vuetify/dist/vuetify.min.css";
 import colors from "vuetify/lib/util/colors";
-import "../public/materialdesignicons.css";
-// import "./plugins/vuetify";
 import App from "./App.vue";
 import "./registerServiceWorker";
 import router from "./router";
 import store from "./store";
 import "./style/global.css";
 import "./style/smallTable.css";
+
 Vue.use(Vuetify);
 
 Vue.use(Router);
@@ -21,6 +21,9 @@ new Vue({
   router,
   store,
   vuetify: new Vuetify({
+    icons: {
+      iconfont: "md"
+    },
     theme: {
       dark: true,
       options: { customProperties: true },
