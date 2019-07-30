@@ -5,7 +5,9 @@ jobs:
    steps:
      - checkout
      - restore_cache:
-        key: cache-{{ checksum "Dockerfile" }}
+        keys:
+          - cache-{{ checksum "Dockerfile" }}-{{ .Branch }}
+          - cache-{{ checksum "Dockerfile" }}
      - run:
         name: Load Docker image layer cache
         command: |
@@ -22,7 +24,7 @@ jobs:
           docker build --tag ${CIRCLE_PROJECT_REPONAME} . | grep '\-\-\->' | grep -v 'Using cache' | sed -e 's/[ >-]//g' > /tmp/layers.txt
           docker save $(cat /tmp/layers.txt) | gzip > caches/${CIRCLE_PROJECT_REPONAME}.tar.gz
      - save_cache:
-        key: cache-{{ checksum "Dockerfile" }}
+        key: cache-{{ checksum "Dockerfile" }}-{{ .Branch }}
         paths:
           - caches/
 

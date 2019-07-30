@@ -5,3 +5,4 @@ server/venv
 Dockerfile
 .git
 README*.md
+cache
