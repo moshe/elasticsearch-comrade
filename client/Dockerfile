@@ -4,4 +4,4 @@ WORKDIR /usr/src/app
 COPY client/package*.json ./
 RUN npm ci --only=production && npm install @vue/cli
 ADD client/ ./
-RUN echo npm run build
+RUN npm run build
