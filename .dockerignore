@@ -6,3 +6,5 @@ Dockerfile
 .git
 README*.md
 caches
+.circleci
+workspace
