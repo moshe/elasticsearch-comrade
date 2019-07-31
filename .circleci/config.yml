@@ -1,6 +1,7 @@
 version: 2
 jobs:
   "build-client":
+      machine: true
       steps:
         - checkout
         - restore_cache:
