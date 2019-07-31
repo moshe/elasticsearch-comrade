@@ -32,7 +32,7 @@
       </v-flex>
     </v-layout>
     <div v-for="(value, key) in changes" :key="key">
-      <v-btn text text small color="white" @click="handleChange({ name: key })">
+      <v-btn text small color="white" @click="handleChange({ name: key })">
         <v-icon>clear</v-icon>
       </v-btn>
       {{ key }} changed from {{ value.from }} to {{ value.value }}
