@@ -32,9 +32,9 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-        keys:
-          - server-{{ checksum "Dockerfile" }}-{{ .Branch }}
-          - server-{{ checksum "Dockerfile" }}
+         keys:
+           - server-{{ checksum "Dockerfile" }}-{{ .Branch }}
+           - server-{{ checksum "Dockerfile" }}
       - run:
          name: Load Docker image layer cache
          command: |
