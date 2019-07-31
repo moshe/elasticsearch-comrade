@@ -23,10 +23,10 @@ jobs:
              mkdir -p caches/
              docker build --tag ${CIRCLE_PROJECT_REPONAME}-client -f client/Dockerfile . | grep '\-\-\->' | grep -v 'Using cache' | sed -e 's/[ >-]//g' > /tmp/layers-client.txt
              docker save $(cat /tmp/layers-client.txt) | gzip > caches/${CIRCLE_PROJECT_REPONAME}-client.tar.gz
-        - save_cache:
-          key: server-{{ checksum "Dockerfile" }}-{{ .Branch }}
-          paths:
-            - caches/
+             #        - save_cache:
+             #          key: server-{{ checksum "Dockerfile" }}-{{ .Branch }}
+             #          paths:
+             #            - caches/
   "build-server":
     machine: true
     steps:
@@ -50,10 +50,10 @@ jobs:
            mkdir -p caches/
            docker build --tag ${CIRCLE_PROJECT_REPONAME}-server -f server/Dockerfile . | grep '\-\-\->' | grep -v 'Using cache' | sed -e 's/[ >-]//g' > /tmp/layers-server.txt
            docker save $(cat /tmp/layers-server.txt) | gzip > caches/${CIRCLE_PROJECT_REPONAME}-server.tar.gz
-      - save_cache:
-         key: server-{{ checksum "Dockerfile" }}-{{ .Branch }}
-         paths:
-           - caches/
+           #      - save_cache:
+           #         key: server-{{ checksum "Dockerfile" }}-{{ .Branch }}
+           #         paths:
+           #           - caches/
   # build:
   #   machine: true
   #   steps:
