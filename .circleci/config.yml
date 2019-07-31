@@ -24,7 +24,7 @@ jobs:
              docker build --tag ${CIRCLE_PROJECT_REPONAME}-client -f client/Dockerfile . | grep '\-\-\->' | grep -v 'Using cache' | sed -e 's/[ >-]//g' > /tmp/layers-client.txt
              docker save $(cat /tmp/layers-client.txt) | gzip > caches/${CIRCLE_PROJECT_REPONAME}-client.tar.gz
         - save_cache:
-           key: server-{{ checksum "client/Dockerfile" }}-{{ .Branch }}
+           key: client-{{ checksum "client/Dockerfile" }}-{{ .Branch }}
            paths:
              - caches/
   "build-server":
@@ -54,34 +54,6 @@ jobs:
          key: server-{{ checksum "server/Dockerfile" }}-{{ .Branch }}
          paths:
            - caches/
-  # build:
-  #   machine: true
-  #   steps:
-  #     - checkout
-  #     - restore_cache:
-  #        keys:
-  #          - cache-{{ checksum "Dockerfile" }}-{{ .Branch }}
-  #          - cache-{{ checksum "Dockerfile" }}
-  #     - run:
-  #        name: Load Docker image layer cache
-  #        command: |
-  #          set +o pipefail
-  #          if [ -f caches/${CIRCLE_PROJECT_REPONAME}.tar.gz ]; then gunzip -c caches/${CIRCLE_PROJECT_REPONAME}.tar.gz | docker load; docker images; fi
-  #     - run:
-  #        name: Build application Docker image
-  #        command: |
-  #          docker build --tag ${CIRCLE_PROJECT_REPONAME} .
-  #     - run:
-  #        name: Save Docker image layer cache
-  #        command: |
-  #          mkdir -p caches/
-  #          docker build --tag ${CIRCLE_PROJECT_REPONAME} . | grep '\-\-\->' | grep -v 'Using cache' | sed -e 's/[ >-]//g' > /tmp/layers.txt
-  #          docker save $(cat /tmp/layers.txt) | gzip > caches/${CIRCLE_PROJECT_REPONAME}.tar.gz
-  #     - save_cache:
-  #        key: cache-{{ checksum "Dockerfile" }}-{{ .Branch }}
-  #        paths:
-  #          - caches/
-
 workflows:
   version: 2
   build_and_test:
