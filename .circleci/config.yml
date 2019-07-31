@@ -6,16 +6,13 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - client2-{{ checksum "client/Dockerfile" }}
+            - client3-{{ checksum "client/Dockerfile" }}
       - run:
           name: Load Docker image layer cache
-          command: |
-            set +o pipefail
-            if [ -f caches/client.tar ]; then docker load -i caches/client.tar; docker images; fi
+          command: test -f caches/client.tar && (docker load -i caches/client.tar) || echo 'Cache not found'
       - run:
           name: Build application Docker image
-          command: |
-            docker build --tag client -f client/Dockerfile .
+          command: docker build --tag client -f client/Dockerfile .
       - run:
           name: Save built docker to workspace
           command: |
@@ -29,6 +26,12 @@ jobs:
     machine: true
     steps:
       - checkout
+      - restore_cache:
+          keys:
+            - client3-{{ checksum "client/Dockerfile" }}
+      - run:
+          name: Load Docker image layer cache
+          command: test -f caches/client.tar && (docker load -i caches/client.tar) || echo 'Cache not found'
       - run:
          name: Save Docker image layer cache
          command: |
@@ -36,36 +39,9 @@ jobs:
            docker build --tag client -f client/Dockerfile .
            docker save $(docker history -q client | grep -v '^<missing>$') -o caches/client.tar
       - save_cache:
-          key: client2-{{ checksum "client/Dockerfile" }}
+          key: client3-{{ checksum "client/Dockerfile" }}
           paths:
             - caches/
-  "build-server":
-    machine: true
-    steps:
-      - checkout
-      - restore_cache:
-         keys:
-           - server-{{ checksum "server/Dockerfile" }}-{{ .Branch }}
-           - server-{{ checksum "server/Dockerfile" }}
-      - run:
-         name: Load Docker image layer cache
-         command: |
-           set +o pipefail
-           if [ -f caches/${CIRCLE_PROJECT_REPONAME}-server.tar.gz ]; then gunzip -c caches/${CIRCLE_PROJECT_REPONAME}-server.tar.gz | docker load; docker images; fi
-      - run:
-         name: Build application Docker image
-         command: |
-           docker build --tag ${CIRCLE_PROJECT_REPONAME}-server -f server/Dockerfile .
-      - run:
-         name: Save Docker image layer cache
-         command: |
-           mkdir -p caches/
-           docker build --tag ${CIRCLE_PROJECT_REPONAME}-server -f server/Dockerfile . | grep '\-\-\->' | grep -v 'Using cache' | sed -e 's/[ >-]//g' > /tmp/layers-server.txt
-           docker save $(cat /tmp/layers-server.txt) | gzip > caches/${CIRCLE_PROJECT_REPONAME}-server.tar.gz
-      - save_cache:
-         key: server-{{ checksum "server/Dockerfile" }}-{{ .Branch }}
-         paths:
-           - caches/
   "build-ui":
     machine: true
     steps:
@@ -78,8 +54,10 @@ jobs:
       - run:
          name: 'build'
          command: |
-           docker run -it $(docker images --format '{{.ID}}') npm run build
-  lint:
+           docker run -it --name build $(docker images --format '{{.ID}}') npm run build
+           UI_ID=$(docker ps -a --filter="name=build" -q)
+           docker cp $UI_ID://usr/src/app/dist/ workspace/dist/
+  eslint:
     machine: true
     steps:
       - attach_workspace:
@@ -89,21 +67,80 @@ jobs:
          command: |
            docker load -i workspace/client.tar
       - run:
-         name: 'lint'
+         name: 'eslint'
+         command: docker run -it $(docker images --format '{{.ID}}') npm run lint --no-fix
+  "build-server":
+    machine: true
+    steps:
+      - checkout
+      - restore_cache:
+         keys:
+           - server2-{{ checksum "server/Dockerfile" }}
+      - run:
+         name: Load Docker image layer cache
+         command: test -f caches/server.tar && (docker load -i caches/server.tar) || echo 'Cache not found'
+      - run:
+         name: Build application Docker image
+         command: docker build --tag server -f server/Dockerfile .
+      - run:
+          name: Save built docker to workspace
+          command: |
+            mkdir -p workspace
+            docker save -o workspace/server.tar server
+      - persist_to_workspace:
+          root: workspace
+          paths:
+            - server.tar
+  "cache-server":
+    machine: true
+    steps:
+      - checkout
+      - restore_cache:
+         keys:
+           - server2-{{ checksum "server/Dockerfile" }}
+      - run:
+         name: Load Docker image layer cache
+         command: test -f caches/server.tar && (docker load -i caches/server.tar) || echo 'Cache not found'
+      - run:
+         name: Save Docker image layer cache
          command: |
-           docker run -it $(docker images --format '{{.ID}}') npm run lint --no-fix
+           mkdir -p caches/
+           docker build --tag server -f server/Dockerfile .
+           docker save $(docker history -q server | grep -v '^<missing>$') -o caches/server.tar
+      - save_cache:
+          key: server2-{{ checksum "server/Dockerfile" }}
+          paths:
+            - caches/
+  flake8:
+    machine: true
+    steps:
+      - attach_workspace:
+         at: workspace/
+      - run:
+         name: Load Docker image layer cache
+         command: |
+           docker load -i workspace/server.tar
+      - run:
+         name: 'flake8'
+         command: docker run -it $(docker images --format '{{.ID}}') pipenv run flake8 --max-line-length=1000
 workflows:
   version: 2
   build_and_test:
     jobs:
       - "build-client"
-      - "build-server"
       - "cache-client":
           requires:
             - "build-client"
       - "build-ui":
           requires:
             - "build-client"
-      - lint:
+      - eslint:
           requires:
             - "build-client"
+      - "build-server"
+      - "cache-server":
+          requires:
+            - "build-server"
+      - "flake8":
+          requires:
+            - "build-server"

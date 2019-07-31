@@ -19,7 +19,7 @@ async def test(ip):
         # s = await client.cluster.health()
         s = await client.cluster.stats()
         found.append({'ip': ip, 'versions': s['nodes']['versions'], 'stats': s})
-    except:
+    except Exception:
         pass
     if s:
         print(ip)

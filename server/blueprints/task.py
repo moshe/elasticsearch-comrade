@@ -9,7 +9,7 @@ from connections import get_client
 
 task_bp = Blueprint('task')
 
-task_query_regex = re.compile('source\[(.*)\]')
+task_query_regex = re.compile('source\[(.*)\]')  # noqa
 
 
 @task_bp.route('/cancle', methods=['POST'])
