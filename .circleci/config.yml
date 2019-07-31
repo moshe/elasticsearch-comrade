@@ -54,9 +54,29 @@ jobs:
          key: server-{{ checksum "server/Dockerfile" }}-{{ .Branch }}
          paths:
            - caches/
+  lint:
+    machine: true
+    steps:
+      - checkout
+      - restore_cache:
+         keys:
+           - client-{{ checksum "client/Dockerfile" }}-{{ .Branch }}
+           - client-{{ checksum "client/Dockerfile" }}
+      - run:
+         name: Load Docker image layer cache
+         command: |
+           set +o pipefail
+           if [ -f caches/${CIRCLE_PROJECT_REPONAME}-client.tar.gz ]; then gunzip -c caches/${CIRCLE_PROJECT_REPONAME}-client.tar.gz | docker load; docker images; fi
+      - run:
+         name: 'lint'
+         command: |
+           docker run -it $(docker images --format '{{.ID}}') npm run lint --no-fix
 workflows:
   version: 2
   build_and_test:
     jobs:
       - "build-client"
       - "build-server"
+      - lint:
+          requires:
+            - "build-client"

@@ -1,9 +1,6 @@
 import traceback
 
 from elasticsearch import ElasticsearchException
-from sanic import Sanic
-from sanic.request import Request
-from sanic.response import HTTPResponse, json
 
 from blueprints.alias import alias_bp
 from blueprints.cluster import cluster_bp
@@ -15,6 +12,9 @@ from blueprints.task import task_bp
 from blueprints.template import template_bp
 from blueprints.views import views_bp
 from connections import clients
+from sanic import Sanic
+from sanic.request import Request
+from sanic.response import HTTPResponse, json
 
 app = Sanic()
 # app.static('/', './static')
