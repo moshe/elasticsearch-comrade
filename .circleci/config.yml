@@ -6,8 +6,8 @@ jobs:
         - checkout
         - restore_cache:
            keys:
-             - client-{{ checksum "Dockerfile" }}-{{ .Branch }}
-             - client-{{ checksum "Dockerfile" }}
+             - client-{{ checksum "client/Dockerfile" }}-{{ .Branch }}
+             - client-{{ checksum "client/Dockerfile" }}
         - run:
            name: Load Docker image layer cache
            command: |
@@ -23,18 +23,18 @@ jobs:
              mkdir -p caches/
              docker build --tag ${CIRCLE_PROJECT_REPONAME}-client -f client/Dockerfile . | grep '\-\-\->' | grep -v 'Using cache' | sed -e 's/[ >-]//g' > /tmp/layers-client.txt
              docker save $(cat /tmp/layers-client.txt) | gzip > caches/${CIRCLE_PROJECT_REPONAME}-client.tar.gz
-             #        - save_cache:
-             #          key: server-{{ checksum "Dockerfile" }}-{{ .Branch }}
-             #          paths:
-             #            - caches/
+        - save_cache:
+           key: server-{{ checksum "client/Dockerfile" }}-{{ .Branch }}
+           paths:
+             - caches/
   "build-server":
     machine: true
     steps:
       - checkout
       - restore_cache:
          keys:
-           - server-{{ checksum "Dockerfile" }}-{{ .Branch }}
-           - server-{{ checksum "Dockerfile" }}
+           - server-{{ checksum "server/Dockerfile" }}-{{ .Branch }}
+           - server-{{ checksum "server/Dockerfile" }}
       - run:
          name: Load Docker image layer cache
          command: |
@@ -50,10 +50,10 @@ jobs:
            mkdir -p caches/
            docker build --tag ${CIRCLE_PROJECT_REPONAME}-server -f server/Dockerfile . | grep '\-\-\->' | grep -v 'Using cache' | sed -e 's/[ >-]//g' > /tmp/layers-server.txt
            docker save $(cat /tmp/layers-server.txt) | gzip > caches/${CIRCLE_PROJECT_REPONAME}-server.tar.gz
-           #      - save_cache:
-           #         key: server-{{ checksum "Dockerfile" }}-{{ .Branch }}
-           #         paths:
-           #           - caches/
+      - save_cache:
+         key: server-{{ checksum "server/Dockerfile" }}-{{ .Branch }}
+         paths:
+           - caches/
   # build:
   #   machine: true
   #   steps:
