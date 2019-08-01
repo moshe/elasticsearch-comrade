@@ -11,6 +11,7 @@ flake8 = "*"
 sanic = "*"
 ujson = "*"
 elasticsearch-async = "*"
+pytest = "*"
 
 [requires]
 python_version = "3.7"
