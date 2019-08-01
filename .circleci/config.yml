@@ -56,8 +56,6 @@ jobs:
       - run:
          name: 'build'
          command: |
-           docker images
-           docker run -it client find / | grep dist
            docker build --tag merged .
            docker save -o workspace/merged.tar merged:latest
       - persist_to_workspace:
@@ -76,7 +74,7 @@ jobs:
            docker load -i workspace/client.tar
       - run:
          name: 'eslint'
-         command: docker run -it $(docker images --format '{{.ID}}') npm run lint --no-fix
+         command: docker run -it client npm run lint --no-fix
   "build-server":
     machine: true
     steps:
@@ -130,7 +128,7 @@ jobs:
            docker load -i workspace/server.tar
       - run:
          name: 'flake8'
-         command: docker run -it $(docker images --format '{{.ID}}') pipenv run flake8 --max-line-length=1000
+         command: docker run -it server pipenv run flake8 --max-line-length=1000
   pytest:
     machine: true
     steps:
@@ -142,7 +140,9 @@ jobs:
            docker load -i workspace/server.tar
       - run:
          name: 'pytest'
-         command: docker run -it $(docker images --format '{{.ID}}') pipenv run pytest
+         command: |
+           docker run -it server find / |grep test_mock.py
+           docker run -it $(docker images --format '{{.ID}}') pipenv run pytest
 workflows:
   version: 2
   build_and_test:
