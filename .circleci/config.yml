@@ -6,7 +6,7 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - client3-{{ checksum "client/Dockerfile" }}
+            - client3-{{ checksum "client/package-lock.json" }}
       - run:
           name: Load Docker image layer cache
           command: test -f caches/client.tar && (docker load -i caches/client.tar) || echo 'Cache not found'
@@ -28,7 +28,7 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - client3-{{ checksum "client/Dockerfile" }}
+            - client3-{{ checksum "client/package-lock.json" }}
       - run:
           name: Load Docker image layer cache
           command: test -f caches/client.tar && (docker load -i caches/client.tar) || echo 'Cache not found'
@@ -39,7 +39,7 @@ jobs:
            docker build --tag client -f client/Dockerfile .
            docker save $(docker history -q client | grep -v '^<missing>$') -o caches/client.tar
       - save_cache:
-          key: client3-{{ checksum "client/Dockerfile" }}
+          key: client3-{{ checksum "client/package-lock.json" }}
           paths:
             - caches/
   "build-ui":
@@ -82,7 +82,7 @@ jobs:
       - checkout
       - restore_cache:
          keys:
-           - server2-{{ checksum "server/Dockerfile" }}
+           - server2-{{ checksum "server/Pipfile.lock" }}
       - run:
          name: Load Docker image layer cache
          command: test -f caches/server.tar && (docker load -i caches/server.tar) || echo 'Cache not found'
@@ -104,7 +104,7 @@ jobs:
       - checkout
       - restore_cache:
          keys:
-           - server2-{{ checksum "server/Dockerfile" }}
+           - server2-{{ checksum "server/Pipfile.lock" }}
       - run:
          name: Load Docker image layer cache
          command: test -f caches/server.tar && (docker load -i caches/server.tar) || echo 'Cache not found'
@@ -115,7 +115,7 @@ jobs:
            docker build --tag server -f server/Dockerfile .
            docker save $(docker history -q server | grep -v '^<missing>$') -o caches/server.tar
       - save_cache:
-          key: server2-{{ checksum "server/Dockerfile" }}
+          key: server2-{{ checksum "server/Pipfile.lock" }}
           paths:
             - caches/
   flake8:
