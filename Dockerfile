@@ -1,2 +1,4 @@
+FROM client
+RUN npm run build
 FROM server
-COPY --from=client:latest /usr/src/app/dist/ /app/static/
+COPY --from=0 /usr/src/app/dist/ /app/static/

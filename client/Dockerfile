@@ -4,4 +4,3 @@ WORKDIR /usr/src/app
 COPY client/package*.json ./
 RUN npm ci
 ADD client/ ./
-RUN npm run build
