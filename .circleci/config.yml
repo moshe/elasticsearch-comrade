@@ -17,7 +17,7 @@ jobs:
           name: Save built docker to workspace
           command: |
             mkdir -p workspace
-            docker save -o workspace/client.tar client
+            docker save -o workspace/client.tar client:latest
       - persist_to_workspace:
           root: workspace
           paths:
@@ -54,6 +54,7 @@ jobs:
       - run:
          name: 'build'
          command: |
+           docker images
            docker run -it --name build $(docker images --format '{{.ID}}') npm run build
            UI_ID=$(docker ps -a --filter="name=build" -q)
            docker cp $UI_ID://usr/src/app/dist/ workspace/dist/
@@ -86,7 +87,7 @@ jobs:
           name: Save built docker to workspace
           command: |
             mkdir -p workspace
-            docker save -o workspace/server.tar server
+            docker save -o workspace/server.tar server:latest
       - persist_to_workspace:
           root: workspace
           paths:
