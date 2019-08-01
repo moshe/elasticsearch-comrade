@@ -45,19 +45,25 @@ jobs:
   "build-ui":
     machine: true
     steps:
+      - checkout
       - attach_workspace:
          at: workspace/
       - run:
          name: Load Docker image layer cache
          command: |
            docker load -i workspace/client.tar
+           docker load -i workspace/server.tar
       - run:
          name: 'build'
          command: |
            docker images
-           docker run -it --name build $(docker images --format '{{.ID}}') npm run build
-           UI_ID=$(docker ps -a --filter="name=build" -q)
-           docker cp $UI_ID://usr/src/app/dist/ workspace/dist/
+           docker build --tag merged .
+           docker save -o workspace/merged.tar merged:latest
+      - persist_to_workspace:
+          root: workspace
+          paths:
+            - merged.tar
+
   eslint:
     machine: true
     steps:
