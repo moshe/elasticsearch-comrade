@@ -57,6 +57,7 @@ jobs:
          name: 'build'
          command: |
            docker images
+           docker run -it client find / | grep dist
            docker build --tag merged .
            docker save -o workspace/merged.tar merged:latest
       - persist_to_workspace:
