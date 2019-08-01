@@ -153,6 +153,7 @@ workflows:
       - "build-ui":
           requires:
             - "build-client"
+            - "build-server"
       - eslint:
           requires:
             - "build-client"
