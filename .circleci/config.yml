@@ -17,11 +17,11 @@ jobs:
           name: Save built docker to workspace
           command: |
             mkdir -p workspace
-            docker save -o workspace/client.tar client:latest
+            docker save client:latest | gzip > workspace/client.tar.gz
       - persist_to_workspace:
           root: workspace
           paths:
-            - client.tar
+            - client.tar.gz
   "cache-client":
     machine: true
     steps:
@@ -51,7 +51,7 @@ jobs:
       - run:
          name: Load Docker image layer cache
          command: |
-           docker load -i workspace/client.tar
+           cat workspace/client.tar.gz | gunzip | docker load
            docker load -i workspace/server.tar
       - run:
          name: 'build'
@@ -71,7 +71,7 @@ jobs:
       - run:
          name: Load Docker image layer cache
          command: |
-           docker load -i workspace/client.tar
+           cat workspace/client.tar.gz | gunzip | docker load
       - run:
          name: 'eslint'
          command: docker run -it client npm run lint --no-fix
