@@ -140,9 +140,7 @@ jobs:
            docker load -i workspace/server.tar
       - run:
          name: 'pytest'
-         command: |
-           docker run -it server find / |grep test_mock.py
-           docker run -it $(docker images --format '{{.ID}}') pipenv run pytest
+         command: docker run -it $(docker images --format '{{.ID}}') pipenv run pytest
 workflows:
   version: 2
   build_and_test:
