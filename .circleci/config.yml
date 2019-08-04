@@ -1,80 +1,45 @@
 version: 2
 jobs:
-  "build-client":
-    machine: true
+  "install-client":
+    docker:
+      - image: circleci/node:12
     steps:
       - checkout
       - restore_cache:
           keys:
-            - client3-{{ checksum "client/package-lock.json" }}
+            - client5-{{ checksum "client/package-lock.json" }}
+
       - run:
-          name: Load Docker image layer cache
-          command: test -f caches/client.tar && (docker load -i caches/client.tar) || echo 'Cache not found'
-      - run:
-          name: Build application Docker image
-          command: docker build --tag client -f client/Dockerfile .
-      - run:
-          name: Save built docker to workspace
-          command: |
-            mkdir -p workspace
-            docker save -o workspace/client.tar client:latest
-      - persist_to_workspace:
-          root: workspace
-          paths:
-            - client.tar
-  "cache-client":
-    machine: true
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - client3-{{ checksum "client/package-lock.json" }}
-      - run:
-          name: Load Docker image layer cache
-          command: test -f caches/client.tar && (docker load -i caches/client.tar) || echo 'Cache not found'
-      - run:
-         name: Save Docker image layer cache
-         command: |
-           mkdir -p caches/
-           docker build --tag client -f client/Dockerfile .
-           docker save $(docker history -q client | grep -v '^<missing>$') -o caches/client.tar
+          name: npm install
+          command: cd client && npm ci
       - save_cache:
-          key: client3-{{ checksum "client/package-lock.json" }}
+          key: client5-{{ checksum "client/package-lock.json" }}
           paths:
-            - caches/
+            - client/node_modules/
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - project
   "build-ui":
-    machine: true
+    docker:
+      - image: circleci/node:12
     steps:
-      - checkout
       - attach_workspace:
-         at: workspace/
-      - run:
-         name: Load Docker image layer cache
-         command: |
-           docker load -i workspace/client.tar
-           docker load -i workspace/server.tar
+          at: ~/
       - run:
          name: 'build'
          command: |
-           docker build --tag merged .
-           docker save -o workspace/merged.tar merged:latest
-      - persist_to_workspace:
-          root: workspace
-          paths:
-            - merged.tar
-
+           cd client
+           npm run build
   eslint:
-    machine: true
+    docker:
+      - image: circleci/node:12
     steps:
       - attach_workspace:
-         at: workspace/
-      - run:
-         name: Load Docker image layer cache
-         command: |
-           docker load -i workspace/client.tar
+         at: ~/
       - run:
          name: 'eslint'
-         command: docker run -it client npm run lint --no-fix
+         command: cd client && npm run lint --no-fix
   "build-server":
     machine: true
     steps:
@@ -91,12 +56,12 @@ jobs:
       - run:
           name: Save built docker to workspace
           command: |
-            mkdir -p workspace
-            docker save -o workspace/server.tar server:latest
+            mkdir -p ~/dockers
+            docker save -o ~/dockers/server.tar server:latest
       - persist_to_workspace:
-          root: workspace
+          root: ~/
           paths:
-            - server.tar
+            - dockers
   "cache-server":
     machine: true
     steps:
@@ -121,11 +86,10 @@ jobs:
     machine: true
     steps:
       - attach_workspace:
-         at: workspace/
+         at: ~/
       - run:
          name: Load Docker image layer cache
-         command: |
-           docker load -i workspace/server.tar
+         command: docker load -i ~/dockers/server.tar
       - run:
          name: 'flake8'
          command: docker run -it server pipenv run flake8 --max-line-length=1000
@@ -133,11 +97,10 @@ jobs:
     machine: true
     steps:
       - attach_workspace:
-         at: workspace/
+         at: ~/
       - run:
          name: Load Docker image layer cache
-         command: |
-           docker load -i workspace/server.tar
+         command: docker load -i ~/dockers/server.tar
       - run:
          name: 'pytest'
          command: docker run -it $(docker images --format '{{.ID}}') pipenv run pytest
@@ -145,17 +108,13 @@ workflows:
   version: 2
   build_and_test:
     jobs:
-      - "build-client"
-      - "cache-client":
-          requires:
-            - "build-client"
+      - "install-client"
       - "build-ui":
           requires:
-            - "build-client"
-            - "build-server"
+            - "install-client"
       - eslint:
           requires:
-            - "build-client"
+            - "install-client"
       - "build-server"
       - "cache-server":
           requires:
