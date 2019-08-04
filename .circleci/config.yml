@@ -1,36 +1,29 @@
 version: 2
 jobs:
-  "install-client":
+  "build-client":
     docker:
       - image: circleci/node:12
     steps:
       - checkout
       - restore_cache:
           keys:
-            - client5-{{ checksum "client/package-lock.json" }}
-
+            - client7-{{ checksum "client/package-lock.json" }}
       - run:
           name: npm install
-          command: cd client && npm ci
+          command: cd client ; npm install
+      - run:
+         name: 'build'
+         command: |
+           cd client
+           npm run build
       - save_cache:
-          key: client5-{{ checksum "client/package-lock.json" }}
+          key: client7-{{ checksum "client/package-lock.json" }}
           paths:
             - client/node_modules/
       - persist_to_workspace:
           root: ~/
           paths:
             - project
-  "build-ui":
-    docker:
-      - image: circleci/node:12
-    steps:
-      - attach_workspace:
-          at: ~/
-      - run:
-         name: 'build'
-         command: |
-           cd client
-           npm run build
   eslint:
     docker:
       - image: circleci/node:12
@@ -52,7 +45,7 @@ jobs:
          command: test -f caches/server.tar && (docker load -i caches/server.tar) || echo 'Cache not found'
       - run:
          name: Build application Docker image
-         command: docker build --tag server -f server/Dockerfile .
+         command: docker build --tag server:latest -f server/Dockerfile .
       - run:
           name: Save built docker to workspace
           command: |
@@ -93,6 +86,32 @@ jobs:
       - run:
          name: 'flake8'
          command: docker run -it server pipenv run flake8 --max-line-length=1000
+  "build-docker":
+    machine: true
+    steps:
+      - attach_workspace:
+         at: ~/
+      - run:
+         name: Load Docker image layer cache
+         command: docker load -i ~/dockers/server.tar
+      - run:
+         name: 'build merged docker'
+         command: |
+            pwd
+            ls -la
+            ls -lad client
+            ls -la client
+            ls -lad client/dist
+            ls -la client/dist
+            find . -name dist
+            docker build --tag merged .
+      - run:
+          name: Save built docker to workspace
+          command: docker save -o ~/dockers/merged.tar merged:latest
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - dockers 
   pytest:
     machine: true
     steps:
@@ -103,19 +122,20 @@ jobs:
          command: docker load -i ~/dockers/server.tar
       - run:
          name: 'pytest'
-         command: docker run -it $(docker images --format '{{.ID}}') pipenv run pytest
+         command: docker run -it server pipenv run pytest
 workflows:
   version: 2
   build_and_test:
     jobs:
-      - "install-client"
-      - "build-ui":
-          requires:
-            - "install-client"
+      - "build-client"
       - eslint:
           requires:
-            - "install-client"
+            - "build-client"
       - "build-server"
+      - "build-docker":
+          requires:
+            - "build-server"
+            - "build-client"
       - "cache-server":
           requires:
             - "build-server"

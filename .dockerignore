@@ -1,6 +1,5 @@
 client/node_modules
 client/npm-debug.log
-client/dist
 server/venv
 Dockerfile
 .git
