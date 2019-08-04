@@ -96,15 +96,7 @@ jobs:
          command: docker load -i ~/dockers/server.tar
       - run:
          name: 'build merged docker'
-         command: |
-            pwd
-            ls -la
-            ls -lad client
-            ls -la client
-            ls -lad client/dist
-            ls -la client/dist
-            find . -name dist
-            docker build --tag merged .
+         command: docker build --tag merged .
       - run:
           name: Save built docker to workspace
           command: docker save -o ~/dockers/merged.tar merged:latest
