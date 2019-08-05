@@ -1,4 +1,6 @@
-version: 2
+version: 2.1
+orbs:
+  cypress: cypress-io/cypress@1.8.0
 jobs:
   "build-client":
     docker:
@@ -115,8 +117,32 @@ jobs:
       - run:
          name: 'pytest'
          command: docker run -it server pipenv run pytest
+  cypress-install:
+    docker:
+    - image: cypress/base:10
+    steps:
+    - checkout
+    - restore_cache:
+        keys:
+        - cache1-{{ arch }}-{{ .Branch }}-{{ checksum "e2e/package.json" }}
+    - run:
+        name: Npm CI
+        command: npm ci
+        working_directory: 'e2e'
+    - run:
+        command: npx cypress verify
+        working_directory: 'e2e'
+    - save_cache:
+        key: cache1-{{ arch }}-{{ .Branch }}-{{ checksum "e2e/package.json" }}
+        paths:
+        - ~/.npm
+        - ~/.cache
+    - persist_to_workspace:
+        root: ~/
+        paths:
+        - project/e2e/node_modules
+        - .cache/Cypress
 workflows:
-  version: 2
   build_and_test:
     jobs:
       - "build-client"
@@ -136,4 +162,16 @@ workflows:
             - "build-server"
       - "pytest":
           requires:
-            - "build-server"
+            - build-server
+      - cypress-install
+      - cypress/run:
+          requires:
+            - cypress-install
+            - "build-docker"
+          working_directory: e2e
+          record: false
+          store_artifacts: true
+          # parallelism: 3
+          # parallel: true
+          group: 3 machines
+          cache-key: 'cache-{{ checksum "e2e/package-lock.json" }}'
