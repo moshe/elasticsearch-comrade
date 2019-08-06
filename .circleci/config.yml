@@ -1,8 +1,6 @@
 version: 2.1
-orbs:
-  cypress: cypress-io/cypress@1.8.0
 jobs:
-  "build-client":
+  build-client:
     docker:
       - image: circleci/node:12
     steps:
@@ -35,7 +33,7 @@ jobs:
       - run:
          name: 'eslint'
          command: cd client && npm run lint --no-fix
-  "build-server":
+  build-server:
     machine: true
     steps:
       - checkout
@@ -57,7 +55,7 @@ jobs:
           root: ~/
           paths:
             - dockers
-  "cache-server":
+  cache-server:
     machine: true
     steps:
       - checkout
@@ -88,7 +86,7 @@ jobs:
       - run:
          name: 'flake8'
          command: docker run -it server pipenv run flake8 --max-line-length=1000
-  "build-docker":
+  build-docker:
     machine: true
     steps:
       - attach_workspace:
@@ -142,36 +140,50 @@ jobs:
         paths:
         - project/e2e/node_modules
         - .cache/Cypress
+  cypress-run:
+    docker:
+    - image: cypress/base:10
+    parallelism: 2
+    steps:
+    - attach_workspace:
+        at: ~/
+    - run:
+        name: Run Cypress tests
+        command: |
+          npx cypress run \
+             --record \
+               --group '3 machines'  \
+               --parallel  \
+        working_directory: e2e
+    - store_artifacts:
+        path: e2e/cypress/videos
+    - store_artifacts:
+        path: e2e/cypress/screenshots
+    - store_artifacts:
+        path: ~/dockers/merged.tar
 workflows:
   build_and_test:
     jobs:
-      - "build-client"
+      - build-client
       - eslint:
           requires:
-            - "build-client"
-      - "build-server"
-      - "build-docker":
+            - build-client
+      - build-server
+      - build-docker:
           requires:
-            - "build-server"
-            - "build-client"
-      - "cache-server":
+            - build-server
+            - build-client
+      - cache-server:
           requires:
-            - "build-server"
-      - "flake8":
+            - build-server
+      - flake8:
           requires:
-            - "build-server"
-      - "pytest":
+            - build-server
+      - pytest:
           requires:
             - build-server
       - cypress-install
-      - cypress/run:
+      - cypress-run:
           requires:
             - cypress-install
-            - "build-docker"
-          working_directory: e2e
-          record: true
-          store_artifacts: true
-          parallelism: 2
-          parallel: true
-          group: 3 machines
-          cache-key: 'cache-{{ checksum "e2e/package-lock.json" }}'
+            - build-docker
