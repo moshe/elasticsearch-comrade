@@ -169,9 +169,9 @@ workflows:
             - cypress-install
             - "build-docker"
           working_directory: e2e
-          record: false
+          record: true
           store_artifacts: true
-          # parallelism: 3
-          # parallel: true
+          parallelism: 2
+          parallel: true
           group: 3 machines
           cache-key: 'cache-{{ checksum "e2e/package-lock.json" }}'
