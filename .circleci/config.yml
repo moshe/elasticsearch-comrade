@@ -12,7 +12,7 @@ jobs:
           name: npm install
           command: cd client ; npm install
       - run:
-         name: 'build'
+         name: build
          command: |
            cd client
            npm run build
@@ -31,7 +31,7 @@ jobs:
       - attach_workspace:
          at: ~/
       - run:
-         name: 'eslint'
+         name: eslint
          command: cd client && npm run lint --no-fix
   build-server:
     machine: true
@@ -84,26 +84,8 @@ jobs:
          name: Load Docker image layer cache
          command: docker load -i ~/dockers/server.tar
       - run:
-         name: 'flake8'
+         name: flake8
          command: docker run -it server pipenv run flake8 --max-line-length=1000
-  build-docker:
-    machine: true
-    steps:
-      - attach_workspace:
-         at: ~/
-      - run:
-         name: Load Docker image layer cache
-         command: docker load -i ~/dockers/server.tar
-      - run:
-         name: 'build merged docker'
-         command: docker build --tag merged .
-      - run:
-          name: Save built docker to workspace
-          command: docker save -o ~/dockers/merged.tar merged:latest
-      - persist_to_workspace:
-          root: ~/
-          paths:
-            - dockers 
   pytest:
     machine: true
     steps:
@@ -113,54 +95,25 @@ jobs:
          name: Load Docker image layer cache
          command: docker load -i ~/dockers/server.tar
       - run:
-         name: 'pytest'
+         name: pytest
          command: docker run -it server pipenv run pytest
-  cypress-install:
-    docker:
-    - image: cypress/base:10
+  build-docker:
+    machine: true
     steps:
-    - checkout
-    - restore_cache:
-        keys:
-        - cache1-{{ arch }}-{{ .Branch }}-{{ checksum "e2e/package.json" }}
-    - run:
-        name: Npm CI
-        command: npm ci
-        working_directory: 'e2e'
-    - run:
-        command: npx cypress verify
-        working_directory: 'e2e'
-    - save_cache:
-        key: cache1-{{ arch }}-{{ .Branch }}-{{ checksum "e2e/package.json" }}
-        paths:
-        - ~/.npm
-        - ~/.cache
-    - persist_to_workspace:
-        root: ~/
-        paths:
-        - project/e2e/node_modules
-        - .cache/Cypress
-  cypress-run:
-    docker:
-    - image: cypress/base:10
-    parallelism: 2
-    steps:
-    - attach_workspace:
-        at: ~/
-    - run:
-        name: Run Cypress tests
-        command: |
-          npx cypress run \
-             --record \
-               --group '3 machines'  \
-               --parallel  \
-        working_directory: e2e
-    - store_artifacts:
-        path: e2e/cypress/videos
-    - store_artifacts:
-        path: e2e/cypress/screenshots
-    - store_artifacts:
-        path: ~/dockers/merged.tar
+      - attach_workspace:
+         at: ~/
+      - run:
+         name: Load Docker image layer cache
+         command: docker load -i ~/dockers/server.tar
+      - run: docker-compose build
+      - run: mkdir -p e2e/cypress/docker/ && docker save -o e2e/cypress/docker/merged.tar merged:latest
+      - run: docker-compose up --build --abort-on-container-exit --exit-code-from e2e
+      - store_artifacts:
+          path: e2e/cypress/videos
+      - store_artifacts:
+          path: e2e/cypress/docker
+      - store_artifacts:
+          path: e2e/cypress/screenshots
 workflows:
   build_and_test:
     jobs:
@@ -182,8 +135,3 @@ workflows:
       - pytest:
           requires:
             - build-server
-      - cypress-install
-      - cypress-run:
-          requires:
-            - cypress-install
-            - build-docker
