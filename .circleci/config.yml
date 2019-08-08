@@ -118,9 +118,6 @@ workflows:
       - cache-server:
           requires:
             - build-server
-      - flake8:
-          requires:
-            - build-server
       - pytest:
           requires:
             - build-server
