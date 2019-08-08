@@ -47,6 +47,9 @@ jobs:
          name: Build application Docker image
          command: docker build --tag server:latest -f server/Dockerfile .
       - run:
+         name: flake8
+         command: docker run -it server pipenv run flake8 --max-line-length=1000
+      - run:
           name: Save built docker to workspace
           command: |
             mkdir -p ~/dockers
@@ -75,17 +78,6 @@ jobs:
           key: server2-{{ checksum "server/Pipfile.lock" }}
           paths:
             - caches/
-  flake8:
-    machine: true
-    steps:
-      - attach_workspace:
-         at: ~/
-      - run:
-         name: Load Docker image layer cache
-         command: docker load -i ~/dockers/server.tar
-      - run:
-         name: flake8
-         command: docker run -it server pipenv run flake8 --max-line-length=1000
   pytest:
     machine: true
     steps:
