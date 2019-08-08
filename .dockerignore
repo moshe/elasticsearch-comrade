@@ -7,3 +7,4 @@ README*.md
 caches
 .circleci
 workspace
+e2e/node_modules

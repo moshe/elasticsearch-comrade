@@ -1,0 +1,33 @@
+version: '3'
+services:
+  web:
+    image: merged
+    build: .
+    container_name: server
+    restart: always
+    ports:
+      - "8000:8000"
+  e2e:
+    image: cypress/included:3.4.1
+    container_name: cypress
+    depends_on:
+      - web
+    environment:
+      - CYPRESS_baseUrl=http://web:8000
+      - DEBUG=icypress:*
+      - CIRCLE_JOB
+      - CIRCLE_BUILD_NUM
+      - CIRCLE_BUILD_URL
+      - CIRCLE_PR_NUMBER
+      - CIRCLE_PR_REPONAM
+      - CIRCLE_PR_USERNAM
+      - CIRCLE_COMPARE_URL
+      - CIRCLE_WORKFLOW_ID
+      - CIRCLE_PULL_REQUEST
+      - CIRCLE_REPOSITORY_URL
+      - CI_PULL_REQUEST
+      - CYPRESS_RECORD_KEY
+    working_dir: /e2e/
+    volumes:
+      - ./e2e/:/e2e/
+    command: --record

@@ -1,8 +1,6 @@
 version: 2.1
-orbs:
-  cypress: cypress-io/cypress@1.8.0
 jobs:
-  "build-client":
+  build-client:
     docker:
       - image: circleci/node:12
     steps:
@@ -14,7 +12,7 @@ jobs:
           name: npm install
           command: cd client ; npm install
       - run:
-         name: 'build'
+         name: build
          command: |
            cd client
            npm run build
@@ -33,9 +31,9 @@ jobs:
       - attach_workspace:
          at: ~/
       - run:
-         name: 'eslint'
+         name: eslint
          command: cd client && npm run lint --no-fix
-  "build-server":
+  build-server:
     machine: true
     steps:
       - checkout
@@ -49,6 +47,9 @@ jobs:
          name: Build application Docker image
          command: docker build --tag server:latest -f server/Dockerfile .
       - run:
+         name: flake8
+         command: docker run -it server pipenv run flake8 --max-line-length=1000
+      - run:
           name: Save built docker to workspace
           command: |
             mkdir -p ~/dockers
@@ -57,7 +58,7 @@ jobs:
           root: ~/
           paths:
             - dockers
-  "cache-server":
+  cache-server:
     machine: true
     steps:
       - checkout
@@ -77,35 +78,6 @@ jobs:
           key: server2-{{ checksum "server/Pipfile.lock" }}
           paths:
             - caches/
-  flake8:
-    machine: true
-    steps:
-      - attach_workspace:
-         at: ~/
-      - run:
-         name: Load Docker image layer cache
-         command: docker load -i ~/dockers/server.tar
-      - run:
-         name: 'flake8'
-         command: docker run -it server pipenv run flake8 --max-line-length=1000
-  "build-docker":
-    machine: true
-    steps:
-      - attach_workspace:
-         at: ~/
-      - run:
-         name: Load Docker image layer cache
-         command: docker load -i ~/dockers/server.tar
-      - run:
-         name: 'build merged docker'
-         command: docker build --tag merged .
-      - run:
-          name: Save built docker to workspace
-          command: docker save -o ~/dockers/merged.tar merged:latest
-      - persist_to_workspace:
-          root: ~/
-          paths:
-            - dockers 
   pytest:
     machine: true
     steps:
@@ -115,63 +87,37 @@ jobs:
          name: Load Docker image layer cache
          command: docker load -i ~/dockers/server.tar
       - run:
-         name: 'pytest'
+         name: pytest
          command: docker run -it server pipenv run pytest
-  cypress-install:
-    docker:
-    - image: cypress/base:10
+  build-docker:
+    machine: true
     steps:
-    - checkout
-    - restore_cache:
-        keys:
-        - cache1-{{ arch }}-{{ .Branch }}-{{ checksum "e2e/package.json" }}
-    - run:
-        name: Npm CI
-        command: npm ci
-        working_directory: 'e2e'
-    - run:
-        command: npx cypress verify
-        working_directory: 'e2e'
-    - save_cache:
-        key: cache1-{{ arch }}-{{ .Branch }}-{{ checksum "e2e/package.json" }}
-        paths:
-        - ~/.npm
-        - ~/.cache
-    - persist_to_workspace:
-        root: ~/
-        paths:
-        - project/e2e/node_modules
-        - .cache/Cypress
+      - attach_workspace:
+         at: ~/
+      - run:
+         name: Load Docker image layer cache
+         command: docker load -i ~/dockers/server.tar
+      - run: docker-compose build
+      - run: docker-compose up --abort-on-container-exit --exit-code-from e2e
+      - store_artifacts:
+          path: e2e/cypress/videos
+      - store_artifacts:
+          path: e2e/cypress/screenshots
 workflows:
   build_and_test:
     jobs:
-      - "build-client"
+      - build-client
       - eslint:
           requires:
-            - "build-client"
-      - "build-server"
-      - "build-docker":
-          requires:
-            - "build-server"
-            - "build-client"
-      - "cache-server":
-          requires:
-            - "build-server"
-      - "flake8":
-          requires:
-            - "build-server"
-      - "pytest":
+            - build-client
+      - build-server
+      - build-docker:
           requires:
             - build-server
-      - cypress-install
-      - cypress/run:
+            - build-client
+      - cache-server:
           requires:
-            - cypress-install
-            - "build-docker"
-          working_directory: e2e
-          record: true
-          store_artifacts: true
-          parallelism: 2
-          parallel: true
-          group: 3 machines
-          cache-key: 'cache-{{ checksum "e2e/package-lock.json" }}'
+            - build-server
+      - pytest:
+          requires:
+            - build-server

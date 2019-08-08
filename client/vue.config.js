@@ -1,4 +1,5 @@
 module.exports = {
+  publicPath: '/static/',
   lintOnSave: false,
   devServer: {
     proxy: {
