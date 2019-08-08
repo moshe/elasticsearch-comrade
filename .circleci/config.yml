@@ -106,12 +106,9 @@ jobs:
          name: Load Docker image layer cache
          command: docker load -i ~/dockers/server.tar
       - run: docker-compose build
-      - run: mkdir -p e2e/cypress/docker/ && docker save -o e2e/cypress/docker/merged.tar merged:latest
-      - run: docker-compose up --build --abort-on-container-exit --exit-code-from e2e
+      - run: docker-compose up --abort-on-container-exit --exit-code-from e2e
       - store_artifacts:
           path: e2e/cypress/videos
-      - store_artifacts:
-          path: e2e/cypress/docker
       - store_artifacts:
           path: e2e/cypress/screenshots
 workflows:
