@@ -4,7 +4,7 @@
       <v-flex style="flex: 2">
         <v-autocomplete
           v-model="method"
-          :items="['GET', 'POST', 'DELETE', 'HEAD']"
+          :items="['GET', 'POST', 'DELETE', 'HEAD', 'PUT']"
           label="Method"
           autofocus
         />

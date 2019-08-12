@@ -17,6 +17,7 @@
           :label="setting.name"
           :value="setting.value"
           @change="v => handleChange(setting, v)"
+          :data-input="setting.name"
         >
           <template v-if="setting.description" v-slot:prepend-inner>
             <v-tooltip bottom>
@@ -37,7 +38,9 @@
       </v-btn>
       {{ key }} changed from {{ value.from }} to {{ value.value }}
     </div>
-    <v-btn color="success" :disabled="!pending" @click="save">Save</v-btn>
+    <v-btn data-btn="save" color="success" :disabled="!pending" @click="save">
+      Save
+    </v-btn>
   </div>
 </template>
 

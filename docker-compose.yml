@@ -1,5 +1,35 @@
 version: '3'
 services:
+  node-1:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.3.0
+    container_name: node-1
+    environment:
+      - node.name=node-1
+      - discovery.seed_hosts=node-2
+      - cluster.initial_master_nodes=node-1,node-2
+      - cluster.name=docker-cluster
+      - xpack.monitoring.collection.enabled=false
+      - "ES_JAVA_OPTS=-Xms256m -Xmx256m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports:
+      - 9200:9200
+  node-2:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.3.0
+    container_name: node-2
+    environment:
+      - node.name=node-2
+      - discovery.seed_hosts=node-1
+      - cluster.initial_master_nodes=node-1,node-2
+      - cluster.name=docker-cluster
+      - xpack.monitoring.collection.enabled=false
+      - "ES_JAVA_OPTS=-Xms256m -Xmx256m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
   web:
     image: merged
     build: .
@@ -7,6 +37,9 @@ services:
     restart: always
     ports:
       - "8000:8000"
+    depends_on:
+      - node-1
+      - node-2
   e2e:
     image: cypress/included:3.4.1
     container_name: cypress

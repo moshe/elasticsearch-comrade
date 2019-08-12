@@ -3,7 +3,7 @@
     <v-flex>
       <v-menu offset-y style="display: inline-block">
         <template v-slot:activator="{ on }">
-          <div class="index-name" v-on="on">
+          <div class="index-name" :data-index-name="indexName" v-on="on">
             {{ indexName }}{{ index.status === "close" ? " (closed)" : "" }}
             <v-icon size="16">arrow_drop_down</v-icon>
           </div>
