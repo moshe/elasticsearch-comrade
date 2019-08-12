@@ -10,5 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "cypress": "^3.4.1"
+  },
+  "devDependencies": {
+    "whatwg-fetch": "^3.0.0"
   }
 }
