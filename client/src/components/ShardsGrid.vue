@@ -10,10 +10,16 @@
               label="Filter indices"
               v-model="indexSearch"
               hide-details
+              data-cy="filter-indices"
             />
           </v-flex>
           <v-flex>
-            <v-checkbox label="Show Hidden" v-model="showHidden" hide-details />
+            <v-checkbox
+              data-cy="show-hidden"
+              label="Show Hidden"
+              v-model="showHidden"
+              hide-details
+            />
             <v-checkbox
               label="Show Green Indices"
               v-model="showGreen"

@@ -17,8 +17,8 @@ def get_client(request: Request, cluster: str = None) -> AsyncElasticsearch:
 
 def clients() -> dict:
     return {
-        "localhost": {
-            "hosts": ['http://localhost']
+        "es-primary": {
+            "hosts": ['http://node-1', 'http://node-1']
         },
         "my-cluster": {
             "hosts": ['http://222.85.141.99']
@@ -26,28 +26,28 @@ def clients() -> dict:
         "backups": {
             "hosts": ['http://52.213.100.155']
         },
-        "vidmoon-master1": {
-            "hosts": ['http://172.106.164.147']
-        },
-        "elasticsearch": {
-            "hosts": ['http://13.76.247.223']
-        },
-        "huadong": {
-            "hosts": ['http://211.148.18.253']
-        },
-        "azure": {
-            "hosts": ['http://35.200.194.186']
-        },
-        "multiplefs": {
-            "hosts": ['http://162.144.40.30']
-        },
-        "s3": {
-            "hosts": ['http://13.250.14.119']
-        },
-        "701": {
-            "hosts": ['http://209.208.59.202']
-        },
-        "720": {
-            "hosts": ['http://192.3.162.113']
-        }
+        # "vidmoon-master1": {
+        #     "hosts": ['http://172.106.164.147']
+        # },
+        # "elasticsearch": {
+        #     "hosts": ['http://13.76.247.223']
+        # },
+        # "huadong": {
+        #     "hosts": ['http://211.148.18.253']
+        # },
+        # "azure": {
+        #     "hosts": ['http://35.200.194.186']
+        # },
+        # "multiplefs": {
+        #     "hosts": ['http://162.144.40.30']
+        # },
+        # "s3": {
+        #     "hosts": ['http://13.250.14.119']
+        # },
+        # "701": {
+        #     "hosts": ['http://209.208.59.202']
+        # },
+        # "720": {
+        #     "hosts": ['http://192.3.162.113']
+        # }
     }

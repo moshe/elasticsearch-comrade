@@ -82,7 +82,6 @@ export default {
   },
   watch: {
     module() {
-      console.log("Change!");
       this.changes = {};
     }
   }

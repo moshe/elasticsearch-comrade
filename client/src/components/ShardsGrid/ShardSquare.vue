@@ -4,7 +4,7 @@
       <div style="display: inline-block; margin-right: 3px; height: 25px">
         <div
           class="shard-square"
-          :data-index="indexName"
+          :data-index="index"
           :data-shard="id"
           :data-node="nodeName"
           v-bind:class="{

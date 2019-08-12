@@ -1,22 +1,32 @@
 /// <reference types="Cypress" />
 
+function createIndex(name, shards=12, replicas=0) {
+  cy.request({
+    method: 'POST',
+    url: '/api/v1/rest/query', body: {
+      body: {"settings": {"index": {"number_of_shards": shards,"number_of_replicas": replicas}}},
+      path: `/${name}`,
+      method: 'PUT'
+    },
+    headers: {'x-elastic-cluster': 'es-primary'}})
+}
+
+function deleteIndex(name){
+  cy.request({
+    method: 'POST',
+    url: '/api/v1/rest/query', body: {path: `/${name}`,method: 'DELETE', body:{}},
+    headers: { 'x-elastic-cluster': 'es-primary' }
+  })
+}
+
 context('Misc', () => {
   beforeEach(() => {
     cy.server()
-    cy.request({
-      method: 'POST',
-      url: '/api/v1/rest/query', body: {path: '/testindex',method: 'DELETE', body:{}},
-      headers: { 'x-elastic-cluster': 'es-primary' }
-    })
+    deleteIndex('testIndex')
+    deleteIndex('.special-index')
     cy.route('/api/v1/clients').as('getClients')
-      cy.request({
-        method: 'POST',
-        url: '/api/v1/rest/query', body: {
-          body: {"settings": {"index": {"number_of_shards": 12,"number_of_replicas": 0}}},
-          path: '/testindex',
-          method: 'PUT'
-        },
-        headers: {'x-elastic-cluster': 'es-primary'}})
+    createIndex('testindex')
+    createIndex('.special-index')
     cy.route('/api/v1/cluster/info/*').as('clusterInfo')
     cy.route('/api/v1/views/shards_grid').as('shardsGrid')
     cy.route('/api/v1/index/testindex/dynamicSettings').as('indexSettings')
@@ -26,6 +36,13 @@ context('Misc', () => {
     cy.get('.cluster[data-cluster="es-primary"]').click()
     cy.wait('@shardsGrid')
   })
+  describe('Filters', () => {
+    it('Should filter special indices', () => {
+      cy.get('[data-index-name=".special-index"]').should('exist')
+      cy.get('[data-cy="show-hidden"]').click({force: true})
+      cy.get('[data-index-name=".special-index"]').should('not.exist')
+    })
+  })
   describe('Change settings', () => {
     it('Should add replicas', () => {
       cy.get('.index-name[data-index-name="testindex"]').click()
@@ -33,10 +50,10 @@ context('Misc', () => {
       cy.wait(['@indexSettings', '@shardsGrid'])
       cy.get('[data-tab="dynamic-index settings"]').click()
       cy.get('[data-input="index.number_of_replicas"]').clear().type(3).blur()
-      cy.get('[data-btn="save"]').eq(1).click()
+      cy.get('[data-btn="save"]').click()
       cy.wait('@postSettings')
       cy.get('[data-input="index.number_of_replicas"]').clear().type(0).blur()
-      cy.get('[data-btn="save"]').eq(1).click()
+      cy.get('[data-btn="save"]').click()
       cy.wait('@postSettings')
     })
   })
