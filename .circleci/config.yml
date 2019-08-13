@@ -119,7 +119,7 @@ jobs:
          name: Load Docker image layer cache
          command: docker load -i ~/dockers/server.tar
       - run: docker-compose build
-      - run: docker-compose up --abort-on-container-exit --exit-code-from e2e || docker-compose logs
+      - run: docker-compose up --abort-on-container-exit --exit-code-from e2e
       - store_artifacts:
           path: e2e/cypress/videos
       - store_artifacts:
