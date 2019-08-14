@@ -21,8 +21,8 @@ def format_index_data(data: dict, aliases: dict) -> dict:
         "primaries": int(data["pri"]),
         "replicas": int(data["rep"]),
         "status": data["status"],
-        "docsCount": int(data["docs.count"]),
-        "docsDeleted": int(data["docs.deleted"]),
+        "docsCount": int(data["docs.count"] or 0),
+        "docsDeleted": int(data["docs.deleted"] or 0),
         "storeSize": data["store.size"],
     }, **append)
 
