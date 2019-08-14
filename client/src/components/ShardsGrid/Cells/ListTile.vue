@@ -1,12 +1,11 @@
 <template>
   <v-list-item @click="action" :disabled="disabled" style="margin-left:24px">
-    <v-list-item-title>{{ title }}</v-list-item-title>
+    <v-list-item-title :data-tile="dataTitle">{{ title }}</v-list-item-title>
   </v-list-item>
 </template>
 
 <script>
 export default {
-  name: "ListTile",
   props: {
     action: {
       type: Function,
@@ -19,6 +18,11 @@ export default {
     disabled: {
       type: Boolean,
       default: false
+    }
+  },
+  computed: {
+    dataTitle() {
+      return this.title.replace(" ", "-").toLowerCase();
     }
   }
 };

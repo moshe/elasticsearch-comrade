@@ -1,6 +1,10 @@
 <template>
   <v-tabs color="#303030">
-    <v-tab v-for="module in modules" :key="module.name">
+    <v-tab
+      v-for="module in modules"
+      :key="module.name"
+      :data-tab="module.name.replace(' ', '-').toLowerCase()"
+    >
       {{ module.name }}
     </v-tab>
     <v-tab-item v-for="module in modules" :key="module.name">

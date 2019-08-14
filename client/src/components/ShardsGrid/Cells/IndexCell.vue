@@ -3,7 +3,7 @@
     <v-flex>
       <v-menu offset-y style="display: inline-block">
         <template v-slot:activator="{ on }">
-          <div class="index-name" v-on="on">
+          <div class="index-name" :data-index-name="indexName" v-on="on">
             {{ indexName }}{{ index.status === "close" ? " (closed)" : "" }}
             <v-icon size="16">arrow_drop_down</v-icon>
           </div>
@@ -142,8 +142,8 @@
     </v-flex>
     <v-flex style="text-align: left" v-if="index.unassignedShards" class="mt-2">
       <shard-square
-        v-for="shard in index.unassignedShards.replicas"
-        :key="shard.shard"
+        v-for="(shard, index) in index.unassignedShards.replicas"
+        :key="index"
         :index="indexName"
         :state="shard.state"
         :id="shard.shard"

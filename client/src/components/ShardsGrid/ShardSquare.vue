@@ -4,6 +4,9 @@
       <div style="display: inline-block; margin-right: 3px; height: 25px">
         <div
           class="shard-square"
+          :data-index="index"
+          :data-shard="id"
+          :data-node="nodeName"
           v-bind:class="{
             'primary-shard': primary,
             'replica-shard': !primary,
@@ -35,6 +38,7 @@
       <v-list-item
         :disabled="isRelocating"
         @click="toggleShardForRelocation({ index, id, nodeName })"
+        data-cy="toggle-relocation"
       >
         <v-list-item-action style="min-width: unset" class="pr-2">
           <v-icon :disabled="isRelocating" style="font-size: 16px">
@@ -44,7 +48,7 @@
         <v-list-item-title v-if="isMarkedForRelocation">
           Deselect for relocation
         </v-list-item-title>
-        <v-list-item-title v-else>Select for relocation</v-list-item-title>
+        <v-list-item-title v-else v-text="'Select for relocation'" />
       </v-list-item>
     </v-list>
   </v-menu>

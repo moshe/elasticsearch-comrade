@@ -1,5 +1,52 @@
-version: '3'
+version: '2.1'
 services:
+  node-1:
+    image: blacktop/elasticsearch:7.3
+    container_name: node-1
+    healthcheck:
+      test: ["CMD", "wget", "http://localhost:9200", "-O-"]
+      interval: 10s
+      timeout: 1s
+      retries: 120
+    environment:
+      - node.name=node-1
+      - discovery.type=zen
+      - discovery.seed_hosts=node-2
+      - cluster.initial_master_nodes=node-1,node-2
+      - cluster.name=docker-cluster
+      - xpack.monitoring.collection.enabled=false
+      - bootstrap.memory_lock=true
+      - node.store.allow_mmap=false
+      - "ES_JAVA_OPTS=-Xms256m -Xmx256m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports:
+      - 9200:9200
+  node-2:
+    image: blacktop/elasticsearch:7.3
+    container_name: node-2
+    healthcheck:
+      test: ["CMD", "wget", "http://localhost:9200", "-O-"]
+      interval: 10s
+      timeout: 1s
+      retries: 120
+    environment:
+      - node.name=node-2
+      - discovery.type=zen
+      - discovery.seed_hosts=node-1
+      - cluster.initial_master_nodes=node-1,node-2
+      - cluster.name=docker-cluster
+      - xpack.monitoring.collection.enabled=false
+      - bootstrap.memory_lock=true
+      - node.store.allow_mmap=false
+      - "ES_JAVA_OPTS=-Xms256m -Xmx256m"
+    mem_limit: 1g
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
   web:
     image: merged
     build: .
@@ -7,8 +54,14 @@ services:
     restart: always
     ports:
       - "8000:8000"
+    depends_on:
+      node-1:
+        condition: service_healthy
+      node-2:
+        condition: service_healthy
   e2e:
     image: cypress/included:3.4.1
+    command: --record
     container_name: cypress
     depends_on:
       - web
@@ -19,8 +72,8 @@ services:
       - CIRCLE_BUILD_NUM
       - CIRCLE_BUILD_URL
       - CIRCLE_PR_NUMBER
-      - CIRCLE_PR_REPONAM
-      - CIRCLE_PR_USERNAM
+      - CIRCLE_PR_REPONAME
+      - CIRCLE_PR_USERNAME
       - CIRCLE_COMPARE_URL
       - CIRCLE_WORKFLOW_ID
       - CIRCLE_PULL_REQUEST
@@ -30,4 +83,3 @@ services:
     working_dir: /e2e/
     volumes:
       - ./e2e/:/e2e/
-    command: --record

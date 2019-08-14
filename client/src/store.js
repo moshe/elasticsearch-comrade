@@ -26,7 +26,7 @@ export default new Vuex.Store({
         allocation: null
       }
     },
-    settingsRefreshEvery: 5000,
+    settingsRefreshEvery: 1000,
     settingsRefreshEnabled: true
   },
   mutations: {

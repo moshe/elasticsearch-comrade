@@ -1,5 +1,10 @@
 <template>
-  <v-layout class="elevation-20 cluster" column :style="cssProps">
+  <v-layout
+    class="elevation-20 cluster"
+    :data-cluster="clusterName"
+    column
+    :style="cssProps"
+  >
     <v-flex>
       <div class="cluster-name">
         <status-dot :status="cluster.status" :size="20" />

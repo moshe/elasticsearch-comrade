@@ -2,6 +2,7 @@ import traceback
 
 from elasticsearch import ElasticsearchException
 from sanic import Sanic
+from sanic.exceptions import NotFound
 from sanic.log import logger
 from sanic.request import Request
 from sanic.response import HTTPResponse, file, json
@@ -48,6 +49,8 @@ async def get_clients(request: Request) -> HTTPResponse:
 async def halt_response(request: Request, exception: Exception) -> HTTPResponse:
     if isinstance(exception, ElasticsearchException):
         error = {"error": exception.info, "type": "ElasticSearch error"}
+    elif isinstance(exception, NotFound):
+        return await file('static/index.html')
     else:
         error = {"error": traceback.format_exc(), "type": "unexpected"}
     logger.error(dumps(error))

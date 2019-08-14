@@ -21,8 +21,8 @@ def format_index_data(data: dict, aliases: dict) -> dict:
         "primaries": int(data["pri"]),
         "replicas": int(data["rep"]),
         "status": data["status"],
-        "docsCount": int(data["docs.count"]),
-        "docsDeleted": int(data["docs.deleted"]),
+        "docsCount": int(data["docs.count"] or 0),
+        "docsDeleted": int(data["docs.deleted"] or 0),
         "storeSize": data["store.size"],
     }, **append)
 
@@ -79,7 +79,7 @@ async def get_shards_info(request: Request) -> tuple:
     recovery = await client.cat.recovery(index=relocating_indices, format='json')
     relocation_progress = {
         (recovery_data["index"], recovery_data["shard"]):
-            int(float(recovery_data["bytes_recovered"]) * 100 / int(recovery_data["bytes_total"]))
+            int(float(recovery_data["bytes_recovered"]) * 100 / (int(recovery_data["bytes_total"]) or 1))
         for recovery_data in recovery if recovery_data["stage"] != "done" and recovery_data["bytes_total"]
     }
     return shards, relocation_progress
@@ -115,9 +115,9 @@ async def indices_stats(request: Request) -> HTTPResponse:
             from_node, to_node = node.split(' -> ')
             node = from_node
             data['fromNode'] = to_node.split()[2]
-            data['progress'] = relocation_progress[(shard['index'], shard['shard'])]
+            data['progress'] = relocation_progress.get((shard['index'], shard['shard']), 0)
         if shard['state'] == 'INITIALIZING':
-            data['progress'] = relocation_progress[(shard['index'], shard['shard'])]
+            data['progress'] = relocation_progress.get((shard['index'], shard['shard']), 0)
         indices_per_node[node][shard['index']][shard_type].append(data)
         indices_per_node[node][shard['index']][shard_type].sort(key=lambda x: x['shard'])
 

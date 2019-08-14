@@ -6,7 +6,7 @@ import Vuetify from "vuetify";
 import "vuetify/dist/vuetify.min.css";
 import colors from "vuetify/lib/util/colors";
 import App from "./App.vue";
-import "./registerServiceWorker";
+// import "./registerServiceWorker";
 import router from "./router";
 import store from "./store";
 import "./style/global.css";
