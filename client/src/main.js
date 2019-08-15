@@ -29,7 +29,8 @@ new Vue({
       options: { customProperties: true },
       themes: {
         light: {
-          "bg-color": "#e9e9e9"
+          "bg-color": "#e9e9e9",
+          accent: colors.blueGrey
         },
         dark: {
           "bg-color": "#595959",

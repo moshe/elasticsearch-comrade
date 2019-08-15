@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <v-header sub class="mt-6">{{ module.name }}</v-header>
+  <div class="pa-4">
+    <v-header sub>{{ module.name }}</v-header>
     <div v-for="line in module.description.split('\n')" :key="line">
       {{ line }}
     </div>
@@ -38,9 +38,14 @@
       </v-btn>
       {{ key }} changed from {{ value.from }} to {{ value.value }}
     </div>
-    <v-btn data-btn="save" color="success" :disabled="!pending" @click="save">
-      Save
-    </v-btn>
+    <v-btn
+      class="mt-5"
+      data-btn="save"
+      color="success"
+      :disabled="!pending"
+      @click="save"
+      v-text="'Save'"
+    />
   </div>
 </template>
 
@@ -88,8 +93,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.v-btn--icon.v-btn--small {
-  margin: 0;
-}
-</style>
+<style scoped></style>

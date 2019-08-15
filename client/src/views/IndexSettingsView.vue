@@ -1,5 +1,5 @@
 <template>
-  <v-tabs color="#303030">
+  <v-tabs>
     <v-tab
       v-for="module in modules"
       :key="module.name"
