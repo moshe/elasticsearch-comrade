@@ -1,6 +1,10 @@
 <template>
-  <div v-if="index" style="max-width: 13vw">
-    <span v-if="index.primaries">
+  <v-row align="start" justify="start" no-gutters>
+    <v-col
+      style="flex-grow: 0"
+      v-for="x in index.primaries || []"
+      :key="x.shard"
+    >
       <shard-square
         :id="x.shard"
         :state="x.state"
@@ -8,12 +12,14 @@
         :progress="x.progress"
         :index="indexName"
         :node-name="nodeName"
-        :key="x.shard"
-        v-for="x in index.primaries"
         :primary="true"
       />
-    </span>
-    <span v-if="index.replicas">
+    </v-col>
+    <v-col
+      style="flex-grow: 0"
+      v-for="x in index.replicas || []"
+      :key="x.shard"
+    >
       <shard-square
         :id="x.shard"
         :state="x.state"
@@ -21,18 +27,15 @@
         :progress="x.progress"
         :index="indexName"
         :node-name="nodeName"
-        :key="x.shard"
-        v-for="x in index.replicas"
         :primary="false"
       />
-    </span>
-  </div>
+    </v-col>
+  </v-row>
 </template>
 
 <script>
 import ShardSquare from "../ShardSquare.vue";
 export default {
-  name: "ShardsCell",
   props: {
     index: {
       required: true
