@@ -9,19 +9,16 @@
         item-key="name"
         :footer-props="{ 'items-per-page-options': [30, 100, 200] }"
       >
-        <template v-slot:items="props">
-          <tr>
-            <td>{{ props.item.name }}</td>
-            <td>{{ props.item.index_patterns.join(",") }}</td>
-            <td>
-              <v-btn icon small @click="edit(props.item)">
-                <v-icon small>edit</v-icon>
-              </v-btn>
-              <v-btn icon small @click="deleteT(props.item.name)">
-                <v-icon small>delete_outline</v-icon>
-              </v-btn>
-            </td>
-          </tr>
+        <template v-slot:item.actions="{ item }">
+          <v-btn icon small @click="edit(item)">
+            <v-icon small>edit</v-icon>
+          </v-btn>
+          <v-btn icon small @click="deleteT(item.name)">
+            <v-icon small>delete_outline</v-icon>
+          </v-btn>
+        </template>
+        <template v-slot:item.index_patterns="{ item }">
+          {{ item.index_patterns.join(", ") }}
         </template>
       </v-data-table>
     </v-flex>
@@ -61,7 +58,7 @@ export default {
       headers: [
         { text: "Name", value: "name" },
         { text: "Index Pattern", value: "index_patterns" },
-        { text: "Actions", value: "index_patterns" }
+        { text: "Actions", value: "actions", sortable: false }
       ],
       base: {
         index_patterns: ["te*", "bar*"],
