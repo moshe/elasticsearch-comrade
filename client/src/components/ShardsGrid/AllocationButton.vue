@@ -2,8 +2,10 @@
   <v-menu offset-y>
     <template v-slot:activator="{ on }">
       <div v-on="on" class="allocation-text">
-        <span>Allocation: {{ current }}</span>
-        <v-icon size="16">arrow_drop_down</v-icon>
+        <span>
+          Allocation: <span style="font-weight: 500">{{ current }}</span>
+        </span>
+        <v-icon size="16" v-text="'arrow_drop_down'" />
       </div>
     </template>
     <v-list dense two-line>
