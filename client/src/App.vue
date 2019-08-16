@@ -22,7 +22,10 @@
       <v-app-bar-nav-icon @click="drawer = true" />
       <v-toolbar-title class="headline text-uppercase">
         <status-dot :status="this.cluster.clusterStatus" class="mr-4" />
-        <span @click="$router.push('/')" style="cursor: pointer">
+        <span
+          @click="$router.currentRoute.name !== 'home' && $router.push('/')"
+          style="cursor: pointer"
+        >
           <span class="font-weight-light">Elasticsearch</span>
           <span class="font-weight-bold">Comrade</span>
         </span>
