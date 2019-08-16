@@ -40,9 +40,18 @@
         :items="filteredTasks"
         class="elevation-1 small-table"
         item-key="taskId"
+        show-expand
         :footer-props="{ 'items-per-page-options': [30, 100, 200] }"
       >
-        <template v-slot:items="props">
+        <template v-slot:item.cancellable="{ item }">
+          <v-btn icon :disabled="!item.cancellable" small @click="cancleTask">
+            <v-icon>clear</v-icon>
+          </v-btn>
+        </template>
+        <template v-slot:expanded-item="{ item }">
+          <code>{{ JSON.stringify(item, 0, 2) }}</code>
+        </template>
+        <!-- <template v-slot:items="props">
           <tr>
             <td @click="props.expanded = !props.expanded">
               <v-btn
@@ -70,14 +79,8 @@
               </v-btn>
             </td>
           </tr>
-        </template>
-        <template v-slot:expand="props">
-          <v-card flat>
-            <v-card-text>
-              <code>{{ JSON.stringify(props.item, 0, 2) }}</code>
-            </v-card-text>
-          </v-card>
-        </template>
+        </template> -->
+        <template v-slot:expand="props"> </template>
       </v-data-table>
     </v-flex>
   </v-layout>
