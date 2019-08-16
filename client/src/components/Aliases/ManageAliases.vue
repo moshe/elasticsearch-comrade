@@ -2,26 +2,27 @@
   <div>
     <v-header sub>Manage Aliases</v-header>
     <v-text-field solo label="Filter Aliases / Indices" v-model="filter" />
-    <div v-for="index in indicesWithAlias" :key="index">
+    <div v-for="alias in aliases" :key="alias">
       <div style="font-size:15px">
-        <v-btn icon x-small @click="handleRemoveIndex(index)">
-          <v-icon size="18">clear</v-icon>
+        <v-icon size="22" class="mr-1" v-text="'bookmark'" />
+        {{ alias }}
+        <v-btn icon x-small @click="handleRemoveIndex(alias)">
+          <v-icon size="18" v-text="'clear'" />
         </v-btn>
-        {{ index }}
       </div>
       <span class="pl-8" />
       <alias-chip
-        v-for="alias in indices[index].aliases"
-        :key="alias"
-        :alias="alias"
+        v-for="index in aliasToindex[alias] || []"
+        :key="index"
+        :alias="index"
         :removed="isRemoved(index, alias)"
         @remove="handleRemove(index, alias)"
         class="ma-1"
       />
       <alias-chip
-        v-for="(action, i) in added.filter(x => x.index === index)"
+        v-for="(action, i) in added.filter(x => x.alias === alias)"
         :key="i"
-        :alias="action.alias"
+        :alias="action.index"
         added
         @remove="handleRemove(action.index, action.alias)"
         class="ma-1"
@@ -34,11 +35,11 @@
         </template>
         <v-list>
           <v-list-item
-            v-for="alias in aliases"
-            :key="alias"
+            v-for="index in Object.keys(indices)"
+            :key="index"
             @click="handleAddition(index, alias)"
           >
-            <v-list-item-title>{{ alias }}</v-list-item-title>
+            <v-list-item-title>{{ index }}</v-list-item-title>
           </v-list-item>
         </v-list>
       </v-menu>
@@ -51,16 +52,21 @@
 import { mapState } from "vuex";
 import AliasChip from "./AliasChip.vue";
 import VHeader from "../Base/Header.vue";
+import aliasApis from "../../mixins/aliasApis";
 
 export default {
+  mixins: [aliasApis],
   components: { AliasChip, VHeader },
   data() {
-    return { filter: "" };
+    return { filter: "", aliasToindex: {} };
   },
   props: {
     pendingActions: {
       type: Array
     }
+  },
+  async created() {
+    this.aliasToindex = await this.listAliases();
   },
   computed: {
     ...mapState(["indices"]),
@@ -98,8 +104,10 @@ export default {
     handleRemove(index, alias) {
       this.$emit("action", { index, alias, action: "remove" });
     },
-    handleRemoveIndex(index) {
-      this.indices[index].aliases.forEach(x => this.handleRemove(index, x));
+    handleRemoveIndex(alias) {
+      this.aliasToindex[alias].forEach(index =>
+        this.handleRemove(index, alias)
+      );
     },
     handleAddition(index, alias) {
       this.$emit("action", { index, alias, action: "add" });
