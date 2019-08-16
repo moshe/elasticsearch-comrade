@@ -55,8 +55,4 @@ export default {
 .removed {
   text-decoration: line-through;
 }
-
-.added {
-  text-decoration: forestgreen;
-}
 </style>
