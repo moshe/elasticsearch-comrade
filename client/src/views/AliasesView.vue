@@ -34,8 +34,8 @@ import { mapState } from "vuex";
 export default {
   components: { CreateAlias, ManageAliases, PendingActions },
   mixins: [aliasApis],
-  async created() {
-    this.aliasToindex = await this.listAliases();
+  created() {
+    this.getAliases();
   },
   data() {
     return { pendingActions: [], aliasToindex: {} };
@@ -47,8 +47,13 @@ export default {
     async commit() {
       this.$store.commit("startLoading");
       await this.updateAliases(this.pendingActions);
-      this.aliasToindex = await this.listAliases();
+      await this.getAliases();
       this.pendingActions = [];
+      this.$store.commit("stopLoading");
+    },
+    async getAliases() {
+      this.$store.commit("startLoading");
+      this.aliasToindex = await this.listAliases();
       this.$store.commit("stopLoading");
     },
     onAction(action) {

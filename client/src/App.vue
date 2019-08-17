@@ -6,6 +6,12 @@
       <drawer-content />
       <template v-slot:append>
         <div class="pa-2">
+          <v-switch
+            :label="$vuetify.theme.dark ? 'Dark' : 'Light'"
+            v-model="$vuetify.theme.dark"
+            class="mr-4"
+            color="primary"
+          />
           <v-btn
             block
             @click="
@@ -35,20 +41,15 @@
     </v-app-bar>
 
     <v-content>
-      <v-dialog v-model="loading" persistent width="500">
+      <v-dialog :value="true" persistent width="500">
         <v-card>
-          <v-card-text>
-            <v-progress-linear indeterminate color="green" class="mb-0" />
+          <v-card-text class="pa-2">
+            <div style="text-align:center">Loading ...</div>
+            <v-progress-linear indeterminate color="green" />
           </v-card-text>
         </v-card>
       </v-dialog>
       <v-container fluid class="pl-10 pr-10">
-        <v-switch
-          label="Dark"
-          v-model="$vuetify.theme.dark"
-          style="display: inline-block"
-          class="mr-4"
-        />
         <!-- <v-btn
           :color="color"
           v-for="color in [
