@@ -65,20 +65,7 @@ export default {
         settings: {
           number_of_shards: 1
         },
-        mappings: {
-          _source: {
-            enabled: false
-          },
-          properties: {
-            host_name: {
-              type: "keyword"
-            },
-            created_at: {
-              type: "date",
-              format: "EEE MMM dd HH:mm:ss Z yyyy"
-            }
-          }
-        }
+        mappings: {}
       }
     };
   },

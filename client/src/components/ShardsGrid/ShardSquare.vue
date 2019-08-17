@@ -119,7 +119,7 @@ export default {
 .shard-square {
   display: inline-block;
   height: 20px;
-  line-height: 20px;
+  line-height: 19px;
   width: 20px;
   text-align: center;
   cursor: pointer;

@@ -10,44 +10,45 @@
           <v-icon size="18" v-text="'clear'" />
         </v-btn>
       </div>
-      <span class="pl-6" />
-      <alias-chip
-        v-for="index in aliasToindex[alias] || []"
-        :key="index"
-        :alias="index"
-        :removed="isRemoved(index, alias)"
-        @remove="handleRemove(index, alias)"
-        class="ma-1"
-      />
-      <alias-chip
-        v-for="(action, i) in added.filter(x => x.alias === alias)"
-        :key="i"
-        :alias="action.index"
-        added
-        @remove="handleRemove(action.index, action.alias)"
-        class="ma-1"
-      />
-      <v-menu offset-y>
-        <template v-slot:activator="{ on }">
-          <v-btn
-            small
-            icon
-            :color="`primary ${$vuetify.theme.dark ? 'lighten' : 'darken'}-1`"
-            v-on="on"
-          >
-            <v-icon v-text="'add'" />
-          </v-btn>
-        </template>
-        <v-list>
-          <v-list-item
-            v-for="index in Object.keys(indices)"
-            :key="index"
-            @click="handleAddition(index, alias)"
-          >
-            <v-list-item-title v-text="index" />
-          </v-list-item>
-        </v-list>
-      </v-menu>
+      <div class="pl-6">
+        <alias-chip
+          v-for="index in aliasToindex[alias] || []"
+          :key="index"
+          :alias="index"
+          :removed="isRemoved(index, alias)"
+          @remove="handleRemove(index, alias)"
+          class="ma-1"
+        />
+        <alias-chip
+          v-for="(action, i) in added.filter(x => x.alias === alias)"
+          :key="i"
+          :alias="action.index"
+          added
+          @remove="handleRemove(action.index, action.alias)"
+          class="ma-1"
+        />
+        <v-menu offset-y>
+          <template v-slot:activator="{ on }">
+            <v-btn
+              small
+              icon
+              :color="`primary ${$vuetify.theme.dark ? 'lighten' : 'darken'}-1`"
+              v-on="on"
+            >
+              <v-icon v-text="'add'" />
+            </v-btn>
+          </template>
+          <v-list>
+            <v-list-item
+              v-for="index in Object.keys(indices)"
+              :key="index"
+              @click="handleAddition(index, alias)"
+            >
+              <v-list-item-title v-text="index" />
+            </v-list-item>
+          </v-list>
+        </v-menu>
+      </div>
       <v-divider class="mb-4 mt-4" />
     </div>
   </div>

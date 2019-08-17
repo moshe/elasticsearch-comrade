@@ -1,10 +1,10 @@
 <template>
-  <v-checkbox class="doc-checkbox" v-model="internalValue">
+  <v-checkbox class="doc-checkbox" v-model="internalValue" hide-details>
     <template v-slot:label>
       {{ label }}
       <v-tooltip bottom max-width="400px">
         <template v-slot:activator="{ on }">
-          <v-icon size="14" class="ml-1" v-on="on" color="secondary lighten-2">
+          <v-icon size="14" class="ml-1" v-on="on" color="secondary lighten-3">
             help_outline
           </v-icon>
         </template>

@@ -14,13 +14,15 @@
         </v-flex>
       </v-layout>
     </v-flex>
-    <v-flex>
+    <v-flex class="mb-2">
       <v-chip
         v-for="filter in filters"
         :key="filter"
         color="green"
         close
-        @input="removeFilter(filter, 'filters')"
+        small
+        class="mr-2"
+        @click:close="removeFilter(filter, 'filters')"
       >
         {{ filter }}
       </v-chip>
@@ -29,7 +31,9 @@
         :key="filter"
         color="red"
         close
-        @input="removeFilter(filter, 'notFilters')"
+        small
+        class="mr-2"
+        @click:close="removeFilter(filter, 'notFilters')"
       >
         {{ filter }}
       </v-chip>
@@ -51,36 +55,6 @@
         <template v-slot:expanded-item="{ item }">
           <code>{{ JSON.stringify(item, 0, 2) }}</code>
         </template>
-        <!-- <template v-slot:items="props">
-          <tr>
-            <td @click="props.expanded = !props.expanded">
-              <v-btn
-                flat
-                icon
-                small
-                class="expand"
-                v-bind:class="{ expanded: props.expanded }"
-              >
-                <v-icon>keyboard_arrow_right</v-icon>
-              </v-btn>
-            </td>
-            <td>{{ props.item.taskId }}</td>
-            <td>{{ props.item.action }}</td>
-            <td>{{ props.item.nodeName }}</td>
-            <td>
-              <v-btn
-                flat
-                icon
-                :disabled="!props.item.cancellable"
-                small
-                @click="cancleTask"
-              >
-                <v-icon>clear</v-icon>
-              </v-btn>
-            </td>
-          </tr>
-        </template> -->
-        <template v-slot:expand="props"> </template>
       </v-data-table>
     </v-flex>
   </v-layout>
