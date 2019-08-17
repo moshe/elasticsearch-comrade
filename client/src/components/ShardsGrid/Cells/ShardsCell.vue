@@ -1,5 +1,5 @@
 <template>
-  <v-row align="start" justify="start" no-gutters>
+  <v-row align="start" justify="start" no-gutters v-if="index">
     <v-col
       style="flex-grow: 0"
       v-for="x in index.primaries || []"

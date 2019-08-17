@@ -2,6 +2,7 @@
   <v-app>
     <json-modal />
     <error-bar />
+    <favicon />
     <v-navigation-drawer v-model="drawer" app class="accent" temporary>
       <drawer-content />
       <template v-slot:append>
@@ -80,6 +81,7 @@ import ErrorBar from "./components/Modals/ErrorBar.vue";
 import DrawerContent from "./components/Navigation/DrawerContent.vue";
 import RefreshSelector from "./components/RefreshSelector.vue";
 import Login from "./components/Login/Login.vue";
+import Favicon from "./components/Favicon.vue";
 
 export default {
   name: "App",
@@ -89,7 +91,8 @@ export default {
     StatusDot,
     RefreshSelector,
     Login,
-    ErrorBar
+    ErrorBar,
+    Favicon
   },
   async created() {
     await this.updateData();
