@@ -7,7 +7,13 @@
             {{ nodeName }}<v-icon size="16">arrow_drop_down</v-icon>
           </v-col>
           <v-col style="text-align:right" v-if="isSuitableForRelocation">
-            <v-btn x-small depressed color="blue darken-2" @click="relocate">
+            <v-btn
+              x-small
+              depressed
+              color="blue darken-2"
+              @click="relocate"
+              :data-relocate-to="nodeName"
+            >
               <span style="font-size: 10px; color:white">MOVE HERE</span>
             </v-btn>
           </v-col>
