@@ -1,6 +1,7 @@
 # Table of contents
 
 * [Introduction](README.md)
+* [Introduction](introduction.md)
 * [Features](features.md)
 * [Installation](installation/README.md)
   * [Using Docker](installation/using-docker.md)
