@@ -41,7 +41,7 @@
     </v-app-bar>
 
     <v-content>
-      <v-dialog :value="true" persistent width="500">
+      <v-dialog v-model="loading" persistent width="500">
         <v-card>
           <v-card-text class="pa-2">
             <div style="text-align:center">Loading ...</div>
