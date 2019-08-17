@@ -4,13 +4,18 @@
       <create-alias @action="onAction" :pending-actions="pendingActions" />
     </v-flex>
     <v-flex xs5 class="pl-4">
-      <manage-aliases @action="onAction" :pending-actions="pendingActions" />
+      <manage-aliases
+        @action="onAction"
+        :pending-actions="pendingActions"
+        :aliasToindex="aliasToindex"
+      />
       <pending-actions
         :pending-actions="pendingActions"
         @removeAction="removeAction"
       />
       <v-btn
         color="success"
+        class="mt-4"
         :disabled="pendingActions.length == 0"
         @click="commit"
       >
@@ -29,18 +34,27 @@ import { mapState } from "vuex";
 export default {
   components: { CreateAlias, ManageAliases, PendingActions },
   mixins: [aliasApis],
+  created() {
+    this.getAliases();
+  },
   data() {
-    return {
-      pendingActions: []
-    };
+    return { pendingActions: [], aliasToindex: {} };
   },
   computed: {
     ...mapState(["indices"])
   },
   methods: {
     async commit() {
+      this.$store.commit("startLoading");
       await this.updateAliases(this.pendingActions);
+      await this.getAliases();
       this.pendingActions = [];
+      this.$store.commit("stopLoading");
+    },
+    async getAliases() {
+      this.$store.commit("startLoading");
+      this.aliasToindex = await this.listAliases();
+      this.$store.commit("stopLoading");
     },
     onAction(action) {
       this.removeAction(action);

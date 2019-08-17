@@ -1,5 +1,5 @@
 <template>
-  <v-list dense>
+  <v-list dense nav>
     <v-list-item link v-for="page in pages" :key="page.to" :to="page.to">
       <v-list-item-icon class="mr-4">
         <v-icon color="white" v-text="page.icon" />

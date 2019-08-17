@@ -4,7 +4,7 @@
     <v-layout class="mb-2">
       <v-flex>
         <v-layout>
-          <v-flex xs4>
+          <v-flex xs4 class="mr-2">
             <v-text-field
               clearable
               label="Filter indices"

@@ -42,3 +42,13 @@ async def create_alias(request: Request) -> HTTPResponse:
         {"actions": [format_alias_addition(action) for action in actions]}
     )
     return json({"status": "ok"})
+
+
+@alias_bp.route('/list')
+async def get_aliases(request: Request) -> HTTPResponse:
+    client = get_client(request)
+    aliases = await client.cat.aliases(format='json')
+    response = defaultdict(list)
+    for x in aliases:
+        response[x['alias']].append(x['index'])
+    return json(response)

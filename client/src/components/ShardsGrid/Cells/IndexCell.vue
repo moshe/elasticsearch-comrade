@@ -47,7 +47,7 @@
             title="Force Merge"
             :disabled="isClosed"
           />
-          <v-list-item class="success--text pt-1">
+          <v-list-item class="success--text pt-2 pb-1">
             <v-list-item-title class="success--text text--lighten-2">
               <v-icon
                 size="14"
@@ -62,7 +62,7 @@
           <list-tile :action="showMapping" title="Show Mapping" />
           <list-tile :action="showSettings" title="Show Settings" />
           <list-tile :action="showHead" title="Head" :disabled="isClosed" />
-          <v-list-item class="success--text pt-1">
+          <v-list-item class="success--text pt-2 pb-1">
             <v-list-item-title class="success--text text--lighten-2">
               <v-icon
                 size="14"
@@ -79,7 +79,7 @@
             title="Edit Settings"
             :disabled="isClosed"
           />
-          <v-list-item class="success--text pt-1">
+          <v-list-item class="success--text pt-2 pb-1">
             <v-list-item-title class="error--text text--lighten-2">
               <v-icon
                 size="14"

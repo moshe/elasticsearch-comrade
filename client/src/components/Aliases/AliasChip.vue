@@ -30,14 +30,17 @@ export default {
     }
   },
   computed: {
+    colorVariant() {
+      return this.$vuetify.theme.dark ? "lighten" : "darken";
+    },
     color() {
       if (this.added) {
-        return "primary";
+        return `primary ${this.colorVariant}-1`;
       }
       if (this.removed) {
         return "gray";
       }
-      return "orange";
+      return `orange ${this.colorVariant}-2`;
     }
   },
   methods: {
@@ -51,9 +54,5 @@ export default {
 <style scoped>
 .removed {
   text-decoration: line-through;
-}
-
-.added {
-  text-decoration: forestgreen;
 }
 </style>

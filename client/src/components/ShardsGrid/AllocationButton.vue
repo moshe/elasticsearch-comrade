@@ -1,16 +1,12 @@
 <template>
   <v-menu offset-y>
     <template v-slot:activator="{ on }">
-      <v-btn
-        class="allocation-button"
-        small
-        color="accent"
-        v-on="on"
-        :disabled="loading"
-      >
-        <v-icon size="12px" dark class="mr-1">{{ icon }}</v-icon>
-        Allocation
-      </v-btn>
+      <div v-on="on" class="allocation-text">
+        <span>
+          Allocation: <span style="font-weight: 500">{{ current }}</span>
+        </span>
+        <v-icon size="16" v-text="'arrow_drop_down'" />
+      </div>
     </template>
     <v-list dense two-line>
       <div v-for="({ name, text }, i) in options" :key="name">
@@ -83,11 +79,12 @@ export default {
 };
 </script>
 
-<style>
-.allocation-button.v-size--small {
-  height: 18px !important;
-  padding: 3px 7px !important;
-  font-size: 9px !important;
-  margin: 0 !important;
+<style scoped>
+.allocation-text {
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 2px;
+  cursor: pointer;
+  font-size: 12px;
+  max-width: 90px;
 }
 </style>

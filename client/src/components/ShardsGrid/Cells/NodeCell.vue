@@ -2,21 +2,20 @@
   <div>
     <v-menu offset-y style="display: inline-block">
       <template v-slot:activator="{ on }">
-        <div class="node-name ml-1" v-on="on" :data-node="nodeName">
-          {{ nodeName }}<v-icon size="16">arrow_drop_down</v-icon>
-        </div>
+        <v-row no-gutters>
+          <v-col class="node-name" v-on="on" :data-node="nodeName">
+            {{ nodeName }}<v-icon size="16">arrow_drop_down</v-icon>
+          </v-col>
+          <v-col style="text-align:right" v-if="isSuitableForRelocation">
+            <v-btn x-small depressed color="blue darken-2" @click="relocate">
+              <span style="font-size: 10px; color:white">MOVE HERE</span>
+            </v-btn>
+          </v-col>
+        </v-row>
       </template>
       <v-list dense>
         <v-list-item @click="$router.push(`/node/${nodeId}`)">
           <v-list-item-title v-text="'Show Info'" />
-        </v-list-item>
-
-        <v-list-item
-          data-cy="relocate-to-node"
-          :disabled="!isSuitableForRelocation"
-          @click="relocate"
-        >
-          <v-list-item-title v-text="'Relocate'" />
         </v-list-item>
       </v-list>
     </v-menu>

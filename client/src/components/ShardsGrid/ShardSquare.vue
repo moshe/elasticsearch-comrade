@@ -21,9 +21,7 @@
         <v-progress-linear
           height="3px"
           v-model="progress"
-          class="ma-0"
           color="white"
-          style="width: 20px"
           v-if="progress != null"
         />
       </div>
@@ -59,7 +57,6 @@ import store from "../../store";
 import { mapMutations } from "vuex";
 
 export default {
-  name: "ShardSquare",
   props: {
     id: {
       required: true,
@@ -122,7 +119,7 @@ export default {
 .shard-square {
   display: inline-block;
   height: 20px;
-  line-height: 20px;
+  line-height: 19px;
   width: 20px;
   text-align: center;
   cursor: pointer;

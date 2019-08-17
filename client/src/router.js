@@ -12,44 +12,44 @@ export default new Router({
   routes: [
     {
       path: "/",
-      nodeName: "home",
+      name: "home",
       component: Home
     },
     {
       path: "/rest",
-      nodeName: "rest",
+      name: "rest",
       component: RESTView
     },
     {
       path: "/aliases",
-      nodeName: "createAliases",
+      name: "createAliases",
       component: AliasesView
     },
     {
       path: "/tasks",
-      nodeName: "tasks",
+      name: "tasks",
       component: TasksView
     },
     {
       path: "/snapshots",
-      nodeName: "snapshots",
+      name: "snapshots",
       component: () =>
         import(/* webpackChunkName: "snapshots" */ "./views/SnapshotsView.vue")
     },
     {
       path: "/templates",
-      nodeName: "templates",
+      name: "templates",
       component: TemplatesView
     },
     {
       path: "/indexSettings/:indexName",
-      nodeName: "indexSettings",
+      name: "indexSettings",
       component: IndexSettingsView,
       props: true
     },
     {
       path: "/node/:nodeId",
-      nodeName: "NodeInfo",
+      name: "NodeInfo",
       component: NodeInfoView,
       props: true
     }

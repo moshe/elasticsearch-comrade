@@ -68,7 +68,6 @@ import EndpointAutoCompleter from "../components/REST/EndpointAutoCompleter.vue"
 import QueryHistory from "../components/REST/QueryHistory.vue";
 
 export default {
-  name: "QueryView",
   components: { EndpointAutoCompleter, RESTButtons, QueryEditor, QueryHistory },
   mixins: [RESTApis],
   data() {
@@ -95,11 +94,16 @@ export default {
         query: this.$refs.editor.getQuery(),
         date: Date.now()
       });
-      const resp = await this.sendQuery(
-        this.method,
-        this.path,
-        this.$refs.editor.getQuery()
-      );
+      let resp = null;
+      try {
+        resp = await this.sendQuery(
+          this.method,
+          this.path,
+          this.$refs.editor.getQuery()
+        );
+      } catch (error) {
+        resp = error;
+      }
       this.$refs.preview.setContent(resp);
     }
   },
