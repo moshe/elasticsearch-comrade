@@ -16,6 +16,9 @@
         <span style="font-weight:600">{{ action.index }}</span>
       </span>
     </div>
+    <div v-if="pendingActions.length === 0">
+      No actions pending
+    </div>
   </div>
 </template>
 
