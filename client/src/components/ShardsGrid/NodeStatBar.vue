@@ -21,7 +21,6 @@
 import { mapState } from "vuex";
 
 export default {
-  name: "NodeStatBar",
   props: {
     name: {
       type: String,
@@ -51,7 +50,7 @@ export default {
       ) {
         this.histogram.shift();
       }
-      if (this.histogram.length > 20) {
+      if (this.histogram.length > 40) {
         this.histogram.shift();
         this.gradient.shift();
       }
