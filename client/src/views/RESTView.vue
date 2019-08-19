@@ -26,7 +26,12 @@
         style="margin-top:48px; flex:1"
         v-show="panes.includes('editor')"
       >
-        <query-editor style="height: 700px;" ref="editor" @execute="onClick" />
+        <query-editor
+          style="height: 700px;"
+          ref="editor"
+          @execute="onClick"
+          :init="init.body"
+        />
       </v-flex>
       <v-flex shrink>
         <r-e-s-t-buttons style="margin-top: 70px" :panes.sync="panes" />
@@ -70,11 +75,17 @@ import QueryHistory from "../components/REST/QueryHistory.vue";
 export default {
   components: { EndpointAutoCompleter, RESTButtons, QueryEditor, QueryHistory },
   mixins: [RESTApis],
+  props: {
+    init: {
+      type: Object,
+      default: () => ({ body: {} })
+    }
+  },
   data() {
     return {
       response: null,
-      method: "GET",
-      path: "/",
+      method: this.init.method || "GET",
+      path: this.init.path || "/",
       panes: ["preview", "editor"]
     };
   },
@@ -85,7 +96,9 @@ export default {
     },
     selectRoute({ path, template }) {
       this.path = path;
-      this.$refs.editor.setContent(template || {});
+      if (template) {
+        this.$refs.editor.setContent(template);
+      }
     },
     async onClick() {
       this.$refs.history.addEntry({

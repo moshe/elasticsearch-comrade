@@ -95,3 +95,15 @@ async def clear_cache(request: Request, index: str) -> HTTPResponse:
     client = get_client(request)
     await client.indices.clear_cache(index=index, allow_no_indices=False)
     return json({"status": "ok"})
+
+
+@index_bp.route('/<index>/body')
+async def set_index_settings(request: Request, index: str) -> HTTPResponse:
+    client = get_client(request)
+    current_index_settings = (await client.indices.get(index))[index]
+    if 'index' in current_index_settings['settings']:
+        current_index_settings['settings']['index'].pop('creation_date', None)
+        current_index_settings['settings']['index'].pop('uuid', None)
+        current_index_settings['settings']['index'].pop('version', None)
+        current_index_settings['settings']['index'].pop('provided_name', None)
+    return json(current_index_settings)

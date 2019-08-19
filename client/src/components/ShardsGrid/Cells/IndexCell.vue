@@ -47,6 +47,11 @@
             title="Force Merge"
             :disabled="isClosed"
           />
+          <list-tile
+            :action="() => copyIndex(indexName)"
+            title="Create Like"
+            :disabled="false"
+          />
           <v-list-item class="success--text pt-2 pb-1">
             <v-list-item-title class="success--text text--lighten-2">
               <v-icon
@@ -180,6 +185,15 @@ export default {
     async showHead() {
       const content = await this.getHead(this.indexName);
       this.startJsonModal(content);
+    },
+    async copyIndex(indexName) {
+      const body = await this.getIndexBody(indexName);
+      this.$router.push({
+        name: "rest",
+        params: {
+          init: { body, method: "PUT", path: "/{indexName}" }
+        }
+      });
     }
   },
   computed: {

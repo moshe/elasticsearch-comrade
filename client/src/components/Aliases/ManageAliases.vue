@@ -81,7 +81,9 @@ export default {
       return this.pendingActions.filter(x => x.action === "add");
     },
     aliases() {
-      return Object.keys(this.aliasToindex);
+      return Object.keys(this.aliasToindex).filter(x =>
+        x.includes(this.filter)
+      );
     }
   },
   methods: {

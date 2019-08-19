@@ -43,6 +43,9 @@ export default {
     },
     async setIndexSettings(index, settings) {
       return await POST(`/api/v1/index/${index}/settings`, settings);
+    },
+    async getIndexBody(index) {
+      return await this.GET(`/api/v1/index/${index}/body`);
     }
   }
 };
