@@ -6,7 +6,7 @@
     label="URL"
     item-text="path"
     ref="filter"
-    @change="onChange"
+    @update:search-input="onChange"
   >
     <template v-slot:item="{ index, item }">
       <v-list-item-content>
@@ -24,7 +24,6 @@ import { mapState } from "vuex";
 import endpoints from "../../assets/elasticsearch_endpoints.json";
 
 export default {
-  name: "EndpointAutoCompleter",
   props: {
     method: {
       type: String,
