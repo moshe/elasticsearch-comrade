@@ -18,9 +18,8 @@
         class="mt-4"
         :disabled="pendingActions.length == 0"
         @click="commit"
-      >
-        Commit
-      </v-btn>
+        v-text="'Save'"
+      />
     </v-flex>
   </v-layout>
 </template>
