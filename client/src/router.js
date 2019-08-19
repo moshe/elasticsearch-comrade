@@ -18,7 +18,8 @@ export default new Router({
     {
       path: "/rest",
       name: "rest",
-      component: RESTView
+      component: RESTView,
+      props: route => ({ ...route.params })
     },
     {
       path: "/aliases",
