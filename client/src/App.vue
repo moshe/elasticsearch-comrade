@@ -108,7 +108,11 @@ export default {
     ...mapMutations(["selectCluster", "startLoading"]),
     async updateData() {
       if (this.settingsRefreshEnabled && this.connectedCluster) {
-        await this.shardsGrid();
+        try {
+          await this.shardsGrid();
+        } catch (error) {
+          // handled in shardsGrid store
+        }
       }
       this.timer = setTimeout(this.updateData, this.settingsRefreshEvery);
     }
