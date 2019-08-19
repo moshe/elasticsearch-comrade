@@ -2,7 +2,7 @@ import json
 import re
 import urllib.request
 
-TAG = 'v7.2.0'
+TAG = 'v7.3.0'
 
 
 def split_to_sections(content: str, h: int = 3) -> dict:
@@ -45,7 +45,7 @@ def extract(location: str, section_name: str) -> None:
          "settings": settings,
          "name": section_name,
          },
-        open(f'../../elasticsearch/index_settings/{fname}.json', 'w'),
+        open(f'../elasticsearch/index_settings/{fname}.json', 'w'),
         indent=2)
 
 

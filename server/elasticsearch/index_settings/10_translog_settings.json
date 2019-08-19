@@ -1,5 +1,5 @@
 {
-  "description": "The data in the translog is only persisted to disk when the translog is\n++fsync++ed and committed.  In the event of hardware failure, any data written\nsince the previous translog commit will be lost.\n\nBy default, `index.translog.durability` is set to `request` meaning that Elasticsearch will only report success of an index, delete,\nupdate, or bulk request to the client after the translog has been successfully\n++fsync++ed and committed on the primary and on every allocated replica. If\n`index.translog.durability` is set to `async` then Elasticsearch ++fsync++s\nand commits the translog every `index.translog.sync_interval` (defaults to 5 seconds).\n\nThe following <<indices-update-settings,dynamically updatable>> per-index\nsettings control the behaviour of the translog:",
+  "description": "The data in the translog is only persisted to disk when the translog is\n++fsync++ed and committed.  In the event of a hardware failure or an operating\nsystem crash or a JVM crash or a shard failure, any data written since the\nprevious translog commit will be lost.\n\nBy default, `index.translog.durability` is set to `request` meaning that Elasticsearch will only report success of an index, delete,\nupdate, or bulk request to the client after the translog has been successfully\n++fsync++ed and committed on the primary and on every allocated replica. If\n`index.translog.durability` is set to `async` then Elasticsearch ++fsync++s\nand commits the translog every `index.translog.sync_interval` (defaults to 5 seconds).\n\nThe following <<indices-update-settings,dynamically updatable>> per-index\nsettings control the behaviour of the translog:",
   "settings": [
     {
       "description": "How often the translog is ++fsync++ed to disk and committed, regardless of\nwrite operations. Defaults to `5s`. Values less than `100ms` are not allowed.",
@@ -14,7 +14,7 @@
       "name": "request"
     },
     {
-      "description": "`fsync` and commit in the background every `sync_interval`. In\n    the event of hardware failure, all acknowledged writes since the last\n    automatic commit will be discarded.\n--",
+      "description": "`fsync` and commit in the background every `sync_interval`. In\n    the event of a failure, all acknowledged writes since the last\n    automatic commit will be discarded.\n--",
       "name": "async"
     },
     {
