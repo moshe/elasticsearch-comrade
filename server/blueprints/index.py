@@ -98,7 +98,7 @@ async def clear_cache(request: Request, index: str) -> HTTPResponse:
 
 
 @index_bp.route('/<index>/body')
-async def set_index_settings(request: Request, index: str) -> HTTPResponse:
+async def get_body(request: Request, index: str) -> HTTPResponse:
     client = get_client(request)
     current_index_settings = (await client.indices.get(index))[index]
     if 'index' in current_index_settings['settings']:
