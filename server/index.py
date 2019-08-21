@@ -1,5 +1,6 @@
 import traceback
 
+import click
 from elasticsearch import ElasticsearchException
 from sanic import Sanic
 from sanic.exceptions import NotFound
@@ -56,5 +57,23 @@ async def halt_response(request: Request, exception: Exception) -> HTTPResponse:
     logger.error(dumps(error))
     return json(error)
 
+
+@click.command()
+@click.option('--port', default=8000, help='Specify port number', show_default=True)
+@click.option('--host', default='0.0.0.0', help='Specify ip to bind', show_default=True)
+@click.option('--debug', default=False, help='Run server in debug', is_flag=True, show_default=True)
+@click.option('--cert', help='Path to your cert file', type=click.Path(exists=True))
+@click.option('--key', help='Path to your key file', type=click.Path(exists=True))
+def cli(port, host, debug, cert, key):
+    ssl = None
+    if key and not cert:
+        raise click.UsageError('--key supplied without --cert')
+    elif cert and not key:
+        raise click.UsageError('--cert supplied without --key')
+    elif cert and key:
+        ssl = {'cert': cert, 'key': key}
+    app.run(host=host, port=port, debug=debug, ssl=ssl)
+
+
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8000, debug=True)
+    cli(auto_envvar_prefix='COMRADE')
