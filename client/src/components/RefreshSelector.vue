@@ -1,12 +1,7 @@
 <template>
   <span>
-    <v-btn
-      icon
-      text
-      style="display:inline-block"
-      @click="setRefreshEnabled(!settingsRefreshEnabled)"
-    >
-      <v-icon>{{ settingsRefreshEnabled ? "stop" : "play_arrow" }}</v-icon>
+    <v-btn icon text @click="setRefreshEnabled(!settingsRefreshEnabled)">
+      <v-icon v-text="settingsRefreshEnabled ? 'stop' : 'play_arrow'" />
     </v-btn>
     <v-select
       style="display:inline-block;height: 0px"

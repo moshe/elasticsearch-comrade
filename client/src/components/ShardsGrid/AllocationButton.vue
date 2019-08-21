@@ -29,7 +29,6 @@ import clusterApis from "../../mixins/clusterApis";
 import { mapActions, mapState } from "vuex";
 
 export default {
-  name: "AllocationButton",
   mixins: [clusterApis],
   computed: {
     ...mapState(["cluster"]),
