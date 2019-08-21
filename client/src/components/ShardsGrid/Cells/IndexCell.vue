@@ -10,10 +10,10 @@
         </template>
         <v-list dense>
           <v-list-item>
-            <v-list-item-title class="success--text text--lighten-2">
+            <v-list-item-title :class="`success--text text--${colorVariant}-2`">
               <v-icon
                 size="14"
-                color="success lighten-2"
+                :color="`success ${colorVariant}-2`"
                 class="pr-2"
                 v-text="'build'"
               />
@@ -53,10 +53,10 @@
             :disabled="false"
           />
           <v-list-item class="success--text pt-2 pb-1">
-            <v-list-item-title class="success--text text--lighten-2">
+            <v-list-item-title :class="`success--text text--${colorVariant}-2`">
               <v-icon
                 size="14"
-                color="success lighten-2"
+                :color="`success ${colorVariant}-2`"
                 class="pr-2"
                 v-text="'visibility'"
               />
@@ -68,10 +68,10 @@
           <list-tile :action="showSettings" title="Show Settings" />
           <list-tile :action="showHead" title="Head" :disabled="isClosed" />
           <v-list-item class="success--text pt-2 pb-1">
-            <v-list-item-title class="success--text text--lighten-2">
+            <v-list-item-title :class="`success--text text--${colorVariant}-2`">
               <v-icon
                 size="14"
-                color="success lighten-2"
+                :color="`success ${colorVariant}-2`"
                 class="pr-2"
                 v-text="'settings'"
               />
@@ -85,10 +85,10 @@
             :disabled="isClosed"
           />
           <v-list-item class="success--text pt-2 pb-1">
-            <v-list-item-title class="error--text text--lighten-2">
+            <v-list-item-title :class="`error--text text--${colorVariant}-2`">
               <v-icon
                 size="14"
-                color="error lighten-2"
+                :color="`error text--${colorVariant}-2`"
                 class="pr-2"
                 v-text="'error_outline'"
               />
@@ -154,6 +154,14 @@
         :id="shard.shard"
         :primary="false"
       />
+      <shard-square
+        v-for="(shard, index) in index.unassignedShards.primaries"
+        :key="index"
+        :index="indexName"
+        :state="shard.state"
+        :id="shard.shard"
+        primary
+      />
     </v-flex>
   </v-layout>
 </template>
@@ -198,6 +206,9 @@ export default {
   },
   computed: {
     ...mapState(["indices"]),
+    colorVariant() {
+      return this.$vuetify.theme.dark ? "lighten" : "darken";
+    },
     index() {
       return this.indices[this.indexName];
     },

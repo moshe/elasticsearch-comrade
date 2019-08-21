@@ -4,7 +4,7 @@
     <v-icon
       v-else-if="isError"
       :size="size * 1.2"
-      color="red"
+      color="red accent-3"
       v-bind:style="{ lineHeight: `${size * 1.5}px` }"
     >
       error
@@ -49,7 +49,7 @@ export default {
           this.status
         ) !== -1
       ) {
-        return colors[this.status].accent4;
+        return colors[this.status].accent3;
       }
       throw new Error(`Unknown cluster status ${this.status}`);
     }
