@@ -110,7 +110,9 @@ async def indices_stats(request: Request) -> HTTPResponse:
         }
         node = shard['node']
         if shard['state'] == 'UNASSIGNED':
-            unassigned_shards[shard['index']][shard_type].append(data)
+            unassigned_shards[shard['index']][shard_type] = sorted(
+                unassigned_shards[shard['index']][shard_type] + [data],
+                key=lambda x: x['shard'])
         if shard['state'] == 'RELOCATING':
             from_node, to_node = node.split(' -> ')
             node = from_node
