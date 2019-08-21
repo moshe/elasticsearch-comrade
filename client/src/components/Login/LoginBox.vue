@@ -1,9 +1,11 @@
 <template>
   <v-layout
-    class="elevation-20 cluster"
+    class="elevation-10 cluster"
+    :class="{ clickable: !cluster.error }"
     :data-cluster="clusterName"
     column
     :style="cssProps"
+    @click="!cluster.error && selectCluster(clusterName)"
   >
     <v-flex>
       <div class="cluster-name">
@@ -27,14 +29,9 @@
           <span class="key">JVM Name:</span>
           {{ cluster.jvmName }}<br />
         </v-flex>
-        <v-flex v-else>{{ cluster.error.args.body }}</v-flex>
+        <v-flex v-else class="error-text">{{ cluster.error.args.body }}</v-flex>
         <v-flex shrink>
-          <v-btn
-            icon
-            text
-            @click="selectCluster(null)"
-            :disabled="!!cluster.error"
-          >
+          <v-btn icon text :disabled="!!cluster.error">
             <v-icon color="white">arrow_forward</v-icon>
           </v-btn>
         </v-flex>
@@ -44,6 +41,7 @@
 </template>
 
 <script>
+import { mapMutations } from "vuex";
 import { GET } from "../../requests";
 import StatusDot from "../StatusDot.vue";
 import { clusterStatus } from "../../enums";
@@ -61,6 +59,9 @@ export default {
     return {
       cluster: { versions: [], docCount: 0, status: clusterStatus.loading }
     };
+  },
+  methods: {
+    ...mapMutations(["selectCluster"])
   },
   async created() {
     try {
@@ -87,6 +88,9 @@ export default {
 </script>
 
 <style scoped>
+.clickable {
+  cursor: pointer;
+}
 .cluster-name {
   background-color: var(--header-color);
   text-align: center;
@@ -100,7 +104,6 @@ export default {
 }
 .cluster {
   margin: 20px;
-  cursor: pointer;
   border-radius: 10px;
   background-color: var(--body-color);
   height: 180px;
@@ -109,5 +112,10 @@ export default {
 
 .info-box {
   padding-left: 20px;
+}
+
+.error-text {
+  overflow: hidden;
+  height: 100px;
 }
 </style>
