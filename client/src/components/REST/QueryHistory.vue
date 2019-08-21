@@ -31,7 +31,7 @@
 
 <script>
 const MAX_SIZE = 1000;
-import formatDistance from "date-fns/distance_in_words_to_now";
+import formatDistance from "date-fns/formatDistanceToNow";
 
 export default {
   props: {
