@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "1d447ee3d223eda36ec35b2417cbce9346a0a81af9e74903e32724ba302df27c"
+            "sha256": "db41300fe8f035b9a94f4b6401db066c7ee53f0ae7ebc3b3ec08ef6be53e97e1"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -85,12 +85,20 @@
             ],
             "version": "==3.0.4"
         },
+        "click": {
+            "hashes": [
+                "sha256:2335065e6395b9e67ca716de5f7526736bfa6ceead690adf616d925bdc622b13",
+                "sha256:5b94b49521f6456670fdb30cd82a4eca9412788a93fa6dd6df72c94d5a8ff2d7"
+            ],
+            "index": "pypi",
+            "version": "==7.0"
+        },
         "elasticsearch": {
             "hashes": [
-                "sha256:cbc73831c63fa2824538df76fcb2c4be007b43dbd9e7788ae70ea6d24109925b",
-                "sha256:d1b176b87a7fb75dca82978c82a4023e8b21cbc98f4018cb51190fb0b8b43764"
+                "sha256:5f40149e10a59a10f769b826dcdb8594c148aac77e5212d1cde5542f8653d8ba",
+                "sha256:7c85cb712beedd4e7d4a9d4d6513823d7b5ecff399a6d5ada8cbea9b1c005a47"
             ],
-            "version": "==7.0.2"
+            "version": "==7.0.3"
         },
         "elasticsearch-async": {
             "hashes": [

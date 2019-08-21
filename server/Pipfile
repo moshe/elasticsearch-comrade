@@ -12,6 +12,7 @@ sanic = "*"
 ujson = "*"
 elasticsearch-async = "*"
 pytest = "*"
+click = "*"
 
 [requires]
 python_version = "3.7"
