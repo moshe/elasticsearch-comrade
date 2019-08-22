@@ -9,7 +9,7 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
-    "@vue/cli": "^3.10.0",
+    "@vue/cli": "^3.11.0",
     "core-js": "^3.2.1",
     "date-fns": "^2.0.0",
     "jsoneditor": "^6.3.0",
