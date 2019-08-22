@@ -2,7 +2,7 @@ from sanic import Blueprint
 from sanic.request import Request
 from sanic.response import HTTPResponse, json
 
-from connections import clients, get_client
+from connections import get_client
 
 cluster_bp = Blueprint('cluster')
 
@@ -32,7 +32,6 @@ async def set_allocation(request: Request, operation: str) -> HTTPResponse:
 
 @cluster_bp.route('/info/<cluster_name>')
 async def get_cluster_info(request: Request, cluster_name: str) -> HTTPResponse:
-    assert cluster_name in clients()
     client = get_client(None, cluster_name)
     await client.ping()
 

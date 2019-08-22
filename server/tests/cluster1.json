@@ -1,0 +1,6 @@
+{
+    "params": {
+        "hosts": ["http://node-1", "http://node-1"]
+    },
+    "name": "es-primary"
+}

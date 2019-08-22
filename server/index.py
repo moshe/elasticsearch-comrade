@@ -18,7 +18,7 @@ from blueprints.snapshot import snapshot_bp
 from blueprints.task import task_bp
 from blueprints.template import template_bp
 from blueprints.views import views_bp
-from connections import clients
+from connections import clusters, load_clients
 
 app = Sanic()
 app.static('/static', './static')
@@ -41,7 +41,7 @@ async def redirect_init(request):
 @app.route('/api/v1/clients')
 async def get_clients(request: Request) -> HTTPResponse:
     result = []
-    for cluster_name in clients():
+    for cluster_name in clusters:
         result.append({"name": cluster_name})
     return json(result)
 
@@ -56,6 +56,17 @@ async def halt_response(request: Request, exception: Exception) -> HTTPResponse:
         error = {"error": traceback.format_exc(), "type": "unexpected"}
     logger.error(dumps(error))
     return json(error)
+
+
+@app.listener('after_server_start')
+async def notify_server_started(app, loop):
+    load_clients()
+
+
+@app.listener('before_server_stop')
+async def close_db(app, loop):
+    for cluster in clusters:
+        await clusters[cluster]['client'].transport.close()
 
 
 @click.command()

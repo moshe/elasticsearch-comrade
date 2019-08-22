@@ -52,6 +52,8 @@ services:
     build: .
     container_name: server
     restart: always
+    volumes:
+      - ./server/tests/cluster1.json:/app/clusters/cluster1.json
     ports:
       - "8000:8000"
     depends_on:
