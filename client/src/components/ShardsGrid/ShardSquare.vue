@@ -78,7 +78,7 @@ export default {
       type: String
     },
     primary: {
-      required: true,
+      default: false,
       type: Boolean
     },
     progress: {

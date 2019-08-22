@@ -12,7 +12,7 @@
         :progress="x.progress"
         :index="indexName"
         :node-name="nodeName"
-        :primary="true"
+        primary
       />
     </v-col>
     <v-col
@@ -27,7 +27,6 @@
         :progress="x.progress"
         :index="indexName"
         :node-name="nodeName"
-        :primary="false"
       />
     </v-col>
   </v-row>

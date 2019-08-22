@@ -17,11 +17,11 @@
             block
             @click="
               selectCluster(null);
+              clearRelocation();
               drawer = false;
             "
-          >
-            Logout
-          </v-btn>
+            v-text="'Logout'"
+          />
         </div>
       </template>
     </v-navigation-drawer>
@@ -105,7 +105,7 @@ export default {
   },
   methods: {
     ...mapActions(["shardsGrid"]),
-    ...mapMutations(["selectCluster", "startLoading"]),
+    ...mapMutations(["selectCluster", "startLoading", "clearRelocation"]),
     async updateData() {
       if (this.settingsRefreshEnabled && this.connectedCluster) {
         try {

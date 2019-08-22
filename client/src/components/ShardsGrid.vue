@@ -73,6 +73,7 @@
             :node-ip="node.ip"
             :node-id="node.id"
             :metrics="node.metrics"
+            :indices="node.indices"
           />
         </v-flex>
         <v-flex v-for="index of currentIndices" :key="index" class="pa-1 cell">

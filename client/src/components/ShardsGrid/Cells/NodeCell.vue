@@ -65,6 +65,10 @@ export default {
     metrics: {
       required: true,
       type: Object
+    },
+    indices: {
+      required: true,
+      type: Object
     }
   },
   methods: {
@@ -91,6 +95,19 @@ export default {
         if (mark.nodeName === this.nodeName) {
           return false;
         }
+
+        if (
+          mark.nodeName !== this.nodeName &&
+          this.indices[mark.index] &&
+          (this.indices[mark.index].primaries
+            .map(x => x.shard)
+            .includes(mark.id) ||
+            this.indices[mark.index].replicas
+              .map(x => x.shard)
+              .includes(mark.id))
+        ) {
+          return false;
+        }
       }
       return true;
     }
@@ -108,20 +125,5 @@ export default {
 .ip {
   font-size: 10px;
   color: #bdbdbd;
-}
-
-.relocate-here {
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.v-btn--small {
-  height: 18px;
-  padding: 3px 7px;
-  font-size: 9px !important;
-  margin: 0;
-}
-.v-btn {
-  min-width: 50px;
 }
 </style>

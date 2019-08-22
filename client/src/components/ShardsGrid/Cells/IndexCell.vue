@@ -152,7 +152,6 @@
         :index="indexName"
         :state="shard.state"
         :id="shard.shard"
-        :primary="false"
       />
       <shard-square
         v-for="(shard, index) in index.unassignedShards.primaries"
