@@ -1,4 +1,5 @@
 import json
+from collections import ChainMap
 from glob import glob
 from os import path
 
@@ -6,6 +7,7 @@ from elasticsearch_async import AsyncElasticsearch
 from sanic.request import Request
 
 clusters = {}
+defaults = {"retry_on_timeout": True, "timeout": 30}
 
 
 def load_clients() -> None:
@@ -19,7 +21,7 @@ def load_clients() -> None:
         name = info.get('name')
         if name is None:
             name = connection.split('/')[-1].replace('.json', '')
-        info['client'] = AsyncElasticsearch(**info['params'])
+        info['client'] = AsyncElasticsearch(**ChainMap(info['params'], defaults))
         clusters[name] = info
 
 
