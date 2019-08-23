@@ -34,11 +34,12 @@ async function request(showError, ...args) {
         type: content.type || "Server Error",
         body: content.error
       });
+    } else {
+      throw new RequestError({
+        type: content.type || "Server Error",
+        body: content
+      });
     }
-    throw new RequestError({
-      type: content.type || "Server Error",
-      body: content.error
-    });
   }
   return content;
 }
