@@ -126,7 +126,7 @@ async def indices_stats(request: Request) -> HTTPResponse:
     for node in nodes:
         node['indices'] = dict(sorted(indices_per_node[node["name"]].items()))
 
-    indices = dict([(x['index'], format_index_data(x, aliases)) for x in indices])
+    indices = dict(sorted([(x['index'], format_index_data(x, aliases)) for x in indices]))
     for index in indices:
         if index in unassigned_shards:
             indices[index]['unassignedShards'] = unassigned_shards[index]
