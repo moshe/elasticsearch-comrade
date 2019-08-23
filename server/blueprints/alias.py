@@ -37,7 +37,6 @@ async def get_index_aliases(request: Request) -> dict:
 async def create_alias(request: Request) -> HTTPResponse:
     client = get_client(request)
     actions = request.json['actions']
-    print({"actions": [format_alias_addition(action) for action in actions]})
     await client.indices.update_aliases(
         {"actions": [format_alias_addition(action) for action in actions]}
     )
