@@ -1,7 +1,8 @@
+import concurrent
 import traceback
 
 import click
-from elasticsearch import ElasticsearchException
+from elasticsearch import ConnectionError, ElasticsearchException
 from sanic import Sanic
 from sanic.exceptions import NotFound
 from sanic.log import logger
@@ -50,11 +51,14 @@ async def get_clients(request: Request) -> HTTPResponse:
 async def halt_response(request: Request, exception: Exception) -> HTTPResponse:
     if isinstance(exception, ElasticsearchException):
         error = {"error": exception.info, "type": "ElasticSearch error"}
+        if isinstance(exception.args[2], concurrent.futures._base.TimeoutError):
+            error['error'] = 'timeout'
+
     elif isinstance(exception, NotFound):
         return await file('static/index.html')
     else:
         error = {"error": traceback.format_exc(), "type": "unexpected"}
-    logger.error(dumps(error))
+    logger.exception(exception)
     return json(error)
 
 
