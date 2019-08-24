@@ -1,55 +1,28 @@
 <template>
-  <v-menu offset-y style="display: inline-block" :disabled="isUnassigned">
-    <template v-slot:activator="{ on }">
-      <div style="display: inline-block; margin-right: 3px; height: 25px">
-        <div
-          class="shard-square"
-          :data-index="index"
-          :data-shard="id"
-          :data-node="nodeName"
-          v-bind:class="{
-            'primary-shard': primary,
-            'replica-shard': !primary,
-            'initializing-shard': isInitializing,
-            'unassigned-shard': isUnassigned,
-            marked: isMarkedForRelocation
-          }"
-          v-on="on"
-        >
-          {{ id }}
-        </div>
-        <v-progress-linear
-          height="3px"
-          v-model="progress"
-          color="white"
-          v-if="progress != null"
-        />
-      </div>
-    </template>
-    <v-list dense class="shard-list">
-      <v-list-item disabled v-if="isRelocating">
-        <v-list-item-action style="min-width: unset" class="pr-2">
-          <v-icon style="font-size: 16px" disabled>computer</v-icon>
-        </v-list-item-action>
-        <v-list-item-action> From {{ fromNode }} </v-list-item-action>
-      </v-list-item>
-      <v-list-item
-        :disabled="isRelocating"
-        @click="toggleShardForRelocation({ index, id, nodeName })"
-        data-cy="toggle-relocation"
-      >
-        <v-list-item-action style="min-width: unset" class="pr-2">
-          <v-icon :disabled="isRelocating" style="font-size: 16px">
-            input
-          </v-icon>
-        </v-list-item-action>
-        <v-list-item-title v-if="isMarkedForRelocation">
-          Deselect for relocation
-        </v-list-item-title>
-        <v-list-item-title v-else v-text="'Select for relocation'" />
-      </v-list-item>
-    </v-list>
-  </v-menu>
+  <div style="display: inline-block; margin-right: 3px; height: 25px">
+    <div
+      class="shard-square"
+      :data-index="index"
+      :data-shard="id"
+      :data-node="nodeName"
+      v-bind:class="{
+        'primary-shard': primary,
+        'replica-shard': !primary,
+        'initializing-shard': isInitializing,
+        'unassigned-shard': isUnassigned,
+        marked: isMarkedForRelocation
+      }"
+      @click="toggle({ index, id, nodeName })"
+    >
+      {{ id }}
+    </div>
+    <v-progress-linear
+      height="3px"
+      v-model="progress"
+      color="white"
+      v-if="progress != null"
+    />
+  </div>
 </template>
 
 <script>
@@ -87,7 +60,13 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(["toggleShardForRelocation"])
+    ...mapMutations(["toggleShardForRelocation"]),
+    toggle(args) {
+      if (this.isRelocating) {
+        return;
+      }
+      this.toggleShardForRelocation(args);
+    }
   },
   computed: {
     isMarkedForRelocation() {

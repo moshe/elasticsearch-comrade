@@ -60,7 +60,6 @@ context('Misc', () => {
     it('cy.screenshot() - take a screenshot', () => {
       createIndex('testindex2', 12, 0)
       cy.get('.shard-square[data-node="node-1"][data-index="testindex2"]').eq(1).click()
-      cy.get('[data-cy="toggle-relocation"]').click()
       cy.get('[data-relocate-to="node-2"]').click()
       deleteIndex('testindex2')
     })

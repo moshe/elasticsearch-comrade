@@ -29,24 +29,18 @@
         </v-layout>
       </v-flex>
       <v-flex shrink>
-        <v-btn
-          text
-          icon
-          @click="page--"
-          :disabled="page * perPage - perPage < 0"
-        >
-          <v-icon>navigate_before</v-icon>
+        <v-btn icon @click="page--" :disabled="page * perPage - perPage < 0">
+          <v-icon v-text="'navigate_before'" />
         </v-btn>
         {{ page * perPage + 1 }} -
         {{ Math.min(page * perPage + perPage, indices.length) }} /
         {{ indices.length }}
         <v-btn
-          text
           icon
           @click="page++"
           :disabled="(page + 1) * perPage >= indices.length"
         >
-          <v-icon>navigate_next</v-icon>
+          <v-icon v-text="'navigate_next'" />
         </v-btn>
       </v-flex>
     </v-layout>
