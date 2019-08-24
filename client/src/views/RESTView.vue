@@ -6,7 +6,6 @@
           v-model="method"
           :items="['GET', 'POST', 'DELETE', 'HEAD', 'PUT']"
           label="Method"
-          autofocus
         />
       </v-flex>
       <v-flex style="flex: 10" class="ml-4">
@@ -101,6 +100,8 @@ export default {
       }
     },
     async onClick() {
+      // FIXME: Ugly hack in order to make endpoint completer to work when adding custom urls
+      this.path = document.querySelector("#endpoint-selector")._value;
       this.$refs.history.addEntry({
         method: this.method,
         path: this.path,

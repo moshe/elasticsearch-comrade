@@ -1,12 +1,13 @@
 <template>
   <v-combobox
     :items="endpoints"
-    :value="path"
     clearable
     label="URL"
     item-text="path"
     ref="filter"
-    @update:search-input="onChange"
+    autofocus
+    v-model="select"
+    id="endpoint-selector"
   >
     <template v-slot:item="{ index, item }">
       <v-list-item-content>
@@ -34,6 +35,11 @@ export default {
       required: true
     }
   },
+  data() {
+    return {
+      select: this.path
+    };
+  },
   computed: {
     ...mapState(["indices"]),
     endpoints() {
@@ -42,14 +48,16 @@ export default {
         .filter(x => x.method === this.method);
     }
   },
-  methods: {
-    onChange(selected) {
+  watch: {
+    select(selected) {
       if (typeof selected === "string") {
         this.$emit("change", { path: selected });
       } else {
         this.$emit("change", selected);
       }
-    },
+    }
+  },
+  methods: {
     expandIndices(route) {
       const indices = Object.keys(this.indices);
       if (route.path.includes("{index}")) {
