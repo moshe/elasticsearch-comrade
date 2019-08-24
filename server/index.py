@@ -2,13 +2,12 @@ import concurrent
 import traceback
 
 import click
-from elasticsearch import ConnectionError, ElasticsearchException
+from elasticsearch import ElasticsearchException
 from sanic import Sanic
 from sanic.exceptions import NotFound
 from sanic.log import logger
 from sanic.request import Request
 from sanic.response import HTTPResponse, file, json
-from ujson import dumps
 
 from blueprints.alias import alias_bp
 from blueprints.cluster import cluster_bp
