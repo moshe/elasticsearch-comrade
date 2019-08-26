@@ -1,8 +1,10 @@
 <template>
   <div class="pa-4">
     <v-header sub>{{ module.name }}</v-header>
-    <div v-for="line in module.description.split('\n')" :key="line">
-      {{ line }}
+    <div style="line-height: 1; white-space: pre;">
+      <span v-for="line in module.description.split('\n')" :key="line">
+        {{ line }}
+      </span>
     </div>
     <v-layout wrap>
       <v-flex
