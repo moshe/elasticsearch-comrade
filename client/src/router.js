@@ -4,6 +4,7 @@ import Home from "./views/Home.vue";
 import IndexSettingsView from "./views/IndexSettingsView.vue";
 import NodeInfoView from "./views/NodeInfoView.vue";
 import RESTView from "./views/RESTView.vue";
+import SQLView from "./views/SQLView.vue";
 import TasksView from "./views/TasksView.vue";
 import TemplatesView from "./views/TemplatesView.vue";
 
@@ -19,6 +20,12 @@ export default new Router({
       path: "/rest",
       name: "rest",
       component: RESTView,
+      props: route => ({ ...route.params })
+    },
+    {
+      path: "/sql",
+      name: "sql",
+      component: SQLView,
       props: route => ({ ...route.params })
     },
     {

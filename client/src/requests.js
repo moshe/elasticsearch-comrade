@@ -32,7 +32,7 @@ async function request(showError, ...args) {
     if (showError) {
       state.commit("setErrorBarContent", {
         type: content.type || "Server Error",
-        body: content.error
+        body: content
       });
     } else {
       throw new RequestError({
