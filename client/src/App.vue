@@ -84,7 +84,6 @@ import Login from "./components/Login/Login.vue";
 import Favicon from "./components/Favicon.vue";
 
 export default {
-  name: "App",
   components: {
     DrawerContent,
     JsonModal,
@@ -108,11 +107,7 @@ export default {
     ...mapMutations(["selectCluster", "startLoading", "clearRelocation"]),
     async updateData() {
       if (this.settingsRefreshEnabled && this.connectedCluster) {
-        try {
-          await this.shardsGrid();
-        } catch (error) {
-          // handled in shardsGrid store
-        }
+        await this.shardsGrid();
       }
       this.timer = setTimeout(this.updateData, this.settingsRefreshEvery);
     }
