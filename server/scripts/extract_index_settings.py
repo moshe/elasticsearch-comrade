@@ -2,10 +2,10 @@ import json
 import re
 import urllib.request
 
-TAG = 'v7.3.0'
+TAG = 'v7.3.1'
 
 
-def split_to_sections(content: str, h: int = 3) -> dict:
+def split_to_sections(content: str, h: int = 2) -> dict:
     sep = h * '=' + ' '
     terms = content.split(sep)
     res = {}
@@ -34,7 +34,7 @@ def get_desc(content: str) -> str:
     return re.split('`.*`::', content)[0].strip()
 
 
-def extract(location: str, section_name: str) -> None:
+def extract(location: str, section_name: str, prefix: str) -> None:
     content = get_asciidoc(location)
     index_settings = get_section(content, section_name)
     settings = get_settings(index_settings)
@@ -45,10 +45,12 @@ def extract(location: str, section_name: str) -> None:
          "settings": settings,
          "name": section_name,
          },
-        open(f'../elasticsearch/index_settings/{fname}.json', 'w'),
+        open(f'./elasticsearch/index_settings/{prefix}_{fname}.json', 'w'),
         indent=2)
 
 
 if __name__ == "__main__":
-    extract('index-modules.asciidoc', 'Dynamic index settings')
-    extract('index-modules/translog.asciidoc', 'Translog settings')
+    extract('index-modules.asciidoc', 'Dynamic index settings', '00')
+    extract('index-modules/translog.asciidoc', 'Translog settings', '10')
+    extract('index-modules/merge.asciidoc', 'Merge scheduling', '40')
+    extract('index-modules/index-sorting.asciidoc', 'Index Sorting', '41')
