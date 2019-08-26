@@ -97,6 +97,13 @@ async def clear_cache(request: Request, index: str) -> HTTPResponse:
     return json({"status": "ok"})
 
 
+@index_bp.route('/graveyard')
+async def graveyard(request: Request) -> HTTPResponse:
+    client = get_client(request)
+    resp = await client.cluster.state(metric='metadata')
+    return json(resp['metadata']['index-graveyard']['tombstones'])
+
+
 @index_bp.route('/<index>/body')
 async def get_body(request: Request, index: str) -> HTTPResponse:
     client = get_client(request)

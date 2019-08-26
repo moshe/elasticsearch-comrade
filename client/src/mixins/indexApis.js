@@ -46,6 +46,9 @@ export default {
     },
     async getIndexBody(index) {
       return await this.GET(`/api/v1/index/${index}/body`);
+    },
+    async getGraveyard() {
+      return await this.GET(`/api/v1/index/graveyard`);
     }
   }
 };

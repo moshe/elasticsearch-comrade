@@ -24,7 +24,8 @@ export default {
         { to: "/tasks", icon: "perm_data_setting", name: "Tasks" },
         { to: "/templates", icon: "add_to_photos", name: "Index Templates" },
         { to: "/snapshots", icon: "backup", name: "Snapshots" },
-        { to: "/sql", icon: "search", name: "SQL (beta)" }
+        { to: "/sql", icon: "search", name: "SQL (beta)" },
+        { to: "/graveyard", icon: "local_hospital", name: "Graveyard" }
       ]
     };
   }

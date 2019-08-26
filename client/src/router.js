@@ -1,5 +1,6 @@
 import Router from "vue-router";
 import AliasesView from "./views/AliasesView.vue";
+import GraveyardView from "./views/GraveyardView.vue";
 import Home from "./views/Home.vue";
 import IndexSettingsView from "./views/IndexSettingsView.vue";
 import NodeInfoView from "./views/NodeInfoView.vue";
@@ -60,6 +61,11 @@ export default new Router({
       name: "NodeInfo",
       component: NodeInfoView,
       props: true
+    },
+    {
+      path: "/graveyard",
+      name: "GraveYard",
+      component: GraveyardView
     }
   ]
 });
