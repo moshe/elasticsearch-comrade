@@ -2,8 +2,8 @@
   <v-row align="start" justify="start" no-gutters v-if="index">
     <v-col
       style="flex-grow: 0"
-      v-for="x in index.primaries || []"
-      :key="x.shard"
+      v-for="(x, i) in index.primaries || []"
+      :key="`p-${i}`"
     >
       <shard-square
         :id="x.shard"
@@ -17,8 +17,8 @@
     </v-col>
     <v-col
       style="flex-grow: 0"
-      v-for="x in index.replicas || []"
-      :key="x.shard"
+      v-for="(x, i) in index.replicas || []"
+      :key="`r-${i}`"
     >
       <shard-square
         :id="x.shard"
