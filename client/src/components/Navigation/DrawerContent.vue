@@ -23,7 +23,8 @@ export default {
         { to: "/rest", icon: "build", name: "REST" },
         { to: "/tasks", icon: "perm_data_setting", name: "Tasks" },
         { to: "/templates", icon: "add_to_photos", name: "Index Templates" },
-        { to: "/snapshots", icon: "backup", name: "Snapshots" }
+        { to: "/snapshots", icon: "backup", name: "Snapshots" },
+        { to: "/sql", icon: "search", name: "SQL (beta)" }
       ]
     };
   }
