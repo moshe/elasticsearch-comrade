@@ -1,4 +1,4 @@
-# Elasticsearch Comrade
+# Elasticsearch Comrade [![CircleCI](https://circleci.com/gh/moshe/elasticsearch-comrade.svg?style=svg)](https://circleci.com/gh/moshe/elasticsearch-comrade)
 Elasticsearch Comrade is an open-source Elasticsearch admin and monitoring panel highly inspired by Cerebro.
 Elasticsearch Comrade built with python3, VueJS, Sanic and Vuetify2
 ![Alt text](/docs/screenshots/main_dark.png?raw=true "Optional Title")
