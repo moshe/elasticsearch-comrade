@@ -49,7 +49,7 @@ context('Misc', () => {
       cy.get('.index-name[data-index-name="testindex"]').click()
       cy.get('[data-tile="edit-settings"]').click()
       cy.wait(['@indexSettings', '@shardsGrid'])
-      cy.get('[data-tab="dynamic-index settings"]').click()
+      cy.get('[data-tab="dynamic-index settings"]').click({force: true})
       cy.get('[data-input="index.number_of_replicas"]').clear().type(1).blur()
       cy.get('[data-btn="save"]:not(.v-btn--disabled)').click()
       cy.wait('@postSettings')
