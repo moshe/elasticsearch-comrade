@@ -59,7 +59,7 @@ jobs:
       - checkout
       - restore_cache:
          keys:
-           - server3-{{ checksum "server/Pipfile.lock" }}
+           - server3-{{ checksum "server/Pipfile.lock" }}-{{ checksum "server/Dockerfile" }}
       - run:
          name: Load Docker image layer cache
          command: test -f caches/server.tar && (docker load -i caches/server.tar) || echo 'Cache not found'
@@ -84,7 +84,7 @@ jobs:
       - checkout
       - restore_cache:
          keys:
-           - server3-{{ checksum "server/Pipfile.lock" }}
+           - server3-{{ checksum "server/Pipfile.lock" }}-{{ checksum "server/Dockerfile" }}
       - run:
          name: Load Docker image layer cache
          command: test -f caches/server.tar && (docker load -i caches/server.tar) || echo 'Cache not found'
@@ -95,7 +95,7 @@ jobs:
            docker build --tag server -f server/Dockerfile .
            docker save $(docker history -q server | grep -v '^<missing>$') -o caches/server.tar
       - save_cache:
-          key: server3-{{ checksum "server/Pipfile.lock" }}
+          key: server3-{{ checksum "server/Pipfile.lock" }}-{{ checksum "server/Dockerfile" }}
           paths:
             - caches/
   pytest:
