@@ -1,13 +1,13 @@
 # Table of contents
 
 * [Introduction](README.md)
-* [Introduction](introduction.md)
 * [Features](features.md)
 * [Installation](installation/README.md)
   * [Using Docker](installation/using-docker.md)
   * [From Source](installation/from-source.md)
 * [Configuration](configuration/README.md)
   * [Cluster Discovery](configuration/cluster-discovery.md)
+  * [Parameters and Environment Variables](configuration/parameters-and-environment-variables.md)
 
 ## Screens
 
