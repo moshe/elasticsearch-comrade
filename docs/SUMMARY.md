@@ -7,6 +7,7 @@
   * [From Source](installation/from-source.md)
 * [Configuration](configuration/README.md)
   * [Cluster Discovery](configuration/cluster-discovery.md)
+  * [Parameters and Environment Variables](configuration/parameters-and-environment-variables.md)
 
 ## Screens
 
