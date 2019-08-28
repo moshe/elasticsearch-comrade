@@ -2,7 +2,7 @@
 
 {% hint style="warning" %}
  This guide assumes your computer is suited with:  
-node &gt;= 12 , python &gt;= 3.7, pipenv
+node &gt;= 12 , python &gt;= 3.7 and pipenv
 {% endhint %}
 
 ```bash
@@ -22,14 +22,14 @@ Now you should open two terminals, one for running the server and the second for
 
 ### Starting the server
 
-```text
+```bash
 cd server
 pipenv run python index.py
 ```
 
 ### Starting the client
 
-```text
+```bash
 cd client
 npm run serv
 ```
