@@ -1,4 +1,4 @@
-FROM python:3.7-alpine@sha256:9363cb46e52894a22ba87ebec0845d30f4c27efd6b907705ba9a27192b45e797
+FROM python:3.7.4-alpine@sha256:488bfa82d8ac22f1ed9f1d4297613a920bf14913adb98a652af7dbbbf1c3cab9
 WORKDIR /app
 COPY server/Pipfile* ./
 RUN apk add --no-cache gcc libc-dev make && \
