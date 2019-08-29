@@ -11,7 +11,13 @@
         </v-row>
         <div>
           <v-header sub>Results</v-header>
-          <v-data-table :headers="headers" :items="items" class="elevation-1" />
+          <v-data-table
+            :headers="headers"
+            :items="items"
+            class="elevation-1 small-table"
+            :items-per-page="100"
+            :footer-props="{ 'items-per-page-options': [30, 100, 200] }"
+          />
         </div>
         <v-fade-transition>
           <v-overlay
@@ -35,6 +41,7 @@
 <script>
 import RESTApis from "../mixins/RESTApis";
 import VHeader from "../components/Base/Header.vue";
+import { mapMutations } from "vuex";
 
 var ace = require("brace");
 require("brace/mode/sql");
@@ -55,7 +62,9 @@ export default {
     };
   },
   methods: {
+    ...mapMutations(["stopLoading", "startLoading"]),
     async executeQuery() {
+      this.startLoading();
       const query = this.editor.getValue();
       const resp = await this.sendQuery("POST", "/_sql", { query }, true);
       this.headers = resp.columns.map(x => ({ text: x.name, value: x.name }));
@@ -67,6 +76,7 @@ export default {
           ])
         )
       );
+      this.stopLoading();
     }
   }
 };
