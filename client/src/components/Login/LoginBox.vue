@@ -5,7 +5,7 @@
     :data-cluster="clusterName"
     column
     :style="cssProps"
-    @click="!cluster.error && selectCluster(clusterName)"
+    @click="login"
   >
     <v-flex>
       <div class="cluster-name">
@@ -61,7 +61,16 @@ export default {
     };
   },
   methods: {
-    ...mapMutations(["selectCluster"])
+    ...mapMutations(["selectCluster"]),
+    login() {
+      if (this.cluster.error || this.cluster.status === clusterStatus.loading) {
+        return;
+      }
+      this.selectCluster({
+        cluster: this.clusterName,
+        version: this.cluster.versions[0]
+      });
+    }
   },
   async created() {
     try {

@@ -7,6 +7,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     connectedCluster: null,
+    clusterVersion: null,
     jsonModalContent: false,
     loading: false,
     shardsMarkedForRelocation: [],
@@ -65,8 +66,14 @@ export default new Vuex.Store({
     setCluster(state, data) {
       Vue.set(state, "cluster", data);
     },
-    selectCluster(state, data) {
-      Vue.set(state, "connectedCluster", data);
+    selectCluster(state, { cluster, version }) {
+      Vue.set(state, "connectedCluster", cluster);
+      Vue.set(state, "clusterVersion", version);
+    },
+    logout(state) {
+      Vue.set(state, "connectedCluster", null);
+      Vue.set(state, "clusterVersion", null);
+      Vue.set(state, "shardsMarkedForRelocation", []);
     },
     clearRelocation(state) {
       Vue.set(state, "shardsMarkedForRelocation", []);

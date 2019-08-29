@@ -25,8 +25,9 @@ async function request(showError, ...args) {
   } catch (e) {
     if (showError) {
       state.commit("setErrorBarContent", { type: "HTTP error", body: e });
+    } else {
+      throw new RequestError({ type: "HTTP error", body: e });
     }
-    throw new RequestError({ type: "HTTP error", body: e });
   }
   if (content && content.error) {
     if (showError) {

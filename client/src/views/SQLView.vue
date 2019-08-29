@@ -1,22 +1,35 @@
 <template>
-  <div>
-    <v-header sub>SQL Editor (Beta)</v-header>
-    <div class="pane" id="editor">SELECT * from "index" LIMIT 100</div>
-    <v-row justify="end">
-      <v-col style="flex-grow: 0">
-        <v-btn color="success" @click="executeQuery" v-text="'Run'" />
-      </v-col>
-    </v-row>
-    <div>
-      <v-header sub>Results</v-header>
-      <v-data-table
-        :headers="headers"
-        :items="items"
-        :items-per-page="7"
-        class="elevation-1"
-      />
-    </div>
-  </div>
+  <v-hover>
+    <template v-slot:default="{ hover }">
+      <div>
+        <v-header sub>SQL Editor (Beta)</v-header>
+        <div class="pane" id="editor">SELECT * from "index" LIMIT 100</div>
+        <v-row justify="end">
+          <v-col style="flex-grow: 0">
+            <v-btn color="success" @click="executeQuery" v-text="'Run'" />
+          </v-col>
+        </v-row>
+        <div>
+          <v-header sub>Results</v-header>
+          <v-data-table :headers="headers" :items="items" class="elevation-1" />
+        </div>
+        <v-fade-transition>
+          <v-overlay
+            v-if="!$store.state.clusterVersion.startsWith('7')"
+            absolute
+            opacity="0.8"
+          >
+            <div
+              style="background-color: rgba(0,0,0,0.3); border-radius: 10px; font-size:18px"
+              class="pa-9"
+            >
+              SQL is a version 7 only feature
+            </div>
+          </v-overlay>
+        </v-fade-transition>
+      </div>
+    </template>
+  </v-hover>
 </template>
 
 <script>
