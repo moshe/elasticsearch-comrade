@@ -17,7 +17,7 @@ Elasticsearch Comrade built with python3, VueJS, Sanic and Vuetify2
 
 
 # Docs
-soon
+[Here](https://moshe-1.gitbook.io/comrade/)
 
 # Installation
 The recommended way to run Comrade in production is using the docker container  
