@@ -1,3 +1,7 @@
+---
+description: Cluster discovery explained
+---
+
 # Cluster Discovery
 
 The discovery system behind Comrade is pretty simple.  

@@ -12,5 +12,5 @@ In order to pull and run run the following command
 docker run -v clusters/:clusters/ -it -p 8000:8000 moshe/elasticsearch-comrade
 ```
 
-For more information regarding configuring Comrade please refer the Configuration section
+For more information regarding the **clusters** directory and Comrade's varius configuration option please refer the [Configuration](https://moshe-1.gitbook.io/comrade/configuration/) section
 
