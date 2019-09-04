@@ -130,7 +130,7 @@ jobs:
             if [[ ${CIRCLE_BRANCH} == "testci" ]]; then
               echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
               docker build --tag $DOCKERHUB_USERNAME/elasticsearch-comrade .
-              IMAGE_TAG="0.0.${CIRCLE_BUILD_NUM}"
+              IMAGE_TAG=v$(python -c'print(__import__("json").load(open("client/package.json"))["version"])')
               docker tag merged:latest $DOCKERHUB_USERNAME/elasticsearch-comrade:$IMAGE_TAG
               docker push $DOCKERHUB_USERNAME/elasticsearch-comrade:latest
               docker push $DOCKERHUB_USERNAME/elasticsearch-comrade:$IMAGE_TAG
