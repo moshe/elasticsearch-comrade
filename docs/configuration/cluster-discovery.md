@@ -5,7 +5,7 @@ description: Cluster discovery explained
 # Cluster Discovery
 
 The discovery system behind Comrade is pretty simple.  
-During startup the service lists the content of **clusters** folder and load all the files that ends with .json.  
+During startup the service lists the content of **clusters** \(configurable\) folder and load all the files that ends with .json.  
 Each json have the connection information for a single cluster. Comrade uses the [official python client of elasticsearch](https://elasticsearch-py.readthedocs.io/en/master/) and the **params** key passed directly to Elasticsearch connection constructor.
 
 ### Examples

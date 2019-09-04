@@ -13,4 +13,5 @@ description: Comrade can be configured via env variables and command line parame
 | --debug | COMRADE\_DEBUG | Run server in debug |
 | --cert | COMRADE\_CERT | Path to cert file |
 | --key | COMRADE\_KEY | Path to key file |
+| --clusters-dir | COMRADE\_CLUSTERS\_DIR | Path to your clusters dir |
 
