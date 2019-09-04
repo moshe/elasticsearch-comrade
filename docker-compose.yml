@@ -14,7 +14,6 @@ services:
       - discovery.seed_hosts=node-2
       - cluster.initial_master_nodes=node-1,node-2
       - cluster.name=docker-cluster
-      - xpack.monitoring.collection.enabled=false
       - bootstrap.memory_lock=true
       - node.store.allow_mmap=false
       - "ES_JAVA_OPTS=-Xms256m -Xmx256m"
@@ -38,7 +37,6 @@ services:
       - discovery.seed_hosts=node-1
       - cluster.initial_master_nodes=node-1,node-2
       - cluster.name=docker-cluster
-      - xpack.monitoring.collection.enabled=false
       - bootstrap.memory_lock=true
       - node.store.allow_mmap=false
       - "ES_JAVA_OPTS=-Xms256m -Xmx256m"

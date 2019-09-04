@@ -120,6 +120,11 @@ jobs:
          command: docker load -i ~/dockers/server.tar
       - run: docker-compose build
       - run: docker-compose up --abort-on-container-exit --exit-code-from e2e
+      - run:
+          name: "Failure: output container logs to console"
+          command: |
+            docker-compose logs
+          when: on_fail
       - store_artifacts:
           path: e2e/cypress/videos
       - store_artifacts:
