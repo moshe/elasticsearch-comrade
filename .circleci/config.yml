@@ -1,10 +1,4 @@
 version: 2.1
-executors:
-  docker-publisher:
-    environment:
-      IMAGE_NAME: jonathancardoso/building-on-ci
-    docker:
-      - image: circleci/buildpack-deps:stretch
 jobs:
   build-client:
     docker:
@@ -135,11 +129,11 @@ jobs:
           command: |
             if [[ ${CIRCLE_BRANCH} == "testci" ]]; then
               echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
-              docker build --tag merged .
+              docker build --tag $DOCKERHUB_USERNAME/elasticsearch-comrade .
               IMAGE_TAG="0.0.${CIRCLE_BUILD_NUM}"
-              docker tag $IMAGE_NAME:latest $IMAGE_NAME:$IMAGE_TAG
-              docker push $IMAGE_NAME:latest
-              docker push $IMAGE_NAME:$IMAGE_TAG
+              docker tag merged:latest $DOCKERHUB_USERNAME/elasticsearch-comrade:$IMAGE_TAG
+              docker push $DOCKERHUB_USERNAME/elasticsearch-comrade:latest
+              docker push $DOCKERHUB_USERNAME/elasticsearch-comrade:$IMAGE_TAG
             fi
 workflows:
   build_and_test:
