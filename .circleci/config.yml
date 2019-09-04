@@ -153,9 +153,3 @@ workflows:
       - pytest:
           requires:
             - build-server
-      - publish-latest:
-          requires:
-            - build-docker
-          filters:
-            branches:
-              only: master
