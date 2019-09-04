@@ -119,7 +119,7 @@ jobs:
          name: Load Docker image layer cache
          command: docker load -i ~/dockers/server.tar
       - run: docker-compose build
-      # - run: docker-compose up --abort-on-container-exit --exit-code-from e2e
+      - run: docker-compose up --abort-on-container-exit --exit-code-from e2e
       - run:
           name: "Failure: output container logs to console"
           command: docker-compose logs
@@ -127,13 +127,17 @@ jobs:
       - run:
           name: Publish Docker Image to Docker Hub
           command: |
-            if [[ ${CIRCLE_BRANCH} == "testci" ]]; then
+            if [[ ${CIRCLE_BRANCH} == "master" ]]; then
               echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
               docker build --tag $DOCKERHUB_USERNAME/elasticsearch-comrade .
               IMAGE_TAG=v$(python -c'print(__import__("json").load(open("client/package.json"))["version"])')
-              docker tag merged:latest $DOCKERHUB_USERNAME/elasticsearch-comrade:$IMAGE_TAG
               docker push $DOCKERHUB_USERNAME/elasticsearch-comrade:latest
-              docker push $DOCKERHUB_USERNAME/elasticsearch-comrade:$IMAGE_TAG
+              if curl -s -o /dev/null -w "%{http_code}" "https://hub.docker.com/v2/repositories/$DOCKERHUB_USERNAME/elasticsearch-comrade/tags/$IMAGE_TAG/"| grep -q 404; then
+                docker tag merged:latest $DOCKERHUB_USERNAME/elasticsearch-comrade:$IMAGE_TAG
+                docker push $DOCKERHUB_USERNAME/elasticsearch-comrade:$IMAGE_TAG
+              else
+                echo Skipping version publish
+              fi
             fi
 workflows:
   build_and_test:
