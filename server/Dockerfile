@@ -8,4 +8,4 @@ RUN apk add --no-cache gcc libc-dev make && \
     rm -rf ~/.cache /var/cache
 COPY server/ .
 EXPOSE 8000
-CMD pipenv run python index.py
+ENTRYPOINT pipenv run python index.py

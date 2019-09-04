@@ -139,6 +139,10 @@ jobs:
                 echo Skipping version publish
               fi
             fi
+      - store_artifacts:
+          path: e2e/cypress/videos
+      - store_artifacts:
+          path: e2e/cypress/screenshots
 workflows:
   build_and_test:
     jobs:
