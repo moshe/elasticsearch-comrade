@@ -63,7 +63,7 @@ async def halt_response(request: Request, exception: Exception) -> HTTPResponse:
 
 @app.listener('after_server_start')
 async def notify_server_started(app, loop):
-    load_clients()
+    load_clients(app.config.clusters_dir)
 
 
 @app.listener('before_server_stop')
@@ -78,7 +78,13 @@ async def close_db(app, loop):
 @click.option('--debug', default=False, help='Run server in debug', is_flag=True, show_default=True)
 @click.option('--cert', help='Path to your cert file', type=click.Path(exists=True))
 @click.option('--key', help='Path to your key file', type=click.Path(exists=True))
-def cli(port, host, debug, cert, key):
+@click.option('--clusters-dir',
+              help='Path to your clusters dir',
+              type=click.Path(exists=True),
+              default='clusters',
+              show_default=True)
+def cli(port: int, host: str, debug: bool, cert: str, key: str, clusters_dir: str):
+    app.config.clusters_dir = clusters_dir
     ssl = None
     if key and not cert:
         raise click.UsageError('--key supplied without --cert')

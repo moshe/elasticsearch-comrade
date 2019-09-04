@@ -10,8 +10,8 @@ clusters = {}
 defaults = {"retry_on_timeout": True, "timeout": 30}
 
 
-def load_clients() -> None:
-    connections_dir = path.abspath(path.join(path.dirname(path.abspath(__file__)), 'clusters'))
+def load_clients(clusters_dir: str) -> None:
+    connections_dir = path.abspath(path.join(path.dirname(path.abspath(__file__)), clusters_dir))
     for connection in glob(connections_dir + '/*'):
         if not connection.endswith('.json'):
             raise RuntimeError(f'Connections dir {connections_dir} requires json files')
