@@ -5,7 +5,8 @@ RUN apk add --no-cache gcc libc-dev make && \
     pip install pipenv && \
     pipenv install && \
     apk del gcc make libc-dev && \
-    rm -rf ~/.cache /var/cache
+    rm -rf ~/.cache /var/cache && \
+    find /usr/local/lib/python3.7/ -type d -name __pycache__ | xargs rm -rf
 COPY server/ .
 EXPOSE 8000
-ENTRYPOINT pipenv run python index.py
+CMD pipenv run python index.py
