@@ -1,4 +1,10 @@
 version: 2.1
+executors:
+  docker-publisher:
+    environment:
+      IMAGE_NAME: jonathancardoso/building-on-ci
+    docker:
+      - image: circleci/buildpack-deps:stretch
 jobs:
   build-client:
     docker:
@@ -119,16 +125,22 @@ jobs:
          name: Load Docker image layer cache
          command: docker load -i ~/dockers/server.tar
       - run: docker-compose build
-      - run: docker-compose up --abort-on-container-exit --exit-code-from e2e
+      # - run: docker-compose up --abort-on-container-exit --exit-code-from e2e
       - run:
           name: "Failure: output container logs to console"
-          command: |
-            docker-compose logs
+          command: docker-compose logs
           when: on_fail
-      - store_artifacts:
-          path: e2e/cypress/videos
-      - store_artifacts:
-          path: e2e/cypress/screenshots
+      - run:
+          name: Publish Docker Image to Docker Hub
+          command: |
+            if [[ ${CIRCLE_BRANCH} == "testci" ]]; then
+              echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+              docker build --tag merged .
+              IMAGE_TAG="0.0.${CIRCLE_BUILD_NUM}"
+              docker tag $IMAGE_NAME:latest $IMAGE_NAME:$IMAGE_TAG
+              docker push $IMAGE_NAME:latest
+              docker push $IMAGE_NAME:$IMAGE_TAG
+            fi
 workflows:
   build_and_test:
     jobs:
@@ -147,3 +159,9 @@ workflows:
       - pytest:
           requires:
             - build-server
+      - publish-latest:
+          requires:
+            - build-docker
+          filters:
+            branches:
+              only: master
