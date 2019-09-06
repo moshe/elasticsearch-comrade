@@ -4,8 +4,6 @@ description: High level overview of the selected cluster
 
 # Main Screen
 
-![](../../.gitbook/assets/image%20%2811%29.png)
-
 ## Shard Relocation
 
 ### Relocate specific shards
