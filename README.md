@@ -26,6 +26,8 @@ Elasticsearch Comrade built with python3, VueJS, Sanic and Vuetify2
 - Comrade dashboard
 - Beats screen
 - Threadpools screen
+
+# Screenshots
 ![Alt text](/docs/.gitbook/assets/image%20(2).png?raw=true "Optional Title")
 ![Alt text](/docs/.gitbook/assets/image%20(5).png?raw=true "Optional Title")
 ![Alt text](/docs/.gitbook/assets/image%20(9).png?raw=true "Optional Title")
