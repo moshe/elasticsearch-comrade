@@ -2,11 +2,6 @@
 Elasticsearch Comrade is an open-source Elasticsearch admin and monitoring panel highly inspired by Cerebro.
 Elasticsearch Comrade built with python3, VueJS, Sanic and Vuetify2
 ![Alt text](/docs/.gitbook/assets/image%20(2).png?raw=true "Optional Title")
-![Alt text](/docs/.gitbook/assets/image%20(16).png?raw=true "Optional Title")
-![Alt text](/docs/.gitbook/assets/image%20(5).png?raw=true "Optional Title")
-![Alt text](/docs/.gitbook/assets/image%20(9).png?raw=true "Optional Title")
-![Alt text](/docs/.gitbook/assets/image%20(7).png?raw=true "Optional Title")
-![Alt text](/docs/.gitbook/assets/image%20(8).png?raw=true "Optional Title")
 
 
 # Main Features
@@ -23,5 +18,17 @@ Elasticsearch Comrade built with python3, VueJS, Sanic and Vuetify2
 - And much more ...
 
 
-# Next steps
+# Installation, configuration and next steps
 [Here](https://moshe-1.gitbook.io/comrade/)
+
+# Next screens
+- Reindex screen
+- Percolator screen
+- Comrade dashboard
+- Beats screen
+- Threadpools screen
+![Alt text](/docs/.gitbook/assets/image%20(16).png?raw=true "Optional Title")
+![Alt text](/docs/.gitbook/assets/image%20(5).png?raw=true "Optional Title")
+![Alt text](/docs/.gitbook/assets/image%20(9).png?raw=true "Optional Title")
+![Alt text](/docs/.gitbook/assets/image%20(7).png?raw=true "Optional Title")
+![Alt text](/docs/.gitbook/assets/image%20(8).png?raw=true "Optional Title")
