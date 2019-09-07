@@ -19,4 +19,5 @@
 
 * [Contributing](other/contributing.md)
 * [Changelog](other/changelog.md)
+* [Roadmap](other/roadmap.md)
 
