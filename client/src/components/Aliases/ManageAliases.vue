@@ -6,7 +6,7 @@
       <div style="font-size:15px">
         <v-icon size="18" class="mr-1" v-text="'bookmark'" />
         {{ alias }}
-        <v-btn icon x-small @click="handleRemoveIndex(alias)">
+        <v-btn icon x-small @click="handleRemoveAlias(alias)">
           <v-icon size="18" v-text="'clear'" />
         </v-btn>
       </div>
@@ -40,7 +40,7 @@
           </template>
           <v-list>
             <v-list-item
-              v-for="index in Object.keys(indices)"
+              v-for="index in availableIndices(alias)"
               :key="index"
               @click="handleAddition(index, alias)"
             >
@@ -81,9 +81,13 @@ export default {
       return this.pendingActions.filter(x => x.action === "add");
     },
     aliases() {
-      return Object.keys(this.aliasToindex).filter(x =>
-        x.includes(this.filter)
-      );
+      return [
+        ...new Set(
+          Object.keys(this.aliasToindex).concat(
+            this.pendingActions.map(x => x.alias)
+          )
+        )
+      ].filter(x => x.includes(this.filter));
     }
   },
   methods: {
@@ -93,13 +97,30 @@ export default {
           .length === 1
       );
     },
+    availableIndices(alias) {
+      const a = [];
+      const pending = this.pendingActions
+        .filter(x => x.alias === alias && x.action === "add")
+        .map(x => x.index);
+      for (const index of Object.keys(this.indices)) {
+        if (!pending.concat(this.aliasToindex[alias]).includes(index)) {
+          a.push(index);
+        }
+      }
+      return a;
+    },
     handleRemove(index, alias) {
       this.$emit("action", { index, alias, action: "remove" });
     },
-    handleRemoveIndex(alias) {
-      this.aliasToindex[alias].forEach(index =>
-        this.handleRemove(index, alias)
-      );
+    handleRemoveAlias(alias) {
+      if (this.aliasToindex[alias]) {
+        this.aliasToindex[alias].forEach(index =>
+          this.handleRemove(index, alias)
+        );
+      }
+      this.pendingActions
+        .filter(x => x.alias === alias)
+        .map(x => this.handleRemove(x.index, alias));
     },
     handleAddition(index, alias) {
       this.$emit("action", { index, alias, action: "add" });
