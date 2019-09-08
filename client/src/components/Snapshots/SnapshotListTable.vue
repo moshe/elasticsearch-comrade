@@ -2,7 +2,11 @@
   <div>
     <repo-selector :repos="repos" @select="loadRepo" />
     <v-dialog v-model="showDialog" width="60%">
-      <restore-form :repo="repo" :snapshot="snapshot" />
+      <restore-form
+        :repo="repo"
+        :snapshot="snapshot"
+        @close="showDialog = false"
+      />
     </v-dialog>
     <v-data-table
       :headers="headers"
@@ -10,21 +14,20 @@
       class="elevation-1 small-table"
       item-key="id"
       :footer-props="{ 'items-per-page-options': [30, 100, 200] }"
-      sort-by="start_time"
+      sort-by="start_time_in_millis"
       :sort-desc="true"
     >
-      <template v-slot:items="props">
-        <tr>
-          <td>{{ props.item.snapshot }}</td>
-          <td>{{ fromNow(props.item.start_time) }}</td>
-          <td>{{ props.item.state }}</td>
-          <td>{{ parseInt(props.item.duration_in_millis / 1000) }}s</td>
-          <td>
-            <v-btn text icon small @click="showRestoreDialog(props.item)">
-              <v-icon small>settings_backup_restore</v-icon>
-            </v-btn>
-          </td>
-        </tr>
+      <template v-slot:item.start_time_in_millis="{ item }">
+        {{ fromNow(item.start_time_in_millis) }}
+      </template>
+      <template v-slot:item.duration_in_millis="{ item }">
+        {{ parseInt(item.duration_in_millis / 1000) }}s
+      </template>
+
+      <template v-slot:item.restore="{ item }">
+        <v-btn text icon small @click="showRestoreDialog(item)">
+          <v-icon small>settings_backup_restore</v-icon>
+        </v-btn>
       </template>
     </v-data-table>
   </div>
@@ -69,10 +72,10 @@ export default {
       snapshot: { indices: [] },
       headers: [
         { text: "Id", value: "snapshot" },
-        { text: "Time", value: "start_time" },
+        { text: "Started", value: "start_time_in_millis" },
         { text: "State", value: "state" },
         { text: "Took", value: "duration_in_millis" },
-        { text: "Restore", value: "duration_in_millis", sortable: false }
+        { text: "Restore", value: "restore", sortable: false }
       ]
     };
   }
