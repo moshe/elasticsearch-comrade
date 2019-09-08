@@ -62,7 +62,7 @@ export default {
   methods: {
     ...mapMutations(["toggleShardForRelocation"]),
     toggle(args) {
-      if (this.isRelocating) {
+      if (this.isRelocating || this.isInitializing) {
         return;
       }
       this.toggleShardForRelocation(args);
