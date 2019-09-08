@@ -52,7 +52,7 @@ export default {
         { text: "Path", value: "path" },
         { text: "Date", value: "date" },
         { text: "Query", value: "query" },
-        { text: "Actions", value: "actions" }
+        { text: "Actions", value: "actions", sortable: false }
       ],
       items: []
     };

@@ -111,6 +111,7 @@ export default {
     },
     async onRestore() {
       await this.restore(this.repo, this.snapshot.snapshot, this.makeBody());
+      this.$emit("close");
     }
   }
 };
