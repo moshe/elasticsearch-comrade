@@ -6,6 +6,8 @@
 import JSONEditor from "jsoneditor";
 import "jsoneditor/dist/jsoneditor.css";
 import colors from "vuetify/lib/util/colors";
+require("brace/theme/monokai");
+require("brace/theme/clouds");
 export default {
   props: {
     readOnly: {
@@ -18,6 +20,9 @@ export default {
   },
   mounted() {
     const container = this.$el;
+    if (!this.dark) {
+      this.options.theme = "ace/theme/clouds";
+    }
     this.editor = new JSONEditor(container, this.options);
     if (this.init) {
       this.setContent(this.init);
@@ -42,6 +47,19 @@ export default {
       this.editor.set(this.editor.get());
     }
   },
+  watch: {
+    dark(isDark) {
+      if (isDark) {
+        console.log("dark!");
+        this.options.theme = "ace/theme/monokai";
+      } else {
+        console.log("light!");
+        this.options.theme = "ace/theme/clouds";
+      }
+      this.editor.destroy();
+      this.editor = new JSONEditor(this.$el, this.options);
+    }
+  },
   data() {
     return {
       editor: null,
@@ -52,16 +70,21 @@ export default {
         statusBar: false,
         enableSort: false,
         enableTransform: false,
-        mainMenuBar: true
+        mainMenuBar: true,
+        theme: "ace/theme/monokai"
       }
     };
   },
   computed: {
-    cssProps() {
+    dark() {
       const { dark } = this.$vuetify.theme;
+      return dark;
+    },
+    cssProps() {
+      const { dark } = this;
       return {
-        "--query-frame": dark ? colors.grey.darken3 : colors.grey.darken1,
-        "--marker": dark ? colors.grey.darken2 : colors.grey.darken2
+        "--query-frame": dark ? colors.grey.darken3 : colors.grey.darken3,
+        "--marker": dark ? colors.grey.darken2 : colors.grey.darken3
       };
     }
   }
@@ -69,36 +92,9 @@ export default {
 </script>
 
 <style>
-/* dark styling of the editor */
 div.jsoneditor,
 div.jsoneditor-menu {
   border-color: var(--query-frame);
   background-color: var(--query-frame);
-}
-
-div.ace_gutter {
-  z-index: 1;
-  background: #4e6e44;
-}
-
-.ace-jsoneditor .ace_gutter {
-  background: var(--query-frame) !important;
-  color: white !important;
-}
-
-div.ace_folding-enabled > .ace_gutter-cell {
-  padding: 0 15px 0 5px;
-  text-align: left;
-}
-
-div.ace_content {
-  background-color: #f5f5f5;
-}
-
-.ace-jsoneditor .ace_marker-layer .ace_active-line {
-  background: #e3f2fd !important;
-}
-.ace-jsoneditor .ace_gutter-active-line {
-  background-color: var(--marker) !important;
 }
 </style>
