@@ -131,10 +131,17 @@ jobs:
               echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
               docker build --tag $DOCKERHUB_USERNAME/elasticsearch-comrade .
               IMAGE_TAG=v$(python -c'print(__import__("json").load(open("client/package.json"))["version"])')
-              docker push $DOCKERHUB_USERNAME/elasticsearch-comrade:latest
+              docker tag merged:latest $DOCKERHUB_USERNAME/elasticsearch-comrade:master
+              echo Pushing master tag
+              docker push $DOCKERHUB_USERNAME/elasticsearch-comrade:master
               if curl -s -o /dev/null -w "%{http_code}" "https://hub.docker.com/v2/repositories/$DOCKERHUB_USERNAME/elasticsearch-comrade/tags/$IMAGE_TAG/"| grep -q 404; then
+                echo Pushing $IMAGE_TAG tag
                 docker tag merged:latest $DOCKERHUB_USERNAME/elasticsearch-comrade:$IMAGE_TAG
                 docker push $DOCKERHUB_USERNAME/elasticsearch-comrade:$IMAGE_TAG
+
+                echo Pushing latest tag
+                docker tag merged:latest $DOCKERHUB_USERNAME/elasticsearch-comrade:latest
+                docker push $DOCKERHUB_USERNAME/elasticsearch-comrade:latest
               else
                 echo Skipping version publish
               fi
