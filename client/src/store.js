@@ -97,10 +97,12 @@ export default new Vuex.Store({
         commit("startLoading");
       }
       const grid = await GET("/api/v1/views/shards_grid");
-      commit("setNodes", grid.nodes);
-      commit("setIndices", grid.indices);
-      commit("setCluster", grid.cluster);
-      commit("stopLoading");
+      if (grid && !grid.error) {
+        commit("setNodes", grid.nodes);
+        commit("setIndices", grid.indices);
+        commit("setCluster", grid.cluster);
+        commit("stopLoading");
+      }
     }
   }
 });
