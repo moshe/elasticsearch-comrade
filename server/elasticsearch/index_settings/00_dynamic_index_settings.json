@@ -50,7 +50,7 @@
       "name": "index.blocks.read_only"
     },
     {
-      "description": "Identical to `index.blocks.read_only` but allows deleting the index to free\n     up resources.",
+      "description": "Similar to `index.blocks.read_only` but also allows deleting the index to\n    free up resources. The <<disk-allocator,disk-based shard allocator>> may\n    add and remove this block automatically.",
       "name": "index.blocks.read_only_allow_delete"
     },
     {

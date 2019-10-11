@@ -2,7 +2,7 @@ import json
 import re
 import urllib.request
 
-TAG = 'v7.3.1'
+TAG = 'v7.4.0'
 
 
 def split_to_sections(content: str, h: int = 2) -> dict:
