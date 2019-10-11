@@ -1,7 +1,7 @@
 version: '2.1'
 services:
   node-1:
-    image: blacktop/elasticsearch:7.3
+    image: blacktop/elasticsearch:7.4
     container_name: node-1
     healthcheck:
       test: ["CMD", "wget", "http://localhost:9200", "-O-"]
