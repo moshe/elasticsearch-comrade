@@ -20,10 +20,15 @@ Elasticsearch Comrade built with python3, VueJS, Sanic and Vuetify2
 # Installation, configuration and next steps
 [Here](https://moshe-1.gitbook.io/comrade/)
 
-# Next screens
+# [Roadmap](https://github.com/moshe/elasticsearch-comrade/milestones?state=open)
+### [v1.1.0](https://github.com/moshe/elasticsearch-comrade/milestone/2)
 - Reindex screen
-- Percolator screen
 - Comrade dashboard
+### [v1.2.0](https://github.com/moshe/elasticsearch-comrade/milestone/4)
+- Cluster settings screen
+- Evacuate node from shards
+- Add commrade version indicator to footer
+### v1.3.0
 - Beats screen
 - Threadpools screen
 
