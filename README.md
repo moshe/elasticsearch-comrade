@@ -2,7 +2,7 @@
 Elasticsearch Comrade is an open-source Elasticsearch admin and monitoring panel highly inspired by Cerebro.
 Elasticsearch Comrade built with python3, VueJS, Sanic, Vuetify2 and Cypress
 ![Alt text](/docs/.gitbook/assets/image%20(16).png?raw=true "Optional Title")
-
+![Alt text](https://moshe.sh/.netlify/functions/img "Optional Title")
 # Main Features
 - Elasticsearch version 5,6 and 7 support (tested against elasticsearch 7.4)
 - Multi cluster
