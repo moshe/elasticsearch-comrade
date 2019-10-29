@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@vue/cli": "^4.0.5",
-    "core-js": "^3.3.3",
+    "core-js": "^3.3.5",
     "date-fns": "^2.6.0",
     "jsoneditor": "^7.0.5",
     "register-service-worker": "^1.6.2",
