@@ -7,3 +7,9 @@ README*.md
 caches
 .circleci
 workspace
+__pycache__
+.pytest_cache
+*.pyc
+server/.vscode
+server/.idea
+server/__pycache__
