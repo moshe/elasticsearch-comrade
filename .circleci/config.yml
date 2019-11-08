@@ -119,6 +119,7 @@ jobs:
          name: Load Docker image layer cache
          command: docker load -i ~/dockers/server.tar
       - run: docker-compose build
+      - run: docker run --rm -e TWINE_PASSWORD -e TWINE_USERNAME -it merged:latest /bin/sh -c "python setup.py bdist_wheel && python setup.py sdist && pip install twine && twine upload dist/*"
       - run: docker-compose up --abort-on-container-exit --exit-code-from e2e
       - run:
           name: "Failure: output container logs to console"

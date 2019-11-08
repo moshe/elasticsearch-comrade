@@ -1,2 +1,2 @@
 FROM server
-COPY client/dist/ /app/static/
+COPY client/dist/ /app/comrade/static/
