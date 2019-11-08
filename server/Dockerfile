@@ -9,7 +9,7 @@ RUN apk add --no-cache gcc libc-dev make && \
     find /usr/local/lib/python3.7/ -type d -name __pycache__ | xargs rm -rf && \
     find /root/.local/ -type d -name __pycache__ | xargs rm -rf
 COPY server/ /app/comrade/
-COPY setup.py /app
+COPY setup.py MANIFEST.in /app/
 EXPOSE 8000
 RUN pipenv install -e . --skip-lock
 CMD pipenv run comrade
