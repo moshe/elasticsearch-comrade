@@ -127,4 +127,7 @@ export default {
   overflow: hidden;
   height: 100px;
 }
+.error-text:hover {
+  overflow: unset;
+}
 </style>
