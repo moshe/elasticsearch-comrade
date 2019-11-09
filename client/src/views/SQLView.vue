@@ -1,6 +1,6 @@
 <template>
   <v-hover>
-    <template v-slot:default="{ hover }">
+    <template>
       <div>
         <v-header sub>SQL Editor (Beta)</v-header>
         <div class="pane" id="editor">SELECT * from "index" LIMIT 100</div>
