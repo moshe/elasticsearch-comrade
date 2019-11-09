@@ -5,8 +5,8 @@ from sanic import Blueprint
 from sanic.request import Request
 from sanic.response import HTTPResponse, json
 
-from blueprints.alias import get_index_aliases
-from connections import get_client
+from ..blueprints.alias import get_index_aliases
+from ..connections import get_client
 
 views_bp = Blueprint('views')
 

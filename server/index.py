@@ -1,5 +1,6 @@
 import concurrent
 import traceback
+from os import path
 
 import click
 from elasticsearch import ElasticsearchException
@@ -9,19 +10,20 @@ from sanic.log import logger
 from sanic.request import Request
 from sanic.response import HTTPResponse, file, json
 
-from blueprints.alias import alias_bp
-from blueprints.cluster import cluster_bp
-from blueprints.index import index_bp
-from blueprints.node import node_bp
-from blueprints.rest import rest_bp
-from blueprints.snapshot import snapshot_bp
-from blueprints.task import task_bp
-from blueprints.template import template_bp
-from blueprints.views import views_bp
-from connections import clusters, load_clients
+from .blueprints.alias import alias_bp
+from .blueprints.cluster import cluster_bp
+from .blueprints.index import index_bp
+from .blueprints.node import node_bp
+from .blueprints.rest import rest_bp
+from .blueprints.snapshot import snapshot_bp
+from .blueprints.task import task_bp
+from .blueprints.template import template_bp
+from .blueprints.views import views_bp
+from .connections import clusters, load_clients
 
 app = Sanic()
-app.static('/static', './static')
+current_dir = path.dirname(__file__)
+app.static('/static', f'{current_dir}/static')
 app.blueprint(views_bp, url_prefix='/api/v1/views')
 app.blueprint(index_bp, url_prefix='/api/v1/index')
 app.blueprint(rest_bp, url_prefix='/api/v1/rest')
@@ -35,7 +37,8 @@ app.blueprint(node_bp, url_prefix='/api/v1/node')
 
 @app.route('/')
 async def redirect_init(request):
-    return await file('static/index.html')
+    print(f'{current_dir}/static/index.html')
+    return await file(f'{current_dir}/static/index.html')
 
 
 @app.route('/api/v1/clients')
@@ -81,7 +84,7 @@ async def close_db(app, loop):
 @click.option('--clusters-dir',
               help='Path to your clusters dir',
               type=click.Path(exists=True),
-              default='clusters',
+              default=path.abspath(path.join(path.dirname(path.abspath(__file__)), 'clusters')),
               show_default=True)
 def cli(port: int, host: str, debug: bool, cert: str, key: str, clusters_dir: str):
     app.config.clusters_dir = clusters_dir
@@ -95,5 +98,9 @@ def cli(port: int, host: str, debug: bool, cert: str, key: str, clusters_dir: st
     app.run(host=host, port=port, debug=debug, ssl=ssl)
 
 
-if __name__ == '__main__':
+def main():
     cli(auto_envvar_prefix='COMRADE')
+
+
+if __name__ == '__main__':
+    main()

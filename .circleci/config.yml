@@ -119,6 +119,7 @@ jobs:
          name: Load Docker image layer cache
          command: docker load -i ~/dockers/server.tar
       - run: docker-compose build
+      - run: docker run --rm -e TWINE_PASSWORD -e TWINE_USERNAME -it merged:latest /bin/sh -c "python setup.py bdist_wheel && python setup.py sdist && pip install twine && twine upload dist/*"
       - run: docker-compose up --abort-on-container-exit --exit-code-from e2e
       - run:
           name: "Failure: output container logs to console"
@@ -135,6 +136,9 @@ jobs:
               echo Pushing master tag
               docker push $DOCKERHUB_USERNAME/elasticsearch-comrade:master
               if curl -s -o /dev/null -w "%{http_code}" "https://hub.docker.com/v2/repositories/$DOCKERHUB_USERNAME/elasticsearch-comrade/tags/$IMAGE_TAG/"| grep -q 404; then
+                echo Pushing to pypi
+                docker run --rm -e TWINE_PASSWORD -e TWINE_USERNAME -it merged:latest /bin/sh -c "python setup.py bdist_wheel && python setup.py sdist && pip install twine && twine upload dist/*"
+                
                 echo Pushing $IMAGE_TAG tag
                 docker tag merged:latest $DOCKERHUB_USERNAME/elasticsearch-comrade:$IMAGE_TAG
                 docker push $DOCKERHUB_USERNAME/elasticsearch-comrade:$IMAGE_TAG

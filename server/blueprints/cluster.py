@@ -2,7 +2,7 @@ from sanic import Blueprint
 from sanic.request import Request
 from sanic.response import HTTPResponse, json
 
-from connections import get_client
+from ..connections import get_client
 
 cluster_bp = Blueprint('cluster')
 
@@ -37,7 +37,8 @@ async def get_cluster_info(request: Request, cluster_name: str) -> HTTPResponse:
 
     response = await client.cluster.stats()
     try:
-        jvm = 'mixed' if len(response['nodes']['jvm']['versions']) > 1 else response['nodes']['jvm']['versions'][0]['vm_name']
+        jvm = 'mixed' if len(response['nodes']['jvm']['versions']) > 1 else response['nodes']['jvm']['versions'][0][
+            'vm_name']
     # For some reasone es6.3.1 is missing jvm version
     except KeyError:
         jvm = 'unknown'

@@ -5,8 +5,8 @@ from sanic import Blueprint
 from sanic.request import Request
 from sanic.response import HTTPResponse, json
 
-from connections import get_client
-from elasticsearch_assets import get_index_settings_docs
+from ..connections import get_client
+from ..elasticsearch_assets import get_index_settings_docs
 
 index_bp = Blueprint('index')
 
