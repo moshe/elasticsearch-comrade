@@ -16,14 +16,23 @@ Elasticsearch Comrade built with python3, VueJS, Sanic, Vuetify2 and Cypress
 - Manage snapshots
 - And much more ...
 
+# Quckstart
+### Cluster dir definitaions
+Comrade discovers clusters using the `--clusters-dir` param, docs are [here](https://moshe-1.gitbook.io/comrade/configuration/cluster-discovery), examples are [here](https://github.com/moshe/elasticsearch-comrade/tree/master/server/tests)
+### Using docker (recommended)
+`docker run -v $PWD/clusters/:/app/clusters/ -it -p 8000:8000 mosheza/elasticsearch-comrade`
+### Using the python package
+`pip install elasticsearch-comrade`  
+`comrade --clusters-dir clusters`
 
 # Installation, configuration and next steps
 [Here](https://moshe-1.gitbook.io/comrade/)
 
 # [Roadmap](https://github.com/moshe/elasticsearch-comrade/milestones?state=open)
 ### [v1.1.0](https://github.com/moshe/elasticsearch-comrade/milestone/2)
-- Reindex screen
-- Comrade dashboard
+- [X] Add python package
+- [ ] Reindex screen
+- [ ] Comrade dashboard
 ### [v1.2.0](https://github.com/moshe/elasticsearch-comrade/milestone/4)
 - Cluster settings screen
 - Evacuate node from shards
