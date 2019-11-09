@@ -12,5 +12,5 @@ In order to pull and run run the following command
 docker run -v $PWD/clusters/:/app/clusters/ -it -p 8000:8000 mosheza/elasticsearch-comrade
 ```
 
-For more information regarding the **clusters** directory and Comrade's varius configuration option please refer the [Configuration](https://moshe-1.gitbook.io/comrade/configuration/) section
+For more information regarding the **clusters** directory and Comrade's various configuration option please refer the [Configuration](../configuration/) section
 

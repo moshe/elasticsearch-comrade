@@ -3,6 +3,7 @@
 * [Introduction](README.md)
 * [Installation](installation/README.md)
   * [Using Docker](installation/using-docker.md)
+  * [Using pip](installation/using-pip.md)
   * [From Source](installation/from-source.md)
 * [Configuration](configuration/README.md)
   * [Cluster Discovery](configuration/cluster-discovery.md)
