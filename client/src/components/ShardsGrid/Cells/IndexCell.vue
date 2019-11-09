@@ -106,16 +106,22 @@
     <v-flex>
       <v-layout justify-start align-start wrap>
         <v-flex shrink v-for="alias in index.aliases" :key="alias">
-          <v-chip
-            x-small
-            label
-            style="margin-right: 6px"
-            color="blue-grey lighten-4"
-            text-color="grey darken-3"
-          >
-            <v-icon size="12" class="mr-1" v-text="'bookmark'" />
-            {{ alias }}
-          </v-chip>
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on }">
+              <v-chip
+                x-small
+                label
+                style="margin-right: 6px"
+                color="blue-grey lighten-4"
+                text-color="grey darken-3"
+                v-on="on"
+              >
+                <v-icon size="12" class="mr-1" v-text="'bookmark'" />
+                {{ alias.length > 22 ? `${alias.substr(0, 22)}...` : alias }}
+              </v-chip>
+            </template>
+            <span>{{ alias }}</span>
+          </v-tooltip>
         </v-flex>
       </v-layout>
     </v-flex>
