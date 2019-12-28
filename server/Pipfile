@@ -13,6 +13,7 @@ ujson = "*"
 elasticsearch-async = "*"
 pytest = "*"
 click = "*"
+twine = "*"
 
 [requires]
 python_version = "3.7"
