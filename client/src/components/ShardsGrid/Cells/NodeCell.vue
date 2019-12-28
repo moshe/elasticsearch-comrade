@@ -26,16 +26,16 @@
       </v-list>
     </v-menu>
     <v-layout style="font-size: 8px" class="pt-1">
-      <v-flex>
+      <v-flex style="flex: 1">
         <node-stat-bar :metric="metrics.heapPercent" name="HEAP" />
       </v-flex>
-      <v-flex class="pl-1">
+      <v-flex class="pl-1" style="flex: 1">
         <node-stat-bar :metric="metrics.diskPercent" name="DISK" />
       </v-flex>
-      <v-flex class="pl-1">
+      <v-flex class="pl-1" style="flex: 1">
         <node-stat-bar :metric="metrics.CPUPercent" name="CPU" />
       </v-flex>
-      <v-flex class="pl-1">
+      <v-flex class="pl-1" style="flex: 1">
         <node-stat-bar :metric="metrics.load1Percent" name="LOAD" />
       </v-flex>
     </v-layout>
