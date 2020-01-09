@@ -16,7 +16,7 @@ Elasticsearch Comrade built with python3, VueJS, Sanic, Vuetify2 and Cypress
 - Manage snapshots
 - And much more ...
 
-# Quckstart
+# Quickstart
 ### Cluster dir definitaions
 Comrade discovers clusters using the `--clusters-dir` param, docs are [here](https://moshe-1.gitbook.io/comrade/configuration/cluster-discovery), examples are [here](https://github.com/moshe/elasticsearch-comrade/tree/master/server/tests)
 ### Using docker (recommended)
