@@ -5,8 +5,8 @@ export default {
     async listTasks() {
       return GET("/api/v1/task/list");
     },
-    async cancleTask(taskId) {
-      return POST("/api/v1/task/cancle", { taskId });
+    async cancelTask(taskId) {
+      return POST("/api/v1/task/cancel", { taskId });
     }
   }
 };
