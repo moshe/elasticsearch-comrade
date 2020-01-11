@@ -1,9 +1,10 @@
 import re
 
-import ujson
 from sanic import Blueprint
 from sanic.request import Request
 from sanic.response import HTTPResponse, json
+
+import ujson
 
 from ..connections import get_client
 
@@ -12,11 +13,11 @@ task_bp = Blueprint('task')
 task_query_regex = re.compile('source\[(.*)\]')  # noqa
 
 
-@task_bp.route('/cancle', methods=['POST'])
-async def cancle_task(request: Request) -> HTTPResponse:
+@task_bp.route('/cancel', methods=['POST'])
+async def cancel_task(request: Request) -> HTTPResponse:
     client = get_client(request)
     task_id = request.json['taskId']
-    await client.tasks.cancle(task_id=task_id)
+    await client.tasks.cancel(task_id=task_id)
     return json({"status": "ok"})
 
 

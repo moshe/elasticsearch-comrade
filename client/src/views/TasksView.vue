@@ -48,7 +48,7 @@
         :footer-props="{ 'items-per-page-options': [30, 100, 200] }"
       >
         <template v-slot:item.cancellable="{ item }">
-          <v-btn icon :disabled="!item.cancellable" small @click="cancleTask">
+          <v-btn icon :disabled="!item.cancellable" small @click="cancelTask">
             <v-icon>clear</v-icon>
           </v-btn>
         </template>
@@ -79,7 +79,7 @@ export default {
         { text: "taskId", value: "taskId" },
         { text: "Action", value: "action" },
         { text: "Node", value: "nodeName" },
-        { text: "Cancle", value: "cancellable" }
+        { text: "Cancel", value: "cancellable" }
       ]
     };
   },
