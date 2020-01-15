@@ -207,9 +207,10 @@
         },
         "hstspreload": {
             "hashes": [
-                "sha256:911ec40002cfd728cb3b962adfc376a87a4062c4f119da46e221caa0b33dc501"
+                "sha256:7ec1d33da7da00a79aed79e995b151f81824a5d4aac0547557da348711292d46"
             ],
-            "version": "==2020.1.7"
+            "index": "pypi",
+            "version": "==2020.1.15"
         },
         "httptools": {
             "hashes": [
@@ -537,7 +538,6 @@
                 "sha256:8dda78f06bd1674bd8720df8a50bb47b6e1233c503a4eed8e7810686bde37656",
                 "sha256:d38fbe01bbf7a3593a32bc35a9c4453c32bc42b98c377f9bff7e9f8da157786c"
             ],
-            "index": "pypi",
             "version": "==1.0.0"
         }
     },
