@@ -1,4 +1,4 @@
-FROM python:3.7.4-alpine@sha256:488bfa82d8ac22f1ed9f1d4297613a920bf14913adb98a652af7dbbbf1c3cab9
+FROM python:3.8.1-alpine@sha256:f21927aab8cd2535ee708e0945e70579143857f7df2e661d19f6d05bc5941063
 WORKDIR /app
 COPY setup.py MANIFEST.in server/Pipfile* ./
 RUN apk add --no-cache gcc libc-dev make libffi-dev libressl-dev && \
