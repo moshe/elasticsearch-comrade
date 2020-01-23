@@ -207,9 +207,9 @@
         },
         "hstspreload": {
             "hashes": [
-                "sha256:1cde56803877ad3aa0a4aa91d0c9c52203f4b7ceb93280c87ad399d3fd79679c"
+                "sha256:5892f7b903f337fd96bb96ee4c28a1960f301479718409d7a3f7d1c1c20e7901"
             ],
-            "version": "==2020.1.17"
+            "version": "==2020.1.22"
         },
         "httptools": {
             "hashes": [
@@ -449,10 +449,10 @@
         },
         "urllib3": {
             "hashes": [
-                "sha256:a8a318824cc77d1fd4b2bec2ded92646630d7fe8619497b142c84a9e6f5a7293",
-                "sha256:f3c5fd51747d450d4dcf6f923c81f78f811aab8205fda64b0aba34a4e48b0745"
+                "sha256:2f3db8b19923a873b3e5256dc9c2dedfa883e33d87c690d9c7913e1f40673cdc",
+                "sha256:87716c2d2a7121198ebcb7ce7cccf6ce5e9ba539041cfbaeecfb641dc0bf6acc"
             ],
-            "version": "==1.25.7"
+            "version": "==1.25.8"
         },
         "uvloop": {
             "hashes": [
@@ -534,10 +534,11 @@
         },
         "zipp": {
             "hashes": [
-                "sha256:57147f6b0403b59f33fd357f169f860e031303415aeb7d04ede4839d23905ab8",
-                "sha256:7ae5ccaca427bafa9760ac3cd8f8c244bfc259794b5b6bb9db4dda2241575d09"
+                "sha256:b338014b9bc7102ca69e0fb96ed07215a8954d2989bc5d83658494ab2ba634af",
+                "sha256:e013e7800f60ec4dde789ebf4e9f7a54236e4bbf5df2a1a4e20ce9e1d9609d67"
             ],
-            "version": "==2.0.0"
+            "index": "pypi",
+            "version": "==2.0.1"
         }
     },
     "develop": {
