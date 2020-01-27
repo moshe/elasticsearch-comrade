@@ -30,7 +30,7 @@
         <node-stat-bar :metric="metrics.heapPercent" name="HEAP" />
       </v-flex>
       <v-flex class="pl-1" style="flex: 1">
-        <node-stat-bar :metric="metrics.diskPercent" name="DISK" />
+        <node-stat-bar :metric="metrics.diskPercentUsed" name="DISK" />
       </v-flex>
       <v-flex class="pl-1" style="flex: 1">
         <node-stat-bar :metric="metrics.CPUPercent" name="CPU" />
