@@ -65,8 +65,8 @@ async def get_nodes_info(request: Request) -> list:
                 "heapPercent": int(node['jvm']['mem']['heap_used_percent']),
                 "load1Percent": int(float(node['os']['cpu']['load_average']['1m']) / 4),  # TODO: Count CPUs
 
-                "diskPercent": int(
-                    node['fs']['total']['available_in_bytes'] * 100 / node['fs']['total']['total_in_bytes'])
+                "diskPercentUsed": int(
+                    (1 - (node['fs']['total']['available_in_bytes'] / node['fs']['total']['total_in_bytes'])) * 100)
             }
         })
     return result
