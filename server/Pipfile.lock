@@ -209,7 +209,6 @@
             "hashes": [
                 "sha256:93c360debe16a74821ebd04eb9844597da904b99db1b7e6280c778f4df422eb1"
             ],
-            "index": "pypi",
             "version": "==2020.2.1"
         },
         "httptools": {
@@ -428,10 +427,11 @@
         },
         "tqdm": {
             "hashes": [
-                "sha256:01464d5950e9a07a8e463c2767883d9616c099c6502f6c7ef4e2e11d3065bd35",
-                "sha256:5865f5fef9d739864ff341ddaa69894173ebacedb1aaafcf014de56343d01d5c"
+                "sha256:251ee8440dbda126b8dfa8a7c028eb3f13704898caaef7caa699b35e119301e2",
+                "sha256:fe231261cfcbc6f4a99165455f8f6b9ef4e1032a6e29bccf168b4bf42012f09c"
             ],
-            "version": "==4.42.0"
+            "index": "pypi",
+            "version": "==4.42.1"
         },
         "twine": {
             "hashes": [
