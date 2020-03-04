@@ -202,9 +202,9 @@
         },
         "hstspreload": {
             "hashes": [
-                "sha256:a1ba0c2730593a1922f93cd9c66ff620248090656102bf31e4559c01d7935e05"
+                "sha256:5f120aa14869019e547166d5d3efa7f40dc5569bf830b130e5ba8bdef5bc9d5a"
             ],
-            "version": "==2020.2.25"
+            "version": "==2020.3.4"
         },
         "httptools": {
             "hashes": [
@@ -301,7 +301,6 @@
                 "sha256:e439c9a10a95cb32abd708bb8be83b2134fa93790a4fb0535ca36db3dda94d20",
                 "sha256:fc3b4adc2ee8474cb3cd2a155305d5f8eda0a9c91320f83e55748e1fcb68f8e3"
             ],
-            "index": "pypi",
             "version": "==4.7.5"
         },
         "packaging": {
@@ -541,10 +540,11 @@
         },
         "zipp": {
             "hashes": [
-                "sha256:12248a63bbdf7548f89cb4c7cda4681e537031eda29c02ea29674bc6854460c2",
-                "sha256:7c0f8e91abc0dc07a5068f315c52cb30c66bfbc581e5b50704c8a2f6ebae794a"
+                "sha256:aa36550ff0c0b7ef7fa639055d797116ee891440eac1a56f378e2d3179e0320b",
+                "sha256:c599e4d75c98f6798c509911d08a22e6c021d074469042177c8c86fb92eefd96"
             ],
-            "version": "==3.0.0"
+            "index": "pypi",
+            "version": "==3.1.0"
         }
     },
     "develop": {
