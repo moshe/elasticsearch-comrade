@@ -59,13 +59,13 @@ jobs:
       - checkout
       - restore_cache:
          keys:
-           - server3-{{ checksum "server/Pipfile.lock" }}-{{ checksum "server/Dockerfile" }}
+           - server3-{{ checksum "Pipfile.lock" }}-{{ checksum "comrade/Dockerfile" }}
       - run:
          name: Load Docker image layer cache
          command: test -f caches/server.tar && (docker load -i caches/server.tar) || echo 'Cache not found'
       - run:
          name: Build application Docker image
-         command: docker build --tag server:latest -f server/Dockerfile .
+         command: docker build --tag server:latest -f comrade/Dockerfile .
       - run:
          name: flake8
          command: docker run -it server pipenv run flake8 --max-line-length=1000
@@ -84,7 +84,7 @@ jobs:
       - checkout
       - restore_cache:
          keys:
-           - server3-{{ checksum "server/Pipfile.lock" }}-{{ checksum "server/Dockerfile" }}
+           - server3-{{ checksum "Pipfile.lock" }}-{{ checksum "comrade/Dockerfile" }}
       - run:
          name: Load Docker image layer cache
          command: test -f caches/server.tar && (docker load -i caches/server.tar) || echo 'Cache not found'
@@ -92,10 +92,10 @@ jobs:
          name: Save Docker image layer cache
          command: |
            mkdir -p caches/
-           docker build --tag server -f server/Dockerfile .
+           docker build --tag server -f comrade/Dockerfile .
            docker save $(docker history -q server | grep -v '^<missing>$') -o caches/server.tar
       - save_cache:
-          key: server3-{{ checksum "server/Pipfile.lock" }}-{{ checksum "server/Dockerfile" }}
+          key: server3-{{ checksum "Pipfile.lock" }}-{{ checksum "comrade/Dockerfile" }}
           paths:
             - caches/
   pytest:
