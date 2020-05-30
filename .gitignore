@@ -1,2 +1,3 @@
 *.code-workspace
+elasticsearch_comrade.egg-info
 ignore/
