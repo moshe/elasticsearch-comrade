@@ -200,11 +200,10 @@
         },
         "hstspreload": {
             "hashes": [
-                "sha256:088884adc70f0efdd3002c86290e2c25c097fa49286feea7120507534f9e8be5",
-                "sha256:5ff96b5df463afd665db2a6069db8a6ed9f2e791aa186200066f92b8d6989546"
+                "sha256:2b59a47bda0d06833e7df5eaf6063a0d420ee9368b98ba7a2c617f66d50d7641",
+                "sha256:d44cb7a113806e55f6e08f1dfac0254f1db2933989172fa481e59470c47340f3"
             ],
-            "index": "pypi",
-            "version": "==2020.5.27"
+            "version": "==2020.5.30"
         },
         "httptools": {
             "hashes": [
@@ -368,11 +367,11 @@
         },
         "pytest": {
             "hashes": [
-                "sha256:0d5fe9189a148acc3c3eb2ac8e1ac0742cb7618c084f3d228baaec0c254b318d",
-                "sha256:ff615c761e25eb25df19edddc0b970302d2a9091fbce0e7213298d85fb61fef6"
+                "sha256:95c710d0a72d91c13fae35dce195633c929c3792f54125919847fdcdf7caa0d3",
+                "sha256:eb2b5e935f6a019317e455b6da83dd8650ac9ffd2ee73a7b657a30873d67a698"
             ],
             "index": "pypi",
-            "version": "==5.3.5"
+            "version": "==5.4.2"
         },
         "readme-renderer": {
             "hashes": [
