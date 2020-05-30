@@ -1,6 +1,6 @@
 FROM python:3.7.7-slim@sha256:56de27efa2d88b47bede6d075a60a70aed76c43a8ee0bbbaa39c8f445a4459fe
 WORKDIR /app
-COPY setup.py MANIFEST.in server/Pipfile* ./
+COPY setup.py MANIFEST.in Pipfile* ./
 RUN apt-get update && \
     apt-get install -y --no-install-recommends gcc python-dev g++ make libffi-dev libssl-dev &&\
     mkdir /app/comrade && \
@@ -11,6 +11,6 @@ RUN apt-get update && \
     find /root/.local/ -type d -name __pycache__ | xargs rm -rf && \
     rm -rf ~/.cache /var/cache && \
     rm -rf /var/lib/apt/lists/*
-COPY server/ /app/comrade/
+COPY comrade/ /app/comrade/
 EXPOSE 8000
 CMD pipenv run comrade
