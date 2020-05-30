@@ -104,7 +104,7 @@ export default {
           include_aliases: this.booleanOptions.include_aliases.value,
           ignore_unavailable: this.booleanOptions.ignore_unavailable.value,
           rename_pattern: this.renamePattern,
-          rename_replacement: this.rename_replacement,
+          rename_replacement: this.renameReplacement,
           index_settings: this.$refs.editor.getQuery()
         })
       );
