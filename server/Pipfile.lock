@@ -200,11 +200,10 @@
         },
         "hstspreload": {
             "hashes": [
-                "sha256:088884adc70f0efdd3002c86290e2c25c097fa49286feea7120507534f9e8be5",
-                "sha256:5ff96b5df463afd665db2a6069db8a6ed9f2e791aa186200066f92b8d6989546"
+                "sha256:2b59a47bda0d06833e7df5eaf6063a0d420ee9368b98ba7a2c617f66d50d7641",
+                "sha256:d44cb7a113806e55f6e08f1dfac0254f1db2933989172fa481e59470c47340f3"
             ],
-            "index": "pypi",
-            "version": "==2020.5.27"
+            "version": "==2020.5.30"
         },
         "httptools": {
             "hashes": [
@@ -550,10 +549,10 @@
     "develop": {
         "autopep8": {
             "hashes": [
-                "sha256:0f592a0447acea0c2b0a9602be1e4e3d86db52badd2e3c84f0193bfd89fd3a43"
+                "sha256:152fd8fe47d02082be86e05001ec23d6f420086db56b17fc883f3f965fb34954"
             ],
             "index": "pypi",
-            "version": "==1.5"
+            "version": "==1.5.2"
         },
         "pycodestyle": {
             "hashes": [
