@@ -7,7 +7,7 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - client7-{{ checksum "client/package-lock.json" }}
+            - client8-{{ checksum "client/package-lock.json" }}
       - run:
           name: npm install
           command: cd client ; npm install
@@ -17,7 +17,7 @@ jobs:
            cd client
            npm run build
       - save_cache:
-          key: client7-{{ checksum "client/package-lock.json" }}
+          key: client8-{{ checksum "client/package-lock.json" }}
           paths:
             - client/node_modules/
       - persist_to_workspace:
