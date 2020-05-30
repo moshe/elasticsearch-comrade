@@ -66,7 +66,7 @@ async def get_mapping(request: Request, index: str) -> HTTPResponse:
 async def head_index(request: Request, index: str) -> HTTPResponse:
     client = get_client(request)
     content = await client.search(index=index)
-    return json(x['_source'] for x in content['hits']['hits'])
+    return json([x['_source'] for x in content['hits']['hits']])
 
 
 @index_bp.route('/<index>/flush')
