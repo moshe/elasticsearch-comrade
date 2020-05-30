@@ -14,11 +14,11 @@ node &gt;= 12 , python &gt;= 3.7 and pipenv
 git clone git@github.com:moshe/elasticsearch-comrade.git
 
 # Install server deps
-cd elasticsearch-comrade/server
-pipenv install
+cd elasticsearch-comrade
+pipenv install -e . --skip-lock
 
 # Install client deps
-cd ../client
+cd client
 npm install
 ```
 
@@ -27,14 +27,13 @@ Now you should open two terminals, one for running the server and the second for
 ### Starting the server
 
 ```bash
-cd server
-pipenv run python index.py
+pipenv run python index.py  # In the root of the project 
 ```
 
 ### Starting the client
 
 ```bash
 cd client
-npm run serv
+npm run serve
 ```
 
