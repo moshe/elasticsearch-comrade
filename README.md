@@ -4,7 +4,7 @@ Elasticsearch Comrade built with python3, VueJS, Sanic, Vuetify2 and Cypress
 ![Alt text](/docs/.gitbook/assets/image%20(16).png?raw=true "Optional Title")
 ![Alt text](https://moshe.sh/.netlify/functions/img?source=github "Optional Title")
 # Main Features
-- Elasticsearch version 5,6 and 7 support (tested against elasticsearch 7.4)
+- Elasticsearch version 5,6 and 7 support (tested against elasticsearch 7.7)
 - Multi cluster
 - Rest API with autocompletion, history, templates, and history
 - SQL editor (version 7 only)

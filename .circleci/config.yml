@@ -137,7 +137,7 @@ jobs:
               if curl -s -o /dev/null -w "%{http_code}" "https://hub.docker.com/v2/repositories/$DOCKERHUB_USERNAME/elasticsearch-comrade/tags/$IMAGE_TAG/"| grep -q 404; then
                 echo Pushing to pypi
                 docker run --rm -e TWINE_PASSWORD -e TWINE_USERNAME -it merged:latest /bin/sh -c "python setup.py bdist_wheel && python setup.py sdist && pipenv run twine upload dist/*"
-                
+
                 echo Pushing $IMAGE_TAG tag
                 docker tag merged:latest $DOCKERHUB_USERNAME/elasticsearch-comrade:$IMAGE_TAG
                 docker push $DOCKERHUB_USERNAME/elasticsearch-comrade:$IMAGE_TAG
