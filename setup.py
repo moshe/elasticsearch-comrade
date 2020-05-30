@@ -5,7 +5,7 @@ from setuptools import find_packages, setup
 packages = ['comrade.' + x for x in find_packages('comrade')]
 setup(
     name='elasticsearch-comrade',
-    version='1.1.4',
+    version='1.2.0',
     description='Elasticsearch admin panel built for ops and monitoring',
     author='Moshe Zada',
     author_email='',
