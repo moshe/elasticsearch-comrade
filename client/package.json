@@ -32,7 +32,7 @@
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-vue": "^6.2.2",
     "material-design-icons-iconfont": "^5.0.1",
-    "sass": "^1.26.7",
+    "sass": "^1.26.11",
     "sass-loader": "^7.3.1",
     "vue-cli-plugin-vuetify": "^2.0.5",
     "vue-template-compiler": "^2.6.11",
