@@ -21,7 +21,7 @@ from .blueprints.template import template_bp
 from .blueprints.views import views_bp
 from .connections import clusters, load_clients
 
-app = Sanic()
+app = Sanic(name="Comrade")
 current_dir = path.dirname(__file__)
 app.static('/static', f'{current_dir}/static')
 app.blueprint(views_bp, url_prefix='/api/v1/views')
