@@ -12,6 +12,7 @@ setup(
     packages=['comrade'] + packages,
     include_package_data=True,
     install_requires=[
+        'aiohttp<=3.6.2',
         'sanic',
         'ujson',
         'elasticsearch-async',
