@@ -13,7 +13,7 @@
     "core-js": "^3.6.5",
     "date-fns": "^2.16.1",
     "jsoneditor": "^7.0.5",
-    "register-service-worker": "^1.6.2",
+    "register-service-worker": "^1.7.2",
     "vue": "^2.6.11",
     "vue-router": "^3.3.4",
     "vuetify": "^2.2.15",
