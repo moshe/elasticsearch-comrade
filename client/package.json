@@ -12,7 +12,7 @@
     "@vue/cli": "^4.4.4",
     "core-js": "^3.6.5",
     "date-fns": "^2.16.1",
-    "jsoneditor": "^7.0.5",
+    "jsoneditor": "^9.1.7",
     "register-service-worker": "^1.6.2",
     "vue": "^2.6.11",
     "vue-router": "^3.3.4",
