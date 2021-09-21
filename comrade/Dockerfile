@@ -2,7 +2,7 @@ FROM python:3.7.7-slim@sha256:56de27efa2d88b47bede6d075a60a70aed76c43a8ee0bbbaa3
 WORKDIR /app
 COPY setup.py MANIFEST.in Pipfile* ./
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends gcc python-dev g++ make libffi-dev libssl-dev &&\
+    apt-get install -y --no-install-recommends gcc python-dev g++ make build-essential libssl-dev libffi-dev python3-dev cargo &&\
     mkdir /app/comrade && \
     pip install pipenv && \
     pipenv install -e . --skip-lock && \
