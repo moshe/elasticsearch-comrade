@@ -1,4 +1,4 @@
-FROM python:3.7.7-slim@sha256:56de27efa2d88b47bede6d075a60a70aed76c43a8ee0bbbaa39c8f445a4459fe
+FROM python:3.10.0-slim@sha256:fecdc82c92e5b996fa1df79732d32d087549fece296fd70150afbf0a7d815979
 WORKDIR /app
 COPY setup.py MANIFEST.in Pipfile* ./
 RUN apt-get update && \
