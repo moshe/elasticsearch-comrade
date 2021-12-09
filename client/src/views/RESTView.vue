@@ -41,7 +41,8 @@
           <v-tab>History</v-tab>
           <v-tab>Starred</v-tab>
           <v-tab-item eager>
-            <query-editor style="height: 700px;" ref="preview" read-only />
+            <query-editor style="height: 700px;" ref="preview" read-only v-if="json_result"/>
+            <rest-table v-bind:result-data="resultData" v-if="cat_result"/>
           </v-tab-item>
           <v-tab-item eager>
             <query-history
@@ -70,9 +71,11 @@ import QueryEditor from "../components/Base/QueryEditor.vue";
 import RESTButtons from "../components/REST/RESTButtons.vue";
 import EndpointAutoCompleter from "../components/REST/EndpointAutoCompleter.vue";
 import QueryHistory from "../components/REST/QueryHistory.vue";
+import RestTable from '../components/REST/RestTable.vue';
+
 
 export default {
-  components: { EndpointAutoCompleter, RESTButtons, QueryEditor, QueryHistory },
+  components: { EndpointAutoCompleter, RESTButtons, QueryEditor, QueryHistory, RestTable },
   mixins: [RESTApis],
   props: {
     init: {
@@ -82,6 +85,9 @@ export default {
   },
   data() {
     return {
+      resultData: null,
+      json_result: true,
+      cat_result: false,
       response: null,
       method: this.init.method || "GET",
       path: this.init.path || "/",
@@ -118,6 +124,13 @@ export default {
       } catch (error) {
         resp = error;
       }
+      if (resp.hasOwnProperty("table") === true) {
+          this.json_result = false
+          this.cat_result = true
+          this.resultData = resp.table
+          return
+      };
+      this.json_result = true
       this.$refs.preview.setContent(resp);
     }
   },
