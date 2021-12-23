@@ -1,7 +1,7 @@
 <template>
   <v-card>
     <v-card-title>
-      详情
+      overview
       <v-spacer></v-spacer>
       <v-text-field
         v-model="search"
