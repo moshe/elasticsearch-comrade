@@ -41,8 +41,8 @@
           <v-tab>History</v-tab>
           <v-tab>Starred</v-tab>
           <v-tab-item eager>
-            <query-editor style="height: 700px;" ref="preview" read-only v-if="json_result"/>
-            <rest-table v-bind:result-data="resultData" v-if="cat_result"/>
+            <rest-table v-bind:result-data="resultData" v-if="showResultInTable"/>
+            <query-editor style="height: 700px;" ref="preview" read-only v-else />
           </v-tab-item>
           <v-tab-item eager>
             <query-history
@@ -85,9 +85,8 @@ export default {
   },
   data() {
     return {
+      showResultInTable: false,
       resultData: null,
-      json_result: true,
-      cat_result: false,
       response: null,
       method: this.init.method || "GET",
       path: this.init.path || "/",
@@ -108,6 +107,9 @@ export default {
     async onClick() {
       // FIXME: Ugly hack in order to make endpoint completer to work when adding custom urls
       this.path = document.querySelector("#endpoint-selector")._value;
+      if (!this.path.match("_cat/*")) {
+        this.showResultInTable = false
+      }
       this.$refs.history.addEntry({
         method: this.method,
         path: this.path,
@@ -125,12 +127,10 @@ export default {
         resp = error;
       }
       if (resp.hasOwnProperty("table")) {
-          this.json_result = false
-          this.cat_result = true
+          this.showResultInTable = true
           this.resultData = resp.table
           return
       };
-      this.json_result = true
       this.$refs.preview.setContent(resp);
     }
   },
