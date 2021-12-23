@@ -124,7 +124,7 @@ export default {
       } catch (error) {
         resp = error;
       }
-      if (resp.hasOwnProperty("table") === true) {
+      if (resp.hasOwnProperty("table")) {
           this.json_result = false
           this.cat_result = true
           this.resultData = resp.table
