@@ -1,4 +1,4 @@
-FROM node:15-alpine AS client
+FROM node:17-alpine AS client
 
 WORKDIR /usr/src/app
 COPY client/package*.json ./
