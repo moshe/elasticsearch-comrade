@@ -20,8 +20,12 @@ async def close_index(request: Request) -> HTTPResponse:
     body = request.json['body']
     method = request.json['method']
     path = request.json['path']
+    if "_cat/" in path:
+        path += "?format=json"
     try:
         resp = await client.transport.perform_request(method, path, body=body)
     except TransportError as e:
         return format_es_exception(e)
+    if "_cat/" in path:
+        resp = {"table": resp}
     return json(resp)

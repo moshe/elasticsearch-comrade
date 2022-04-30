@@ -41,7 +41,8 @@
           <v-tab>History</v-tab>
           <v-tab>Starred</v-tab>
           <v-tab-item eager>
-            <query-editor style="height: 700px;" ref="preview" read-only />
+            <rest-table v-bind:result-data="resultData" v-if="showResultInTable"/>
+            <query-editor style="height: 700px;" ref="preview" read-only v-else />
           </v-tab-item>
           <v-tab-item eager>
             <query-history
@@ -70,9 +71,11 @@ import QueryEditor from "../components/Base/QueryEditor.vue";
 import RESTButtons from "../components/REST/RESTButtons.vue";
 import EndpointAutoCompleter from "../components/REST/EndpointAutoCompleter.vue";
 import QueryHistory from "../components/REST/QueryHistory.vue";
+import RestTable from '../components/REST/RestTable.vue';
+
 
 export default {
-  components: { EndpointAutoCompleter, RESTButtons, QueryEditor, QueryHistory },
+  components: { EndpointAutoCompleter, RESTButtons, QueryEditor, QueryHistory, RestTable },
   mixins: [RESTApis],
   props: {
     init: {
@@ -82,6 +85,8 @@ export default {
   },
   data() {
     return {
+      showResultInTable: false,
+      resultData: null,
       response: null,
       method: this.init.method || "GET",
       path: this.init.path || "/",
@@ -102,6 +107,9 @@ export default {
     async onClick() {
       // FIXME: Ugly hack in order to make endpoint completer to work when adding custom urls
       this.path = document.querySelector("#endpoint-selector")._value;
+      if (!this.path.match("_cat/*")) {
+        this.showResultInTable = false
+      }
       this.$refs.history.addEntry({
         method: this.method,
         path: this.path,
@@ -118,6 +126,11 @@ export default {
       } catch (error) {
         resp = error;
       }
+      if (resp.hasOwnProperty("table")) {
+          this.showResultInTable = true
+          this.resultData = resp.table
+          return
+      };
       this.$refs.preview.setContent(resp);
     }
   },
